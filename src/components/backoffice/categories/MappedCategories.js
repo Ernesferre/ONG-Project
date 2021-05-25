@@ -10,7 +10,7 @@ export const MappedCategories = ({ categories }) => {
       {categories.map((category, index) => (
         <Flex
           flexDir="column"
-          key="index"
+          key={index}
           margin="1em"
           bg="gray.200"
           padding="1em"
