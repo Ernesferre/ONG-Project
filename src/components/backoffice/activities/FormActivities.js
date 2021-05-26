@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import {Box, Stack, Button, FormControl, FormLabel, Input, IconButton, HStack} from '@chakra-ui/react'
+import {Flex, Box, Text, Stack, Button, FormControl, FormLabel, Input} from '@chakra-ui/react'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import { FaFileImage } from 'react-icons/fa'
 
 const ActivitiesForm = ({activityToEdit}) => {
 
@@ -11,22 +12,34 @@ const ActivitiesForm = ({activityToEdit}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(name)
-        console.log(description)
-        console.log(image)
+        if (name === '' || description === '' || image === '') {
+            alert('Por favor complete todos los campos')
+        } else {
+        const data = {
+            name: name,
+            description: description,
+            image: image
+        }
+            if (activityToEdit) {
+                // editActivity(data)
+            } else {
+                // createActivity(data)
+            }
+        }
     }
 
     return(
-        <Stack w='100%'>
-        <Box bg="gray.100" borderWidth="1px" borderRadius="lg" alignSelf='center' overflow="hidden" w={[250, 400, 640]} maxWidth={640}>
+        <Flex w='100%' minHeight='100vh' align='center' justify='center'>
+        <Box bg="gray.100" borderWidth="1px" borderRadius="lg" overflow="hidden" w={[250, 400, 700]} maxWidth={700}>
             <form method='POST' onSubmit={handleSubmit}>
-                <Stack w={'90%'} margin={8} spacing={5} >
+                <Stack w={'90%'} margin={[3,6,8]} spacing={5} >
                     <FormControl>
                         <FormLabel>Nombre</FormLabel>
                         <Input type='text'
                             value={activityToEdit ? activityToEdit.name : name} 
                             onChange={(e) => setName(e.target.value)}
                             bg="white"
+                            isRequired
                         />
                     </FormControl>
                     <FormControl>
@@ -44,22 +57,22 @@ const ActivitiesForm = ({activityToEdit}) => {
                     <FormControl>
                         <FormLabel>Foto</FormLabel>
                         <Input type='file' 
+                            id='file'
                             onChange={(e) => setImage(e.target.files[0])}
-                            style={{height:'0', width:'0', overflow:'hidden'}}
+                            style={{height:'0', width:'0', overflow:'hidden', padding:'0', border:'none'}}
                         />
-                        <IconButton
-                            colorScheme="blue"
-                            aria-label="Search database"
-                            icon={<SearchIcon />}
-                        />
+                        <label htmlFor="file" style={{cursor:'pointer'}} >
+                            <Box as={FaFileImage} size="36px" color="blue.500" />
+                        </label>
+                        {image && <Text style={{textAlign:'left'}} marginTop={3}>{image.name}</Text>}
                     </FormControl>
-                    <HStack>
-                        <Button colorScheme="blue" type='submit' size="sm">Crear</Button>
-                    </HStack>
+                    <FormControl>
+                        <Button colorScheme="blue" type='submit' size="sm" marginTop={5}>Crear</Button>
+                    </FormControl>
                 </Stack>
             </form>
         </Box>
-        </Stack>
+        </Flex>
     )
 }
 
