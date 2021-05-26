@@ -1,4 +1,4 @@
-const BASE_URL = "http://ongapi.alkemy.org";
+const BASE_URL = "http://ongapi.alkemy.org/api";
 
 export async function registerUser(data) {
     try {
