@@ -1,24 +1,4 @@
 import './App.css';
-<<<<<<< HEAD
-import RegisterForm from './components/RegisterForm'
-import { theme, ThemeProvider } from '@chakra-ui/react'
-  
-
-
-function App() {
-  return (
-    
-    
-    <ThemeProvider theme={theme}>
-        <div className="App">
-          <RegisterForm />
-        </div>
-    </ThemeProvider>
-    
-    
-  
-    
-=======
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -39,7 +19,6 @@ function App() {
           </Switch>
         </div>
       </Router>
->>>>>>> master
   );
 }
 
