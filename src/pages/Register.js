@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik, Form  } from 'formik';
-import TextField from './TextField';
+import TextField from '../components/TextField';
 import * as Yup from 'yup';
 import {
     Button,
@@ -9,7 +9,7 @@ import {
     Spacer
   } from "@chakra-ui/react"
 
-const RegisterForm = () => {
+const Register = () => {
     
     
 
@@ -79,4 +79,4 @@ const RegisterForm = () => {
 }
 
 
-export default RegisterForm
+export default Register
