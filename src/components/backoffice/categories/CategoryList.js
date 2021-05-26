@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/button";
-import { Container, Flex, Heading } from "@chakra-ui/layout";
+import { Box, Container, Flex, Heading } from "@chakra-ui/layout";
 import React from "react";
 import { Link } from "react-router-dom";
 import { MappedCategories } from "./MappedCategories";
@@ -18,9 +18,11 @@ export const CategoryList = () => {
     <Container maxW="container.xl">
       <Flex flexDir="column">
         <Heading textAlign="center">Categorías</Heading>
-        <Link>
-          <Button colorScheme="green">+ Nueva Categoría</Button>
-        </Link>
+        <Flex>
+          <Link to="/backoffice/categorias/create">
+            <Button colorScheme="green">+ Nueva Categoría</Button>
+          </Link>
+        </Flex>
         <MappedCategories categories={fakeData} />
       </Flex>
     </Container>
