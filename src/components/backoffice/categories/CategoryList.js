@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/button";
-import { Box, Container, Flex, Heading } from "@chakra-ui/layout";
+import { Container, Flex, Heading } from "@chakra-ui/layout";
 import React from "react";
 import { Link } from "react-router-dom";
 import { MappedCategories } from "./MappedCategories";
