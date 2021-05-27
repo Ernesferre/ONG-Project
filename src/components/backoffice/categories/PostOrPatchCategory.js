@@ -4,10 +4,9 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Container, Heading, Text } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import { Input } from "@chakra-ui/input";
-import { useParams } from "react-router";
 import axios from "axios";
 
-export const PostOrPatchCategory = () => {
+export const PostOrPatchCategory = ({ id }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
@@ -15,8 +14,6 @@ export const PostOrPatchCategory = () => {
     name: name,
     description: description,
   };
-
-  const { id } = useParams();
 
   const getCategoryData = async () => {
     const response = await axios.get(
