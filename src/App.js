@@ -2,7 +2,7 @@ import "./App.css";
 //REACT-ROUTER
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //CHAKRA
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, ModalHeader } from "@chakra-ui/react";
 
 //CLIENT
 import Home from "./pages/Home";
@@ -14,6 +14,9 @@ import Header from "./components/backoffice/layout/Header";
 import Sidebar from "./components/backoffice/layout/Sidebar";
 import Backoffice  from "./components/backoffice/Backoffice";
 import { CategoryList } from "./components/backoffice/categories/CategoryList";
+import ListOfActivities from "./components/backoffice/activities/ListOfActivities";
+import CreateActivity from "./components/backoffice/activities/CreateActivity";
+import EditActivity from "./components/backoffice/activities/EditActivity";
 
 function App() {
   return (
@@ -32,8 +35,10 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-
             <Route exact path="/nosotros" component={Nosotros} />
+            <Route exact path="/backoffice/activities" component={ListOfActivities} />
+            <Route exact path="/backoffice/activities/create" component={CreateActivity} />
+            <Route exact path="/backoffice/activities/edit" component={EditActivity} />
           </Switch>
         </div>
       </Router>
