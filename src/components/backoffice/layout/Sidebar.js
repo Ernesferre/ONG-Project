@@ -9,23 +9,41 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { NavLink } from "./Header";
 
 const Sections = [
   {
     name: "Categorías",
     routes: [
       {
-        route: "/",
-        name: "Ver categorías",
+        route: "/backoffice/categories",
+        name: "Categorías",
       },
       {
-        route: "/",
-        name: "Crear actividad",
+        route: "/backoffice/categories/create",
+        name: "Crear categorías",
       },
       {
-        route: "/",
-        name: "Editar actividad",
+        route: "/backoffice/categories/edit",
+        name: "Editar categorías",
+      },
+    ],
+  },
+  {
+    name: "Novedades",
+    routes: [
+      {
+        route: "/backoffice/news",
+        name: "Novedades",
+      },
+      {
+        route: "/backoffice/news/create",
+        name: "Crear novedad",
+      },
+      {
+        route: "/backoffice/news/edit",
+        name: "Editar novedad",
       },
     ],
   },
@@ -33,15 +51,15 @@ const Sections = [
     name: "Actividades",
     routes: [
       {
-        route: "/",
-        name: "Ver actividades",
+        route: "/backoffice/activities",
+        name: "Actividades",
       },
       {
-        route: "/",
+        route: "/backoffice/activities/create",
         name: "Crear actividad",
       },
       {
-        route: "/",
+        route: "/backoffice/activities/edit",
         name: "Editar actividad",
       },
     ],
@@ -55,6 +73,7 @@ const NavLinks = [
 ];
 
 const Sidebar = () => {
+  const router = useHistory()
   const [open, setopen] = React.useState(false);
   return (
     <>
@@ -76,22 +95,22 @@ const Sidebar = () => {
         borderRight="solid thin lightgray"
         bg="white"
         zIndex={100}
-        position="absolute"
+        position="fixed"
         transition="left 1s ease"
         left={open ? "0" : "-100%"}
         top="0"
       >
         <Accordion allowToggle allowMultiple>
-          <Box m=".6rem">
+          <Box m=".6rem" onClick={()=>{router.push("/")}} cursor="pointer">
+            <img
+              src="/brand-logo.svg"
+              style={{ margin: "auto" }}
+              width="150px"
+              alt="Somos más logo"
+            />
             <Text fontSize="3xl" borderBottom="solid 0 lightgray">
               Somos Más
             </Text>
-            <img
-              src="/logo192.png"
-              style={{ margin: "auto" }}
-              width="75px"
-              alt="Somos más logo"
-            />
           </Box>
 
           {/* This section shows the Header navigation links when the screen is small */}
@@ -111,9 +130,12 @@ const Sidebar = () => {
               flexDirection="column"
             >
               {NavLinks.map((route) => (
-                <Link key={route.name} className="nav-link" to={route.route}>
-                  {route.name}
-                </Link>
+                <NavLink
+                  key={route.name}
+                  className="nav-link"
+                  name={route.name}
+                  route={route.route}
+                />
               ))}
             </AccordionPanel>
           </AccordionItem>
@@ -136,9 +158,12 @@ const Sidebar = () => {
                 flexDirection="column"
               >
                 {section.routes.map((route) => (
-                  <Link key={route.name} className="nav-link" to={route.route}>
-                    {route.name}
-                  </Link>
+                  <NavLink
+                    key={route.name}
+                    className="nav-link"
+                    name={route.name}
+                    route={route.route}
+                  />
                 ))}
               </AccordionPanel>
             </AccordionItem>
