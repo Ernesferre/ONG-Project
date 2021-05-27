@@ -6,12 +6,14 @@ import Register from "./pages/Register";
 import Nosotros from "./pages/Nosotros";
 import { CategoryList } from "./components/backoffice/categories/CategoryList";
 import { ChakraProvider } from "@chakra-ui/react";
+import Header from "./components/backoffice/layout/Header";
 
 function App() {
   return (
     <ChakraProvider>
       <Router>
         <div className="App">
+          <Header />
           <Switch>
             <Route
               exact
