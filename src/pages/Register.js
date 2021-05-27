@@ -11,8 +11,6 @@ import {
 
 const Register = () => {
     
-    
-
     const validate = Yup.object({
         nombre: Yup.string()
             .required("Requerido"),
@@ -25,8 +23,6 @@ const Register = () => {
             .min(6, "Inserte mas de 6 caracteres")
             .required("Requerido"),
     })
-
-   
 
     return (
             
@@ -44,8 +40,7 @@ const Register = () => {
                 console.log(values);
             }}
             >
-
-            
+    
                 {formik => (
                     <Flex height="90vh" alignItems="center" justifyContent="center">
                         <Flex direction="column" p={12} background="gray.100" rounded={6} alignItems="center" justifyContent="center"  >
