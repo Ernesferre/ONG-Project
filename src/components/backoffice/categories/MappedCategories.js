@@ -2,9 +2,26 @@ import { Button } from "@chakra-ui/button";
 import { Flex, Text } from "@chakra-ui/layout";
 import { useBreakpointValue } from "@chakra-ui/media-query";
 import React from "react";
+import Swal from "sweetalert2";
 
 export const MappedCategories = ({ categories }) => {
   const flexDir = useBreakpointValue({ base: "column", sm: "" });
+
+  const handleDelete = async () => {
+    const confirmation = await Swal.fire({
+      title: "Confirmación",
+      text: "¿Quieres borrar esta categoría?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Borrar",
+      confirmButtonColor: "#DB5752",
+      cancelButtonText: "Cancelar",
+    });
+    if (confirmation.isConfirmed === true) {
+      // DELETE FUNCTION HERE
+    }
+  };
+
   return (
     <Flex flexDir="column">
       {categories.map((category, index) => (
@@ -33,7 +50,12 @@ export const MappedCategories = ({ categories }) => {
               <Button colorScheme="blue" size="sm" variant="outline">
                 Editar
               </Button>
-              <Button size="sm" colorScheme="red" marginLeft="1em">
+              <Button
+                size="sm"
+                colorScheme="red"
+                marginLeft="1em"
+                onClick={() => handleDelete()}
+              >
                 Borrar
               </Button>
             </Flex>

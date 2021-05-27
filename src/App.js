@@ -1,11 +1,17 @@
 import "./App.css";
+//REACT-ROUTER
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+//CHAKRA
+import { ChakraProvider } from "@chakra-ui/react";
+
+//CLIENT
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Nosotros from "./pages/Nosotros";
+// BACKOFFICE
+import Backoffice  from "./components/backoffice/Backoffice";
 import { CategoryList } from "./components/backoffice/categories/CategoryList";
-import { ChakraProvider } from "@chakra-ui/react";
 
 function App() {
   return (
@@ -13,6 +19,7 @@ function App() {
       <Router>
         <div className="App">
           <Switch>
+            <Route exact path="/backoffice" component={Backoffice}/>
             <Route
               exact
               path="/backoffice/categories"
