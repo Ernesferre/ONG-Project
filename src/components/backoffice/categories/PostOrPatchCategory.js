@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Container, Heading, Text } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import { Input } from "@chakra-ui/input";
 import { useParams } from "react-router";
+import axios from "axios";
 
 export const PostOrPatchCategory = () => {
   const [name, setName] = useState("");
@@ -16,6 +17,19 @@ export const PostOrPatchCategory = () => {
   };
 
   const { id } = useParams();
+
+  const getCategoryData = async () => {
+    const response = await axios.get(
+      `http://ongapi.alkemy.org/api/categories/${id}`
+    );
+    return response.data;
+  };
+
+  useEffect(() => {
+    if (id !== undefined) {
+      console.log(getCategoryData());
+    }
+  }, []);
 
   return (
     <Container maxW="container.xl" bg="gray.200" borderRadius="3px">
