@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import Nosotros from "./pages/Nosotros";
 // BACKOFFICE
 import Header from "./components/backoffice/layout/Header";
+import Sidebar from "./components/backoffice/layout/Sidebar";
 import Backoffice  from "./components/backoffice/Backoffice";
 import { CategoryList } from "./components/backoffice/categories/CategoryList";
 import ListOfActivities from "./components/backoffice/activities/ListOfActivities";
@@ -23,6 +24,7 @@ function App() {
       <Router>
         <div className="App">
           <Header />
+          <Sidebar/>
           <Switch>
             <Route exact path="/backoffice" component={Backoffice}/>
             <Route

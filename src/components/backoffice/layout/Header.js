@@ -84,6 +84,7 @@ export const NavLink = ({ name, route }) => {
   return (
     <LinkRouterDom
       to={route}
+      exact
       activeStyle={{
         fontWeight: "bold",
         color: "#db5752",
