@@ -66,12 +66,6 @@ const Sections = [
   },
 ];
 
-const NavLinks = [
-  { route: "/login", name: "Login" },
-  { route: "/register", name: "Registrar" },
-  { route: "/nosotros", name: "Nosotros" },
-];
-
 const Sidebar = () => {
   const router = useHistory()
   const [open, setopen] = React.useState(false);
@@ -101,7 +95,7 @@ const Sidebar = () => {
         top="0"
       >
         <Accordion allowToggle allowMultiple>
-          <Box m=".6rem" onClick={()=>{router.push("/")}} cursor="pointer">
+          <Box m=".6rem" onClick={()=>{router.push("/backoffice")}} cursor="pointer">
             <img
               src="/brand-logo.svg"
               style={{ margin: "auto" }}
@@ -112,33 +106,6 @@ const Sidebar = () => {
               Somos Más
             </Text>
           </Box>
-
-          {/* This section shows the Header navigation links when the screen is small */}
-          <AccordionItem display={{ base: "block", md: "none" }}>
-            <AccordionButton bg="gray.100" _hover={{ background: "#9AC9FB" }}>
-              <Box flex="1" textAlign="left">
-                Navegación
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-
-            <AccordionPanel
-              pb={4}
-              pl="2rem"
-              display="flex"
-              textAlign="left"
-              flexDirection="column"
-            >
-              {NavLinks.map((route) => (
-                <NavLink
-                  key={route.name}
-                  className="nav-link"
-                  name={route.name}
-                  route={route.route}
-                />
-              ))}
-            </AccordionPanel>
-          </AccordionItem>
 
           {/* This section shows the backoffice navigation links */}
           {Sections.map((section) => (
