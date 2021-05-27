@@ -15,9 +15,9 @@ import { GrClose as CloseIcon } from "react-icons/gr";
 import { NavLink as LinkRouterDom } from "react-router-dom";
 
 const Routes = [
-  { route: "/login", name: "Login" },
-  { route: "/nosotros", name: "Nosotros" },
-  { route: "/register", name: "Registrar" },
+  { route: "/backoffice/categories", name: "Categorías" },
+  { route: "/backoffice/news", name: "Novedades" },
+  { route: "/backoffice/activities", name: "Actividades" },
 ];
 
 export default function Header() {
@@ -28,7 +28,7 @@ export default function Header() {
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={10}>
         <Flex h={16} alignItems={"center"} justifyContent={"left"}>
           <HStack>
-            <LinkRouterDom to="/">
+            <LinkRouterDom to="/backoffice">
               <img src="/brand-logo.svg" width="120px" alt="Somos más logo" />
             </LinkRouterDom>
           </HStack>
