@@ -22,6 +22,12 @@ export const MappedSlides = ({
   ];
 
   const [saveData, setSaveData] = useState(fakeData);
+ 
+
+  const handleDelete = (id) => {
+    const filtered = saveData?.filter((i) => i.order !== id);
+    setSaveData(filtered);
+  };
 
   return (
     <Container>
@@ -48,7 +54,12 @@ export const MappedSlides = ({
             >
               Editar
             </Button>
-            <Button cursor="pointer" border="none" bg="red">
+            <Button
+              onClick={() => handleDelete(item.order)}
+              cursor="pointer"
+              border="none"
+              bg="red"
+            >
               Eliminar
             </Button>
           </Flex>
