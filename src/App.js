@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Nosotros from "./pages/Nosotros";
 // BACKOFFICE
+import Header from "./components/backoffice/layout/Header";
 import Backoffice  from "./components/backoffice/Backoffice";
 import { CategoryList } from "./components/backoffice/categories/CategoryList";
 
@@ -18,6 +19,7 @@ function App() {
     <ChakraProvider>
       <Router>
         <div className="App">
+          <Header />
           <Switch>
             <Route exact path="/backoffice" component={Backoffice}/>
             <Route
