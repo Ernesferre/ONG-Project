@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.nav-link{
+  font-weight: 500;
+}
+.nav-link:hover {
+  background: transparent;
+  color: #db5752;
+}
+.nav-link:active {
+  background: transparent;
+  color: #9ac9fb;
+}
+.nav-link:focus {
+  outline: none;
+}
