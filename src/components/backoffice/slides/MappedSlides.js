@@ -1,6 +1,15 @@
 import React, { useState } from "react";
-import { Container, Flex, Heading, Image, Button, Box } from "@chakra-ui/react";
+import {
+  Container,
+  Flex,
+  Heading,
+  Image,
+  Button,
+  Box,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+
+
 
 export const MappedSlides = ({
   slideshow,
@@ -95,16 +104,18 @@ export const MappedSlides = ({
                 <button onSubmit={(e) => handleOnEditSubmit(e)} type="submit">
                   Guardar
                 </button>
+                <button onClick={() => handleEdit(item)}>Regresar</button>
               </form>
             ) : (
               <>
-                <Heading as="h3">{item.title}</Heading>
                 <Heading as="h5">
                   <Link to="/backoffice/slides/create">Crear nueva slide</Link>
                 </Heading>
-
+                <Heading as="h3">{item.title}</Heading>
                 {item.img === "" ? (
-                  <Box>Por favor ingresa una imagen en el home</Box>
+                  <Box  h="22rem"w="90%"  border="1px solid lightgray">
+                    <p>Por favor ingresa una imagen en el home, haz click en editar</p>
+                  </Box>
                 ) : (
                   <Image
                     h="22rem"
