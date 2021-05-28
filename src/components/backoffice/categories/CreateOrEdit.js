@@ -65,7 +65,7 @@ export const CreateOrEdit = ({ isCreate, id }) => {
       history.push("/backoffice/categories");
       return response.data;
     } catch (error) {
-      handleError(error.response.data.message);
+      handleError();
     }
   };
 
@@ -79,7 +79,7 @@ export const CreateOrEdit = ({ isCreate, id }) => {
       history.push("/backoffice/categories");
       return response.data;
     } catch (error) {
-      handleError(error.response.data.message);
+      handleError();
     }
   };
 
