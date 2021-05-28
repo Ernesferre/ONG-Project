@@ -24,7 +24,7 @@ export async function registerUser(data) {
 
 export async function loginUser(data) {
     try {
-        const url = `${BASE_URL}`
+        const url = `${BASE_URL}/login`
         const params = {
             method: "POST",
             headers: {
