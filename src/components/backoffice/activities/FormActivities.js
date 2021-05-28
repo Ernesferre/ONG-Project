@@ -4,6 +4,15 @@ import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { FaFileImage } from 'react-icons/fa'
 
+// convert image to base64
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = error => reject(error)
+  })
+
+
 const ActivitiesForm = ({activityToEdit}) => {
 
     const [name, setName] = useState('')
@@ -18,20 +27,34 @@ const ActivitiesForm = ({activityToEdit}) => {
         }
     }, [activityToEdit])
 
-    const handleSubmit = (e) => {
+    async function handleSubmit(e) {
         e.preventDefault()
         if (name === '' || description === '' || image === '') {
             alert('Por favor complete todos los campos')
         } else {
-        const data = {
-            name: name,
-            description: description,
-            image: image
-        }
-            if (activityToEdit) {
-                // editActivity(activityToEdit.id, data)
+            let data
+            if (typeof image !== 'string') {
+                let base64Img = await toBase64(image)
+                data = {
+                    name: name,
+                    description: description,
+                    image: base64Img
+                }
             } else {
+                data = {
+                    name: name,
+                    description: description,
+                    image: image
+                }
+            }
+            if (activityToEdit) {
+                // AGREGAR FUNCIÓN EDITAR - pasar id y data
+                // editActivity(activityToEdit.id, data)
+                console.log(data)
+            } else {
+                // AGREGAR FUNCIÓN CREAR - pasar data
                 // createActivity(data)
+                console.log(data)
             }
         }
     }
@@ -67,13 +90,13 @@ const ActivitiesForm = ({activityToEdit}) => {
                             <FormLabel>Foto</FormLabel>
                             <Input type='file' 
                                 id='file'
-                                onChange={(e) => setImage(e.target.files[0].name)}
+                                onChange={(e)=>setImage(e.target.files[0])}
                                 style={{height:'0', width:'0', overflow:'hidden', padding:'0', border:'none'}}
                             />
                             <label htmlFor="file" style={{cursor:'pointer'}} >
                                 <Box as={FaFileImage} size="36px" color="blue.500" />
                             </label>
-                            {image && <Text style={{textAlign:'left'}} marginTop={3}>{image}</Text>}
+                            {image && <Text style={{textAlign:'left'}} marginTop={3}>{activityToEdit ? activityToEdit.name : image.name}</Text>}
                         </FormControl>
                         <FormControl>
                             <Button colorScheme="blue" type='submit' size="sm" marginTop={5}>Crear</Button>
