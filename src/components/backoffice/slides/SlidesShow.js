@@ -4,6 +4,8 @@ import { ReactComponent as LeftArrow } from "../../../assets/arrowLeft.svg";
 import { ReactComponent as RightArrow } from "../../../assets/arrowRight.svg";
 
 
+
+
 const SlidesShow = ({ speed = "500" }) => {
   const slideshow = useRef(null);
   const fakeData = [

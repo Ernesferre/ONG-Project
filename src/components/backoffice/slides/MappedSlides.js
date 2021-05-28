@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
 import {
-  Container,
   Flex,
   Heading,
   Image,
@@ -8,7 +8,6 @@ import {
   Box,
   Text,
   Stack,
-  FormControl,
   FormLabel,
   Input,
 } from "@chakra-ui/react";
@@ -82,99 +81,115 @@ export const MappedSlides = ({
   };
 
   return (
-    
-      <Flex color="black" wrap="nowrap" ref={slideshow}>
-        {saveData?.map((item, idx) => (
-          <Flex
-            key={idx}
-            align="center"
-            minW="100%"
-            direction="column"
-            overflow="hidden"
-            pos="relative"
-            zIndex="10"
-          >
-            {isEdit ? (
-              <Flex
-                w="100%"
-                flexDirection="column"
-                minHeight="100vh"
-                align="center"
-                justify="center"
-                padding={10}
-                
+    <Flex color="black" wrap="nowrap" ref={slideshow}>
+      {saveData?.map((item, idx) => (
+        <Flex
+          key={idx}
+          align="center"
+          minW="100%"
+          direction="column"
+          overflow="hidden"
+          pos="relative"
+          zIndex="10"
+        >
+          {isEdit ? (
+            <Flex
+              w="100%"
+              flexDirection="column"
+              minHeight="100vh"
+              align="center"
+              justify="center"
+              padding={10}
+            >
+              <Heading margin={5}>Editar slides</Heading>{" "}
+              <Box
+                bg="gray.100"
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="hidden"
+                w={[250, 400, 700]}
+                maxWidth={700}
               >
-                <Heading margin={5}>Editar slides</Heading>{" "}
-                <Box
-                  bg="gray.100"
-                  borderWidth="1px"
-                  borderRadius="lg"
-                  overflow="hidden"
-                  w={[250, 400, 700]}
-                  maxWidth={700}
-                >
-                  <form onSubmit={(e) => handleOnEditSubmit(e)}>
-                    <Stack w={"90%"} margin={[3, 6, 8]} spacing={5}>
-                      <FormLabel>Ingrese un titulo</FormLabel>
-                      <Input
-                        bg="white"
-                        type="text"
-                        name="title"
-                        defaultValue={item.title}
-                      />
-                      <FormLabel>Ingese una imagen</FormLabel>
-                      <Input
-                        bg="white"
-                        type="file"
-                        name="img"
-                        onChange={(e) => uploadImage(e)}
-                      />
-                      <Button
-                        colorScheme="blue"
-                        type="submit"
-                        size="sm"
-                        marginTop={5}
-                        onSubmit={(e) => handleOnEditSubmit(e)}
-                        type="submit"
-                      >
-                        Guardar
-                      </Button>
-                      <Button
-                        colorScheme="yellow"
-                        type="submit"
-                        size="sm"
-                        marginTop={5}
-                        onClick={() => handleEdit(item)}
-                      >
-                        Regresar
-                      </Button>
-                    </Stack>
-                  </form>
+                <form onSubmit={(e) => handleOnEditSubmit(e)}>
+                  <Stack w={"90%"} margin={[3, 6, 8]} spacing={5}>
+                    <FormLabel>Ingrese un titulo</FormLabel>
+                    <Input
+                      bg="white"
+                      type="text"
+                      name="title"
+                      defaultValue={item.title}
+                    />
+                    <FormLabel>Ingese una imagen</FormLabel>
+                    <Input
+                      bg="white"
+                      type="file"
+                      name="img"
+                      onChange={(e) => uploadImage(e)}
+                    />
+                    <Button
+                      colorScheme="blue"
+                      type="submit"
+                      size="sm"
+                      marginTop={5}
+                      onSubmit={(e) => handleOnEditSubmit(e)}
+                      type="submit"
+                    >
+                      Guardar
+                    </Button>
+                    <Button
+                      colorScheme="yellow"
+                      type="submit"
+                      size="sm"
+                      marginTop={5}
+                      onClick={() => handleEdit(item)}
+                    >
+                      Regresar
+                    </Button>
+                  </Stack>
+                </form>
+              </Box>
+            </Flex>
+          ) : (
+            <>
+              <Button mt={4} colorScheme="blue" bg="#5796D9" type="submit">
+                <Link cursor="pointer" to="/backoffice/slides/create">
+                  {" "}
+                  + Crear nueva slide
+                </Link>
+              </Button>
+
+              <Heading as="h3" mt="3rem">
+                {item.title}
+              </Heading>
+              {item.img === "" ? (
+                <Box h="22rem" w="90%" border="1px solid lightgray">
+                  <Text w="60%" display="block" mx="auto" mt="5rem">
+                    Por favor ingresa una imagen en el home, haz click en editar
+                  </Text>
                 </Box>
-              </Flex>
-            ) : (
-              <>
-                <Heading as="h5">
-                  <Link to="/backoffice/slides/create">Crear nueva slide</Link>
-                </Heading>
-                <Heading as="h3">{item.title}</Heading>
-                {item.img === "" ? (
-                  <Box h="22rem" w="90%" border="1px solid lightgray">
-                    <p>
-                      Por favor ingresa una imagen en el home, haz click en
-                      editar
-                    </p>
-                  </Box>
-                ) : (
-                  <Image
-                    h="22rem"
-                    w="90%"
-                    objectFit="cover"
-                    border="1px solid lightgray"
-                    src={item.img}
-                    alt="slides-home"
-                  />
-                )}
+              ) : (
+                <Image
+                  h="22rem"
+                  w="90%"
+                  objectFit="cover"
+                  border="1px solid lightgray"
+                  src={item.img}
+                  alt="slides-home"
+                  mt="1rem"
+                />
+              )}
+
+              <Flex mt="2rem">
+                <Button
+                  cursor="pointer"
+                  mr="1rem"
+                  border="none"
+                  bg="#5796D9"
+                  color="white"
+                  onClick={() => handleEdit(item)}
+                >
+                  Editar
+                </Button>
                 <Button
                   onClick={() => handleDelete(item.order)}
                   cursor="pointer"
@@ -183,46 +198,32 @@ export const MappedSlides = ({
                 >
                   Eliminar
                 </Button>
+              </Flex>
 
-                <Button
+              <Flex
+                justify="space-between"
+                pos="relative"
+                bottom="18rem"
+                margin="18px"
+                w="100%"
+                color="blue"
+              >
+                <IoIosArrowDropleft
+                  onClick={prev}
+                  fontSize="30px"
                   cursor="pointer"
-                  mr="1rem"
-                  border="none"
-                  bg="blue"
-                  color="white"
-                  onClick={() => handleEdit(item)}
-                >
-                  Editar
-                </Button>
-                <Flex
-                  justify="space-between"
-                  pos="relative"
-                  bottom="14rem"
-                  margin="18px"
-                >
-                  <Button
-                    cursor="pointer"
-                    zIndex="10000"
-                    border="none"
-                    bg="white"
-                    onClick={prev}
-                  >
-                    <LeftArrow />
-                  </Button>
-                  <Button
-                    cursor="pointer"
-                    zIndex="10000"
-                    border="none"
-                    bg="white"
-                    onClick={next}
-                  >
-                    <RightArrow />
-                  </Button>
-                </Flex>
-              </>
-            )}
-          </Flex>
-        ))}
-      </Flex>
+                />
+
+                <IoIosArrowDropright
+                  onClick={next}
+                  fontSize="30px"
+                  cursor="pointer"
+                />
+              </Flex>
+            </>
+          )}
+        </Flex>
+      ))}
+    </Flex>
   );
 };
