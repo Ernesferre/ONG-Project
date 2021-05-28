@@ -13,6 +13,8 @@ import Nosotros from "./pages/Nosotros";
 import Header from "./components/backoffice/layout/Header";
 import Backoffice from "./components/backoffice/Backoffice";
 import { CategoryList } from "./components/backoffice/categories/CategoryList";
+import { CategoryPatch } from "./pages/backoffice/categories/CategoryPatch";
+import { CategoryCreate } from "./pages/backoffice/categories/CategoryCreate";
 
 function App() {
   return (
@@ -26,6 +28,16 @@ function App() {
               exact
               path="/backoffice/categories"
               component={CategoryList}
+            />
+            <Route
+              exact
+              path="/backoffice/categories/:id"
+              component={CategoryPatch}
+            />
+            <Route
+              exact
+              path="/backoffice/categories/create"
+              component={CategoryCreate}
             />
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
