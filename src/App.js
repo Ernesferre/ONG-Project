@@ -75,6 +75,7 @@ function App() {
       </Router>
     </ChakraProvider>
 
+  );
 }
 
 export default App;

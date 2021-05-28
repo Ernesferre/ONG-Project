@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Flex, Heading, Image, Button } from "@chakra-ui/react";
+import { Container, Flex, Heading, Image, Button, Box } from "@chakra-ui/react";
 
 export const MappedSlides = ({
   slideshow,
@@ -7,26 +7,65 @@ export const MappedSlides = ({
   next,
   LeftArrow,
   RightArrow,
+  saveData,
+  parentCallBack,
 }) => {
-  const fakeData = [
-    { title: "title1", img: "", order: 1 },
-    { title: "title2", img: "", order: 2 },
-    { title: "title3", img: "", order: 3 },
-    { title: "title4", img: "", order: 4 },
-    { title: "title5", img: "", order: 5 },
-    { title: "title6", img: "", order: 6 },
-    { title: "title7", img: "", order: 7 },
-    { title: "title8", img: "", order: 8 },
-    { title: "title9", img: "", order: 9 },
-    { title: "title10", img: "", order: 10 },
-  ];
+  const [isEdit, setIsEdit] = useState(false);
+  const [id, setId] = useState("");
 
-  const [saveData, setSaveData] = useState(fakeData);
- 
+  let base64;
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    base64 = await convertBase64(file);
+
+    const updateSlides = saveData?.map((data) => {
+      if (data.order === id) {
+        data.img = base64;
+      }
+      return data;
+    });
+    parentCallBack(updateSlides);
+  };
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const handleEdit = (item) => {
+    setIsEdit(!isEdit);
+    setId(item.order);
+  };
+
+  const onEdit = (id, title) => {
+    const updateSlides = saveData?.map((data) => {
+      if (data.order === id) {
+        data.title = title;
+      }
+      return data;
+    });
+    parentCallBack(updateSlides);
+  };
+
+  const handleOnEditSubmit = (evt) => {
+    evt.preventDefault();
+    onEdit(id, evt.target.title.value, evt.target.img.value);
+    setIsEdit(!isEdit);
+  };
 
   const handleDelete = (id) => {
     const filtered = saveData?.filter((i) => i.order !== id);
-    setSaveData(filtered);
+    parentCallBack(filtered);
   };
 
   return (
@@ -42,29 +81,61 @@ export const MappedSlides = ({
             pos="relative"
             zIndex="10"
           >
-            <Heading as="h3">{item.title}</Heading>
-            <Image h="22rem" w="90%" border="1px solid black" src="" alt="" />
+            {isEdit ? (
+              <form onSubmit={(e) => handleOnEditSubmit(e)}>
+                <label>Titulo</label>
+                <input type="text" name="title" defaultValue={item.title} />
+                <label>Ingese una imagen</label>
+                <input
+                  type="file"
+                  name="img"
+                  onChange={(e) => uploadImage(e)}
+                />
+                <button onSubmit={(e) => handleOnEditSubmit(e)} type="submit">
+                  Guardar
+                </button>
+              </form>
+            ) : (
+              <>
+                <Heading as="h3">{item.title}</Heading>
 
-            <Button
-              cursor="pointer"
-              mr="1rem"
-              border="none"
-              bg="blue"
-              color="white"
-            >
-              Editar
-            </Button>
-            <Button
-              onClick={() => handleDelete(item.order)}
-              cursor="pointer"
-              border="none"
-              bg="red"
-            >
-              Eliminar
-            </Button>
+                {item.img === "" ? (
+                  <Box>Por favor ingresa una imagen en el home</Box>
+                ) : (
+                  <Image
+                    h="22rem"
+                    w="90%"
+                    objectFit='cover'
+                    border="1px solid lightgray"
+                    src={item.img}
+                    alt="slides-home"
+                  />
+                )}
+                <Button
+                  onClick={() => handleDelete(item.order)}
+                  cursor="pointer"
+                  border="none"
+                  bg="red"
+                >
+                  Eliminar
+                </Button>
+
+                <Button
+                  cursor="pointer"
+                  mr="1rem"
+                  border="none"
+                  bg="blue"
+                  color="white"
+                  onClick={() => handleEdit(item)}
+                >
+                  Editar
+                </Button>
+              </>
+            )}
           </Flex>
         ))}
       </Flex>
+
       <Flex justify="space-between" pos="relative" bottom="14rem" margin="18px">
         <Button
           cursor="pointer"
