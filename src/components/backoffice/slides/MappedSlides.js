@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Flex, Heading, Image, Button, Box } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export const MappedSlides = ({
   slideshow,
@@ -98,6 +99,9 @@ export const MappedSlides = ({
             ) : (
               <>
                 <Heading as="h3">{item.title}</Heading>
+                <Heading as="h5">
+                  <Link to="/backoffice/slides/create">Crear nueva slide</Link>
+                </Heading>
 
                 {item.img === "" ? (
                   <Box>Por favor ingresa una imagen en el home</Box>
@@ -105,7 +109,7 @@ export const MappedSlides = ({
                   <Image
                     h="22rem"
                     w="90%"
-                    objectFit='cover'
+                    objectFit="cover"
                     border="1px solid lightgray"
                     src={item.img}
                     alt="slides-home"
