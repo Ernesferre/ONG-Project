@@ -118,6 +118,7 @@ export const MappedSlides = ({
                       type="text"
                       name="title"
                       defaultValue={item.title}
+                      required
                     />
                     <FormLabel>Ingese una imagen</FormLabel>
                     <Input
@@ -125,6 +126,7 @@ export const MappedSlides = ({
                       type="file"
                       name="img"
                       onChange={(e) => uploadImage(e)}
+                      required
                     />
                     <Button
                       colorScheme="blue"
