@@ -6,11 +6,12 @@ import Swal from "sweetalert2";
 import { useHistory } from "react-router";
 import { CreateOrEditForm } from "./CreateOrEditForm";
 import { Spinner } from "@chakra-ui/spinner";
+import { createCategory, editCategory } from './CategoriesService'
 
-export const CreateOrEdit = ({ isCreate, id }) => {
-  const [name, setName] = useState("");
+export const CreateOrEdit = ({ isCreate, id, lastId, categoryToEdit }) => {
+  const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('');
   const category = {
     name: name,
     description: description,
@@ -37,51 +38,79 @@ export const CreateOrEdit = ({ isCreate, id }) => {
   };
 
   useEffect(() => {
-    if (isCreate === false) {
-      const getCategoryData = async () => {
-        setLoading(true);
-        try {
-          const response = await axios.get(
-            `http://ongapi.alkemy.org/api/categories/${id}`
-          );
-          setName(response.data.data.name);
-          setDescription(response.data.data.description);
-          setLoading(false);
-        } catch (error) {
-          handleError();
-        }
-      };
-      getCategoryData();
+    setLoading(true)
+    if (!isCreate) {
+      setName(categoryToEdit.name);
+      setDescription(categoryToEdit.description);
+      setLoading(false)
+    } else {
+      setLoading(false)
     }
-  }, [id, isCreate, setLoading]);
+  }, [isCreate, categoryToEdit])
+  // useEffect(() => {
+  //   if (isCreate === false) {
+  //     const getCategoryData = async () => {
+  //       setLoading(true);
+  //       try {
+  //         const response = await axios.get(
+  //           `http://ongapi.alkemy.org/api/categories/${id}`
+  //         );
+  //         setName(response.data.data.name);
+  //         setDescription(response.data.data.description);
+  //         setLoading(false);
+  //       } catch (error) {
+  //         handleError();
+  //       }
+  //     };
+  //     getCategoryData();
+  //   }
+  // }, [id, isCreate, setLoading]);
 
-  const handlePost = async () => {
-    try {
-      const response = await axios.post(
-        "http://ongapi.alkemy.org/api/categories",
-        category
-      );
+  // const handlePost = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       "http://ongapi.alkemy.org/api/categories",
+  //       category
+  //     );
+  //     handleSuccess();
+  //     history.push("/backoffice/categories");
+  //     return response.data;
+  //   } catch (error) {
+  //     handleError();
+  //   }
+  // };
+
+  const handlePost = () => {
+    createCategory(category, lastId)
+    .then(() => {
       handleSuccess();
       history.push("/backoffice/categories");
-      return response.data;
-    } catch (error) {
-      handleError();
-    }
-  };
+    })
+    .catch(err => handleError())
+  }
 
-  const handlePut = async (id) => {
-    try {
-      const response = await axios.put(
-        `http://ongapi.alkemy.org/api/categories/${id}`,
-        category
-      );
+  const handlePut = (id) => {
+    editCategory(id, category)
+    .then(() => {
       handleSuccess();
       history.push("/backoffice/categories");
-      return response.data;
-    } catch (error) {
-      handleError();
-    }
-  };
+    })
+    .catch(err => handleError())
+  }
+
+  // const handlePut = async (id) => {
+  //   try {
+  //     const response = await axios.put(
+  //       `http://ongapi.alkemy.org/api/categories/${id}`,
+  //       category
+  //     );
+  //     handleSuccess();
+  //     history.push("/backoffice/categories");
+  //     return response.data;
+  //   } catch (error) {
+  //     handleError();
+  //   }
+  // };
 
   return (
     <Container
@@ -113,7 +142,7 @@ export const CreateOrEdit = ({ isCreate, id }) => {
             bg="#5796D9"
             type="submit"
             onClick={() => {
-              isCreate ? handlePost() : handlePut(id);
+              isCreate ? handlePost() : handlePut(categoryToEdit.id);
             }}
           >
             {isCreate === false ? <Text>Editar</Text> : <Text>Crear</Text>}
