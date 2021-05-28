@@ -16,7 +16,8 @@ export const PostOrPatchCategory = ({ id }) => {
     description: description,
   };
 
-  console.log("id=", id);
+  console.log(id);
+
   useEffect(() => {
     if (id !== undefined) {
       const getCategoryData = async () => {
@@ -42,7 +43,7 @@ export const PostOrPatchCategory = ({ id }) => {
 
   return (
     <Container maxW="container.xl" bg="gray.200" borderRadius="3px">
-      {id ? (
+      {id !== undefined ? (
         <Heading>Editar Categoría</Heading>
       ) : (
         <Heading>Crear Categoría</Heading>

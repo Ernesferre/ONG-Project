@@ -31,13 +31,13 @@ function App() {
             />
             <Route
               exact
-              path="/backoffice/categories/:id"
-              component={CategoryPatch}
+              path="/backoffice/categories/create"
+              component={CategoryCreate}
             />
             <Route
               exact
-              path="/backoffice/categories/create"
-              component={CategoryCreate}
+              path="/backoffice/categories/:id"
+              component={CategoryPatch}
             />
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
