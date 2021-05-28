@@ -47,38 +47,6 @@ export const CreateOrEdit = ({ isCreate, id, lastId, categoryToEdit }) => {
       setLoading(false)
     }
   }, [isCreate, categoryToEdit])
-  // useEffect(() => {
-  //   if (isCreate === false) {
-  //     const getCategoryData = async () => {
-  //       setLoading(true);
-  //       try {
-  //         const response = await axios.get(
-  //           `http://ongapi.alkemy.org/api/categories/${id}`
-  //         );
-  //         setName(response.data.data.name);
-  //         setDescription(response.data.data.description);
-  //         setLoading(false);
-  //       } catch (error) {
-  //         handleError();
-  //       }
-  //     };
-  //     getCategoryData();
-  //   }
-  // }, [id, isCreate, setLoading]);
-
-  // const handlePost = async () => {
-  //   try {
-  //     const response = await axios.post(
-  //       "http://ongapi.alkemy.org/api/categories",
-  //       category
-  //     );
-  //     handleSuccess();
-  //     history.push("/backoffice/categories");
-  //     return response.data;
-  //   } catch (error) {
-  //     handleError();
-  //   }
-  // };
 
   const handlePost = () => {
     createCategory(category, lastId)
@@ -98,19 +66,6 @@ export const CreateOrEdit = ({ isCreate, id, lastId, categoryToEdit }) => {
     .catch(err => handleError())
   }
 
-  // const handlePut = async (id) => {
-  //   try {
-  //     const response = await axios.put(
-  //       `http://ongapi.alkemy.org/api/categories/${id}`,
-  //       category
-  //     );
-  //     handleSuccess();
-  //     history.push("/backoffice/categories");
-  //     return response.data;
-  //   } catch (error) {
-  //     handleError();
-  //   }
-  // };
 
   return (
     <Container

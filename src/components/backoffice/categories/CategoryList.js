@@ -6,14 +6,6 @@ import { MappedCategories } from "./MappedCategories";
 import { getCategories } from './CategoriesService';
 
 export const CategoryList = () => {
-  // const fakeData = [
-  //   { name: "category1", createdAt: "25/5/2021" },
-  //   { name: "category2", createdAt: "25/5/2021" },
-  //   { name: "category4", createdAt: "25/5/2021" },
-  //   { name: "category5", createdAt: "25/5/2021" },
-  //   { name: "category6", createdAt: "25/5/2021" },
-  //   { name: "category7", createdAt: "25/5/2021" },
-  // ];
 
   const [loading, setLoading] = useState(true)
   const [categories, setCategories] = useState()
