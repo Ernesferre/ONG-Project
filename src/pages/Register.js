@@ -20,7 +20,7 @@ const Register = () => {
     const toast = useToast()
     
     const validate = Yup.object({
-        nombre: Yup.string()
+        name: Yup.string()
             .required("Requerido"),
         apellido: Yup.string()
             .required("Requerido"),
