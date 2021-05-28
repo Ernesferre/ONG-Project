@@ -1,6 +1,6 @@
 import React from "react";
-import { PostOrPatchCategory } from "../../../components/backoffice/categories/PostOrPatchCategory";
+import { CreateOrEditMain } from "../../../components/backoffice/categories/CreateOrEditMain";
 
 export const CategoryCreate = () => {
-  return <PostOrPatchCategory />;
+  return <CreateOrEditMain />;
 };
