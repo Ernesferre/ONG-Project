@@ -14,7 +14,7 @@ import { NavLink } from "./Header";
 
 const Sections = [
   {
-    name: "Categorías",
+    name: "Categoríass",
     routes: [
       {
         route: "/backoffice/categories",
@@ -68,19 +68,11 @@ const Sections = [
 
 const Sidebar = () => {
   const router = useHistory()
-  const [open, setopen] = React.useState(false);
+  // const [open, setopen] = React.useState(false);
+
+
   return (
     <>
-      {/* This button is temporarily useful to open the sidebar, it must be deleted in the integration of Header and Sidebar */}
-      <button
-        onClick={() => {
-          setopen(!open);
-        }}
-        style={{ background: "orangered", padding: ".5rem" }}
-      >
-        Abrir sidebar
-      </button>
-
       <Box
         w="250px"
         py="2rem"
@@ -91,7 +83,7 @@ const Sidebar = () => {
         zIndex={100}
         position="fixed"
         transition="left 1s ease"
-        left={open ? "0" : "-100%"}
+        left={"0"}
         top="0"
       >
         <Accordion allowToggle allowMultiple>
