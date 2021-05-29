@@ -12,7 +12,7 @@ import Nosotros from "./pages/Nosotros";
 // BACKOFFICE
 import Header from "./components/backoffice/layout/Header";
 import Backoffice from "./components/backoffice/Backoffice";
-import {NoveltiesList as Novelties} from "./components/backoffice/novelties/NoveltiesList";
+import NoveltiesList from "./components/backoffice/novelties/NoveltiesList";
 import { CategoryList } from "./components/backoffice/categories/CategoryList";
 import { CategoryPatch } from "./pages/backoffice/categories/CategoryPatch";
 import { CategoryCreate } from "./pages/backoffice/categories/CategoryCreate";
@@ -30,7 +30,7 @@ function App() {
           <Sidebar />
           <Switch>
             <Route exact path="/backoffice" component={Backoffice} />
-            <Route exact path="/backoffice/news" component={Novelties}/>
+            <Route exact path="/backoffice/news" component={NoveltiesList}/>
             <Route
               exact
               path="/backoffice/categories"
