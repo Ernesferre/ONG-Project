@@ -3,6 +3,7 @@ import {Flex, Heading, Box, Text, Stack, Button, FormControl, FormLabel, Input} 
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { FaFileImage } from 'react-icons/fa'
+import  {addActivities} from './ActivitiesService'
 
 // convert image to base64
 const toBase64 = file => new Promise((resolve, reject) => {

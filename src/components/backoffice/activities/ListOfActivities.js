@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {Container, Flex, Heading, Button} from '@chakra-ui/react'
 import MappedActivities from './MappedActivities'
-import { getActivities, addActivities, onEditActivities, onDeleteActivities} from './ActivitiesService';
+import  {getActivities} from './ActivitiesService'
 
 const ListOfActivities = () => {
 

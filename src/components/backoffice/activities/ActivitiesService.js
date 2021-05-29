@@ -7,12 +7,13 @@ export const getActivities = async () => {
     .catch((err) => console.log(err));
 };
 
-export const addActivities = async (created_at, description, name, image) => {
+export const addActivities = async ( description, name, image) => {
+  let date = new Date().toISOString();
   await fetch(url, {
     method: "POST",
     body: JSON.stringify({
       name: name,
-      created_at: created_at,
+      created_at: date,
       description: description,
       image: image,
     }),
