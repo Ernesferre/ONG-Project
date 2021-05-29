@@ -7,10 +7,17 @@ import {Flex, Heading, Stack, Button} from "@chakra-ui/react";
 //COMPONENTS
 import TextField from '../components/TextField';
 
+import {loginUser} from "../app/authService"
+import { useHistory } from "react-router-dom";
+import { useToast } from "@chakra-ui/react"
+
 const Login = () => {
 
   //user = objeto con informacion del usuario 
   const [user, setUser] = useState({})
+
+  let history = useHistory();
+  const toast = useToast()
 
   const validate = Yup.object({
     email: Yup.string().email("El email es invalido").required("Requerido"),
@@ -25,9 +32,27 @@ const Login = () => {
       }}
       validationSchema={validate}
       
-      onSubmit={(values, actions) => {
+      onSubmit={ async (values, actions) => {
 
-        setUser(values)
+       
+        const response = await loginUser(values)
+    
+        if(response.data?.token) {
+            console.log(response.data);
+            history.push("/");
+       
+        }  else {
+        
+            toast({
+                title: "Error al registrar el usuario.",  
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+              })
+        }
+
+
+        setUser(response)
 
         actions.setSubmitting(false)
 

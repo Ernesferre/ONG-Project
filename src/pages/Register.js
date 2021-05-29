@@ -2,6 +2,11 @@ import React from 'react'
 import { Formik, Form  } from 'formik';
 import TextField from '../components/TextField';
 import * as Yup from 'yup';
+import {registerUser} from "../app/authService"
+import { useHistory } from "react-router-dom";
+import { useToast } from "@chakra-ui/react"
+
+
 import {
     Button,
     Heading,
@@ -10,9 +15,12 @@ import {
   } from "@chakra-ui/react"
 
 const Register = () => {
+
+    let history = useHistory();
+    const toast = useToast()
     
     const validate = Yup.object({
-        nombre: Yup.string()
+        name: Yup.string()
             .required("Requerido"),
         apellido: Yup.string()
             .required("Requerido"),
@@ -28,7 +36,7 @@ const Register = () => {
             
             <Formik
                 initialValues={{
-                    nombre: '',
+                    name: '',
                     apellido: '',
                     email: '',
                     password: ''
@@ -36,8 +44,24 @@ const Register = () => {
             
             validationSchema={validate}
 
-            onSubmit={values => {
-                console.log(values);
+            onSubmit  =  { async values => {
+                  
+                const response = await registerUser(values)
+   
+                if(response) {
+                    console.log(response.data.token);
+                    history.push("/");
+               
+                }  else {
+      
+                    toast({
+                        title: "Error al registrar el usuario.", 
+                        status: "error",
+                        duration: 3000,
+                        isClosable: true,
+                      })
+                }
+
             }}
             >
     
@@ -50,7 +74,7 @@ const Register = () => {
                         
                             <Form>
                                 
-                                <TextField label="Nombre" name="nombre" type="text" />
+                                <TextField label="Nombre" name="name" type="text" />
                                 <TextField label="Apellido" name="apellido" type="text" />
                                 <TextField label="Email" name="email" type="email" />
                                 <TextField label="Password" name="password" type="password" />
