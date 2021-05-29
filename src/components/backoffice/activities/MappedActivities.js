@@ -3,11 +3,16 @@ import { Button, Flex, Image, Text, useBreakpointValue } from '@chakra-ui/react'
 import {Link} from 'react-router-dom'
 
 const MappedActivities = ({ activities }) => {
+  
   const flexDir = useBreakpointValue({ base: "column", md: "row" })
   const marginTop = useBreakpointValue({ base: "1rem", md: "0" })
+
+
+
+  
   return (
     <Flex flexDir="column">
-      {activities.map((activity) => (
+      {activities?.map((activity) => (
         <Flex
           flexDir="column"
           key={activity.id}
