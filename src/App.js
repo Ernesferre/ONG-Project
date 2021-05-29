@@ -26,7 +26,6 @@ function App() {
       <Router>
         <div className="App">
           <Header />
-          <Sidebar />
           <Switch>
             <Route exact path="/backoffice" component={Backoffice} />
             <Route

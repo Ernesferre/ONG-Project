@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import {
   Box,
   Flex,
@@ -9,10 +11,11 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
-import { GiHamburgerMenu as HamburgerIcon } from "react-icons/gi";
+import { GiHamburgerMenu, GiHamburgerMenu as HamburgerIcon } from "react-icons/gi";
 import { GrClose as CloseIcon } from "react-icons/gr";
 
 import { NavLink as LinkRouterDom } from "react-router-dom";
+import Sidebar from "./Sidebar";
 
 const Routes = [
   { route: "/backoffice/categories", name: "Categorías" },
@@ -22,6 +25,8 @@ const Routes = [
 
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [open, setopen] = React.useState(false);
 
   return (
     <>
@@ -51,30 +56,35 @@ export default function Header() {
             <Button bg="#FAFA88" mx="10px" cursor={"pointer"}>
               Cerrar sesión
             </Button>
+
             <IconButton
-              size={"md"}
-              icon={
-                isOpen ? (
-                  <CloseIcon style={{ display: "inline" }} />
-                ) : (
-                  <HamburgerIcon style={{ display: "inline" }} />
-                )
-              }
-              aria-label={"Open Menu"}
-              onClick={isOpen ? onClose : onOpen}
-            />
+              onClick={() => {
+              setopen(!open);
+              }}
+              style={{ padding: ".5rem" }}
+              icon= {<GiHamburgerMenu />}
+            >
+            </IconButton>
+
+            {
+              open ? 
+              ( <Sidebar /> ) : null
+            }  
+             
           </Flex>
         </Flex>
 
-        {isOpen ? (
-          <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={4}>
-              {Routes.map((link) => (
+        {isOpen ? 
+          (
+            <Box pb={4} display={{ md: "none" }}>
+              <Stack as={"nav"} spacing={4}>
+                {Routes.map((link) => (
                 <NavLink key={link.name} route={link.route} name={link.name} />
-              ))}
-            </Stack>
-          </Box>
-        ) : null}
+                ))}
+              </Stack>
+            </Box>
+          ) :
+           null}
       </Box>
     </>
   );
