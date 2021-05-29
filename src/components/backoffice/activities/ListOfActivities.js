@@ -40,8 +40,7 @@ const ListOfActivities = () => {
                         <Button colorScheme="green">+ Crear Actividad</Button>
                     </Link>
                     </Flex>
-                    {/* CAMBIAR fakeData por activities */}
-                    <MappedActivities activities={activities}></MappedActivities>
+                    <MappedActivities activities={activities} parentCallBack={setUpdate} ></MappedActivities>
                 </Flex>
             </Container>
         </div>
