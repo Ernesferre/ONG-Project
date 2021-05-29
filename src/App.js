@@ -20,6 +20,8 @@ import Sidebar from "./components/backoffice/layout/Sidebar";
 import ListOfActivities from "./components/backoffice/activities/ListOfActivities";
 import CreateActivity from "./components/backoffice/activities/CreateActivity";
 import EditActivity from "./components/backoffice/activities/EditActivity";
+import SlidesShow from "./components/backoffice/slides/SlidesShow";
+
 
 function App() {
   return (
@@ -63,6 +65,11 @@ function App() {
               exact
               path="/backoffice/activities/edit"
               component={EditActivity}
+            />
+            <Route
+              exact
+              path="/backoffice/slides"
+              component={SlidesShow}
             />
           </Switch>
         </div>
