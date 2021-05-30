@@ -11,10 +11,17 @@ import {loginUser} from "../app/authService"
 import { useHistory } from "react-router-dom";
 import { useToast } from "@chakra-ui/react"
 
+//REDUX
+import {useDispatch} from "react-redux";
+import {SET_LOGIN} from "../features/authReducer";
+
 const Login = () => {
 
   //user = objeto con informacion del usuario 
-  const [user, setUser] = useState({})
+ // const [user, setUser] = useState({})
+
+  const dispatch = useDispatch();
+  const TOKEN = "token";
 
   let history = useHistory();
   const toast = useToast()
@@ -39,6 +46,8 @@ const Login = () => {
     
         if(response.data?.token) {
             console.log(response.data);
+            dispatch(SET_LOGIN(response.data))
+            localStorage.setItem(TOKEN, response.data.token)
             history.push("/");
        
         }  else {
@@ -52,7 +61,7 @@ const Login = () => {
         }
 
 
-        setUser(response)
+       // setUser(response)
 
         actions.setSubmitting(false)
 
