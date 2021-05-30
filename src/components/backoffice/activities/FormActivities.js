@@ -48,6 +48,16 @@ const ActivitiesForm = ({ activityToEdit }) => {
       confirmButtonText: "Ok",
     });
   };
+
+  const handleSuccessEdit = () => {
+    Swal.fire({
+      title: "Success",
+      text: "Actividad editada",
+      icon: "success",
+      confirmButtonText: "Ok",
+    });
+  };
+
   const handleError = () => {
     Swal.fire({
       title: "Error",
@@ -80,7 +90,7 @@ const ActivitiesForm = ({ activityToEdit }) => {
       if (activityToEdit) {
         editActivity(activityToEdit.id, data)
         .then(() => {
-            handleSuccess();
+          handleSuccessEdit();
             history.push("/backoffice/activities");
           })
           .catch(err => handleError())
