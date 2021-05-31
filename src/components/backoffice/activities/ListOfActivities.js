@@ -23,12 +23,12 @@ const ListOfActivities = () => {
       useEffect(()=>{
         getActivities()
         .then(res => {
-          console.log(res.data)
+            console.log(res.data);
           setActivities(res.data)
-          setLastID(res.data.sort((a,b)=> b.id - a.id)[0].id)
           setLoading(false)
+          setUpdate(false)
         })
-      }, [update])
+    }, [update])
 
     return(
         <div>
