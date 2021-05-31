@@ -1,9 +1,29 @@
 import React from 'react'
 import { Button, Flex, Image, Text, useBreakpointValue } from '@chakra-ui/react'
 import {Link} from 'react-router-dom'
+import Swal from "sweetalert2";
 
 const MappedActivities = ({ activities }) => {
-  
+
+  const handleDelete = async (id) => {
+
+    
+    const confirmation = await Swal.fire({
+      title: "Confirmación",
+      text: "¿Quieres borrar esta actividad?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Borrar",
+      confirmButtonColor: "#DB5752",
+      cancelButtonText: "Cancelar",
+    });
+    if (confirmation.isConfirmed === true) {
+      // DELETE FUNCTION HERE
+      console.log('ID ELIMINADO' + '' + id);
+    
+    }
+  };
+
   const flexDir = useBreakpointValue({ base: "column", md: "row" })
   const marginTop = useBreakpointValue({ base: "1rem", md: "0" })
 
@@ -57,7 +77,7 @@ const MappedActivities = ({ activities }) => {
                 colorScheme="red" 
                 marginLeft="1em"  
                 // AGREGAR FUNCIÓN ELIMINAR
-                // onClick={() => handleDelete(activity.id)}
+                onClick={() => handleDelete(activity.id)}
               >
                 Borrar
               </Button>
