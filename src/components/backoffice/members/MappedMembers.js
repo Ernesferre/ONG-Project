@@ -22,6 +22,7 @@ const MappedMembers = ({ members }) => {
             <Flex alignItems="center" justifyContent="space-between">
                 <Image
                     boxSize="100px"
+                    borderRadius="full"
                     objectFit="cover"
                     src={member.image}
                     fallbackSrc="/brand-logo.svg"

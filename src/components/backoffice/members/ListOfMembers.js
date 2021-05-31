@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
-import {Container, Flex, Heading, Button} from '@chakra-ui/react'
+import {Container, Flex, Heading, Button, Spinner} from '@chakra-ui/react'
 import MappedMembers from './MappedMembers'
 // import { getMembers} from './membersService'
 
 const ListOfMembers = () => {
 
-    // const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true)
     // const [members, setMembers] = useState()
     // const [update, setUpdate] = useState(false)
     // const [lastID, setLastID] = useState()
@@ -30,13 +30,24 @@ const ListOfMembers = () => {
     //     })
     //   }, [update])
 
+    // if (loading) return <Spinner
+    //                         thickness="4px"
+    //                         speed="0.65s"
+    //                         emptyColor="gray.200"
+    //                         color="blue.500"
+    //                         size="xl"
+    //                         marginTop='3em'
+    //                         />
     return(
         <div>
             <Container maxW="container.xl">
                 <Flex flexDir="column" marginTop='1em'>
                     <Heading textAlign="center">Miembros</Heading>
                     <Flex alignSelf='flex-end' marginRight='1em'>
-                    <Link to="/backoffice/members/create">
+                    <Link to={{
+                        pathname: "/backoffice/members/create",
+                        // state: {lastID:lastID},
+                    }}>
                         <Button colorScheme="green">+ Crear Miembro</Button>
                     </Link>
                     </Flex>
