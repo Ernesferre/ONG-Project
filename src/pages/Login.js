@@ -10,6 +10,7 @@ import TextField from '../components/TextField';
 import {loginUser} from "../app/authService"
 import { useHistory } from "react-router-dom";
 import { useToast } from "@chakra-ui/react"
+import { apiService } from "../app/apiService";
 
 const Login = () => {
 
@@ -38,7 +39,11 @@ const Login = () => {
         const response = await loginUser(values)
     
         if(response.data?.token) {
-            console.log(response.data);
+
+            // console.log(response.data);
+            localStorage.setItem('token', response.data?.token);
+            apiService (response.data?.token);
+            
             history.push("/");
        
         }  else {
