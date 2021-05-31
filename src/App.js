@@ -21,6 +21,8 @@ import ListOfActivities from "./components/backoffice/activities/ListOfActivitie
 import CreateActivity from "./components/backoffice/activities/CreateActivity";
 import EditActivity from "./components/backoffice/activities/EditActivity";
 import SlidesShow from "./components/backoffice/slides/SlidesShow";
+import ListOfMembers from "./components/backoffice/members/ListOfMembers";
+import CreateMember from "./components/backoffice/members/CreateMember";
 
 
 function App() {
@@ -70,6 +72,16 @@ function App() {
               exact
               path="/backoffice/slides"
               component={SlidesShow}
+            />
+            <Route
+              exact
+              path="/backoffice/members"
+              component={ListOfMembers}
+            />
+            <Route
+              exact
+              path="/backoffice/activities/create"
+              component={CreateMember}
             />
           </Switch>
         </div>
