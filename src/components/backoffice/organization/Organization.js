@@ -48,7 +48,12 @@ export const Organization = () => {
             </Text>
             <Heading size="md">{data.name}</Heading>
           </Flex>
-          <Image src={data.logo} boxSize="15em" alignSelf="center" />
+          <Image
+            src={data.logo}
+            boxSize="sm"
+            alignSelf="center"
+            objectFit="cover"
+          />
           <Flex flexDir="column" margin="1em">
             <Text color="gray.500" fontWeight="bold">
               Descripción:
