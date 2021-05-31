@@ -21,7 +21,7 @@ import ListOfActivities from "./components/backoffice/activities/ListOfActivitie
 import CreateActivity from "./components/backoffice/activities/CreateActivity";
 import EditActivity from "./components/backoffice/activities/EditActivity";
 import SlidesShow from "./components/backoffice/slides/SlidesShow";
-
+import { OrganizationPage } from "./pages/backoffice/organization/OrganizationPage";
 
 function App() {
   return (
@@ -31,7 +31,7 @@ function App() {
           <Header />
           <Switch>
             <Route exact path="/backoffice" component={Backoffice} />
-            <Route exact path="/backoffice/news" component={NoveltiesList}/>
+            <Route exact path="/backoffice/news" component={NoveltiesList} />
             <Route
               exact
               path="/backoffice/categories"
@@ -66,10 +66,11 @@ function App() {
               path="/backoffice/activities/edit"
               component={EditActivity}
             />
+            <Route exact path="/backoffice/slides" component={SlidesShow} />
             <Route
               exact
-              path="/backoffice/slides"
-              component={SlidesShow}
+              path="/backoffice/organization"
+              component={OrganizationPage}
             />
           </Switch>
         </div>
