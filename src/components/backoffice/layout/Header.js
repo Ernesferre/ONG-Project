@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import {
   Box,
@@ -29,6 +30,13 @@ export default function Header() {
 
   const [open, setopen] = React.useState(false);
 
+  const history = useHistory();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    history.push("/login")
+  }
+
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={10}>
@@ -54,7 +62,7 @@ export default function Header() {
           </HStack>
 
           <Flex alignItems={"center"} ml={{ base: "auto", md: "2rem" }}>
-            <Button bg="#FAFA88" mx="10px" cursor={"pointer"}>
+            <Button bg="#FAFA88" mx="10px" cursor={"pointer"} onClick={handleLogout}>
               Cerrar sesión
             </Button>
 
