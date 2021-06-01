@@ -21,6 +21,9 @@ import CreateActivity from "./components/backoffice/activities/CreateActivity";
 import EditActivity from "./components/backoffice/activities/EditActivity";
 import SlidesShow from "./components/backoffice/slides/SlidesShow";
 import TestimonialList from "./components/backoffice/testimonials/TestimonialList";
+import { UserList } from "./components/backoffice/users/UserList";
+import { CreateOrEditUser } from "./components/backoffice/users/CreateOrEditUser";
+import { UserCreate } from "./pages/backoffice/users/UserCreate";
 
 
 function App() {
@@ -75,6 +78,22 @@ function App() {
               exact
               path="/backoffice/testimonials"
               component={TestimonialList}
+            />
+
+            <Route
+              exact
+              path="/backoffice/users"
+              component={UserList}
+            />
+              <Route
+              exact
+              path="/backoffice/users/create"
+              component={UserCreate}
+            />
+                <Route
+              exact
+              path="/backoffice/users/edit"
+              component={CreateOrEditUser}
             />
           </Switch>
         </div>
