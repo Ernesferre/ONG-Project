@@ -1,5 +1,5 @@
 import { Input } from "@chakra-ui/input";
-import { Container, Flex, Heading, Stack, Text } from "@chakra-ui/layout";
+import { Container, Flex, Heading } from "@chakra-ui/layout";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
@@ -16,19 +16,17 @@ export const OrganizationEdit = () => {
   const [address, setAddress] = useState("");
   const [cellphone, setCellphone] = useState("");
   const [phone, setPhone] = useState("");
-  const [logo, setLogo] = useState("");
+  const [currentLogo, setCurrentLogo] = useState("");
+  const [changedLogo, setChangedLogo] = useState("");
   const [welcomeText, setWelcomeText] = useState("");
 
-  const formObject = {
-    name,
-    short_description: shortDescription,
-    long_description: longDescription,
-    address,
-    cellphone,
-    phone,
-    logo,
-    welcome_text: welcomeText,
-  };
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
 
   const handleError = () => {
     Swal.fire({
@@ -50,10 +48,28 @@ export const OrganizationEdit = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let organization = {
+      name,
+      short_description: shortDescription,
+      long_description: longDescription,
+      address,
+      cellphone,
+      phone,
+      welcome_text: welcomeText,
+    };
+
+    if (changedLogo) {
+      const newBase64Logo = await toBase64(changedLogo);
+      organization = { ...organization, logo: newBase64Logo };
+      console.log(organization);
+    }
+    // let base64Logo = await toBase64(logo);
+    // console.log(base64Logo);
+
     try {
       const response = await axios.post(
         "http://ongapi.alkemy.org/api/organization",
-        formObject
+        organization
       );
       console.log(response);
       handleSuccess();
@@ -75,7 +91,7 @@ export const OrganizationEdit = () => {
         setCellphone(response.data.data[0].cellphone);
         setAddress(response.data.data[0].address);
         setWelcomeText(response.data.data[0].welcome_text);
-        setLogo(response.data.data[0].logo);
+        setCurrentLogo(response.data.data[0].logo);
       } catch (error) {
         handleError();
       }
@@ -183,32 +199,18 @@ export const OrganizationEdit = () => {
           </FormControl>
           <FormControl>
             <FormLabel color="gray.400" fontWeight="bold" marginTop="1em">
-              Logo
+              Logo Actual
+            </FormLabel>
+            <Flex justifyContent="center">
+              <Image src={currentLogo} objectFit="cover" boxSizing="md" />
+            </Flex>
+            <FormLabel color="gray.400" fontWeight="bold" marginTop="1em">
+              Cambiar logo
             </FormLabel>
             <Input
-              id="file"
               type="file"
-              bg="white"
-              variant="filled"
-              _hover={{ bg: "gray.100" }}
-              _focus={{ bg: "gray.100" }}
-              onChange={(e) => setLogo(e.target.files[0])}
-              height="0"
-              width="0"
-              overflow="hidden"
-              padding="0"
-              border="none"
+              onChange={(e) => setChangedLogo(e.target.files[0])}
             />
-            <FormLabel htmlFor="file">
-              <Flex justifyContent="center">
-                <Image
-                  src={logo}
-                  objectFit="cover"
-                  boxSizing="md"
-                  cursor="pointer"
-                />
-              </Flex>
-            </FormLabel>
           </FormControl>
           <Button marginTop="1em" type="submit" colorScheme="blue">
             Editar
