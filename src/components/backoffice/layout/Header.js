@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import {
   Box,
@@ -21,12 +22,20 @@ const Routes = [
   { route: "/backoffice/categories", name: "Categorías" },
   { route: "/backoffice/news", name: "Novedades" },
   { route: "/backoffice/activities", name: "Actividades" },
+  { route: "/backoffice/testimonials", name: "Testimonios" },
 ];
 
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [open, setopen] = React.useState(false);
+
+  const history = useHistory();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    history.push("/login")
+  }
 
   return (
     <>
@@ -53,7 +62,7 @@ export default function Header() {
           </HStack>
 
           <Flex alignItems={"center"} ml={{ base: "auto", md: "2rem" }}>
-            <Button bg="#FAFA88" mx="10px" cursor={"pointer"}>
+            <Button bg="#FAFA88" mx="10px" cursor={"pointer"} onClick={handleLogout}>
               Cerrar sesión
             </Button>
 
