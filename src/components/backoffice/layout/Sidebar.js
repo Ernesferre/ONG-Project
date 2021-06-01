@@ -18,15 +18,11 @@ const Sections = [
     routes: [
       {
         route: "/backoffice/categories",
-        name: "Categorías",
+        name: "Listar categorías",
       },
       {
         route: "/backoffice/categories/create",
         name: "Crear categorías",
-      },
-      {
-        route: "/backoffice/categories/edit",
-        name: "Editar categorías",
       },
     ],
   },
@@ -35,15 +31,11 @@ const Sections = [
     routes: [
       {
         route: "/backoffice/news",
-        name: "Novedades",
+        name: "Listar novedades",
       },
       {
         route: "/backoffice/news/create",
         name: "Crear novedad",
-      },
-      {
-        route: "/backoffice/news/edit",
-        name: "Editar novedad",
       },
     ],
   },
@@ -52,15 +44,24 @@ const Sections = [
     routes: [
       {
         route: "/backoffice/activities",
-        name: "Actividades",
+        name: "Listar actividades",
       },
       {
         route: "/backoffice/activities/create",
         name: "Crear actividad",
       },
+    ],
+  },
+  {
+    name: "Testimonios",
+    routes: [
       {
-        route: "/backoffice/activities/edit",
-        name: "Editar actividad",
+        route: "/backoffice/testimonials",
+        name: "Listar testimonios",
+      },
+      {
+        route: "/backoffice/testimonials/create",
+        name: "Crear testimonio",
       },
     ],
   },
