@@ -9,7 +9,6 @@ import { Image } from "@chakra-ui/image";
 import { Flex } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import { Spinner } from "@chakra-ui/spinner";
-import { Text } from "@chakra-ui/layout";
 
 export const OrganizationForm = () => {
   const [loading, setLoading] = useState(true);
