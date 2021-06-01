@@ -9,6 +9,7 @@ import { CategoryList } from '../components/backoffice/categories/CategoryList'
 import Header from '../components/backoffice/layout/Header'
 import NoveltiesList from '../components/backoffice/novelties/NoveltiesList'
 import SlidesShow from '../components/backoffice/slides/SlidesShow'
+import TestimonialList from '../components/backoffice/testimonials/TestimonialList'
 import { CategoryCreate } from '../pages/backoffice/categories/CategoryCreate'
 import { CategoryPatch } from '../pages/backoffice/categories/CategoryPatch'
 
@@ -54,6 +55,11 @@ export const Private = () => {
               exact
               path="/backoffice/slides"
               component={SlidesShow}
+            />
+            <Route
+              exact
+              path="/backoffice/testimonials"
+              component={TestimonialList}
             />
 
             <Redirect to="/" />

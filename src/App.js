@@ -26,8 +26,8 @@ function App() {
                 component={ Public }/>
 
             <Redirect to="/" />
+            
           </Switch>
-
         </div>
       </Router>
     </ChakraProvider>
