@@ -1,6 +1,7 @@
 import { Stack, Image, Button, Text } from "@chakra-ui/react";
 
-const Novelty = ({ novelty }) => {
+const New = ({ novelty }) => {
+  console.log(novelty)
   return (
     <Stack
       spacing={6}
@@ -27,7 +28,7 @@ const Novelty = ({ novelty }) => {
         <Text color="gray.400" fontSize="small">
           Creado
         </Text>
-        <Text fontWeight="bold">{novelty?.createdAt}</Text>
+        <Text fontWeight="bold">{novelty?.created_at}</Text>
       </Stack>
 
       <Stack d="flex" direction="row" justify="center" align="center">
@@ -42,4 +43,4 @@ const Novelty = ({ novelty }) => {
     </Stack>
   );
 };
-export default Novelty;
+export default New;
