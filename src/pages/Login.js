@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 //FORMIK AND YUP
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -17,8 +17,7 @@ import {SET_LOGIN} from "../features/authReducer";
 
 const Login = () => {
 
-  //user = objeto con informacion del usuario 
- // const [user, setUser] = useState({})
+  
 
   const dispatch = useDispatch();
   const TOKEN = "token";
@@ -60,8 +59,6 @@ const Login = () => {
               })
         }
 
-
-       // setUser(response)
 
         actions.setSubmitting(false)
 
