@@ -13,7 +13,7 @@ export const PrivateRoute = ({children, ...props}) => {
         }
     }, [user]); */
 
-    const user = false;
+    const user = true;
 
     if (user) {
         return <Route { ...props }>{children}</Route>
