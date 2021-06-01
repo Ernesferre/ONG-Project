@@ -6,6 +6,9 @@ import {registerUser} from "../app/authService"
 import { useHistory } from "react-router-dom";
 import { useToast } from "@chakra-ui/react"
 
+import {useDispatch} from "react-redux";
+import {SET_REGISTER} from "../features/authReducer";
+
 
 import {
     Button,
@@ -15,6 +18,9 @@ import {
   } from "@chakra-ui/react"
 
 const Register = () => {
+
+    const dispatch = useDispatch();
+    const TOKEN = "token";
 
     let history = useHistory();
     const toast = useToast()
@@ -49,7 +55,9 @@ const Register = () => {
                 const response = await registerUser(values)
    
                 if(response) {
-                    console.log(response.data.token);
+                    console.log(response.data);
+                    dispatch(SET_REGISTER(response.data))
+                    localStorage.setItem(TOKEN, response.data.token)
                     history.push("/");
                
                 }  else {
