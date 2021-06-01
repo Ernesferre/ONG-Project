@@ -14,6 +14,8 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaFileImage } from "react-icons/fa";
 
+import { useAlert } from "../layout/Alert";
+
 // convert image to base64
 // const toBase64 = (file) =>
 //   new Promise((resolve, reject) => {
@@ -24,48 +26,57 @@ import { FaFileImage } from "react-icons/fa";
 //   });
 
 const TestimonialsForm = ({ testimonialToEdit }) => {
+  const { setAlert } = useAlert();
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
 
   useEffect(() => {
     if (testimonialToEdit) {
-    //   setName(testimonialToEdit.name);
-    //   setDescription(testimonialToEdit.description);
-    //   setImage(testimonialToEdit.image);
+      setName(testimonialToEdit.name);
+      setDescription(testimonialToEdit.description);
+      setImage(testimonialToEdit.image);
     }
   }, [testimonialToEdit]);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // if (name === "" || description === "" || image === "") {
-    //   alert("Por favor complete todos los campos");
-    // } else {
-    //   let data;
-    //   if (typeof image !== "string") {
-    //     let base64Img = await toBase64(image);
-    //     data = {
-    //       name: name,
-    //       description: description,
-    //       image: base64Img,
-    //     };
-    //   } else {
-    //     data = {
-    //       name: name,
-    //       description: description,
-    //       image: image,
-    //     };
-    //   }
-    //   if (activityToEdit) {
-    //     // AGREGAR FUNCIÓN EDITAR - pasar id y data
-    //     // editActivity(activityToEdit.id, data)
-    //     console.log(data);
-    //   } else {
-    //     // AGREGAR FUNCIÓN CREAR - pasar data
-    //     // createActivity(data)
-    //     console.log(data);
-    //   }
-    // }
+    if (name === "" || description === "" || image === "") {
+      setAlert({
+        title: "Campo vacío",
+        text: "Algún campo está vacio o no se ha cargado una imagen.",
+        show: true,
+        type: "error",
+      });
+    } else {
+      //   let data;
+      //   if (typeof image !== "string") {
+      //     let base64Img = await toBase64(image);
+      //     data = {
+      //       name: name,
+      //       description: description,
+      //       image: base64Img,
+      //     };
+      //   } else {
+      //     data = {
+      //       name: name,
+      //       description: description,
+      //       image: image,
+      //     };
+      //   }
+      if (testimonialToEdit) {
+        // AGREGAR FUNCIÓN EDITAR - pasar id y data
+        // editActivity(activityToEdit.id, data)
+        // console.log(data);
+        console.log("Editiging");
+      } else {
+        // AGREGAR FUNCIÓN CREAR - pasar data
+        // createActivity(data)
+        // console.log(data);
+        console.log("Creating");
+      }
+    }
   }
 
   return (
@@ -105,10 +116,10 @@ const TestimonialsForm = ({ testimonialToEdit }) => {
             </FormControl>
             <CKEditor
               editor={ClassicEditor}
-              data={testimonialToEdit ? testimonialToEdit.description : description}
-              onReady={(editor) => {
-                console.log("Editor is ready to use!", editor);
-              }}
+              data={
+                testimonialToEdit ? testimonialToEdit.description : description
+              }
+              onReady={(editor) => {}}
               onChange={(event, editor) => {
                 const data = editor.getData();
                 setDescription(data);
@@ -139,7 +150,7 @@ const TestimonialsForm = ({ testimonialToEdit }) => {
             </FormControl>
             <FormControl>
               <Button colorScheme="blue" type="submit" size="sm" marginTop={5}>
-                Crear
+                {testimonialToEdit ? "Guardar" : "Crear"}
               </Button>
             </FormControl>
           </Stack>
