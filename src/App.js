@@ -2,7 +2,7 @@ import "./App.css";
 //REACT-ROUTER
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //CHAKRA
-import { ChakraProvider, ModalHeader } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 
 //CLIENT
 import Home from "./pages/Home";
@@ -16,11 +16,11 @@ import NoveltiesList from "./components/backoffice/novelties/NoveltiesList";
 import { CategoryList } from "./components/backoffice/categories/CategoryList";
 import { CategoryPatch } from "./pages/backoffice/categories/CategoryPatch";
 import { CategoryCreate } from "./pages/backoffice/categories/CategoryCreate";
-import Sidebar from "./components/backoffice/layout/Sidebar";
 import ListOfActivities from "./components/backoffice/activities/ListOfActivities";
 import CreateActivity from "./components/backoffice/activities/CreateActivity";
 import EditActivity from "./components/backoffice/activities/EditActivity";
 import SlidesShow from "./components/backoffice/slides/SlidesShow";
+import TestimonialList from "./components/backoffice/testimonials/TestimonialList";
 
 
 function App() {
@@ -70,6 +70,11 @@ function App() {
               exact
               path="/backoffice/slides"
               component={SlidesShow}
+            />
+            <Route
+              exact
+              path="/backoffice/testimonials"
+              component={TestimonialList}
             />
           </Switch>
         </div>

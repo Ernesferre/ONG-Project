@@ -21,6 +21,7 @@ const Routes = [
   { route: "/backoffice/categories", name: "Categorías" },
   { route: "/backoffice/news", name: "Novedades" },
   { route: "/backoffice/activities", name: "Actividades" },
+  { route: "/backoffice/testimonials", name: "Testimonios" },
 ];
 
 export default function Header() {

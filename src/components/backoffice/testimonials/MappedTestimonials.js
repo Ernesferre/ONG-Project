@@ -14,15 +14,19 @@ const MappedTestimonials = ({ testimonials }) => {
 
   const handleDelete = (id) => {
     setAlert({
+      show: true,
       title: "Confirmación",
       text: "¿Quieres borrar este testimonio?",
-      show: true,
       type: "warning",
       showCancelButton: true,
+      confirmButtonColor: "#DB5752",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Borrar",
       onConfirm: () => {
         // DELETE FUNCTION HERE
         console.log("ID ELIMINADO" + "" + id);
       },
+      onCancel: () => {},
     });
   };
 
@@ -54,27 +58,21 @@ const MappedTestimonials = ({ testimonials }) => {
                 alt={testimonial.name}
               />
             </Flex>
-            <Flex
-              alignItems="center"
-              justifyContent="space-between"
-              marginTop={marginTop}
-            >
-              <Text fontWeight="bold">
-                <Text fontSize="small" color="gray.400">
-                  Testimonio:{" "}
-                </Text>
-                {testimonial.name}
+            <Flex direction="column" marginTop={marginTop}>
+              <Text fontSize="small" color="gray.400">
+                Nombre:
               </Text>
+              <Text fontWeight="bold">{testimonial.name}</Text>
             </Flex>
             <Flex
-              alignItems="center"
+              direction="column"
               justifyContent="space-between"
               marginTop={marginTop}
             >
+              <Text fontSize="small" color="gray.400">
+                Creado el:
+              </Text>
               <Text fontWeight="bold">
-                <Text fontSize="small" color="gray.400">
-                  Creado el:{" "}
-                </Text>
                 {testimonial.created_at.slice(0, 10)}
               </Text>
             </Flex>
