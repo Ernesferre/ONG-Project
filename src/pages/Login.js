@@ -10,6 +10,7 @@ import TextField from '../components/TextField';
 import {loginUser} from "../app/authService"
 import { useHistory } from "react-router-dom";
 import { useToast } from "@chakra-ui/react"
+import { apiService } from "../app/apiService";
 
 //REDUX
 import {useDispatch} from "react-redux";
@@ -47,6 +48,7 @@ const Login = () => {
             console.log(response.data);
             dispatch(SET_LOGIN(response.data))
             localStorage.setItem(TOKEN, response.data.token)
+            apiService (response.data?.token);
             history.push("/");
        
         }  else {
