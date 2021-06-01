@@ -26,6 +26,9 @@ const newsReducer = createSlice({
   extraReducers: {},
 });
 
-export const {setAllNews} = newsReducer.actions;
+export const newsSelectors = newsAdapter.getSelectors(
+  (state) => state.news
+)
+export const {setAllNews, add} = newsReducer.actions;
 
 export default newsReducer.reducer;

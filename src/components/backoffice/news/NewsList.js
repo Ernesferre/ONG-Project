@@ -1,5 +1,5 @@
 //HOOKS
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 //REACT ROUTER
 import {Link} from 'react-router-dom';
@@ -9,7 +9,7 @@ import {Stack, CircularProgress, Heading, Button} from "@chakra-ui/react";
 
 //COMPONENTS
 import New from './New';
-import {fetchNews} from '../../../features/newsReducer';
+import {fetchNews, newsSelectors} from '../../../features/newsReducer';
 
 const mockNov = [
   {
@@ -33,8 +33,8 @@ const NewsList = () => {
 
   const dispatch = useDispatch();
 
-  const news = useSelector(store => Object.entries(store.news.entities))
-  
+  const news = useSelector(newsSelectors.selectAll)
+
   useEffect(() => {
 
     dispatch(fetchNews())
@@ -65,7 +65,7 @@ const NewsList = () => {
       { 
         news.length > 0 ? (
 
-          news.map(novelty => <New novelty={novelty[1]} /> )
+          news.map(novelty => <New key={novelty.id} novelty={novelty} /> )
 
         ) : (
 

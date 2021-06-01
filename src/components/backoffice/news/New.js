@@ -1,7 +1,7 @@
 import { Stack, Image, Button, Text } from "@chakra-ui/react";
 
 const New = ({ novelty }) => {
-  console.log(novelty)
+
   return (
     <Stack
       spacing={6}
