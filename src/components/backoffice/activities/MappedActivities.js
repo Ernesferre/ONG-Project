@@ -1,13 +1,17 @@
-import React from 'react'
-import { Button, Flex, Image, Text, useBreakpointValue } from '@chakra-ui/react'
-import {Link} from 'react-router-dom'
+import React from "react";
+import {
+  Button,
+  Flex,
+  Image,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { deleteActivities } from "./ActivitiesService";
 
-const MappedActivities = ({ activities }) => {
-
+const MappedActivities = ({ activities, parentCallBack }) => {
   const handleDelete = async (id) => {
-
-    
     const confirmation = await Swal.fire({
       title: "Confirmación",
       text: "¿Quieres borrar esta actividad?",
@@ -17,19 +21,14 @@ const MappedActivities = ({ activities }) => {
       confirmButtonColor: "#DB5752",
       cancelButtonText: "Cancelar",
     });
+
     if (confirmation.isConfirmed === true) {
-      // DELETE FUNCTION HERE
-      console.log('ID ELIMINADO' + '' + id);
-    
+      deleteActivities(id);
+      parentCallBack(true);
     }
   };
-
-  const flexDir = useBreakpointValue({ base: "column", md: "row" })
-  const marginTop = useBreakpointValue({ base: "1rem", md: "0" })
-
-
-
-  
+  const flexDir = useBreakpointValue({ base: "column", md: "row" });
+  const marginTop = useBreakpointValue({ base: "1rem", md: "0" });
   return (
     <Flex flexDir="column">
       {activities?.map((activity) => (
@@ -41,42 +40,59 @@ const MappedActivities = ({ activities }) => {
           padding="1em"
           borderRadius="0.1em"
         >
-          <Flex alignItems='center' justifyContent='space-between' flexDir={flexDir}>
+          <Flex
+            alignItems="center"
+            justifyContent="space-between"
+            flexDir={flexDir}
+          >
             <Flex alignItems="center" justifyContent="space-between">
-                <Image
-                    boxSize="100px"
-                    objectFit="cover"
-                    src={activity.image}
-                    fallbackSrc="/brand-logo.svg"
-                    alt={activity.name}
-                />
+              <Image
+                boxSize="100px"
+                objectFit="cover"
+                src={activity.image}
+                fallbackSrc="/brand-logo.svg"
+                alt={activity.name}
+              />
             </Flex>
-            <Flex alignItems="center" justifyContent="space-between" marginTop={marginTop}>
+            <Flex
+              alignItems="center"
+              justifyContent="space-between"
+              marginTop={marginTop}
+            >
               <Text fontWeight="bold">
-                <Text fontSize="small" color="gray.400">Actividad: </Text>
+                <Text fontSize="small" color="gray.400">
+                  Actividad:{" "}
+                </Text>
                 {activity.name}
               </Text>
             </Flex>
-            <Flex alignItems="center" justifyContent="space-between" marginTop={marginTop}>
+            <Flex
+              alignItems="center"
+              justifyContent="space-between"
+              marginTop={marginTop}
+            >
               <Text fontWeight="bold">
-                <Text fontSize="small" color="gray.400">Creada el: </Text>
+                <Text fontSize="small" color="gray.400">
+                  Creada el:{" "}
+                </Text>
                 {activity.created_at.slice(0, 10)}
               </Text>
             </Flex>
             <Flex justifyContent="space-between" marginTop={marginTop}>
-                <Link 
-                    to={{
-                        pathname: "/backoffice/activities/edit",
-                        state: activity,
-                    }}>
-                    <Button colorScheme="blue" size="sm" variant="outline">
-                        Editar
-                    </Button>
-                </Link>
-              <Button size="sm" 
-                colorScheme="red" 
-                marginLeft="1em"  
-                // AGREGAR FUNCIÓN ELIMINAR
+              <Link
+                to={{
+                  pathname: "/backoffice/activities/edit",
+                  state: activity,
+                }}
+              >
+                <Button colorScheme="blue" size="sm" variant="outline">
+                  Editar
+                </Button>
+              </Link>
+              <Button
+                size="sm"
+                colorScheme="red"
+                marginLeft="1em"
                 onClick={() => handleDelete(activity.id)}
               >
                 Borrar
@@ -86,7 +102,7 @@ const MappedActivities = ({ activities }) => {
         </Flex>
       ))}
     </Flex>
-  )
-}
+  );
+};
 
-export default MappedActivities
+export default MappedActivities;
