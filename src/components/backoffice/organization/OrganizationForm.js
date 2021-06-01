@@ -9,6 +9,7 @@ import { Image } from "@chakra-ui/image";
 import { Flex } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import { Spinner } from "@chakra-ui/spinner";
+import { Text } from "@chakra-ui/layout";
 
 export const OrganizationForm = () => {
   const [loading, setLoading] = useState(true);
@@ -198,14 +199,31 @@ export const OrganizationForm = () => {
             <Flex justifyContent="center">
               <Image src={currentLogo} objectFit="cover" boxSizing="md" />
             </Flex>
-            <FormLabel color="gray.400" fontWeight="bold" marginTop="1em">
-              Cambiar logo
-            </FormLabel>
+            <Flex justifyContent="center">
+              <FormLabel
+                htmlFor="file"
+                color="white"
+                fontWeight="bold"
+                marginTop="1em"
+                bg="#5796D9"
+                width="10em"
+                padding="0.5em"
+                textAlign="center"
+                borderRadius="0.3em"
+                cursor="pointer"
+                _hover={{ bg: "#88BBF2" }}
+              >
+                Cambiar Logo
+              </FormLabel>
+              <Flex alignItems="center">{changedLogo.name}</Flex>
+            </Flex>
             <Input
+              id="file"
               _hover={{ borderColor: "" }}
               _focus={{ borderColor: "" }}
               type="file"
               onChange={(e) => setChangedLogo(e.target.files[0])}
+              display="none"
             />
           </FormControl>
           <Button marginTop="1em" type="submit" colorScheme="blue">
