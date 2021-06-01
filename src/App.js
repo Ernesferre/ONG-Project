@@ -28,7 +28,7 @@ function App() {
     <ChakraProvider>
       <Router>
         <div className="App">
-          <Header />
+          {/* <Header /> */}
           <Switch>
             <Route exact path="/backoffice" component={Backoffice} />
             <Route exact path="/backoffice/news" component={NoveltiesList}/>

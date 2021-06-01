@@ -1,9 +1,11 @@
 import React from 'react'
+import HeaderPublic from '../components/public/layout/HeaderPublic'
 
 const Home = () => {
     return (
         <div>
-            Home
+            <HeaderPublic />
+            
         </div>
     )
 }
