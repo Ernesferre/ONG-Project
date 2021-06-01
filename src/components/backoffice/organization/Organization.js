@@ -44,7 +44,7 @@ export const Organization = () => {
           <Heading>Organización</Heading>
           <Flex flexDir="column " margin="1em">
             <Text color="gray.500" fontWeight="bold">
-              Nombre:
+              Nombre
             </Text>
             <Heading size="md">{data.name}</Heading>
           </Flex>
@@ -56,7 +56,7 @@ export const Organization = () => {
           />
           <Flex flexDir="column" margin="1em">
             <Text color="gray.500" fontWeight="bold">
-              Descripción:
+              Descripción
             </Text>
             <Text> {data.short_description}</Text>
           </Flex>
