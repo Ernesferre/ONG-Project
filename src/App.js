@@ -21,6 +21,8 @@ import CreateActivity from "./components/backoffice/activities/CreateActivity";
 import EditActivity from "./components/backoffice/activities/EditActivity";
 import SlidesShow from "./components/backoffice/slides/SlidesShow";
 import TestimonialList from "./components/backoffice/testimonials/TestimonialList";
+import CreateTestimonial from "./components/backoffice/testimonials/CreateTestimonial";
+import EditTestimonial from "./components/backoffice/testimonials/EditTestimonial";
 
 
 function App() {
@@ -75,6 +77,16 @@ function App() {
               exact
               path="/backoffice/testimonials"
               component={TestimonialList}
+            />
+            <Route
+              exact
+              path="/backoffice/testimonials/create"
+              component={CreateTestimonial}
+            />
+            <Route
+              exact
+              path="/backoffice/testimonials/edit"
+              component={EditTestimonial}
             />
           </Switch>
         </div>
