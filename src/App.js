@@ -20,20 +20,23 @@ import ListOfActivities from "./components/backoffice/activities/ListOfActivitie
 import CreateActivity from "./components/backoffice/activities/CreateActivity";
 import EditActivity from "./components/backoffice/activities/EditActivity";
 import SlidesShow from "./components/backoffice/slides/SlidesShow";
+import { OrganizationPage } from "./pages/backoffice/organization/OrganizationPage";
 import TestimonialList from "./components/backoffice/testimonials/TestimonialList";
 import CreateTestimonial from "./components/backoffice/testimonials/CreateTestimonial";
 import EditTestimonial from "./components/backoffice/testimonials/EditTestimonial";
-
+import { UserList } from "./components/backoffice/users/UserList";
+import { CreateOrEditUser } from "./components/backoffice/users/CreateOrEditUser";
+import { UserCreate } from "./pages/backoffice/users/UserCreate";
 
 function App() {
   return (
     <ChakraProvider>
       <Router>
         <div className="App">
-          <Header />
+          {/* <Header /> */}
           <Switch>
             <Route exact path="/backoffice" component={Backoffice} />
-            <Route exact path="/backoffice/news" component={NoveltiesList}/>
+            <Route exact path="/backoffice/news" component={NoveltiesList} />
             <Route
               exact
               path="/backoffice/categories"
@@ -68,10 +71,11 @@ function App() {
               path="/backoffice/activities/edit"
               component={EditActivity}
             />
+            <Route exact path="/backoffice/slides" component={SlidesShow} />
             <Route
               exact
-              path="/backoffice/slides"
-              component={SlidesShow}
+              path="/backoffice/organization"
+              component={OrganizationPage}
             />
             <Route
               exact
@@ -87,6 +91,21 @@ function App() {
               exact
               path="/backoffice/testimonials/edit"
               component={EditTestimonial}
+            />
+            <Route
+              exact
+              path="/backoffice/users"
+              component={UserList}
+            />
+            <Route
+              exact
+              path="/backoffice/users/create"
+              component={UserCreate}
+            />
+            <Route
+              exact
+              path="/backoffice/users/edit"
+              component={CreateOrEditUser}
             />
           </Switch>
         </div>
