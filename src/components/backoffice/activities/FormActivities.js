@@ -26,6 +26,23 @@ const toBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
+// convert url to base64
+const urlToBase64 = (img) => {
+  var blob = new Blob([img])
+  var url = URL.createObjectURL(blob)
+  
+  return fetch(url)
+  .then(res => res.blob())
+  .then(blob => {
+    var fr = new FileReader()
+    fr.onload = () => {
+      var b64 = fr.result
+      return b64
+    }
+    fr.readAsDataURL(blob)
+  })
+}
+
 const ActivitiesForm = ({ activityToEdit }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -81,10 +98,11 @@ const ActivitiesForm = ({ activityToEdit }) => {
           image: base64Img,
         };
       } else {
+        let urlToBase64Img = await urlToBase64(image);
         data = {
           name: name,
           description: description,
-          image: image,
+          image: urlToBase64Img,
         };
       }
       if (activityToEdit) {
