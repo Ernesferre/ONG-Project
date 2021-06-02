@@ -8,8 +8,9 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useAlert } from "../layout/Alert";
+import { deleteTestimonial } from './testimonials';
 
-const MappedTestimonials = ({ testimonials }) => {
+const MappedTestimonials = ({ testimonials, handleUpdate }) => {
   const { setAlert } = useAlert();
 
   const handleDelete = (id) => {
@@ -23,9 +24,12 @@ const MappedTestimonials = ({ testimonials }) => {
       cancelButtonText: "Cancelar",
       confirmButtonText: "Borrar",
       onConfirm: () => {
-        // DELETE FUNCTION HERE
-        console.log("ID ELIMINADO" + "" + id);
-      },
+        deleteTestimonial(id)    
+        // console.log("ID ELIMINADO" + "" + id);
+      .then(res => {
+        handleUpdate()
+      })},
+
       onCancel: () => {},
     });
   };
