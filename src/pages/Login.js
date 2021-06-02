@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 //FORMIK AND YUP
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -12,10 +12,16 @@ import { useHistory } from "react-router-dom";
 import { useToast } from "@chakra-ui/react"
 import { apiService } from "../app/apiService";
 
+//REDUX
+import {useDispatch} from "react-redux";
+import {SET_LOGIN} from "../features/authReducer";
+
 const Login = () => {
 
-  //user = objeto con informacion del usuario 
-  const [user, setUser] = useState({})
+  
+
+  const dispatch = useDispatch();
+  const TOKEN = "token";
 
   let history = useHistory();
   const toast = useToast()
@@ -39,11 +45,10 @@ const Login = () => {
         const response = await loginUser(values)
     
         if(response.data?.token) {
-
-            // console.log(response.data);
-            localStorage.setItem('token', response.data?.token);
+            console.log(response.data);
+            dispatch(SET_LOGIN(response.data))
+            localStorage.setItem(TOKEN, response.data.token)
             apiService (response.data?.token);
-            
             history.push("/");
        
         }  else {
@@ -56,8 +61,6 @@ const Login = () => {
               })
         }
 
-
-        setUser(response)
 
         actions.setSubmitting(false)
 
