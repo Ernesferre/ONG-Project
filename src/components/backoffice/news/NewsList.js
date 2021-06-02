@@ -11,23 +11,9 @@ import {Stack, CircularProgress, Heading, Button} from "@chakra-ui/react";
 import New from './New';
 import {fetchNews, newsSelectors} from '../../../features/newsReducer';
 
-const mockNov = [
-  {
-    name: "novedad numero uno",
-    image: "https://via.placeholder.com/100",
-    createdAt: "12-05-20",
-  },
-  {
-    name: "novedad numero dos",
-    image: "https://via.placeholder.com/100",
-    createdAt:"12-05-20",
-  },
-  {
-    name: "novedad numero tres",
-    image: "https://via.placeholder.com/100",
-    createdAt: "12-05-20",
-  },
-];
+
+//prueba ckeditor
+import NewsForm from './NewsForm';
 
 const NewsList = () => {
 
@@ -44,7 +30,7 @@ const NewsList = () => {
 
   return (
     <Stack d="flex" pt={3} align="center" width="100%" spacing={6}>
-
+{/* 
       <Stack>
         <Heading textAlign="center">Novedades</Heading>
       </Stack>
@@ -73,8 +59,8 @@ const NewsList = () => {
 
         )
       }
-      </Stack>
-
+      </Stack> */}
+      <NewsForm/>
     </Stack>
   );
 };
