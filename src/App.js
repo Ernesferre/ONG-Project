@@ -21,6 +21,7 @@ import CreateActivity from "./components/backoffice/activities/CreateActivity";
 import EditActivity from "./components/backoffice/activities/EditActivity";
 import SlidesShow from "./components/backoffice/slides/SlidesShow";
 import TestimonialList from "./components/backoffice/testimonials/TestimonialList";
+import FormHomeEdition from "./components/backoffice/homeEdition/FormHomeEdition";
 
 
 function App() {
@@ -70,6 +71,11 @@ function App() {
               exact
               path="/backoffice/slides"
               component={SlidesShow}
+            />
+             <Route
+              exact
+              path="/backoffice/homeEdition"
+              component={FormHomeEdition}
             />
             <Route
               exact

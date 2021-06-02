@@ -28,8 +28,8 @@ const Login = () => {
   return (
     <Formik
       initialValues={{
-        email: "",
-        password: "",
+        welcome_text: "",
+        
       }}
       validationSchema={validate}
       
