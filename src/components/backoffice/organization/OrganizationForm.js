@@ -43,31 +43,33 @@ export const OrganizationForm = () => {
       reader.onerror = (error) => reject(error);
     });
 
-  const handleError = ({ message }) => {
+  const handleError = (message) => {
     Swal.fire({
       title: "Error",
-      text: { message },
+      text: message,
       icon: "error",
       confirmButtonText: "OK",
     });
   };
 
-  const handleSuccess = () => {
+  const handleSuccess = (message) => {
     Swal.fire({
       title: "Success",
-      text: "Tarea completada",
+      text: message,
       icon: "success",
       confirmButtonText: "OK",
     });
   };
 
-  const handleValidation = (values) => {
-    organization.forEach((value) => {
+  const handleValidation = (object) => {
+    let validated = true;
+    const values = Object.values(object);
+    values.forEach((value) => {
       if (value.length === 0) {
-        return false;
+        validated = false;
       }
     });
-    return true;
+    return validated;
   };
 
   const handleSubmit = async (e) => {
@@ -76,18 +78,18 @@ export const OrganizationForm = () => {
       const newBase64Logo = await toBase64(changedLogo);
       organization = { ...organization, logo: newBase64Logo };
     }
-    const passedValidation = handleValidation();
+    const passedValidation = handleValidation(organization);
     if (passedValidation) {
       try {
         const response = await axios.post(
           "http://ongapi.alkemy.org/api/organization",
           organization
         );
-        handleSuccess();
+        handleSuccess("Organización editada");
         history.push("/");
         return response.data;
       } catch (error) {
-        handleError();
+        handleError("No se pudo realizar la tarea");
       }
     } else {
       handleError("Todos los campos deben tener datos");
@@ -114,6 +116,7 @@ export const OrganizationForm = () => {
     };
     getOrganizationData();
   }, []);
+
   return (
     <>
       {loading ? (
