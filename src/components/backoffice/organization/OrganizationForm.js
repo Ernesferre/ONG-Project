@@ -9,6 +9,7 @@ import { Image } from "@chakra-ui/image";
 import { Flex } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import { Spinner } from "@chakra-ui/spinner";
+import { useHistory } from "react-router";
 
 export const OrganizationForm = () => {
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,8 @@ export const OrganizationForm = () => {
   const [currentLogo, setCurrentLogo] = useState("");
   const [changedLogo, setChangedLogo] = useState("");
   const [welcomeText, setWelcomeText] = useState("");
+
+  const history = useHistory();
 
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -35,7 +38,7 @@ export const OrganizationForm = () => {
       title: "Error",
       text: "Hubo un error",
       icon: "error",
-      confirmButtonText: "Ok",
+      confirmButtonText: "OK",
     });
   };
 
@@ -44,7 +47,7 @@ export const OrganizationForm = () => {
       title: "Success",
       text: "Tarea completada",
       icon: "success",
-      confirmButtonText: "Ok",
+      confirmButtonText: "OK",
     });
   };
 
@@ -71,6 +74,7 @@ export const OrganizationForm = () => {
         organization
       );
       handleSuccess();
+      history.push("/");
       return response.data;
     } catch (error) {
       handleError();
