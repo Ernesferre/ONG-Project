@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Flex, Image, Text, useBreakpointValue } from '@chakra-ui/react'
 import {Link} from 'react-router-dom'
 
-const MappedMembers = ({ members }) => {
+const MappedMembers = ({ members, parentCallBack }) => {
 
   const flexDir = useBreakpointValue({ base: "column", md: "row" })
   const marginTop = useBreakpointValue({ base: "1rem", md: "0" })
@@ -38,7 +38,7 @@ const MappedMembers = ({ members }) => {
             <Flex justifyContent="space-between" marginTop={marginTop}>
                 <Link 
                     to={{
-                        pathname: "/backoffice/activities/edit",
+                        pathname: "/backoffice/members/edit",
                         state: member,
                     }}>
                     <Button colorScheme="blue" size="sm" variant="outline">

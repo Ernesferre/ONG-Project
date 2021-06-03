@@ -2,14 +2,13 @@ import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {Container, Flex, Heading, Button, Spinner} from '@chakra-ui/react'
 import MappedMembers from './MappedMembers'
-// import { getMembers} from './membersService'
+// import { getMembers } from './membersService'
 
 const ListOfMembers = () => {
 
     const [loading, setLoading] = useState(true)
     // const [members, setMembers] = useState()
-    // const [update, setUpdate] = useState(false)
-    // const [lastID, setLastID] = useState()
+    const [update, setUpdate] = useState(false)
 
     const fakeData = [
         { id:1, name: "member 1", description: '<h1>lorem ipsum</h1><br><p>lorem ipsum</p>', image:"https://images.unsplash.com/photo-1495446815901-a7297e633e8d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80", created_at: "2021-05-12T00:59:46.326Z" },
@@ -25,9 +24,10 @@ const ListOfMembers = () => {
     //     .then(res => {
     //       console.log(res.data)
     //       setMembers(res.data)
-    //       setLastID(res.data.sort((a,b)=> b.id - a.id)[0].id)
     //       setLoading(false)
+    //      setUpdate(false)
     //     })
+    //      .catch(() => setLoading(false))
     //   }, [update])
 
     // if (loading) return <Spinner
@@ -44,15 +44,15 @@ const ListOfMembers = () => {
                 <Flex flexDir="column" marginTop='1em'>
                     <Heading textAlign="center">Miembros</Heading>
                     <Flex alignSelf='flex-end' marginRight='1em'>
-                    <Link to={{
-                        pathname: "/backoffice/members/create",
-                        // state: {lastID:lastID},
-                    }}>
+                    <Link to="/backoffice/members/create">
                         <Button colorScheme="green">+ Crear Miembro</Button>
                     </Link>
                     </Flex>
-                    {/* CAMBIAR fakeData por members */}
-                    <MappedMembers members={fakeData}></MappedMembers>
+                    {/* {members ?  */}
+                    {/* cambiar fakeDate por members */}
+                    <MappedMembers members={fakeData} parentCallBack={setUpdate}></MappedMembers>
+                    {/* : <Heading as="h4" size="md" textAlign="center">No se encontraron miembros</Heading> */}
+                    {/* } */}
                 </Flex>
             </Container>
         </div>
