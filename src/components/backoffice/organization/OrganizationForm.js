@@ -23,6 +23,16 @@ export const OrganizationForm = () => {
   const [changedLogo, setChangedLogo] = useState("");
   const [welcomeText, setWelcomeText] = useState("");
 
+  let organization = {
+    name,
+    short_description: shortDescription,
+    long_description: longDescription,
+    address,
+    cellphone,
+    phone,
+    welcome_text: welcomeText,
+  };
+
   const history = useHistory();
 
   const toBase64 = (file) =>
@@ -33,10 +43,10 @@ export const OrganizationForm = () => {
       reader.onerror = (error) => reject(error);
     });
 
-  const handleError = () => {
+  const handleError = ({ message }) => {
     Swal.fire({
       title: "Error",
-      text: "Hubo un error",
+      text: { message },
       icon: "error",
       confirmButtonText: "OK",
     });
@@ -51,33 +61,36 @@ export const OrganizationForm = () => {
     });
   };
 
+  const handleValidation = (values) => {
+    organization.forEach((value) => {
+      if (value.length === 0) {
+        return false;
+      }
+    });
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let organization = {
-      name,
-      short_description: shortDescription,
-      long_description: longDescription,
-      address,
-      cellphone,
-      phone,
-      welcome_text: welcomeText,
-    };
-
     if (changedLogo) {
       const newBase64Logo = await toBase64(changedLogo);
       organization = { ...organization, logo: newBase64Logo };
     }
-
-    try {
-      const response = await axios.post(
-        "http://ongapi.alkemy.org/api/organization",
-        organization
-      );
-      handleSuccess();
-      history.push("/");
-      return response.data;
-    } catch (error) {
-      handleError();
+    const passedValidation = handleValidation();
+    if (passedValidation) {
+      try {
+        const response = await axios.post(
+          "http://ongapi.alkemy.org/api/organization",
+          organization
+        );
+        handleSuccess();
+        history.push("/");
+        return response.data;
+      } catch (error) {
+        handleError();
+      }
+    } else {
+      handleError("Todos los campos deben tener datos");
     }
   };
   useEffect(() => {
@@ -214,7 +227,7 @@ export const OrganizationForm = () => {
                 textAlign="center"
                 borderRadius="0.3em"
                 cursor="pointer"
-                _hover={{ bg: "#88BBF2" }}
+                _hover={{ bg: "#3672B3" }}
               >
                 Cambiar Logo
               </FormLabel>
@@ -229,7 +242,7 @@ export const OrganizationForm = () => {
               display="none"
             />
           </FormControl>
-          <Button marginTop="1em" type="submit" colorScheme="blue">
+          <Button marginTop="1em" bg="#5796D9" type="submit" colorScheme="blue">
             Editar
           </Button>
         </form>
