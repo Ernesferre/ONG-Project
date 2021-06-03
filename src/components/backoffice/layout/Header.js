@@ -18,6 +18,9 @@ import { GrClose as CloseIcon } from "react-icons/gr";
 import { NavLink as LinkRouterDom } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
+import {useDispatch} from "react-redux";
+import {SET_LOGOUT} from './../../../features/authReducer'
+
 const Routes = [
   { route: "/backoffice/categories", name: "Categorías" },
   { route: "/backoffice/news", name: "Novedades" },
@@ -26,13 +29,17 @@ const Routes = [
 ];
 
 export default function Header() {
+  
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const dispatch = useDispatch();
 
   const [open, setopen] = React.useState(false);
 
   const history = useHistory();
 
   const handleLogout = () => {
+    dispatch(SET_LOGOUT())
     localStorage.removeItem('token')
     history.push("/login")
   }
