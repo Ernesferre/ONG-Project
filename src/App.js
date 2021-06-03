@@ -13,6 +13,8 @@ import Nosotros from "./pages/Nosotros";
 import Header from "./components/backoffice/layout/Header";
 import Backoffice from "./components/backoffice/Backoffice";
 import NewsList from "./components/backoffice/news/NewsList";
+import NewsForm from "./components/backoffice/news/NewsForm";
+import NewsEdit from "./components/backoffice/news/NewsEdit";
 import { CategoryList } from "./components/backoffice/categories/CategoryList";
 import { CategoryPatch } from "./pages/backoffice/categories/CategoryPatch";
 import { CategoryCreate } from "./pages/backoffice/categories/CategoryCreate";
@@ -32,6 +34,8 @@ function App() {
           <Switch>
             <Route exact path="/backoffice" component={Backoffice} />
             <Route exact path="/backoffice/news" component={NewsList}/>
+            <Route exact path="/backoffice/news/create" component={NewsForm}/>
+            <Route exact path="/backoffice/news/edit" component={NewsEdit}/>
             <Route
               exact
               path="/backoffice/categories"

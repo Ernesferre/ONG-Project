@@ -11,10 +11,6 @@ import {Stack, CircularProgress, Heading, Button} from "@chakra-ui/react";
 import New from './New';
 import {fetchNews, newsSelectors} from '../../../features/newsReducer';
 
-
-//prueba ckeditor
-import NewsForm from './NewsForm';
-
 const NewsList = () => {
 
   const dispatch = useDispatch();
@@ -30,7 +26,7 @@ const NewsList = () => {
 
   return (
     <Stack d="flex" pt={3} align="center" width="100%" spacing={6}>
-{/* 
+
       <Stack>
         <Heading textAlign="center">Novedades</Heading>
       </Stack>
@@ -59,8 +55,7 @@ const NewsList = () => {
 
         )
       }
-      </Stack> */}
-      <NewsForm/>
+      </Stack>
     </Stack>
   );
 };

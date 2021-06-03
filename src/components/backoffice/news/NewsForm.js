@@ -1,75 +1,137 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {
   FormControl,
   FormLabel,
   Input,
+  Select,
   Stack,
-  Button
+  Button,
 } from "@chakra-ui/react";
-import { FaFileImage } from "react-icons/fa";
 
-const NewsForm = () => {
-  const [news, setNews] = useState();
-  const handleChange = (e) => {
-    e.target.type == "file" && (
-      setNews({...news,
-      [e.target.name]: e.target.value[0]
-      })
-    )
+import { getCategories } from "../categories/CategoriesService";
+//convertir imagen a base64
+const toBase64 = file => new Promise((resolve, reject) => {
+  const reader = new FileReader()
+  reader.readAsDataURL(file)
+  reader.onload = () => resolve(reader.result)
+  reader.onerror = error => reject(error)
+})
+
+const NewsForm = ({ newToEdit = {} }) => {
+
+  const [categorias, setCategorias] = useState([]);
+
+  const [news, setNews] = useState(newToEdit);
+
+  const handleChangeImage = async (imageFile) => {
+  
+    let image64 = await toBase64(imageFile[0]).then(res => res)
+
     setNews({
       ...news,
-      [e.target.name]: e.target.value
+      image: image64,
     })
+
+  };
+
+  const handleChange = (e) => {
+    setNews({
+      ...news,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    //falta validaciones
+    //info para enviar peticiones
     console.log(news)
-  }
+  };
+
+  useEffect(() => getCategories().then((res) => setCategorias(res.data)), []);
+
+  useEffect(() => {
+    if (newToEdit) {
+      setNews({
+        ...news,
+        title: newToEdit.name,
+        content: newToEdit.content,
+        category_id: newToEdit.category_id,
+        image: newToEdit.image
+      });
+    }
+  }, []);
+
 
   return (
     <Stack w="80%" p={6} m={24} bg="gray.200">
-      <form>
+      <form onSubmit={handleSubmitForm}>
         <FormControl mb={6}>
           <FormLabel>Titulo</FormLabel>
-          <Input name="titulo" onChange={handleChange} bg="#fff" type="text" />
+          <Input
+            name="title"
+            value={news.title}
+            onChange={handleChange}
+            bg="white"
+            type="text"
+            required
+          />
         </FormControl>
 
-        <FormControl  mb={6} >
+        <FormControl mb={6}>
+          <FormLabel>Categoría</FormLabel>
+          <Select
+            name="category_id"
+            value={news.category_id}
+
+            onChange={handleChange}
+            bg="white"
+            placeholder="Seleccione una categoría"
+          >
+            {categorias.length > 0 ? (
+              categorias.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              ))
+            ) : (
+              <option>Agrege categoria</option>
+            )}
+          </Select>
+        </FormControl>
+
+        <FormControl mb={6}>
           <FormLabel>Descripcion</FormLabel>
           <CKEditor
             editor={ClassicEditor}
-            data="valor inicial"
-            onReady={(editor) => {
-              console.log("Editor is ready to use!", editor);
-            }}
+            data={news.content}
             onChange={(event, editor) => {
               const data = editor.getData();
               setNews({
                 ...news,
-                content: data
-              })
-              console.log( news );
+                content: data,
+              });
             }}
-            config={{ckfinder: {
-              // Upload the images to the server using the CKFinder QuickUpload command.
-              uploadUrl: 'https://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
-            }}}
-            onBlur={(event, editor) => {
-              console.log("Blur.", editor);
-            }}
-            onFocus={(event, editor) => {
-              console.log("Focus.", editor);
+            config={{
+              ckfinder: {
+                // Upload the images to the server using the CKFinder QuickUpload command.
+                uploadUrl:
+                  "https://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json",
+              },
             }}
           />
         </FormControl>
-        <FormControl  mb={6}>
-          <FormLabel >Foto</FormLabel>
+        <FormControl mb={6}>
+          <FormLabel>Imagen</FormLabel>
           <Input
-            name="name" 
-            onChange={handleChange}
+            required
+            name="image"
+            onChange={(e) => handleChangeImage(e.target.files)}
             type="file"
-            id="file"
             h="auto"
-            style={{  
+            style={{
               overflow: "hidden",
               padding: "0",
               border: "none",
@@ -82,7 +144,7 @@ const NewsForm = () => {
         </Button>
       </form>
     </Stack>
-  );  
+  );
 };
 
 export default NewsForm;
