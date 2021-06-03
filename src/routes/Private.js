@@ -7,7 +7,7 @@ import ListOfActivities from '../components/backoffice/activities/ListOfActiviti
 import Backoffice from '../components/backoffice/Backoffice'
 import { CategoryList } from '../components/backoffice/categories/CategoryList'
 import Header from '../components/backoffice/layout/Header'
-import NoveltiesList from '../components/backoffice/novelties/NoveltiesList'
+import NewsList from '../components/backoffice/news/NewsList'
 import SlidesShow from '../components/backoffice/slides/SlidesShow'
 import TestimonialList from '../components/backoffice/testimonials/TestimonialList'
 import { CreateOrEditUser } from '../components/backoffice/users/CreateOrEditUser'
@@ -23,7 +23,7 @@ export const Private = () => {
           <Header />
           <Switch>
             <Route exact path="/backoffice" component={Backoffice} />
-            <Route exact path="/backoffice/news" component={NoveltiesList}/>
+            <Route exact path="/backoffice/news" component={NewsList}/>
             <Route
               exact
               path="/backoffice/categories"
