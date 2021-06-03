@@ -8,7 +8,7 @@ const EditMember = () => {
     const memberToEdit = location.state
 
     return(
-        <FormMembers activityToEdit={memberToEdit}></FormMembers>
+        <FormMembers member={memberToEdit}></FormMembers>
     )
 }
 
