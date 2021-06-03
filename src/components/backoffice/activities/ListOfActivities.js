@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {Container, Flex, Heading, Button} from '@chakra-ui/react'
 import MappedActivities from './MappedActivities'
-import { getActivities, addActivities, onEditActivities, onDeleteActivities} from './ActivitiesService';
+import  {getActivities} from './ActivitiesService'
 
 const ListOfActivities = () => {
 
@@ -23,12 +23,12 @@ const ListOfActivities = () => {
       useEffect(()=>{
         getActivities()
         .then(res => {
-          console.log(res.data)
+            console.log(res.data);
           setActivities(res.data)
-          setLastID(res.data.sort((a,b)=> b.id - a.id)[0].id)
           setLoading(false)
+          setUpdate(false)
         })
-      }, [update])
+    }, [update])
 
     return(
         <div>
@@ -40,8 +40,7 @@ const ListOfActivities = () => {
                         <Button colorScheme="green">+ Crear Actividad</Button>
                     </Link>
                     </Flex>
-                    {/* CAMBIAR fakeData por activities */}
-                    <MappedActivities activities={activities}></MappedActivities>
+                    <MappedActivities activities={activities} parentCallBack={setUpdate} ></MappedActivities>
                 </Flex>
             </Container>
         </div>

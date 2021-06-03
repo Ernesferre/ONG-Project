@@ -10,11 +10,13 @@ import {
   FormControl,
   FormLabel,
   Input,
+  InputGroup,
+  InputLeftElement
 } from "@chakra-ui/react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { FaFileImage } from "react-icons/fa";
-import { createActivity, editActivity } from "./ActivitiesService";
+import { FaFileImage, FaFacebook, FaLinkedin } from "react-icons/fa";
+// import { createMember, editMember } from "./membersService";
 import Swal from "sweetalert2";
 
 // convert image to base64
@@ -43,24 +45,28 @@ const urlToBase64 = (img) => {
   })
 }
 
-const ActivitiesForm = ({ activityToEdit }) => {
+const FormMembers = ({ member }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-  const history = useHistory()
+  const [facebook, setFacebook] = useState("");
+  const [linkedin, setLinkedin] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
-    if (activityToEdit) {
-      setName(activityToEdit.name);
-      setDescription(activityToEdit.description);
-      setImage(activityToEdit.image);
+    if (member) {
+      setName(member.name);
+      setDescription(member.description);
+      setImage(member.image);
+      setFacebook(member.facebookUrl);
+      setLinkedin(member.linkedinUrl);
     }
-  }, [activityToEdit]);
+  }, [member]);
 
   const handleSuccess = () => {
     Swal.fire({
       title: "Success",
-      text: "Actividad creada",
+      text: "Miembro creado",
       icon: "success",
       confirmButtonText: "Ok",
     });
@@ -69,7 +75,7 @@ const ActivitiesForm = ({ activityToEdit }) => {
   const handleSuccessEdit = () => {
     Swal.fire({
       title: "Success",
-      text: "Actividad editada",
+      text: "Miembro editado",
       icon: "success",
       confirmButtonText: "Ok",
     });
@@ -86,7 +92,7 @@ const ActivitiesForm = ({ activityToEdit }) => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (name === "" || description === "" || image === "") {
+    if (name === "" || description === "" || image === "" || facebook === "" || linkedin === "") {
       alert("Por favor complete todos los campos");
     } else {
       let data;
@@ -96,6 +102,8 @@ const ActivitiesForm = ({ activityToEdit }) => {
           name: name,
           description: description,
           image: base64Img,
+          facebookUrl: facebook,
+          linkedinUrl: linkedin
         };
       } else {
         let urlToBase64Img = await urlToBase64(image);
@@ -103,23 +111,25 @@ const ActivitiesForm = ({ activityToEdit }) => {
           name: name,
           description: description,
           image: urlToBase64Img,
+          facebookUrl: facebook,
+          linkedinUrl: linkedin
         };
       }
-      if (activityToEdit) {
-        editActivity(activityToEdit.id, data)
-        .then(() => {
-          handleSuccessEdit();
-            history.push("/backoffice/activities");
-          })
-          .catch(err => handleError())
-      } else {
-        createActivity(data)
-        .then(() => {
-            handleSuccess();
-            history.push("/backoffice/activities");
-          })
-          .catch(err => handleError())
-      }
+    //   if (member) {
+        // editActivity(member.id, data)
+        // .then(() => {
+        //   handleSuccessEdit();
+        //     history.push("/backoffice/members");
+        //   })
+        //   .catch(err => handleError())
+    //   } else {
+    //     createActivity(data)
+    //     .then(() => {
+    //         handleSuccess();
+    //         history.push("/backoffice/members");
+    //       })
+    //       .catch(err => handleError())
+    //   }
     }
   }
 
@@ -133,7 +143,7 @@ const ActivitiesForm = ({ activityToEdit }) => {
       padding={10}
     >
       <Heading margin={5}>
-        {activityToEdit ? "Editar actividad" : "Crear actividad"}
+        {member ? "Editar miembro" : "Crear miembro"}
       </Heading>
       <Box
         bg="gray.100"
@@ -160,7 +170,7 @@ const ActivitiesForm = ({ activityToEdit }) => {
             </FormControl>
             <CKEditor
               editor={ClassicEditor}
-              data={activityToEdit ? activityToEdit.description : description}
+              data={member ? member.description : description}
               onReady={(editor) => {
                 console.log("Editor is ready to use!", editor);
               }}
@@ -169,6 +179,38 @@ const ActivitiesForm = ({ activityToEdit }) => {
                 setDescription(data);
               }}
             />
+            <FormControl>
+                <FormLabel>Linkedin</FormLabel>
+                <InputGroup>
+                    <InputLeftElement
+                    pointerEvents="none"
+                    children={<FaLinkedin color="gray.300" />}
+                    />
+                    <Input type='url' 
+                    placeholder="Linkedin URL" 
+                    value={linkedin}
+                    onChange={(e) => setLinkedin(e.target.value)}
+                    bg="white"
+                    isRequired
+                    />
+                </InputGroup>
+            </FormControl>
+            <FormControl>
+                <FormLabel>Facebook</FormLabel>
+                <InputGroup>
+                    <InputLeftElement
+                    pointerEvents="none"
+                    children={<FaFacebook color="gray.300" />}
+                    />
+                    <Input type='url' 
+                    placeholder="Facebook URL" 
+                    value={facebook}
+                    onChange={(e) => setFacebook(e.target.value)}
+                    bg="white"
+                    isRequired
+                    />
+                </InputGroup>
+            </FormControl>
             <FormControl>
               <FormLabel>Foto</FormLabel>
               <Input
@@ -188,7 +230,7 @@ const ActivitiesForm = ({ activityToEdit }) => {
               </label>
               {image && (
                 <Text style={{ textAlign: "left" }} marginTop={3}>
-                  {activityToEdit ? activityToEdit.name : image.name}
+                  {member ? member.name : image.name}
                 </Text>
               )}
             </FormControl>
@@ -204,4 +246,4 @@ const ActivitiesForm = ({ activityToEdit }) => {
   );
 };
 
-export default ActivitiesForm;
+export default FormMembers;

@@ -7,34 +7,38 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
-import { deleteActivities } from "./ActivitiesService";
+import { useAlert } from "../layout/Alert";
 
-const MappedActivities = ({ activities, parentCallBack }) => {
-  const handleDelete = async (id) => {
-    const confirmation = await Swal.fire({
+const MappedTestimonials = ({ testimonials }) => {
+  const { setAlert } = useAlert();
+
+  const handleDelete = (id) => {
+    setAlert({
+      show: true,
       title: "Confirmación",
-      text: "¿Quieres borrar esta actividad?",
-      icon: "warning",
+      text: "¿Quieres borrar este testimonio?",
+      type: "warning",
       showCancelButton: true,
-      confirmButtonText: "Borrar",
       confirmButtonColor: "#DB5752",
       cancelButtonText: "Cancelar",
+      confirmButtonText: "Borrar",
+      onConfirm: () => {
+        // DELETE FUNCTION HERE
+        console.log("ID ELIMINADO" + "" + id);
+      },
+      onCancel: () => {},
     });
-
-    if (confirmation.isConfirmed === true) {
-      deleteActivities(id);
-      parentCallBack(true);
-    }
   };
+
   const flexDir = useBreakpointValue({ base: "column", md: "row" });
   const marginTop = useBreakpointValue({ base: "1rem", md: "0" });
+
   return (
     <Flex flexDir="column">
-      {activities?.map((activity) => (
+      {testimonials?.map((testimonial) => (
         <Flex
           flexDir="column"
-          key={activity.id}
+          key={testimonial.id}
           margin="1em"
           bg="gray.200"
           padding="1em"
@@ -49,40 +53,34 @@ const MappedActivities = ({ activities, parentCallBack }) => {
               <Image
                 boxSize="100px"
                 objectFit="cover"
-                src={activity.image}
+                src={testimonial.image}
                 fallbackSrc="/brand-logo.svg"
-                alt={activity.name}
+                alt={testimonial.name}
               />
             </Flex>
-            <Flex
-              alignItems="center"
-              justifyContent="space-between"
-              marginTop={marginTop}
-            >
-              <Text fontWeight="bold">
-                <Text fontSize="small" color="gray.400">
-                  Actividad:{" "}
-                </Text>
-                {activity.name}
+            <Flex direction="column" marginTop={marginTop}>
+              <Text fontSize="small" color="gray.400">
+                Nombre:
               </Text>
+              <Text fontWeight="bold">{testimonial.name}</Text>
             </Flex>
             <Flex
-              alignItems="center"
+              direction="column"
               justifyContent="space-between"
               marginTop={marginTop}
             >
+              <Text fontSize="small" color="gray.400">
+                Creado el:
+              </Text>
               <Text fontWeight="bold">
-                <Text fontSize="small" color="gray.400">
-                  Creada el:{" "}
-                </Text>
-                {activity.created_at.slice(0, 10)}
+                {testimonial.created_at.slice(0, 10)}
               </Text>
             </Flex>
             <Flex justifyContent="space-between" marginTop={marginTop}>
               <Link
                 to={{
-                  pathname: "/backoffice/activities/edit",
-                  state: activity,
+                  pathname: "/backoffice/testimonials/edit",
+                  state: testimonial,
                 }}
               >
                 <Button colorScheme="blue" size="sm" variant="outline">
@@ -93,7 +91,8 @@ const MappedActivities = ({ activities, parentCallBack }) => {
                 size="sm"
                 colorScheme="red"
                 marginLeft="1em"
-                onClick={() => handleDelete(activity.id)}
+                // AGREGAR FUNCIÓN ELIMINAR
+                onClick={() => handleDelete(testimonial.id)}
               >
                 Borrar
               </Button>
@@ -105,4 +104,4 @@ const MappedActivities = ({ activities, parentCallBack }) => {
   );
 };
 
-export default MappedActivities;
+export default MappedTestimonials;
