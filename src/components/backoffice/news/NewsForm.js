@@ -3,6 +3,8 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {
   FormControl,
+  Flex,
+  Heading,
   FormLabel,
   Input,
   Select,
@@ -22,8 +24,14 @@ const toBase64 = file => new Promise((resolve, reject) => {
 const NewsForm = ({ newToEdit = {} }) => {
 
   const [categorias, setCategorias] = useState([]);
-
-  const [news, setNews] = useState(newToEdit);
+  //info novedad
+  const data = {
+    title: "",
+    content: "",
+    category_id: "",
+    image: "",
+  }
+  const [news, setNews] = useState("created_at" in newToEdit ? newToEdit : data);
 
   const handleChangeImage = async (imageFile) => {
   
@@ -53,7 +61,8 @@ const NewsForm = ({ newToEdit = {} }) => {
   useEffect(() => getCategories().then((res) => setCategorias(res.data)), []);
 
   useEffect(() => {
-    if (newToEdit) {
+    if ("created_at" in newToEdit) {
+
       setNews({
         ...news,
         title: newToEdit.name,
@@ -61,12 +70,33 @@ const NewsForm = ({ newToEdit = {} }) => {
         category_id: newToEdit.category_id,
         image: newToEdit.image
       });
+    } else {
+      const data = {
+        title: "",
+        content: "",
+        category_id: "",
+        image: "",
+      }
+      setNews(data);
     }
+
   }, []);
 
 
   return (
-    <Stack w="80%" p={6} m={24} bg="gray.200">
+    <Flex
+    w="100%"
+    flexDirection="column"
+    minHeight="100vh"
+    align="center"
+    justify="center"
+    padding={6}
+  > 
+  <Heading>
+  {"created_at" in newToEdit ? "Editar novedad" : "Crear novedad"}
+  </Heading>
+    <Stack w="80%" p={6} m={10} bg="gray.200">
+
       <form onSubmit={handleSubmitForm}>
         <FormControl mb={6}>
           <FormLabel>Titulo</FormLabel>
@@ -140,10 +170,11 @@ const NewsForm = ({ newToEdit = {} }) => {
         </FormControl>
 
         <Button mt={4} colorScheme="blue" type="submit">
-          Crear
+        {"created_at" in newToEdit ? "Editar" : "Crear"}
         </Button>
       </form>
     </Stack>
+    </Flex>
   );
 };
 

@@ -36,7 +36,9 @@ function App() {
           {/* <Header /> */}
           <Switch>
             <Route exact path="/backoffice" component={Backoffice} />
-            <Route exact path="/backoffice/news" component={NoveltiesList} />
+            <Route exact path="/backoffice/news" component={NewsList} />
+            <Route exact path="/backoffice/news/create" component={NewsForm}/>
+            <Route exact path="/backoffice/news/edit" component={NewsEdit}/>
             <Route
               exact
               path="/backoffice/categories"
