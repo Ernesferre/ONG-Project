@@ -10,12 +10,14 @@ import Header from '../components/backoffice/layout/Header'
 import NoveltiesList from '../components/backoffice/novelties/NoveltiesList'
 import SlidesShow from '../components/backoffice/slides/SlidesShow'
 import TestimonialList from '../components/backoffice/testimonials/TestimonialList'
-import { CreateOrEditUser } from '../components/backoffice/users/CreateOrEditUser'
 import { UserList } from '../components/backoffice/users/UserList'
 import { CategoryCreate } from '../pages/backoffice/categories/CategoryCreate'
 import { CategoryPatch } from '../pages/backoffice/categories/CategoryPatch'
 import { OrganizationPage } from '../pages/backoffice/organization/OrganizationPage'
-import { UserCreate } from '../pages/backoffice/users/UserCreate'
+import { UserPatch } from '../pages/backoffice/users/UserPatch'
+import { UserCreate } from "../pages/backoffice/users/UserCreate";
+
+
 
 export const Private = () => {
     return (
@@ -80,10 +82,10 @@ export const Private = () => {
               path="/backoffice/users/create"
               component={UserCreate}
             />
-            <Route
+          <Route
               exact
-              path="/backoffice/users/edit"
-              component={CreateOrEditUser}
+              path="/backoffice/users/:id"
+              component={UserPatch}
             />
 
             <Redirect to="/" />
