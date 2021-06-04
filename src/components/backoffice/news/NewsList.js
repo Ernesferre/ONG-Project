@@ -1,26 +1,24 @@
 //HOOKS
-import { useEffect } from 'react';
-import {useDispatch, useSelector} from 'react-redux'
+import { useEffect, useState } from 'react';
+
 //REACT ROUTER
 import {Link} from 'react-router-dom';
+
+//SERVICIOS
+import newsService from './newsService';
 
 //CHAKRA
 import {Stack, CircularProgress, Heading, Button} from "@chakra-ui/react";
 
 //COMPONENTS
 import New from './New';
-import {fetchNews, newsSelectors} from '../../../features/newsReducer';
 
 const NewsList = () => {
 
-  const dispatch = useDispatch();
-
-  const news = useSelector(newsSelectors.selectAll)
+  const [news, setNews] = useState([]);
 
   useEffect(() => {
-
-    dispatch(fetchNews())
-    
+    newsService.getNews().then(res => setNews(res))
   }, [])
 
 

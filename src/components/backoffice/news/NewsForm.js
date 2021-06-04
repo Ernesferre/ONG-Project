@@ -1,6 +1,9 @@
+//HOOKS
 import { useEffect, useState } from "react";
+//CKEDITOR
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+//CHAKRA
 import {
   FormControl,
   Flex,
@@ -12,7 +15,26 @@ import {
   Button,
 } from "@chakra-ui/react";
 
+//services
 import { getCategories } from "../categories/CategoriesService";
+import newsService from './newsService';
+
+// convert url to base64
+const urlToBase64 = (img) => {
+  var blob = new Blob([img])
+  var url = URL.createObjectURL(blob)
+  
+  return fetch(url)
+  .then(res => res.blob())
+  .then(blob => {
+    var fr = new FileReader()
+    fr.onload = () => {
+      var b64 = fr.result
+      return b64
+    }
+    fr.readAsDataURL(blob)
+  })
+}
 //convertir imagen a base64
 const toBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -23,7 +45,9 @@ const toBase64 = (file) =>
   });
 
 const NewsForm = ({ newToEdit = {} }) => {
+
   const [categorias, setCategorias] = useState([]);
+
   //info novedad
   const data = {
     title: "",
@@ -31,17 +55,18 @@ const NewsForm = ({ newToEdit = {} }) => {
     category_id: "",
     image: "",
   };
+
   const [news, setNews] = useState(
     "created_at" in newToEdit ? newToEdit : data
   );
 
-  const handleChangeImage = async (imageFile) => {
-    let image64 = await toBase64(imageFile[0]).then((res) => res);
+  const handleChangeImage = (imageFile) => {
 
     setNews({
       ...news,
-      image: image64,
+      image: imageFile[0],
     });
+
   };
 
   const handleChange = (e) => {
@@ -51,11 +76,53 @@ const NewsForm = ({ newToEdit = {} }) => {
     });
   };
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
-    //falta validaciones
-    //info para enviar peticiones
-    console.log(news);
+
+    if("created_at" in newToEdit){
+      
+      let imageEdit;
+      
+      if(typeof news.image == "string"){
+
+        imageEdit = await urlToBase64(news.image)
+
+      } else {
+
+        imageEdit = await toBase64(news.image).then((res) => res);
+
+      }
+
+      const data = {
+        id: news.id,
+        name: news.title,
+        content: news.content,
+        image: imageEdit,
+        category_id: news.category_id,
+        updated_at: new Date().toISOString()
+      }
+
+      newsService.editNews(data, news.id).then(res => console.log(res))
+
+    } else {
+      let imageEdit;
+      if(typeof news.image !== "string"){
+        imageEdit = await toBase64(news.image).then((res) => res);
+      }
+
+
+      const data = {
+        name: news.title,
+        content: news.content,
+        image: imageEdit,
+        category_id: news.category_id,
+        created_at: new Date().toISOString()
+      }
+  
+      newsService.createNews(data).then(res => console.log(res))
+     
+    }
+
   };
 
   useEffect(() => getCategories().then((res) => setCategorias(res.data)), []);
@@ -151,7 +218,6 @@ const NewsForm = ({ newToEdit = {} }) => {
           <FormControl mb={6}>
             <FormLabel>Imagen</FormLabel>
             <Input
-              required
               name="image"
               onChange={(e) => handleChangeImage(e.target.files)}
               type="file"
