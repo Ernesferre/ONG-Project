@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import {
   Box,
@@ -17,16 +18,31 @@ import { GrClose as CloseIcon } from "react-icons/gr";
 import { NavLink as LinkRouterDom } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
+import {useDispatch} from "react-redux";
+import {SET_LOGOUT} from './../../../features/authReducer'
+
 const Routes = [
   { route: "/backoffice/categories", name: "Categorías" },
   { route: "/backoffice/news", name: "Novedades" },
   { route: "/backoffice/activities", name: "Actividades" },
+  { route: "/backoffice/testimonials", name: "Testimonios" },
 ];
 
 export default function Header() {
+  
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const dispatch = useDispatch();
+
   const [open, setopen] = React.useState(false);
+
+  const history = useHistory();
+
+  const handleLogout = () => {
+    dispatch(SET_LOGOUT())
+    localStorage.removeItem('token')
+    history.push("/login")
+  }
 
   return (
     <>
@@ -53,7 +69,7 @@ export default function Header() {
           </HStack>
 
           <Flex alignItems={"center"} ml={{ base: "auto", md: "2rem" }}>
-            <Button bg="#FAFA88" mx="10px" cursor={"pointer"}>
+            <Button bg="#FAFA88" mx="10px" cursor={"pointer"} onClick={handleLogout}>
               Cerrar sesión
             </Button>
 

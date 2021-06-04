@@ -1,6 +1,6 @@
-const url = "http://ongapi.alkemy.org/api/activities";
+const url = "http://ongapi.alkemy.org/api/slides";
 
-export const getActivities = async () => {
+export const getSlides = async () => {
   return await fetch(url, { method: "GET" })
 
 
@@ -11,11 +11,13 @@ export const getActivities = async () => {
     .catch((err) => console.log(err));
 };
 
+
+
 export function createActivity(values, lastId) {
 
   let date = new Date().toISOString()
 
-  const newActivity = {
+  const newSlide = {
       "id": parseInt(lastId) + 1,
       "name": values.name,
       "description": values.description,
@@ -28,7 +30,7 @@ export function createActivity(values, lastId) {
 
     return fetch(url, {
         method: 'POST',
-        body: JSON.stringify(newActivity),
+        body: JSON.stringify(newSlide),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
@@ -44,11 +46,11 @@ export function createActivity(values, lastId) {
     })
 }
 
-export function editActivity(id, values) {
+export function editSlide(id, values) {
 
   let date = new Date().toISOString()
 
-  const newActivity = {
+  const editSlide = {
       "id": id,
       "name": values.name,
       "description": values.description,
@@ -61,7 +63,7 @@ export function editActivity(id, values) {
 
     return fetch(`${url}/${id}`, {
         method: 'PUT',
-        body: JSON.stringify(newActivity),
+        body: JSON.stringify(editSlide),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
@@ -78,9 +80,9 @@ export function editActivity(id, values) {
 }
 
 
-export const deleteActivities = (id) => {
+export const deleteSlide = (id) => {
   return fetch(`${url}/${id}`, {method: 'DELETE'})
   // .then(res => res.data)
-  .then(() => 'Category deleted')
+  .then(() => 'Slide deleted')
   .catch(err => console.log(err))
 }
