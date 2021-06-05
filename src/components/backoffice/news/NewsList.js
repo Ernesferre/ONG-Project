@@ -16,10 +16,15 @@ import New from './New';
 const NewsList = () => {
 
   const [news, setNews] = useState([]);
+  const [updateList, setUpdateList] = useState(false)
 
   useEffect(() => {
-    newsService.getNews().then(res => setNews(res))
-  }, [])
+    newsService.getNews().then(res => {
+      setNews(res)
+      setUpdateList(false)
+    })
+      
+  }, [updateList])
 
 
   return (
@@ -45,7 +50,7 @@ const NewsList = () => {
       { 
         news.length > 0 ? (
 
-          news.map(novelty => <New key={novelty.id} novelty={novelty} /> )
+          news.map(novelty => <New key={novelty.id} setUpdateList={setUpdateList} novelty={novelty} /> )
 
         ) : (
 

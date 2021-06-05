@@ -16,5 +16,10 @@ export default {
         .then(res => res.data)
         .catch(err =>  console.log(`Error al editar novedad ${err}`))
         return edit;
+    },
+    deleteNews: async (id) => {
+        axios.delete(`http://ongapi.alkemy.org/api/news/${id}`)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
     }
 }

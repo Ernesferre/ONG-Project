@@ -161,7 +161,7 @@ const NewsForm = ({ newToEdit = {} }) => {
           title: "Novedad creada",
           text: "titulo",
           show: true,
-          type: "succes",
+          type: "success",
           showCancelButton: false,
         });
       })
