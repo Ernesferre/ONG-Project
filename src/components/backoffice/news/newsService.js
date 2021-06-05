@@ -9,12 +9,12 @@ export default {
         const create = await axios.post(`http://ongapi.alkemy.org/api/news`, data)
         .then(res => res.data)
         .catch(err => console.log(`Error al cargar nueva novedad ${err}`) )
-        return create
+        return create;
     },
     editNews: async (data, id) => {
         const edit = await axios.put(`http://ongapi.alkemy.org/api/news/${id}`, data)
         .then(res => res.data)
         .catch(err =>  console.log(`Error al editar novedad ${err}`))
-        return edit
+        return edit;
     }
 }

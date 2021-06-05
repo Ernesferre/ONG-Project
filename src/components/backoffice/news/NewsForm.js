@@ -1,5 +1,7 @@
 //HOOKS
 import { useEffect, useState } from "react";
+import {useHistory} from 'react-router-dom';
+import { useAlert } from "../layout/Alert";
 //CKEDITOR
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -45,8 +47,13 @@ const toBase64 = (file) =>
   });
 
 const NewsForm = ({ newToEdit = {} }) => {
-
+  //estado para cargar categorias al formulario
   const [categorias, setCategorias] = useState([]);
+
+  //alert: componente reutilizado
+  const { setAlert } = useAlert();
+
+  const history = useHistory();
 
   //info novedad
   const data = {
@@ -55,11 +62,11 @@ const NewsForm = ({ newToEdit = {} }) => {
     category_id: "",
     image: "",
   };
-
+  //data para enviar
   const [news, setNews] = useState(
     "created_at" in newToEdit ? newToEdit : data
   );
-
+    //change imagen
   const handleChangeImage = (imageFile) => {
 
     setNews({
@@ -68,7 +75,7 @@ const NewsForm = ({ newToEdit = {} }) => {
     });
 
   };
-
+  //change inputs
   const handleChange = (e) => {
     setNews({
       ...news,
@@ -76,23 +83,25 @@ const NewsForm = ({ newToEdit = {} }) => {
     });
   };
 
+  //envio de formulario
   const handleSubmitForm = async (e) => {
     e.preventDefault();
 
+    //si existe la propiedad created_at es porque tengo que editar
     if("created_at" in newToEdit){
       
       let imageEdit;
-      
+      //si no se sube otra imagen me quedo la que ya estaba y la paso a base64
       if(typeof news.image == "string"){
 
         imageEdit = await urlToBase64(news.image)
 
       } else {
-
+        //si cargo nueva imagen la conviert a base64
         imageEdit = await toBase64(news.image).then((res) => res);
 
       }
-
+      //data que voy a enviar
       const data = {
         id: news.id,
         name: news.title,
@@ -102,15 +111,42 @@ const NewsForm = ({ newToEdit = {} }) => {
         updated_at: new Date().toISOString()
       }
 
-      newsService.editNews(data, news.id).then(res => console.log(res))
+      //peticion a la API
+      newsService.editNews(data, news.id).then(res => {
+
+        const text = res.data.name
+
+        setAlert({
+          title: "Novedad editada",
+          text: text,
+          show: true,
+          type: "success",
+          showCancelButton: false,
+        });
+
+      })
+      .then(() =>  history.push('/backoffice/news'))
+      .catch(err => {
+        setAlert({
+          title: "",
+          text: "Error al editar novedad",
+          show: true,
+          type: "error",
+          showCancelButton: true,
+        });
+      })
 
     } else {
+      //si tengo que crear
       let imageEdit;
+      //convertir imagen a base64
       if(typeof news.image !== "string"){
+
         imageEdit = await toBase64(news.image).then((res) => res);
+
       }
 
-
+      //data a enviar
       const data = {
         name: news.title,
         content: news.content,
@@ -118,15 +154,34 @@ const NewsForm = ({ newToEdit = {} }) => {
         category_id: news.category_id,
         created_at: new Date().toISOString()
       }
-  
-      newsService.createNews(data).then(res => console.log(res))
-     
+
+      //peticion a la API
+      newsService.createNews(data).then(res => {
+        setAlert({
+          title: "Novedad creada",
+          text: "titulo",
+          show: true,
+          type: "succes",
+          showCancelButton: false,
+        });
+      })
+      .then(() => history.push('/backoffice/news'))
+      .catch(err => {
+        setAlert({
+          title: "",
+          text: "Error al crear novedad",
+          show: true,
+          type: "error",
+          showCancelButton: true,
+        });
+      })
     }
 
   };
-
+  //cargo categorias desde la API
   useEffect(() => getCategories().then((res) => setCategorias(res.data)), []);
-
+  
+  //si llega props con post para editar
   useEffect(() => {
     if ("created_at" in newToEdit) {
       setNews({
