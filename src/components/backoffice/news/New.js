@@ -1,6 +1,7 @@
 import { Stack, Image, Button, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
-const Novelty = ({ novelty }) => {
+const New = ({ novelty }) => {
   return (
     <Stack
       spacing={6}
@@ -11,8 +12,7 @@ const Novelty = ({ novelty }) => {
       w="100%"
       bg="gray.200"
     >
-
-      <Stack>
+      <Stack d="flex" justify="center" h="auto" maxWidth="350px">
         <Image src={novelty?.image} />
       </Stack>
 
@@ -27,19 +27,26 @@ const Novelty = ({ novelty }) => {
         <Text color="gray.400" fontSize="small">
           Creado
         </Text>
-        <Text fontWeight="bold">{novelty?.createdAt}</Text>
+        <Text fontWeight="bold">{novelty?.created_at.slice(0, 10)}</Text>
       </Stack>
 
       <Stack d="flex" direction="row" justify="center" align="center">
-        <Button variant="outline" colorScheme="blue">
-          Editar
-        </Button>
+        <Link
+          to={{
+            pathname: "/backoffice/news/edit",
+            state: novelty,
+          }}
+        >
+          <Button variant="outline" colorScheme="blue">
+            Editar
+          </Button>
+        </Link>
+
         <Button variant="solid" colorScheme="red">
           Borrar
         </Button>
       </Stack>
-
     </Stack>
   );
 };
-export default Novelty;
+export default New;

@@ -1,6 +1,6 @@
 //HOOKS
-import { useState } from 'react';
-
+import { useEffect } from 'react';
+import {useDispatch, useSelector} from 'react-redux'
 //REACT ROUTER
 import {Link} from 'react-router-dom';
 
@@ -8,29 +8,21 @@ import {Link} from 'react-router-dom';
 import {Stack, CircularProgress, Heading, Button} from "@chakra-ui/react";
 
 //COMPONENTS
-import Novelty from './Novelty';
+import New from './New';
+import {fetchNews, newsSelectors} from '../../../features/newsReducer';
 
-const mockNov = [
-  {
-    name: "novedad numero uno",
-    image: "https://via.placeholder.com/100",
-    createdAt: "12-05-20",
-  },
-  {
-    name: "novedad numero dos",
-    image: "https://via.placeholder.com/100",
-    createdAt:"12-05-20",
-  },
-  {
-    name: "novedad numero tres",
-    image: "https://via.placeholder.com/100",
-    createdAt: "12-05-20",
-  },
-];
+const NewsList = () => {
 
-const NoveltiesList = () => {
+  const dispatch = useDispatch();
 
-  const [novelties, setNovelties] = useState(mockNov);
+  const news = useSelector(newsSelectors.selectAll)
+
+  useEffect(() => {
+
+    dispatch(fetchNews())
+    
+  }, [])
+
 
   return (
     <Stack d="flex" pt={3} align="center" width="100%" spacing={6}>
@@ -53,9 +45,9 @@ const NoveltiesList = () => {
       <Stack d="flex" pt={3} align="center" w="75%" spacing={6} >
 
       { 
-        novelties.length != 0 ? (
+        news.length > 0 ? (
 
-          novelties.map(novelty => <Novelty novelty={novelty} /> )
+          news.map(novelty => <New key={novelty.id} novelty={novelty} /> )
 
         ) : (
 
@@ -64,8 +56,7 @@ const NoveltiesList = () => {
         )
       }
       </Stack>
-
     </Stack>
   );
 };
-export default NoveltiesList;
+export default NewsList;
