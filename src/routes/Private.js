@@ -6,18 +6,23 @@ import EditActivity from '../components/backoffice/activities/EditActivity'
 import ListOfActivities from '../components/backoffice/activities/ListOfActivities'
 import Backoffice from '../components/backoffice/Backoffice'
 import { CategoryList } from '../components/backoffice/categories/CategoryList'
+import HomeEdition from '../components/backoffice/homeEdition/HomeEdition'
 import Header from '../components/backoffice/layout/Header'
-import NoveltiesList from '../components/backoffice/novelties/NoveltiesList'
+import NewsList from '../components/backoffice/news/NewsList'
+import NewsEdit from '../components/backoffice/news/NewsEdit'
+import NewsForm from '../components/backoffice/news/NewsEdit'
 import SlidesShow from '../components/backoffice/slides/SlidesShow'
 import TestimonialList from '../components/backoffice/testimonials/TestimonialList'
 import EditTestimonial from '../components/backoffice/testimonials/EditTestimonial'
 import CreateTestimonial from '../components/backoffice/testimonials/CreateTestimonial'
-import { CreateOrEditUser } from '../components/backoffice/users/CreateOrEditUser'
 import { UserList } from '../components/backoffice/users/UserList'
 import { CategoryCreate } from '../pages/backoffice/categories/CategoryCreate'
 import { CategoryPatch } from '../pages/backoffice/categories/CategoryPatch'
 import { OrganizationPage } from '../pages/backoffice/organization/OrganizationPage'
-import { UserCreate } from '../pages/backoffice/users/UserCreate'
+import { UserPatch } from '../pages/backoffice/users/UserPatch'
+import { UserCreate } from "../pages/backoffice/users/UserCreate";
+
+
 
 export const Private = () => {
     return (
@@ -25,7 +30,10 @@ export const Private = () => {
           <Header />
           <Switch>
             <Route exact path="/backoffice" component={Backoffice} />
-            <Route exact path="/backoffice/news" component={NoveltiesList}/>
+            <Route exact path="/backoffice/news" component={NewsList}/>
+            <Route exact path="/backoffice/news/edit" component={NewsEdit}/>
+            <Route exact path="/backoffice/news/create" component={NewsForm}/>
+
             <Route
               exact
               path="/backoffice/categories"
@@ -92,10 +100,15 @@ export const Private = () => {
               path="/backoffice/users/create"
               component={UserCreate}
             />
+          <Route
+              exact
+              path="/backoffice/users/:id"
+              component={UserPatch}
+            />
             <Route
               exact
-              path="/backoffice/users/edit"
-              component={CreateOrEditUser}
+              path="/backoffice/homeEdition"
+              component={HomeEdition}
             />
 
             <Redirect to="/" />

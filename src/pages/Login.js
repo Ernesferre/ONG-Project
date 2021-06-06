@@ -36,6 +36,7 @@ const Login = () => {
       initialValues={{
         email: "",
         password: "",
+        
       }}
       validationSchema={validate}
       
