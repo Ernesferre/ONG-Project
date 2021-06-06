@@ -6,6 +6,7 @@ import EditActivity from '../components/backoffice/activities/EditActivity'
 import ListOfActivities from '../components/backoffice/activities/ListOfActivities'
 import Backoffice from '../components/backoffice/Backoffice'
 import { CategoryList } from '../components/backoffice/categories/CategoryList'
+import HomeEdition from '../components/backoffice/homeEdition/HomeEdition'
 import Header from '../components/backoffice/layout/Header'
 import NewsList from '../components/backoffice/news/NewsList'
 import NewsEdit from '../components/backoffice/news/NewsEdit'
@@ -89,6 +90,11 @@ export const Private = () => {
               exact
               path="/backoffice/users/edit"
               component={CreateOrEditUser}
+            />
+            <Route
+              exact
+              path="/backoffice/homeEdition"
+              component={HomeEdition}
             />
 
             <Redirect to="/" />
