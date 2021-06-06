@@ -1,7 +1,33 @@
-import { Stack, Image, Button, Text } from "@chakra-ui/react";
+//REACT ROUTER DOM
 import { Link } from "react-router-dom";
+//ALERTAS
+import Swal from "sweetalert2";
+//SERVICIOS
+import newsService from "./newsService";
+//CHAKRA COMPONENTES
+import { Stack, Image, Button, Text } from "@chakra-ui/react";
 
-const New = ({ novelty }) => {
+const New = ({ novelty, setUpdateList }) => {
+
+  const handleDelete = async (id) => {
+    const confirmation = await Swal.fire({
+      title: "Confirmación",
+      text: "¿Quieres borrar esta novedad?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Borrar",
+      confirmButtonColor: "#DB5752",
+      cancelButtonText: "Cancelar",
+    });
+
+    if (confirmation.isConfirmed === true) {
+      
+      newsService.deleteNews(id)
+
+      setUpdateList(true)
+    }
+  };
+
   return (
     <Stack
       spacing={6}
@@ -42,7 +68,11 @@ const New = ({ novelty }) => {
           </Button>
         </Link>
 
-        <Button variant="solid" colorScheme="red">
+        <Button
+          onClick={() => handleDelete(novelty.id)}
+          variant="solid"
+          colorScheme="red"
+        >
           Borrar
         </Button>
       </Stack>
