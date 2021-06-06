@@ -1,11 +1,6 @@
 import React from "react";
-
+import { CreateOrEditMain } from "../../../components/backoffice/users/CreateOrEditMain";
 
 export const UserCreate = () => {
- 
-
-  return (
-  
-     <h2> Usuario Creado </h2>
-  );
+  return <CreateOrEditMain />;
 };
