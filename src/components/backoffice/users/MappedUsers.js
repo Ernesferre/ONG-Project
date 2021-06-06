@@ -9,11 +9,21 @@ import Swal from "sweetalert2";
 export const MappedUsers = ({ users, handleUpdate }) => {
   const flexDir = useBreakpointValue({ base: "column", sm: "" });
 
-  const handleDelete =  () => {
-  
+  const handleDelete = async (id) => {
+    const confirmation = await Swal.fire({
+      title: "Confirmación",
+      text: "¿Quieres borrar este usuario?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Borrar",
+      confirmButtonColor: "#DB5752",
+      cancelButtonText: "Cancelar",
+    });
+    if (confirmation.isConfirmed === true) {
+      // DELETE FUNCTION HERE
         console.log("delete")
-   
-    
+        handleUpdate()
+    }
   };
 
   return (
@@ -44,6 +54,7 @@ export const MappedUsers = ({ users, handleUpdate }) => {
               <Link 
                   to={{
                     pathname: "/backoffice/users/edit",
+                    state: {user: user},
                  
                 }}>
                 <Button colorScheme="blue" size="sm" variant="outline">
@@ -54,7 +65,7 @@ export const MappedUsers = ({ users, handleUpdate }) => {
                 size="sm"
                 colorScheme="red"
                 marginLeft="1em"
-                onClick={() => handleDelete()}
+                onClick={() => handleDelete(user.id)}
               >
                 Borrar
               </Button>
