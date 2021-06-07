@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React0 from "react";
 import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
 import {
   Flex,
@@ -7,9 +7,6 @@ import {
   Button,
   Box,
   Text,
-  Stack,
-  FormLabel,
-  Input,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -25,7 +22,7 @@ export const MappedSlides = ({
   const handleDelete = async (id) => {
     const confirmation = await Swal.fire({
       title: "Confirmación",
-      text: "¿Quieres borrar esta actividad?",
+      text: "¿Quieres borrar esta slide?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Borrar",
@@ -93,6 +90,7 @@ let split = <p></p>
             </Link>
             <Button
               // DELETE FUNCTION  HERE
+              onClick={()=> handleDelete(slide.id)}
               cursor="pointer"
               border="none"
               bg="red"
