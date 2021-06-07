@@ -9,7 +9,6 @@ import { MappedUsers } from "./MappedUsers";
 export const UserList = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.userList);
-  console.log(users);
   const [loading, setLoading] = useState(true);
   const [update, setUpdate] = useState(false);
   useEffect(() => {
