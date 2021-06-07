@@ -59,12 +59,7 @@ export const MappedUsers = ({ users, handleUpdate }) => {
               </Text>
             </Flex>
             <Flex justifyContent="space-between">
-              <Link
-                to={{
-                  pathname: "/backoffice/users/edit",
-                  state: { user: user },
-                }}
-              >
+              <Link to={`/backoffice/users/${user.id}`}>
                 <Button colorScheme="blue" size="sm" variant="outline">
                   Editar
                 </Button>

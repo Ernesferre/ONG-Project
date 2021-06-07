@@ -5,6 +5,7 @@ const initialState = {
   error: "",
   status: "idle",
   userList: [],
+  singleUser: {},
 };
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
@@ -12,13 +13,21 @@ export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
   return response.data.data;
 });
 
-export const editUser = createAsyncThunk("users/editUser", async (userData) => {
-  const response = await axios.put(
-    "http://ongapi.alkemy.org/api/users",
-    userData
-  );
-  return response.data;
+export const fetchUser = createAsyncThunk("users/fetchUser", async (id) => {
+  const response = await axios.get(`http://ongapi.alkemy.org/api/users/${id}`);
+  return response.data.data;
 });
+
+export const editUser = createAsyncThunk(
+  "users/editUser",
+  async ({ userData, id }) => {
+    const response = await axios.put(
+      `http://ongapi.alkemy.org/api/users/${id}`,
+      { userData }
+    );
+    return response.data;
+  }
+);
 
 export const createUser = createAsyncThunk(
   "users/createUser",
@@ -49,6 +58,13 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchUser.pending, (users) => {
+        users.status = "loading";
+      })
+      .addCase(fetchUser.fulfilled, (user, action) => {
+        user.singleUser = action.payload;
+        user.status = "idle";
+      })
       .addCase(fetchUsers.pending, (users) => {
         users.status = "loading";
       })
@@ -59,6 +75,12 @@ export const userSlice = createSlice({
       .addCase(fetchUsers.rejected, (users, action) => {
         users.error = action.error;
         users.status = "idle";
+      })
+      .addCase(createUser.pending, (users) => {
+        users.status = "creating user";
+      })
+      .addCase(createUser.rejected, (users, action) => {
+        users.error = action.error;
       });
   },
 });
