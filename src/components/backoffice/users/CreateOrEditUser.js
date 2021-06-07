@@ -2,42 +2,38 @@ import React, { useEffect, useState } from "react";
 
 import { CreateOrEditForm } from "./CreateOrEditForm";
 
-
-export const CreateOrEditUser = ({ isCreate, id, lastId, user }) => {
-  const [name, setName] = useState('');
+export const CreateOrEditUser = ({ isCreate, id, user }) => {
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [image, setImage] = useState('');
-  const [rol, setRol] = useState('');
-  
+  const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
+  const [rol, setRol] = useState("");
 
   useEffect(() => {
-    
     if (!isCreate) {
       setName(user.name);
       setEmail(user.email);
       setImage(user.profilePhoto);
       setRol(user.role);
-      setLoading(false)
+      setLoading(false);
     } else {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [isCreate, user])
+  }, [isCreate, user]);
 
- 
   return (
-        <>   
-          <CreateOrEditForm
-            name={name}
-            email={email}
-            image={image}
-            rol={rol}
-            setName={setName}
-            setEmail={setEmail}
-            setImage={setImage}
-            setRol={setRol}
-            id={id}
-          />       
-        </> 
+    <>
+      <CreateOrEditForm
+        name={name}
+        email={email}
+        image={image}
+        rol={rol}
+        setName={setName}
+        setEmail={setEmail}
+        setImage={setImage}
+        setRol={setRol}
+        id={id}
+      />
+    </>
   );
 };

@@ -4,8 +4,10 @@ import { useBreakpointValue } from "@chakra-ui/media-query";
 import { Link } from "react-router-dom";
 import React from "react";
 import Swal from "sweetalert2";
-
+import { deleteUser, removeUserFromState } from "../../../features/userSlice";
+import { useDispatch } from "react-redux";
 export const MappedUsers = ({ users, handleUpdate }) => {
+  const dispatch = useDispatch();
   const flexDir = useBreakpointValue({ base: "column", sm: "" });
   const handleDelete = async (id) => {
     const confirmation = await Swal.fire({
@@ -18,9 +20,9 @@ export const MappedUsers = ({ users, handleUpdate }) => {
       cancelButtonText: "Cancelar",
     });
     if (confirmation.isConfirmed === true) {
-      // DELETE FUNCTION HERE
+      dispatch(deleteUser(id));
+      dispatch(removeUserFromState(id));
       console.log("delete");
-      handleUpdate();
     }
   };
 
