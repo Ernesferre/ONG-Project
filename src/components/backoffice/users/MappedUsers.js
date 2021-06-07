@@ -21,11 +21,10 @@ export const MappedUsers = ({ users, handleUpdate }) => {
     });
     if (confirmation.isConfirmed === true) {
       // DELETE FUNCTION HERE
-        console.log("delete user")
+        console.log("delete")
         handleUpdate()
     }
   };
-
 
   return (
     <Flex flexDir="column">
@@ -55,6 +54,7 @@ export const MappedUsers = ({ users, handleUpdate }) => {
               <Link 
                   to={{
                     pathname: "/backoffice/users/edit",
+                    state: {user: user},
                  
                 }}>
                 <Button colorScheme="blue" size="sm" variant="outline">

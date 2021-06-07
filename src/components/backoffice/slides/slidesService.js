@@ -13,12 +13,12 @@ export const getSlides = async () => {
 
 
 
-export function createActivity(values, lastId) {
+export function createSlide(values, lastId) {
 
   let date = new Date().toISOString()
 
   const newSlide = {
-      "id": parseInt(lastId) + 1,
+      "id": '',
       "name": values.name,
       "description": values.description,
       "image": values.image,
