@@ -11,16 +11,18 @@ import Header from '../components/backoffice/layout/Header'
 import NewsList from '../components/backoffice/news/NewsList'
 import NewsEdit from '../components/backoffice/news/NewsEdit'
 import NewsForm from '../components/backoffice/news/NewsEdit'
-import SlidesShow from '../components/backoffice/slides/SlidesShow'
 import TestimonialList from '../components/backoffice/testimonials/TestimonialList'
+import EditTestimonial from '../components/backoffice/testimonials/EditTestimonial'
+import CreateTestimonial from '../components/backoffice/testimonials/CreateTestimonial'
 import { UserList } from '../components/backoffice/users/UserList'
 import { CategoryCreate } from '../pages/backoffice/categories/CategoryCreate'
 import { CategoryPatch } from '../pages/backoffice/categories/CategoryPatch'
 import { OrganizationPage } from '../pages/backoffice/organization/OrganizationPage'
 import { UserPatch } from '../pages/backoffice/users/UserPatch'
-import { UserCreate } from "../pages/backoffice/users/UserCreate";
-
-
+import { UserCreate } from '../pages/backoffice/users/UserCreate'
+import CreateSlice from "../components/backoffice/slides/CreateSlide";
+import ListOfSlides from "../components/backoffice/slides/ListOfSlides";
+import EditSlice from "../components/backoffice/slides/EditSlice";
 
 export const Private = () => {
     return (
@@ -63,10 +65,20 @@ export const Private = () => {
               path="/backoffice/activities/edit"
               component={EditActivity}
             />
-            <Route
+             <Route
               exact
               path="/backoffice/slides"
-              component={SlidesShow}
+              component={ListOfSlides}
+            />
+             <Route
+              exact
+              path="/backoffice/slides/create"
+              component={CreateSlice}
+            />
+            <Route
+              exact
+              path="/backoffice/slides/edit"
+              component={EditSlice}
             />
             <Route
               exact
@@ -77,6 +89,16 @@ export const Private = () => {
               exact
               path="/backoffice/testimonials"
               component={TestimonialList}
+            />
+            <Route
+              exact
+              path="/backoffice/testimonials/edit"
+              component={EditTestimonial}
+            />
+            <Route
+              exact
+              path="/backoffice/testimonials/create"
+              component={CreateTestimonial}
             />
             <Route
               exact

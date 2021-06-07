@@ -9,6 +9,10 @@ import { Private } from "./routes/Private";
 import { Public } from "./routes/Public";
 import { PrivateRoute } from "./routes/PrivateRoute";
 
+
+
+
+
 function App() {
 
   return (
@@ -19,6 +23,7 @@ function App() {
               <PrivateRoute
                 path="/backoffice"
                 component={ Private }/>
+            
 
               <Route
                 path="/"

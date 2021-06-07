@@ -7,31 +7,13 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { useAlert } from "../layout/Alert";
-import { deleteTestimonial } from './testimonials';
+import { deleteTestimonial } from "./testimonials";
 
 const MappedTestimonials = ({ testimonials, handleUpdate }) => {
-  const { setAlert } = useAlert();
-
   const handleDelete = (id) => {
-    setAlert({
-      show: true,
-      title: "Confirmación",
-      text: "¿Quieres borrar este testimonio?",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#DB5752",
-      cancelButtonText: "Cancelar",
-      confirmButtonText: "Borrar",
-      onConfirm: () => {
-        deleteTestimonial(id)    
-        // console.log("ID ELIMINADO" + "" + id);
-      .then(res => {
-        handleUpdate()
-      })},
-
-      onCancel: () => {},
-    });
+    deleteTestimonial(id)
+    handleUpdate(true);
+    console.log(`Deleting testimonial ${id} `)
   };
 
   const flexDir = useBreakpointValue({ base: "column", md: "row" });
@@ -95,7 +77,6 @@ const MappedTestimonials = ({ testimonials, handleUpdate }) => {
                 size="sm"
                 colorScheme="red"
                 marginLeft="1em"
-                // AGREGAR FUNCIÓN ELIMINAR
                 onClick={() => handleDelete(testimonial.id)}
               >
                 Borrar

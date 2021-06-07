@@ -17,12 +17,11 @@ const TestimonialList = () => {
         setTestimonials(res.data);
         setLastID(res.data.sort((a, b) => b.id - a.id)[0].id);
         setLoading(false);
+        setUpdate(false);
       });
     }, [update]);
 
-    const handleUpdate = () => {
-      setUpdate(update => !update)
-    }
+    
 
   return (
     <Container maxW="container.xl">
@@ -36,8 +35,7 @@ const TestimonialList = () => {
             </Button>
           </Link>
         </Flex>
-        {/* CAMBIAR fakeData por testimonials */}
-        <MappedTestimonials testimonials={testimonials} handleUpdate={handleUpdate} ></MappedTestimonials>
+        <MappedTestimonials testimonials={testimonials} handleUpdate={setUpdate} ></MappedTestimonials>
       </Flex>
     </Container>
   );
