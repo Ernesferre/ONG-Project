@@ -12,6 +12,8 @@ import NewsList from '../components/backoffice/news/NewsList'
 import NewsEdit from '../components/backoffice/news/NewsEdit'
 import NewsForm from '../components/backoffice/news/NewsEdit'
 import TestimonialList from '../components/backoffice/testimonials/TestimonialList'
+import EditTestimonial from '../components/backoffice/testimonials/EditTestimonial'
+import CreateTestimonial from '../components/backoffice/testimonials/CreateTestimonial'
 import { UserList } from '../components/backoffice/users/UserList'
 import { CategoryCreate } from '../pages/backoffice/categories/CategoryCreate'
 import { CategoryPatch } from '../pages/backoffice/categories/CategoryPatch'
@@ -87,6 +89,16 @@ export const Private = () => {
               exact
               path="/backoffice/testimonials"
               component={TestimonialList}
+            />
+            <Route
+              exact
+              path="/backoffice/testimonials/edit"
+              component={EditTestimonial}
+            />
+            <Route
+              exact
+              path="/backoffice/testimonials/create"
+              component={CreateTestimonial}
             />
             <Route
               exact
