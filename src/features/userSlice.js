@@ -48,7 +48,7 @@ export const userSlice = createSlice({
         users.status = "loading";
       })
       .addCase(fetchUsers.fulfilled, (users, action) => {
-        users.userList = [...users.userList, action.payload];
+        users.userList = action.payload;
         users.status = "idle";
       })
       .addCase(fetchUsers.rejected, (users, action) => {

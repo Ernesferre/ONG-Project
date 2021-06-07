@@ -9,15 +9,15 @@ import { MappedUsers } from "./MappedUsers";
 export const UserList = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.userList);
-
+  console.log(users);
   const [loading, setLoading] = useState(true);
   const [update, setUpdate] = useState(false);
-
   useEffect(() => {
     // AGREGAR FUNCIÓN para traer data
     dispatch(fetchUsers());
+
     setLoading(false);
-  }, []);
+  }, [dispatch]);
 
   const handleUpdate = () => {
     setUpdate((update) => !update);
@@ -33,7 +33,7 @@ export const UserList = () => {
             <Button colorScheme="green">+ Nuevo Usuario</Button>
           </Link>
         </Flex>
-        <MappedUsers users={users[0]} handleUpdate={handleUpdate} />
+        <MappedUsers users={users} handleUpdate={handleUpdate} />
       </Flex>
     </Container>
   );
