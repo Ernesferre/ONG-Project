@@ -30,6 +30,7 @@ export const CreateOrEditForm = ({ id }) => {
     email: Yup.string()
       .email("Email debe ser válido")
       .required("El Email es requerido"),
+    profilePhoto: Yup.mixed().required("La imagen es requerida"),
   });
 
   const { singleUser, status } = useSelector((state) => state.users);
