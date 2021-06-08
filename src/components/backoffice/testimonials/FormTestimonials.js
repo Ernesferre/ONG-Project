@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {useHistory} from 'react-router-dom'
 import {
   Flex,
   Heading,
@@ -15,15 +16,34 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaFileImage } from "react-icons/fa";
 
 import { useAlert } from "../layout/Alert";
+import { createTestimonial } from "./testimonials";
+import { editTestimonial } from "./testimonials";
 
 // convert image to base64
-// const toBase64 = (file) =>
-//   new Promise((resolve, reject) => {
-//     const reader = new FileReader();
-//     reader.readAsDataURL(file);
-//     reader.onload = () => resolve(reader.result);
-//     reader.onerror = (error) => reject(error);
-//   });
+const toBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+
+  // convert url to base64
+const urlToBase64 = (img) => {
+  var blob = new Blob([img])
+  var url = URL.createObjectURL(blob)
+  
+  return fetch(url)
+  .then(res => res.blob())
+  .then(blob => {
+    var fr = new FileReader()
+    fr.onload = () => {
+      var b64 = fr.result
+      return b64
+    }
+    fr.readAsDataURL(blob)
+  })
+}
 
 const TestimonialsForm = ({ testimonialToEdit }) => {
   const { setAlert } = useAlert();
@@ -31,6 +51,7 @@ const TestimonialsForm = ({ testimonialToEdit }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
+  const history = useHistory()
 
   useEffect(() => {
     if (testimonialToEdit) {
@@ -50,31 +71,39 @@ const TestimonialsForm = ({ testimonialToEdit }) => {
         type: "error",
       });
     } else {
-      //   let data;
-      //   if (typeof image !== "string") {
-      //     let base64Img = await toBase64(image);
-      //     data = {
-      //       name: name,
-      //       description: description,
-      //       image: base64Img,
-      //     };
-      //   } else {
-      //     data = {
-      //       name: name,
-      //       description: description,
-      //       image: image,
-      //     };
-      //   }
+        let data;
+        if (typeof image !== "string") {
+          let base64Img = await toBase64(image);
+          data = {
+            name: name,
+            description: description,
+            image: base64Img,
+          };
+        } else {
+          let urlToBase64Img = await urlToBase64(image);
+          data = {
+            name: name,
+            description: description,
+            image: urlToBase64Img,
+          };
+        }
       if (testimonialToEdit) {
-        // AGREGAR FUNCIÓN EDITAR - pasar id y data
-        // editActivity(activityToEdit.id, data)
-        // console.log(data);
-        console.log("Editiging");
+        editTestimonial(testimonialToEdit.id, data)
+        .then(() => {
+          history.push("/backoffice/testimonials");
+        })
+        
       } else {
         // AGREGAR FUNCIÓN CREAR - pasar data
-        // createActivity(data)
-        // console.log(data);
-        console.log("Creating");
+        createTestimonial(data)
+        .then(() => {
+          //HBAILITAR Linea inferior CUANDO SE INTRODUZAC SWEET ALERT
+          // handleSuccess();
+          history.push("/backoffice/testimonials");
+        })
+        //HBAILITAR Linea inferior CUANDO SE INTRODUZAC SWEET ALERT
+        // .catch(err => handleError())
+
       }
     }
   }
