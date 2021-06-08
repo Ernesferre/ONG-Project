@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Flex, Image, Text, useBreakpointValue } from '@chakra-ui/react'
 import {Link} from 'react-router-dom'
 import Swal from "sweetalert2";
+import { deleteMember } from '../../../functions/membersService';
 
 const MappedMembers = ({ members, parentCallBack }) => {
 
@@ -19,7 +20,7 @@ const MappedMembers = ({ members, parentCallBack }) => {
       cancelButtonText: "Cancelar",
     }).then(result => {
       if (result.value) {
-        console.log("Eliminar de la api", id);
+        deleteMember(id);
       }
     })
   }

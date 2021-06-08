@@ -65,7 +65,7 @@ const FormMembers = ({ member }) => {
 
   const handleSuccess = (name) => {
     Swal.fire({
-      title: "Success",
+      title: "Hecho",
       text: `Miembro ${name} creado`,
       icon: "success",
       confirmButtonText: "Ok",
@@ -74,7 +74,7 @@ const FormMembers = ({ member }) => {
 
   const handleSuccessEdit = (name) => {
     Swal.fire({
-      title: "Success",
+      title: "Hecho",
       text: `Miembro ${name} editado`,
       icon: "success",
       confirmButtonText: "Ok",
