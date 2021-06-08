@@ -81,6 +81,9 @@ export const userSlice = createSlice({
       })
       .addCase(createUser.rejected, (users, action) => {
         users.error = action.error;
+      })
+      .addCase(createUser.fulfilled, (users, action) => {
+        users.status = "created user";
       });
   },
 });

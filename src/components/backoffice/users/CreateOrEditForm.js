@@ -15,7 +15,9 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser, editUser, fetchUser } from "../../../features/userSlice";
 import { Field, Form, Formik } from "formik";
+import Swal from "sweetalert2";
 import * as Yup from "yup";
+import axios from "axios";
 
 export const CreateOrEditForm = ({ id }) => {
   const editSchema = Yup.object().shape({
@@ -23,10 +25,31 @@ export const CreateOrEditForm = ({ id }) => {
       .min(2, "Nombre demasiado corto")
       .max(100, "Nombre demasiado largo")
       .required("Nombre es requerido"),
+    password: Yup.string()
+      .min(8, "La contraseña debe tener al menos 6 caracteres")
+      .max(200, "Contraseña demasiado larga"),
     email: Yup.string()
       .email("Email debe ser válido")
       .required("El Email es requerido"),
   });
+
+  const handleError = (message) => {
+    Swal.fire({
+      title: "Error",
+      text: message,
+      icon: "error",
+      confirmButtonText: "OK",
+    });
+  };
+
+  const handleSuccess = (message) => {
+    Swal.fire({
+      title: "Success",
+      text: message,
+      icon: "success",
+      confirmButtonText: "OK",
+    });
+  };
 
   const { singleUser, status } = useSelector((state) => state.users);
 
@@ -97,22 +120,24 @@ export const CreateOrEditForm = ({ id }) => {
                 password: values.password,
                 profilePhoto: base64Img,
               };
-              if (id !== undefined) {
-                // AGREGAR FUNCIÓN EDITAR - pasar id y data
-                data = {
-                  ...data,
-                  id,
-                };
-                console.log(data);
-                dispatch(editUser(data, id));
-                history.push("/backoffice/users");
-                console.log(data);
-              } else {
-                // AGREGAR FUNCIÓN CREAR - pasar data
-                dispatch(createUser(data));
-                history.push("/backoffice/users");
-                console.log(data);
-              }
+              setTimeout(() => {
+                if (id !== undefined) {
+                  // AGREGAR FUNCIÓN EDITAR - pasar id y data
+                  data = {
+                    ...data,
+                    ...singleUser,
+                  };
+                  dispatch(editUser(data, id));
+                  console.log(data);
+                  actions.setSubmitting(false);
+                  // history.push("/backoffice/users");
+                } else {
+                  // AGREGAR FUNCIÓN CREAR - pasar data
+                  dispatch(createUser(data));
+                  // history.push("/backoffice/users");
+                  actions.setSubmitting(false);
+                }
+              }, 1000);
             }}
           >
             {(props) => (
@@ -201,7 +226,6 @@ export const CreateOrEditForm = ({ id }) => {
                         Foto de Perfil
                       </FormLabel>
                       <Input
-                        variant="filled"
                         id="profilePhoto"
                         type="file"
                         onChange={(e) => {
@@ -223,7 +247,7 @@ export const CreateOrEditForm = ({ id }) => {
                   isLoading={props.isSubmitting}
                   type="submit"
                 >
-                  {id ? "Editar" : "Crear"}
+                  Submit
                 </Button>
               </Form>
             )}
