@@ -7,10 +7,13 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { deleteTestimonial } from "./testimonials";
 
-const MappedTestimonials = ({ testimonials }) => {
+const MappedTestimonials = ({ testimonials, handleUpdate }) => {
   const handleDelete = (id) => {
-    console.log("Deleting")
+    deleteTestimonial(id)
+    handleUpdate(true);
+    console.log(`Deleting testimonial ${id} `)
   };
 
   const flexDir = useBreakpointValue({ base: "column", md: "row" });
@@ -74,7 +77,6 @@ const MappedTestimonials = ({ testimonials }) => {
                 size="sm"
                 colorScheme="red"
                 marginLeft="1em"
-                // AGREGAR FUNCIÓN ELIMINAR
                 onClick={() => handleDelete(testimonial.id)}
               >
                 Borrar
