@@ -152,6 +152,7 @@ export const CreateOrEditForm = ({ id }) => {
                         Contraseña
                       </FormLabel>
                       <Input
+                        type="password"
                         variant="filled"
                         {...field}
                         id="password"
