@@ -198,7 +198,7 @@ export const CreateOrEditForm = ({ id }) => {
                   )}
                 </Field>
                 <Field name="profilePhoto">
-                  {({ field, form }) => (
+                  {({ field, form, values }) => (
                     <FormControl
                       isInvalid={
                         form.errors.profilePhoto && form.touched.profilePhoto
@@ -210,6 +210,7 @@ export const CreateOrEditForm = ({ id }) => {
                       <Input
                         id="profilePhoto"
                         type="file"
+                        display="none"
                         onChange={(e) => {
                           form.setFieldValue(
                             "profilePhoto",
@@ -217,6 +218,21 @@ export const CreateOrEditForm = ({ id }) => {
                           );
                         }}
                       />
+                      <FormLabel
+                        htmlFor="profilePhoto"
+                        color="white"
+                        fontWeight="bold"
+                        marginTop="1em"
+                        bg="#5796D9"
+                        width="10em"
+                        padding="0.5em"
+                        textAlign="center"
+                        borderRadius="0.3em"
+                        cursor="pointer"
+                        _hover={{ bg: "#3672B3" }}
+                      >
+                        Elegir Foto
+                      </FormLabel>
                       <FormErrorMessage>
                         {form.errors.profilePhoto}
                       </FormErrorMessage>
