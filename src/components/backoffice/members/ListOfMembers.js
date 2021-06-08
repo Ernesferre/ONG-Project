@@ -19,25 +19,25 @@ const ListOfMembers = () => {
         { id:6, name: "member 6", description: '<h1>lorem ipsum</h1><br><p>lorem ipsum</p>', image:'', created_at: "2021-05-28T00:59:46.326Z" }
       ]
 
-    //   useEffect(()=>{
-    //     getMembers()
-    //     .then(res => {
-    //       console.log(res.data)
-    //       setMembers(res.data)
-    //       setLoading(false)
-    //      setUpdate(false)
-    //     })
-    //      .catch(() => setLoading(false))
-    //   }, [update])
+    /* useEffect(()=>{
+        getMembers()
+        .then(res => {
+          console.log(res.data)
+          setMembers(res.data)
+          setLoading(false)
+         setUpdate(false)
+        })
+         .catch(() => setLoading(false))
+      }, [update])
 
-    // if (loading) return <Spinner
-    //                         thickness="4px"
-    //                         speed="0.65s"
-    //                         emptyColor="gray.200"
-    //                         color="blue.500"
-    //                         size="xl"
-    //                         marginTop='3em'
-    //                         />
+    if (loading) return <Spinner
+                            thickness="4px"
+                            speed="0.65s"
+                            emptyColor="gray.200"
+                            color="blue.500"
+                            size="xl"
+                            marginTop='3em'
+                            /> */
     return(
         <div>
             <Container maxW="container.xl">
