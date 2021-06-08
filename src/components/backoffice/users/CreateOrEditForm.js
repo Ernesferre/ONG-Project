@@ -40,7 +40,7 @@ export const CreateOrEditForm = ({ id }) => {
     name: "",
     email: "",
     password: "",
-    role_id: "",
+    role_id: "0",
     profilePhoto: "",
   };
 
@@ -72,7 +72,7 @@ export const CreateOrEditForm = ({ id }) => {
 
   return (
     <Container maxWidth="container.xl" minHeight="100vh" bg="gray.200">
-      <Heading margin={5}>{id ? "Editar Usuario" : "Crear Usuario"}</Heading>
+      <Heading>{id ? "Editar Usuario" : "Crear Usuario"}</Heading>
       {status === "loading" ? (
         <Flex height="10em" justifyContent="center" alignItems="center">
           <Spinner size="xl" color="#5796D9" />
