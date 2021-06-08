@@ -1,11 +1,29 @@
 import React from 'react'
 import { Button, Flex, Image, Text, useBreakpointValue } from '@chakra-ui/react'
 import {Link} from 'react-router-dom'
+import Swal from "sweetalert2";
 
 const MappedMembers = ({ members, parentCallBack }) => {
 
   const flexDir = useBreakpointValue({ base: "column", md: "row" })
   const marginTop = useBreakpointValue({ base: "1rem", md: "0" })
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: '¿Estás Seguro?',
+      text: 'Se eliminará de la base de datos.',
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Borrar",
+      confirmButtonColor: "#DB5752",
+      cancelButtonText: "Cancelar",
+    }).then(result => {
+      if (result.value) {
+        console.log("Eliminar de la api", id);
+      }
+    })
+  }
+  
 
   return (
     <Flex flexDir="column">
@@ -48,8 +66,7 @@ const MappedMembers = ({ members, parentCallBack }) => {
               <Button size="sm" 
                 colorScheme="red" 
                 marginLeft="1em"  
-                // AGREGAR FUNCIÓN ELIMINAR
-                // onClick={() => handleDelete(member.id)}
+                onClick={() => handleDelete(member.id)}
               >
                 Borrar
               </Button>
