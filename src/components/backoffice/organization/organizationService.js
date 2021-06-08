@@ -1,9 +1,9 @@
-const url = "http://ongapi.alkemy.org/api/organization";
+const url = "http://ongapi.alkemy.org/api/organization"
 
 export const getOrganization = async () => {
   return await fetch(url, { method: "GET" })
     .then((response) => response.json())
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
 };
 
 export function editOrganization(data) {
