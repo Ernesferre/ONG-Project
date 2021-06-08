@@ -15,9 +15,8 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser, editUser, fetchUser } from "../../../features/userSlice";
 import { Field, Form, Formik } from "formik";
-import Swal from "sweetalert2";
+
 import * as Yup from "yup";
-import axios from "axios";
 
 export const CreateOrEditForm = ({ id }) => {
   const editSchema = Yup.object().shape({
@@ -32,24 +31,6 @@ export const CreateOrEditForm = ({ id }) => {
       .email("Email debe ser válido")
       .required("El Email es requerido"),
   });
-
-  const handleError = (message) => {
-    Swal.fire({
-      title: "Error",
-      text: message,
-      icon: "error",
-      confirmButtonText: "OK",
-    });
-  };
-
-  const handleSuccess = (message) => {
-    Swal.fire({
-      title: "Success",
-      text: message,
-      icon: "success",
-      confirmButtonText: "OK",
-    });
-  };
 
   const { singleUser, status } = useSelector((state) => state.users);
 
@@ -81,7 +62,8 @@ export const CreateOrEditForm = ({ id }) => {
       dispatch(fetchUser(id));
     }
     mapData(singleUser);
-  }, [dispatch, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const history = useHistory();
 
@@ -122,17 +104,16 @@ export const CreateOrEditForm = ({ id }) => {
               };
               setTimeout(() => {
                 if (id !== undefined) {
-                  // AGREGAR FUNCIÓN EDITAR - pasar id y data
                   data = {
                     ...data,
-                    ...singleUser,
+                    id,
                   };
-                  dispatch(editUser(data, id));
-                  console.log(data);
+                  try {
+                    dispatch(editUser(data));
+                  } catch (error) {}
                   actions.setSubmitting(false);
                   // history.push("/backoffice/users");
                 } else {
-                  // AGREGAR FUNCIÓN CREAR - pasar data
                   dispatch(createUser(data));
                   // history.push("/backoffice/users");
                   actions.setSubmitting(false);

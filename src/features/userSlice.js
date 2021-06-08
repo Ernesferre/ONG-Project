@@ -1,5 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import Swal from "sweetalert2";
+
+const handleError = (message) => {
+  Swal.fire({
+    title: "Error",
+    text: message,
+    icon: "error",
+    confirmButtonText: "OK",
+  });
+};
+
+const handleSuccess = (message) => {
+  Swal.fire({
+    title: "Success",
+    text: message,
+    icon: "success",
+    confirmButtonText: "OK",
+  });
+};
 
 const initialState = {
   error: "",
@@ -18,25 +37,32 @@ export const fetchUser = createAsyncThunk("users/fetchUser", async (id) => {
   return response.data.data;
 });
 
-export const editUser = createAsyncThunk(
-  "users/editUser",
-  async ({ userData, id }) => {
+export const editUser = createAsyncThunk("users/editUser", async (userData) => {
+  try {
     const response = await axios.put(
-      `http://ongapi.alkemy.org/api/users/${id}`,
+      `http://ongapi.alkemy.org/api/users/${userData.id}`,
       userData
     );
+    handleSuccess("Usuario editado");
     return response.data;
+  } catch (error) {
+    handleError("Hubo un error");
   }
-);
+});
 
 export const createUser = createAsyncThunk(
   "users/createUser",
   async (userData) => {
-    const response = await axios.post(
-      "http://ongapi.alkemy.org/api/users",
-      userData
-    );
-    return response.data;
+    try {
+      const response = await axios.post(
+        "http://ongapi.alkemy.org/api/users",
+        userData
+      );
+      handleSuccess("Usuario creado");
+      return response.data;
+    } catch (error) {
+      handleError("Hubo un error");
+    }
   }
 );
 
