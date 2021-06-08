@@ -16,8 +16,8 @@ import {
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaFileImage, FaFacebook, FaLinkedin } from "react-icons/fa";
-// import { createMember, editMember } from "./membersService";
 import Swal from "sweetalert2";
+import { createMember, editMember } from "../../../functions/membersService";
 
 // convert image to base64
 const toBase64 = (file) =>
@@ -63,19 +63,19 @@ const FormMembers = ({ member }) => {
     }
   }, [member]);
 
-  const handleSuccess = () => {
+  const handleSuccess = (name) => {
     Swal.fire({
       title: "Success",
-      text: "Miembro creado",
+      text: `Miembro ${name} creado`,
       icon: "success",
       confirmButtonText: "Ok",
     });
   };
 
-  const handleSuccessEdit = () => {
+  const handleSuccessEdit = (name) => {
     Swal.fire({
       title: "Success",
-      text: "Miembro editado",
+      text: `Miembro ${name} editado`,
       icon: "success",
       confirmButtonText: "Ok",
     });
@@ -115,21 +115,23 @@ const FormMembers = ({ member }) => {
           linkedinUrl: linkedin
         };
       }
-    //   if (member) {
-        // editActivity(member.id, data)
-        // .then(() => {
-        //   handleSuccessEdit();
-        //     history.push("/backoffice/members");
-        //   })
-        //   .catch(err => handleError())
-    //   } else {
-    //     createActivity(data)
-    //     .then(() => {
-    //         handleSuccess();
-    //         history.push("/backoffice/members");
-    //       })
-    //       .catch(err => handleError())
-    //   }
+    
+
+      if (member) {
+         editMember(member.id, data)
+         .then((res) => {
+           handleSuccessEdit(res.data.data.name);
+             history.push("/backoffice/members");
+           })
+           .catch(err => handleError())
+       } else {
+         createMember(data)
+        .then((res) => {
+             handleSuccess(res.data.data.name);
+             history.push("/backoffice/members");
+           })
+           .catch(err => handleError())
+       }
     }
   }
 

@@ -19,6 +19,7 @@ import { CategoryPatch } from '../pages/backoffice/categories/CategoryPatch'
 import { OrganizationPage } from '../pages/backoffice/organization/OrganizationPage'
 import { UserPatch } from '../pages/backoffice/users/UserPatch'
 import { UserCreate } from "../pages/backoffice/users/UserCreate";
+import FormMembers from '../components/backoffice/members/FormMembers'
 
 
 
@@ -27,6 +28,7 @@ export const Private = () => {
         <>
           <Header />
           <Switch>
+          <Route exact path="/backoffice/members/form" component={FormMembers} />
             <Route exact path="/backoffice" component={Backoffice} />
             <Route exact path="/backoffice/news" component={NewsList}/>
             <Route exact path="/backoffice/news/edit" component={NewsEdit}/>
@@ -99,7 +101,7 @@ export const Private = () => {
               component={HomeEdition}
             />
 
-            <Redirect to="/" />
+            <Redirect to="/backoffice" />
 
           </Switch>
         </>
