@@ -1,30 +1,9 @@
-import React, { useRef, useCallback, useState } from "react";
+import React, { useRef, useCallback, useState, useEffect } from "react";
 import { MappedSlides } from "../slides/MappedSlides";
-import { ReactComponent as LeftArrow } from "../../../assets/arrowLeft.svg";
-import { ReactComponent as RightArrow } from "../../../assets/arrowRight.svg";
 
 
-
-
-const SlidesShow = ({ speed = "500" }) => {
+const SlidesShow = ({ speed = "500", slides, parentCallBack }) => {
   const slideshow = useRef(null);
-  const fakeData = [
-    { title: "title1", img: "", order: 1 },
-    { title: "title2", img: "", order: 2 },
-    { title: "title3", img: "", order: 3 },
-    { title: "title4", img: "", order: 4 },
-    { title: "title5", img: "", order: 5 },
-    { title: "title6", img: "", order: 6 },
-    { title: "title7", img: "", order: 7 },
-    { title: "title8", img: "", order: 8 },
-    { title: "title9", img: "", order: 9 },
-    { title: "title10", img: "", order: 10 },
-  ];
-
-  const [saveData, setSaveData] = useState(fakeData);
-
-  console.log({saveData});
-  
 
   const next = useCallback(() => {
     if (slideshow.current.children.length > 0) {
@@ -61,18 +40,16 @@ const SlidesShow = ({ speed = "500" }) => {
     }
   };
 
-  const order = saveData.map((data) => data.order);
+  const order = slides?.map((data) => data.id);
 
   return (
     <>
       <MappedSlides
         next={next}
         prev={prev}
-        LeftArrow={LeftArrow}
-        RightArrow={RightArrow}
         slideshow={slideshow}
-        saveData={saveData}
-        parentCallBack={setSaveData}
+        slides={slides}
+        parentCallBack={parentCallBack}
         order={order}
       />
     </>
