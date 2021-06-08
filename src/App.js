@@ -1,6 +1,11 @@
 import "./App.css";
 //REACT-ROUTER
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 //CHAKRA
 import { ChakraProvider } from "@chakra-ui/react";
 
@@ -10,22 +15,16 @@ import { Public } from "./routes/Public";
 import { PrivateRoute } from "./routes/PrivateRoute";
 
 function App() {
-
   return (
     <ChakraProvider>
       <Router>
         <div className="App">
           <Switch>
-              <PrivateRoute
-                path="/backoffice"
-                component={ Private }/>
+            <PrivateRoute path="/backoffice" component={Private} />
 
-              <Route
-                path="/"
-                component={ Public }/>
+            <Route path="/" component={Public} />
 
             <Redirect to="/" />
-            
           </Switch>
         </div>
       </Router>
