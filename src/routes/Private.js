@@ -26,6 +26,9 @@ import EditSlice from "../components/backoffice/slides/EditSlice";
 import { OrganizationEditPage } from "../pages/backoffice/organization/OrganizationEditPage";
 import SlidesShow from "../components/backoffice/slides/SlidesShow";
 import { CreateOrEditUser } from "../components/backoffice/users/CreateOrEditUser";
+import CreateMember from "../components/backoffice/members/CreateMember"
+import EditMember from "../components/backoffice/members/EditMember"
+import ListOfMembers from "../components/backoffice/members/ListOfMembers"
 
 export const Private = () => {
   return (
@@ -36,31 +39,14 @@ export const Private = () => {
         <Route exact path="/backoffice/news" component={NewsList} />
         <Route exact path="/backoffice/news/edit" component={NewsEdit} />
         <Route exact path="/backoffice/news/create" component={NewsForm} />
-
         <Route exact path="/backoffice/categories" component={CategoryList} />
-        <Route
-          exact
-          path="/backoffice/categories/create"
-          component={CategoryCreate}
+        <Route exact path="/backoffice/categories/create" component={CategoryCreate}
         />
         <Route
           exact
           path="/backoffice/categories/:id"
           component={CategoryPatch}
         />
-
-        <Route exact path="/backoffice/categories" component={CategoryList} />
-        <Route
-          exact
-          path="/backoffice/categories/create"
-          component={CategoryCreate}
-        />
-        <Route
-          exact
-          path="/backoffice/categories/:id"
-          component={CategoryPatch}
-        />
-
         <Route
           exact
           path="/backoffice/activities"
@@ -103,28 +89,7 @@ export const Private = () => {
         <Route exact path="/backoffice/users/create" component={UserCreate} />
         <Route exact path="/backoffice/users/:id" component={UserPatch} />
         <Route exact path="/backoffice/homeEdition" component={HomeEdition} />
-
-        <Route
-          exact
-          path="/backoffice/activities"
-          component={ListOfActivities}
-        />
-        <Route
-          exact
-          path="/backoffice/activities/create"
-          component={CreateActivity}
-        />
-        <Route
-          exact
-          path="/backoffice/activities/edit"
-          component={EditActivity}
-        />
         <Route exact path="/backoffice/slides" component={SlidesShow} />
-        <Route
-          exact
-          path="/backoffice/organization"
-          component={OrganizationPage}
-        />
         <Route
           exact
           path="/backoffice/organization/edit"
@@ -132,17 +97,24 @@ export const Private = () => {
         />
         <Route
           exact
-          path="/backoffice/testimonials"
-          component={TestimonialList}
-        />
-        <Route exact path="/backoffice/users" component={UserList} />
-        <Route exact path="/backoffice/users/create" component={UserCreate} />
-        <Route
-          exact
           path="/backoffice/users/edit"
           component={CreateOrEditUser}
         />
-
+        <Route
+              exact
+              path="/backoffice/members"
+              component={ListOfMembers}
+            />
+            <Route
+              exact
+              path="/backoffice/members/create"
+              component={CreateMember}
+            />
+            <Route
+              exact
+              path="/backoffice/members/edit"
+              component={EditMember}
+            />
         <Redirect to="/" />
       </Switch>
     </>
