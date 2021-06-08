@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Flex,
   Select,
   Heading,
-  Stack,
   Button,
   FormControl,
   FormLabel,
@@ -38,10 +37,21 @@ export const CreateOrEditForm = ({ id }) => {
   };
 
   let initialValues = {
-    name: singleUser?.name,
-    email: singleUser?.email,
-    role_id: singleUser?.role_id,
+    name: "",
+    email: "",
+    password: "",
+    role_id: "",
+    profilePhoto: "",
   };
+
+  if (id !== undefined) {
+    initialValues = {
+      ...initialValues,
+      name: singleUser?.name,
+      email: singleUser?.email,
+      role_id: singleUser?.role_id,
+    };
+  }
 
   useEffect(() => {
     if (id !== undefined) {
