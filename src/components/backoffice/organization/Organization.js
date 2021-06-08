@@ -6,6 +6,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { getOrganization } from "./organizationService";
 
 export const Organization = () => {
   const [data, setData] = useState({});
@@ -18,21 +19,16 @@ export const Organization = () => {
       confirmButtonText: "OK",
     });
   };
-  useEffect(() => {
-    const getOrganizationData = async () => {
-      try {
-        const response = await axios.get(
-          "http://ongapi.alkemy.org/api/organization"
-        );
 
-        setData(response.data.data[0]);
-        setLoading(false);
-      } catch (error) {
-        handleError();
-      }
-    };
-    getOrganizationData();
+  useEffect(() => {
+    getOrganization()
+    .then(res => {
+      setData(res.data[0]);
+      setLoading(false);
+    })
+    .catch(() => handleError())
   }, []);
+
   return (
     <Container maxW="container.xl">
       {loading ? (

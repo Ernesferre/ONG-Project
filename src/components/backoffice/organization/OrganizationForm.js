@@ -1,6 +1,5 @@
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -10,6 +9,7 @@ import { Flex } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import { Spinner } from "@chakra-ui/spinner";
 import { useHistory } from "react-router";
+import { editOrganization, getOrganization } from "./organizationService";
 
 export const OrganizationForm = () => {
   const [loading, setLoading] = useState(true);
@@ -81,13 +81,15 @@ export const OrganizationForm = () => {
     const passedValidation = handleValidation(organization);
     if (passedValidation) {
       try {
-        const response = await axios.post(
-          "http://ongapi.alkemy.org/api/organization",
-          organization
-        );
-        handleSuccess("Organización editada");
-        history.push("/");
-        return response.data;
+        editOrganization(organization)
+        .then(res => {
+          if (res === 'ok') {
+            handleSuccess("Organización editada");
+            history.push("/backoffice/organization");
+          } else {
+            handleError("No se pudo realizar la tarea");
+          }
+        })
       } catch (error) {
         handleError("No se pudo realizar la tarea");
       }
@@ -95,26 +97,21 @@ export const OrganizationForm = () => {
       handleError("Todos los campos deben tener datos");
     }
   };
+
   useEffect(() => {
-    const getOrganizationData = async () => {
-      try {
-        const response = await axios.get(
-          "http://ongapi.alkemy.org/api/organization"
-        );
-        setName(response.data.data[0].name);
-        setShortDescription(response.data.data[0].short_description);
-        setLongDescription(response.data.data[0].long_description);
-        setPhone(response.data.data[0].phone);
-        setCellphone(response.data.data[0].cellphone);
-        setAddress(response.data.data[0].address);
-        setWelcomeText(response.data.data[0].welcome_text);
-        setCurrentLogo(response.data.data[0].logo);
+    getOrganization()
+    .then(res => {
+        setName(res.data[0].name);
+        setShortDescription(res.data[0].short_description);
+        setLongDescription(res.data[0].long_description);
+        setPhone(res.data[0].phone);
+        setCellphone(res.data[0].cellphone);
+        setAddress(res.data[0].address);
+        setWelcomeText(res.data[0].welcome_text);
+        setCurrentLogo(res.data[0].logo);
         setLoading(false);
-      } catch (error) {
-        handleError();
-      }
-    };
-    getOrganizationData();
+    })
+    .catch(() => handleError())
   }, []);
 
   return (
