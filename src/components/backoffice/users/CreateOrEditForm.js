@@ -33,12 +33,6 @@ export const CreateOrEditForm = ({ id }) => {
 
   const dispatch = useDispatch();
 
-  const [name, setName] = useState("");
-
-  const [email, setEmail] = useState("");
-
-  const [rol, setRol] = useState("");
-
   const mapData = (user) => {
     initialValues = { name: user.name, email: user.email, rol: user.rol };
   };
@@ -49,7 +43,6 @@ export const CreateOrEditForm = ({ id }) => {
     role_id: singleUser?.role_id,
   };
 
-  console.log(singleUser);
   useEffect(() => {
     if (id !== undefined) {
       dispatch(fetchUser(id));
@@ -59,30 +52,13 @@ export const CreateOrEditForm = ({ id }) => {
 
   const history = useHistory();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    if (name === "" || email === "" || rol === "") {
-      alert("Por favor complete todos los campos");
-    } else {
-      let data = {
-        name: name,
-        email: email,
-        rol: rol,
-      };
-      if (id !== undefined) {
-        // AGREGAR FUNCIÓN EDITAR - pasar id y data
-        data = { ...data, id };
-        dispatch(editUser(data));
-        history.push("/backoffice/users");
-        console.log(data);
-      } else {
-        // AGREGAR FUNCIÓN CREAR - pasar data
-        dispatch(createUser(data));
-        history.push("/backoffice/users");
-        console.log(data);
-      }
-    }
-  }
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
 
   return (
     <Container maxWidth="container.xl" minHeight="100vh" bg="gray.200">
@@ -102,15 +78,22 @@ export const CreateOrEditForm = ({ id }) => {
             enableReinitialize={true}
             initialValues={initialValues}
             validationSchema={editSchema}
-            onSubmit={(values, actions) => {
+            onSubmit={async (values, actions) => {
+              let base64Img = await toBase64(values.profilePhoto);
               let data = {
                 name: values.name,
                 email: values.email,
-                role_id: values.role_id,
+                role_id: parseInt(values.role_id),
+                password: values.password,
+                profilePhoto: base64Img,
               };
               if (id !== undefined) {
                 // AGREGAR FUNCIÓN EDITAR - pasar id y data
-                data = { ...data, id };
+                data = {
+                  ...data,
+                  id,
+                };
+                console.log(data);
                 dispatch(editUser(data, id));
                 history.push("/backoffice/users");
                 console.log(data);
@@ -160,6 +143,26 @@ export const CreateOrEditForm = ({ id }) => {
                     </FormControl>
                   )}
                 </Field>
+                <Field name="password">
+                  {({ field, form }) => (
+                    <FormControl
+                      isInvalid={form.errors.password && form.touched.password}
+                    >
+                      <FormLabel marginTop="1em" htmlFor="password">
+                        Contraseña
+                      </FormLabel>
+                      <Input
+                        variant="filled"
+                        {...field}
+                        id="password"
+                        placeholder="Contraseña"
+                      />
+                      <FormErrorMessage>
+                        {form.errors.password}
+                      </FormErrorMessage>
+                    </FormControl>
+                  )}
+                </Field>
                 <Field name="role_id">
                   {({ field, form }) => (
                     <FormControl
@@ -173,6 +176,33 @@ export const CreateOrEditForm = ({ id }) => {
                         <option value="0">Usuario</option>
                       </Select>
                       <FormErrorMessage>{form.errors.role_id}</FormErrorMessage>
+                    </FormControl>
+                  )}
+                </Field>
+                <Field name="profilePhoto">
+                  {({ field, form }) => (
+                    <FormControl
+                      isInvalid={
+                        form.errors.profilePhoto && form.touched.profilePhoto
+                      }
+                    >
+                      <FormLabel marginTop="1em" htmlFor="profilePhoto">
+                        Foto de Perfil
+                      </FormLabel>
+                      <Input
+                        variant="filled"
+                        id="profilePhoto"
+                        type="file"
+                        onChange={(e) => {
+                          form.setFieldValue(
+                            "profilePhoto",
+                            e.currentTarget.files[0]
+                          );
+                        }}
+                      />
+                      <FormErrorMessage>
+                        {form.errors.profilePhoto}
+                      </FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>

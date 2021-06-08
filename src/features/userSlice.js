@@ -23,7 +23,7 @@ export const editUser = createAsyncThunk(
   async ({ userData, id }) => {
     const response = await axios.put(
       `http://ongapi.alkemy.org/api/users/${id}`,
-      { userData }
+      userData
     );
     return response.data;
   }
