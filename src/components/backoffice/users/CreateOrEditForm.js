@@ -112,10 +112,10 @@ export const CreateOrEditForm = ({ id }) => {
                     dispatch(editUser(data));
                   } catch (error) {}
                   actions.setSubmitting(false);
-                  // history.push("/backoffice/users");
+                  history.push("/backoffice/users");
                 } else {
                   dispatch(createUser(data));
-                  // history.push("/backoffice/users");
+                  history.push("/backoffice/users");
                   actions.setSubmitting(false);
                 }
               }, 1000);
