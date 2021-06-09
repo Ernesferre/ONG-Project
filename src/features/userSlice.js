@@ -110,9 +110,16 @@ export const userSlice = createSlice({
       })
       .addCase(createUser.fulfilled, (users, action) => {
         users.status = "created user";
-        console.log(action.payload);
         if (action.payload.data !== undefined) {
           users.userList = users.userList.concat(action.payload.data);
+        }
+      })
+      .addCase(editUser.fulfilled, (users, action) => {
+        if (action.payload.data !== undefined) {
+          const index = users.userList.findIndex(
+            (user) => user.id === action.payload.data.id
+          );
+          users.userList[index] = action.payload.data;
         }
       });
   },
