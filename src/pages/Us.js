@@ -1,11 +1,8 @@
-import React from 'react'
+import React from "react";
+import About from "../components/public/About/index";
 
 const Nosotros = () => {
-    return (
-        <div>
-            Nosotros
-        </div>
-    )
-}
+  return <About />;
+};
 
-export default Nosotros
+export default Nosotros;
