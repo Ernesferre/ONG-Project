@@ -30,6 +30,7 @@ import CreateMember from "../components/backoffice/members/CreateMember"
 import EditMember from "../components/backoffice/members/EditMember"
 import ListOfMembers from "../components/backoffice/members/ListOfMembers"
 
+
 export const Private = () => {
   return (
     <>
@@ -101,21 +102,22 @@ export const Private = () => {
           component={CreateOrEditUser}
         />
         <Route
-              exact
-              path="/backoffice/members"
-              component={ListOfMembers}
-            />
-            <Route
-              exact
-              path="/backoffice/members/create"
-              component={CreateMember}
-            />
-            <Route
-              exact
-              path="/backoffice/members/edit"
-              component={EditMember}
-            />
-        <Redirect to="/" />
+          exact
+          path="/backoffice/members"
+          component={ListOfMembers}
+        />
+        <Route
+          exact
+          path="/backoffice/members/create"
+          component={CreateMember}
+        />
+        <Route
+          exact
+          path="/backoffice/members/edit"
+          component={EditMember}
+        />
+
+        <Redirect to="/backoffice" />
       </Switch>
     </>
   );
