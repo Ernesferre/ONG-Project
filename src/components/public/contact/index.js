@@ -4,14 +4,51 @@ import React from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FcPhoneAndroid } from "react-icons/fc";
 import { HiLocationMarker } from "react-icons/hi";
+import ContactForm from "./ContactForm";
+
+import {
+  Stack,
+  Button,
+  VStack,
+  useBreakpointValue,
+} from '@chakra-ui/react';
+
 export const Contact = () => {
   return (
+    <>
+
+<Flex
+      w={'full'}
+      h={'30vh'}
+      backgroundImage={
+        'url(https://i.ibb.co/gMjbwRb/Foto-6.jpg)'
+      }
+      backgroundSize={'cover'}
+      backgroundPosition={'center center'}>
+      <VStack
+        w={'full'}
+        justify={'center'}
+        px={useBreakpointValue({ base: 4, md: 8 })}
+        bgGradient={'linear(to-r, blackAlpha.600, transparent)'}>
+        <Stack maxW={'2xl'} align={'flex-start'} spacing={6}>
+          <Text
+            color={'white'}
+            fontWeight={700}
+            lineHeight={1.2}
+            fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}>
+            Contacto
+          </Text>
+        </Stack>
+      </VStack>
+    </Flex>
+
+
     <Container maxW="container.xl">
+
       <Heading>Contacto</Heading>
-      <Flex flexWrap="wrap" justifyContent="center">
-        <Flex flexDir="column" minW="27em" minH="27em">
-          <Heading size="lg">Contáctenos</Heading>
-          <Text color="gray.300">// formulario de contacto aca //</Text>
+      <Flex flexWrap="wrap" justifyContent="space-evenly">
+        <Flex flexDir="column" minH="27em">
+          <ContactForm />
         </Flex>
         <Flex flexDir="column" margin="1em">
           <Text color="gray.400">Información de contacto</Text>
@@ -41,5 +78,6 @@ export const Contact = () => {
         </Flex>
       </Flex>
     </Container>
+    </>
   );
 };
