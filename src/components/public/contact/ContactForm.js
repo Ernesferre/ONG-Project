@@ -19,16 +19,19 @@ import { useState } from 'react'
 const ContactForm = () => {
 
     const [name, setName] = useState('')
-    const [mail, setMail] = useState('')
-    const [tel, setTel] = useState('')
+    const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
     const [message, setMessage] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(name)
-        console.log(mail)
-        console.log(tel)
-        console.log(message)
+        const messageData = {
+            name,
+            email,
+            phone,
+            message
+        }
+        console.log(messageData)
     }
     return (
         <Flex
@@ -54,14 +57,14 @@ const ContactForm = () => {
                         pointerEvents="none"
                         children={<FaAt color="brandBlue.200" />}
                         />
-                        <Input type="email" placeholder="Email" required onChange={(e) => setMail(e.target.value)}/>
+                        <Input type="email" placeholder="Email" required onChange={(e) => setEmail(e.target.value)}/>
                     </InputGroup>
                     <InputGroup>
                         <InputLeftElement
                         pointerEvents="none"
                         children={<FaPhone color="brandBlue.200" />}
                         />
-                        <Input type="tel" placeholder="Teléfono" required onChange={(e) => setTel(e.target.value)}/>
+                        <Input type="tel" placeholder="Teléfono" required onChange={(e) => setPhone(e.target.value)}/>
                     </InputGroup>
                 </Stack>
                 <Textarea
