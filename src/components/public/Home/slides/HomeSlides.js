@@ -131,7 +131,7 @@ function ArrowButton(props) {
       {...props}
       position="absolute"
       borderRadius="0"
-      _focus="none"
+      _focus={{border:"none"}}
       _hover={{ backgroundColor: "#9AC9FB80" }}
       _active={{ backgroundColor: "#9AC9FBA0" }}
       bg="transparent"
