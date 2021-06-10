@@ -1,9 +1,13 @@
 import React from "react";
 import { Heading, Text, Box } from "@chakra-ui/react";
+import Slides from "./Slides/HomeSlides";
 
 const Home = () => {
   return (
-    <Box m={{ base: "1rem", md: "2rem" }}>
+    <Box>
+      <Box>
+        <Slides/>
+      </Box>
       <Box>
         <Heading as="h1" size="2xl">
           Somos Más
@@ -14,9 +18,6 @@ const Home = () => {
           la cultura y las normas de convivencia de la sociedad a la que
           pertenecen.
         </Text>
-      </Box>
-      <Box h="400px">
-          Slides
       </Box>
       <Box h="400px">
           Novedades
