@@ -4,11 +4,11 @@ import { useBreakpointValue } from "@chakra-ui/media-query";
 import { Link } from "react-router-dom";
 import React from "react";
 import Swal from "sweetalert2";
-
-
+import { deleteUser, removeUserFromState } from "../../../features/userSlice";
+import { useDispatch } from "react-redux";
 export const MappedUsers = ({ users, handleUpdate }) => {
+  const dispatch = useDispatch();
   const flexDir = useBreakpointValue({ base: "column", sm: "" });
-
   const handleDelete = async (id) => {
     const confirmation = await Swal.fire({
       title: "Confirmación",
@@ -20,18 +20,18 @@ export const MappedUsers = ({ users, handleUpdate }) => {
       cancelButtonText: "Cancelar",
     });
     if (confirmation.isConfirmed === true) {
-      // DELETE FUNCTION HERE
-        console.log("delete")
-        handleUpdate()
+      dispatch(deleteUser(id));
+      dispatch(removeUserFromState(id));
+      console.log("delete");
     }
   };
 
   return (
     <Flex flexDir="column">
-      {users.map((user) => (
+      {users.map((user, index) => (
         <Flex
+          key={index}
           flexDir="column"
-          key={user.id}
           margin="1em"
           bg="gray.200"
           padding="1em"
@@ -42,23 +42,26 @@ export const MappedUsers = ({ users, handleUpdate }) => {
               <Text fontSize="small" color="gray.400">
                 Usuario:
               </Text>
-              <Text fontWeight="bold">{`\u00A0\u00A0${user.name.charAt(0).toUpperCase() + user.name.slice(1)}`}</Text>
+              <Text
+                fontWeight="bold"
+                textTransform="capitalize"
+                marginLeft="0.3em"
+              >
+                {user.name}
+              </Text>
             </Flex>
             <Flex alignItems="center" justifyContent="space-between">
               <Text fontSize="small" color="gray.400">
                 Email:
               </Text>
-              <Text fontWeight="bold">{`\u00A0\u00A0${user.email.charAt(0).toUpperCase() + user.email.slice(1)}`}</Text>
+              <Text fontWeight="bold" marginLeft="0.3em">
+                {user.email}
+              </Text>
             </Flex>
             <Flex justifyContent="space-between">
-              <Link 
-                  to={{
-                    pathname: "/backoffice/users/edit",
-                    state: {user: user},
-                 
-                }}>
+              <Link to={`/backoffice/users/${user.id}`}>
                 <Button colorScheme="blue" size="sm" variant="outline">
-                Editar
+                  Editar
                 </Button>
               </Link>
               <Button

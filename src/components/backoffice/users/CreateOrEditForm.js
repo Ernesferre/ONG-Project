@@ -1,123 +1,257 @@
-import React from 'react'
-import {Flex, Select, Heading, Box, Text, Stack, Button, FormControl, FormLabel, Input} from '@chakra-ui/react'
-import { FaFileImage } from 'react-icons/fa'
+import React, { useEffect } from "react";
+import {
+  Flex,
+  Select,
+  Heading,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Spinner,
+  FormErrorMessage,
+  Container,
+} from "@chakra-ui/react";
 import { useHistory } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { createUser, editUser, fetchUser } from "../../../features/userSlice";
+import { Field, Form, Formik } from "formik";
 
- 
-export const CreateOrEditForm = ({
-  name,
-  setName,
-  email,
-  setEmail,
-  image,
-  setImage,
-  rol,
-  setRol,
-  id,
-  
-}) => {
+import * as Yup from "yup";
 
+export const CreateOrEditForm = ({ id }) => {
+  const editSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(2, "Nombre demasiado corto")
+      .max(100, "Nombre demasiado largo")
+      .required("Nombre es requerido"),
+    password: Yup.string()
+      .min(8, "La contraseña debe tener al menos 6 caracteres")
+      .max(200, "Contraseña demasiado larga"),
+    email: Yup.string()
+      .email("Email debe ser válido")
+      .required("El Email es requerido"),
+    profilePhoto: Yup.mixed().required("La imagen es requerida"),
+  });
+
+  const { singleUser, status } = useSelector((state) => state.users);
+
+  const dispatch = useDispatch();
+
+  const mapData = (user) => {
+    initialValues = { name: user.name, email: user.email, rol: user.rol };
+  };
+
+  let initialValues = {
+    name: "",
+    email: "",
+    password: "",
+    role_id: "0",
+    profilePhoto: "",
+  };
+
+  if (id !== undefined) {
+    initialValues = {
+      ...initialValues,
+      name: singleUser?.name,
+      email: singleUser?.email,
+      role_id: singleUser?.role_id,
+    };
+  }
+
+  useEffect(() => {
+    if (id !== undefined) {
+      dispatch(fetchUser(id));
+    }
+    mapData(singleUser);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const history = useHistory();
 
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
 
-  // convert image to base64
-const toBase64 = file => new Promise((resolve, reject) => {
-  const reader = new FileReader()
-  reader.readAsDataURL(file)
-  reader.onload = () => resolve(reader.result)
-  reader.onerror = error => reject(error)
-})
-
-  async function handleSubmit(e) {
-      e.preventDefault()
-      if (name === '' || email === '' || image === ''  || rol === '') {
-          alert('Por favor complete todos los campos')
-      } else {
-          let data
-          if (typeof image !== 'string') {
-              let base64Img = await toBase64(image)
-              data = {
-                  name: name,
-                  email: email,
-                  rol: rol,
-                  image: base64Img
-              }
-          } else {
-              data = {
-                  name: name,
-                  email: email,
-                  rol: rol,
-                  image: image
-              }
-          }
-          if (email) {
-              // AGREGAR FUNCIÓN EDITAR - pasar id y data
-              history.push("/backoffice/users");
-              console.log(data)
-          } else {
-              // AGREGAR FUNCIÓN CREAR - pasar data
-              history.push("/backoffice/users");
-              console.log(data)
-          }
-      }
-  }
-
-
-  return(
-    <Flex w='100%' flexDirection='column' minHeight='100vh' align='center' justify='center' padding={10}>
-    <Heading margin={5}>{id ? 'Editar Usuario' : 'Crear Usuario'}</Heading>
-        <Box bg="gray.100" borderWidth="1px" borderRadius="lg" overflow="hidden" w={[250, 400, 700]} maxWidth={700}>
-            <form method='POST' onSubmit={handleSubmit}>
-                <Stack w={'90%'} margin={[3,6,8]} spacing={5} >
-                    <FormControl>
-                        <FormLabel>Nombre</FormLabel>
-                        <Input type='text'
-                            value={name} 
-                            onChange={(e) => setName(e.target.value)}
-                            bg="white"
-                            isRequired
-                        />
+  return (
+    <Container maxWidth="container.xl" minHeight="100vh" bg="gray.200">
+      <Heading>{id ? "Editar Usuario" : "Crear Usuario"}</Heading>
+      {status === "loading" ? (
+        <Flex height="10em" justifyContent="center" alignItems="center">
+          <Spinner size="xl" color="#5796D9" />
+        </Flex>
+      ) : (
+        <Flex
+          flexDir="column"
+          borderWidth="10px"
+          borderRadius="0.3em"
+          justifyContent="center"
+        >
+          <Formik
+            enableReinitialize={true}
+            initialValues={initialValues}
+            validationSchema={editSchema}
+            onSubmit={async (values, actions) => {
+              let base64Img = await toBase64(values.profilePhoto);
+              let data = {
+                name: values.name,
+                email: values.email,
+                role_id: parseInt(values.role_id),
+                password: values.password,
+                profilePhoto: base64Img,
+              };
+              setTimeout(() => {
+                if (id !== undefined) {
+                  data = {
+                    ...data,
+                    id,
+                  };
+                  try {
+                    dispatch(editUser(data));
+                  } catch (error) {}
+                  actions.setSubmitting(false);
+                  history.push("/backoffice/users");
+                } else {
+                  dispatch(createUser(data));
+                  history.push("/backoffice/users");
+                  actions.setSubmitting(false);
+                }
+              }, 1000);
+            }}
+          >
+            {(props) => (
+              <Form>
+                <Field name="name">
+                  {({ field, form }) => (
+                    <FormControl
+                      isInvalid={form.errors.name && form.touched.name}
+                    >
+                      <FormLabel marginTop="1em" htmlFor="name">
+                        Nombre
+                      </FormLabel>
+                      <Input
+                        variant="filled"
+                        {...field}
+                        id="name"
+                        placeholder="Nombre"
+                      />
+                      <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                     </FormControl>
-                    <FormControl>
-                        <FormLabel marginBottom={3}>Email</FormLabel>
-                        <Input type='email'
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)}
-                            bg="white"
-                            isRequired
-                        />
+                  )}
+                </Field>
+                <Field name="email">
+                  {({ field, form }) => (
+                    <FormControl
+                      isInvalid={form.errors.email && form.touched.email}
+                    >
+                      <FormLabel marginTop="1em" htmlFor="email">
+                        Email
+                      </FormLabel>
+                      <Input
+                        variant="filled"
+                        {...field}
+                        id="email"
+                        placeholder="Email"
+                      />
+                      <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                     </FormControl>
-                       
-                    <FormControl>
-                        <FormLabel>Foto</FormLabel>
-                        <Input type='file' 
-                            id='file'
-                            onChange={(e)=>setImage(e.target.files[0])}
-                            style={{height:'0', width:'0', overflow:'hidden', padding:'0', border:'none'}}
-                        />
-                        <label htmlFor="file" style={{cursor:'pointer'}} >
-                            <Box as={FaFileImage} size="36px" color="blue.500" />
-                        </label>
-                        {image && <Text style={{textAlign:'left'}} marginTop={3}>{id ? name : image.name}</Text>}
+                  )}
+                </Field>
+                <Field name="password">
+                  {({ field, form }) => (
+                    <FormControl
+                      isInvalid={form.errors.password && form.touched.password}
+                    >
+                      <FormLabel marginTop="1em" htmlFor="password">
+                        Contraseña
+                      </FormLabel>
+                      <Input
+                        type="password"
+                        variant="filled"
+                        {...field}
+                        id="password"
+                        placeholder="Contraseña"
+                      />
+                      <FormErrorMessage>
+                        {form.errors.password}
+                      </FormErrorMessage>
                     </FormControl>
-                    <FormControl>
-                    <FormLabel>Rol</FormLabel>
-                    <Select placeholder="Select Rol"  value={rol} 
-                            onChange={(e) => setRol(e.target.value)}>
-                          <option value="admin">Administrador</option>
-                          <option value="user">Usuario</option>
-                        
-                        </Select>
-
+                  )}
+                </Field>
+                <Field name="role_id">
+                  {({ field, form }) => (
+                    <FormControl
+                      isInvalid={form.errors.role_id && form.touched.role_id}
+                    >
+                      <FormLabel marginTop="1em" htmlFor="role_id">
+                        Rol
+                      </FormLabel>
+                      <Select variant="filled" {...field} id="role_id">
+                        <option value="1">Administrador</option>
+                        <option value="0">Usuario</option>
+                      </Select>
+                      <FormErrorMessage>{form.errors.role_id}</FormErrorMessage>
                     </FormControl>
-                    <FormControl>
-                            <Button colorScheme="blue" type='submit' size="sm" marginTop={5}>Crear</Button>
-                        </FormControl>
-                 
-                </Stack>
-            </form>
-        </Box>
-    </Flex>
-)
-}
+                  )}
+                </Field>
+                <Field name="profilePhoto">
+                  {({ field, form, values }) => (
+                    <FormControl
+                      isInvalid={
+                        form.errors.profilePhoto && form.touched.profilePhoto
+                      }
+                    >
+                      <FormLabel marginTop="1em" htmlFor="profilePhoto">
+                        Foto de Perfil
+                      </FormLabel>
+                      <Input
+                        id="profilePhoto"
+                        type="file"
+                        display="none"
+                        onChange={(e) => {
+                          form.setFieldValue(
+                            "profilePhoto",
+                            e.currentTarget.files[0]
+                          );
+                        }}
+                      />
+                      <FormLabel
+                        htmlFor="profilePhoto"
+                        color="white"
+                        fontWeight="bold"
+                        marginTop="1em"
+                        bg="#5796D9"
+                        width="10em"
+                        padding="0.5em"
+                        textAlign="center"
+                        borderRadius="0.3em"
+                        cursor="pointer"
+                        _hover={{ bg: "#3672B3" }}
+                      >
+                        Elegir Foto
+                      </FormLabel>
+                      <FormErrorMessage>
+                        {form.errors.profilePhoto}
+                      </FormErrorMessage>
+                    </FormControl>
+                  )}
+                </Field>
+                <Button
+                  mt={4}
+                  colorScheme="blue"
+                  isLoading={props.isSubmitting}
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </Form>
+            )}
+          </Formik>
+        </Flex>
+      )}
+    </Container>
+  );
+};
