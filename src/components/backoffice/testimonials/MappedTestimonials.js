@@ -8,12 +8,27 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { deleteTestimonial } from "./testimonials";
+import {useAlert} from '../layout/Alert'
 
 const MappedTestimonials = ({ testimonials, handleUpdate }) => {
+  const {setAlert} = useAlert();
   const handleDelete = (id) => {
-    deleteTestimonial(id)
-    handleUpdate(true);
-    console.log(`Deleting testimonial ${id} `)
+      setAlert({
+        show: true,
+        title: "Confirmación",
+        text: "¿Quieres borrar este testimonio?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DB5752",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Borrar",
+        onConfirm: () => {
+          deleteTestimonial(id)
+          handleUpdate(true);
+          console.log(`Deleting testimonial ${id} `)
+        },
+        onCancel: () => {},
+      });    
   };
 
   const flexDir = useBreakpointValue({ base: "column", md: "row" });
