@@ -6,45 +6,9 @@ import { FcPhoneAndroid } from "react-icons/fc";
 import { HiLocationMarker } from "react-icons/hi";
 import ContactForm from "./ContactForm";
 
-import {
-  Stack,
-  Button,
-  VStack,
-  useBreakpointValue,
-} from '@chakra-ui/react';
-
 export const Contact = () => {
   return (
-    <>
-
-<Flex
-      w={'full'}
-      h={'30vh'}
-      backgroundImage={
-        'url(https://i.ibb.co/gMjbwRb/Foto-6.jpg)'
-      }
-      backgroundSize={'cover'}
-      backgroundPosition={'center center'}>
-      <VStack
-        w={'full'}
-        justify={'center'}
-        px={useBreakpointValue({ base: 4, md: 8 })}
-        bgGradient={'linear(to-r, blackAlpha.600, transparent)'}>
-        <Stack maxW={'2xl'} align={'flex-start'} spacing={6}>
-          <Text
-            color={'white'}
-            fontWeight={700}
-            lineHeight={1.2}
-            fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}>
-            Contacto
-          </Text>
-        </Stack>
-      </VStack>
-    </Flex>
-
-
     <Container maxW="container.xl">
-
       <Heading>Contacto</Heading>
       <Flex flexWrap="wrap" justifyContent="space-evenly">
         <Flex flexDir="column" minH="27em">
@@ -78,6 +42,5 @@ export const Contact = () => {
         </Flex>
       </Flex>
     </Container>
-    </>
   );
 };
