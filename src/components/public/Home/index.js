@@ -1,6 +1,6 @@
 import React from "react";
 import { Heading, Text, Box } from "@chakra-ui/react";
-import Slides from "./Slides/HomeSlides";
+import Slides from "./slides/HomeSlides";
 
 const Home = () => {
   return (
