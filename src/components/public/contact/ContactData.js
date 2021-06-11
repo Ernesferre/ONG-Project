@@ -48,10 +48,11 @@ export const ContactData = ({
     <Flex
       flexDir="column"
       margin="1em"
-      bg="brandBlue.50"
+      bg="gray.200"
       padding="1em"
       borderRadius="0.2em"
       justifyContent="space-between"
+      boxShadow="lg"
     >
       <Text color="gray.400">Información de contacto</Text>
       <Heading size="md" color="gray.600">
