@@ -4,14 +4,15 @@ import React from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FcPhoneAndroid } from "react-icons/fc";
 import { HiLocationMarker } from "react-icons/hi";
+import ContactForm from "./ContactForm";
+
 export const Contact = () => {
   return (
     <Container maxW="container.xl">
       <Heading>Contacto</Heading>
-      <Flex flexWrap="wrap" justifyContent="center">
-        <Flex flexDir="column" minW="27em" minH="27em">
-          <Heading size="lg">Contáctenos</Heading>
-          <Text color="gray.300">// formulario de contacto aca //</Text>
+      <Flex flexWrap="wrap" justifyContent="space-evenly">
+        <Flex flexDir="column" minH="27em">
+          <ContactForm />
         </Flex>
         <Flex flexDir="column" margin="1em">
           <Text color="gray.400">Información de contacto</Text>
