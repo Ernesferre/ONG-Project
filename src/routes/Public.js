@@ -6,7 +6,7 @@ import Register from "../pages/Register";
 import Us from "../pages/Us";
 import { Contact } from "../components/public/contact";
 import Layout from "../components/public/layout/Layout";
-
+import { PublicActivities } from "../components/public/activities/PublicActivities";
 export const Public = () => {
   return (
       <Layout>
@@ -16,8 +16,10 @@ export const Public = () => {
           <Route exact path="/register" component={Register} />
           <Route exact path="/us" component={Us} />
           <Route exact path="/contacto" component={Contact} />
+             <Route exact path="/activities" component={PublicActivities} />
           <Redirect to="/" />
         </Switch>
       </Layout>
-  );
+  )
+
 };
