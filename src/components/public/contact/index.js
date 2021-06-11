@@ -1,14 +1,15 @@
-import { Container, Flex, Heading, Text } from "@chakra-ui/layout";
+import { Container, Flex, Heading } from "@chakra-ui/layout";
 import React from "react";
 import { ContactData } from "./ContactData";
+import ContactForm from "./ContactForm";
+
 export const Contact = () => {
   return (
     <Container maxW="container.xl">
       <Heading>Contacto</Heading>
-      <Flex flexWrap="wrap" justifyContent="center">
-        <Flex flexDir="column" minW="27em" minH="27em">
-          <Heading size="lg">Contáctenos</Heading>
-          <Text color="gray.300">// formulario de contacto aca //</Text>
+      <Flex flexWrap="wrap" justifyContent="space-evenly">
+        <Flex flexDir="column" minH="27em">
+          <ContactForm />
         </Flex>
         <ContactData
           address="Perón 1525, CABA"
