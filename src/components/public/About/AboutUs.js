@@ -3,11 +3,11 @@ import {Flex, Text} from '@chakra-ui/react';
 const AboutUs = ({ text }) => {
   return (
     <Flex
-      padding={6}
+      padding={4}
       direction="column"
       justify="center"
       alignItems="center"
-      h={{ base: "auto", md: "500px" }}
+      h={{ base: "auto", md: "320px" }}
       bg="#E5E5E5"
     >
       <Text
