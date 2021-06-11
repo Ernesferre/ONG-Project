@@ -1,6 +1,8 @@
 import React from "react";
 import { Heading, Text, Box } from "@chakra-ui/react";
 import Slides from "./slides/HomeSlides";
+import Footer from "../layout/Footer";
+import { PublicActivities } from "../activities/PublicActivities";
 
 const Home = () => {
   return (
@@ -15,18 +17,18 @@ const Home = () => {
           </Heading>
           <Text fontSize={{ base: "1rem", md: "1.5rem" }}>
             Mediante nuestros programas educativos, buscamos incrementar la
-            capacidad intelectual, moral y afectiva de las personas de acuerdo con
-            la cultura y las normas de convivencia de la sociedad a la que
+            capacidad intelectual, moral y afectiva de las personas de acuerdo
+            con la cultura y las normas de convivencia de la sociedad a la que
             pertenecen.
           </Text>
         </Box>
-        <Box h="400px">
-            Novedades
+        <Box h="400px">Slides</Box>
+        <Box h="400px">Novedades</Box>
+        <Box h="400px">Testimonios</Box>
+        <Box>
+          <PublicActivities />
         </Box>
-        <Box h="400px">
-            Testimonios
-        </Box>
-        
+        <Footer/>
       </Box>
     </>
   );
