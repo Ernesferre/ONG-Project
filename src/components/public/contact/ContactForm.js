@@ -99,7 +99,7 @@ const ContactForm = () => {
             </Stack>
             <form method="POST" onSubmit={handleSubmit}>
                 <FormControl id="nombre" mt={4}>
-                    <Input type="text" placeholder="Nombre y apellido" onChange={(e) => setName(e.target.value)} required/>
+                    <Input type="text" value={name} placeholder="Nombre y apellido" onChange={(e) => setName(e.target.value)} required/>
                 </FormControl>
                 <Stack spacing={4}
                     direction={{ base: 'column', sm: 'row' }}
@@ -111,17 +111,18 @@ const ContactForm = () => {
                         pointerEvents="none"
                         children={<FaAt color="brandBlue.200" />}
                         />
-                        <Input type="email" placeholder="Email" required onChange={(e) => setEmail(e.target.value)}/>
+                        <Input type="email" value={email} placeholder="Email" required onChange={(e) => setEmail(e.target.value)}/>
                     </InputGroup>
                     <InputGroup>
                         <InputLeftElement
                         pointerEvents="none"
                         children={<FaPhone color="brandBlue.200" />}
                         />
-                        <Input type="tel" placeholder="Teléfono" required onChange={(e) => setPhone(e.target.value)}/>
+                        <Input type="tel" value={phone} placeholder="Teléfono" required onChange={(e) => setPhone(e.target.value)}/>
                     </InputGroup>
                 </Stack>
                 <Textarea
+                    value={message}
                     placeholder="Mensaje"
                     mt={4}
                     required
