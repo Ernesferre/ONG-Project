@@ -26,13 +26,26 @@ const ContactForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const messageData = {
-            name,
-            email,
-            phone,
-            message
+            "name": name,
+            "email": email,
+            "phone": phone,
+            "message": message,
+            "created_at": new Date().toISOString()
         }
-        console.log(messageData)
+        fetch('http://ongapi.alkemy.org/api/contacts', {
+            method: 'POST',
+            body: JSON.stringify(messageData),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          })
+        .then(() => handleSuccess())
+        .catch(err => {
+            console.log(err)
+            handleError()
+        })
     }
+    
     return (
         <Flex
       align={'center'}
