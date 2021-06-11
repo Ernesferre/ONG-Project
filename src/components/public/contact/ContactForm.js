@@ -3,7 +3,6 @@ import {
     Flex,
     Box,
     FormControl,
-    FormLabel,
     Input,
     Stack,
     Button,
@@ -13,8 +12,9 @@ import {
     InputGroup,
     InputLeftElement
   } from '@chakra-ui/react'
-  import {FaPhone, FaAt} from 'react-icons/fa'
+import {FaPhone, FaAt} from 'react-icons/fa'
 import { useState } from 'react'
+import { useAlert } from '../../backoffice/layout/Alert'
 
 const ContactForm = () => {
 
@@ -22,6 +22,47 @@ const ContactForm = () => {
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [message, setMessage] = useState('')
+
+    const { setAlert } = useAlert()
+
+    const handleSuccess = () => {
+        setAlert({
+            title: "Mensaje enviado",
+            text: "Muchas gracias, te responderemos a la brevedad.",
+            show: true,
+            type: "success",
+            showCancelButton: false,
+            confirmButtonColor: '#5796D9',
+            confirmButtonText: 'Cerrar',
+            onConfirm: () => {
+                setName('')
+                setEmail('')
+                setPhone('')
+                setMessage('')
+            },
+            onCancel: () => {},
+        })
+    }
+
+    const handleError = () => {
+        setAlert({
+            title: "Algo salió mal",
+            text: "Hubo un error al enviar el mensaje, por favor intenta de vuelta",
+            show: true,
+            icon: "error",
+            type: "error",
+            showCancelButton: false,
+            confirmButtonColor: '#5796D9',
+            confirmButtonText: 'Cerrar',
+            onConfirm: () => {
+                setName('')
+                setEmail('')
+                setPhone('')
+                setMessage('')
+            },
+            onCancel: () => {},
+        })
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -45,7 +86,7 @@ const ContactForm = () => {
             handleError()
         })
     }
-    
+
     return (
         <Flex
       align={'center'}
