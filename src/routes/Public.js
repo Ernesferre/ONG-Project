@@ -9,7 +9,6 @@ import Layout from "../components/public/layout/Layout";
 
 export const Public = () => {
   return (
-    <>
       <Layout>
         <Switch>
           <Route exact path="/" component={Home} />
@@ -20,6 +19,5 @@ export const Public = () => {
           <Redirect to="/" />
         </Switch>
       </Layout>
-    </>
   );
 };
