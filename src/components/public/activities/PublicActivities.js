@@ -1,8 +1,8 @@
 import React from "react";
-import { Heading, Container, HStack, Flex } from "@chakra-ui/react";
-import Card from "../../Cards/Card";
+import { Flex } from "@chakra-ui/react";
 import Title from "../../Title/Title";
 import pictureActivities from "../../../assets/Foto10.jpg";
+import CardActivity from "./CardActivity";
 
 export const PublicActivities = () => {
   const fakeDataActivities = [
@@ -39,7 +39,7 @@ export const PublicActivities = () => {
       <Title title="Actividades" image={pictureActivities} />
       <Flex wrap="wrap" gridGap="6%" justify="center" align="center" mt="3rem">
         {fakeDataActivities.map((data) => (
-          <Card
+          <CardActivity
             image={data.image}
             title={data.title}
             description={data.description}
