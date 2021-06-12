@@ -3,6 +3,7 @@ import { Heading, Text, Box } from "@chakra-ui/react";
 import Slides from "./slides/HomeSlides";
 import Footer from "../layout/Footer";
 import { PublicActivities } from "../activities/PublicActivities";
+import { PublicNews } from "../news/PublicNews";
 
 const Home = () => {
   return (
@@ -23,7 +24,9 @@ const Home = () => {
           </Text>
         </Box>
         <Box h="400px">Slides</Box>
-        <Box h="400px">Novedades</Box>
+        <Box>
+          <PublicNews />
+        </Box>
         <Box h="400px">Testimonios</Box>
         <Box>
           <PublicActivities />
