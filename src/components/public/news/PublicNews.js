@@ -1,4 +1,5 @@
 import React from "react";
+import { Flex } from "@chakra-ui/react";
 import pictureNews from "../../../assets/Foto9.jpg";
 import Title from "../../Title/Title";
 import CardNews from "./CardNews";
