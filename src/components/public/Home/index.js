@@ -1,6 +1,5 @@
 import React from "react";
 import { Heading, Text, Box } from "@chakra-ui/react";
-import Footer from "../layout/Footer";
 
 const Home = () => {
   return (
@@ -28,7 +27,6 @@ const Home = () => {
         </Box>
         
       </Box>
-      <Footer />
     </>
   );
 };
