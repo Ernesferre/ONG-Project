@@ -1,7 +1,6 @@
 import React from "react";
 import { Heading, Text, Box } from "@chakra-ui/react";
 import Slides from "./slides/HomeSlides";
-import Footer from "../layout/Footer";
 
 const Home = () => {
   return (
@@ -29,7 +28,6 @@ const Home = () => {
         </Box>
         
       </Box>
-      <Footer />
     </>
   );
 };
