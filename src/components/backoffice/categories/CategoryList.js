@@ -10,14 +10,12 @@ export const CategoryList = () => {
   const [loading, setLoading] = useState(true)
   const [categories, setCategories] = useState()
   const [update, setUpdate] = useState(false)
-  const [lastID, setLastID] = useState()
 
   useEffect(()=>{
     getCategories()
     .then(res => {
       console.log(res.data)
       setCategories(res.data)
-      setLastID(res.data.sort((a,b)=> b.id - a.id)[0].id)
       setLoading(false)
     })
   }, [update])
@@ -32,10 +30,7 @@ export const CategoryList = () => {
       <Flex flexDir="column">
         <Heading textAlign="center">Categorías</Heading>
         <Flex>
-          <Link to={{
-              pathname: "/backoffice/categories/create",
-              state: {lastID:lastID},
-          }}>
+          <Link to="/backoffice/categories/create">
             <Button colorScheme="green">+ Nueva Categoría</Button>
           </Link>
         </Flex>
