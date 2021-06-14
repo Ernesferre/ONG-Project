@@ -3,7 +3,6 @@ import {
     Flex,
     Box,
     FormControl,
-    FormLabel,
     Input,
     Stack,
     Button,
@@ -13,8 +12,9 @@ import {
     InputGroup,
     InputLeftElement
   } from '@chakra-ui/react'
-  import {FaPhone, FaAt} from 'react-icons/fa'
+import {FaPhone, FaAt} from 'react-icons/fa'
 import { useState } from 'react'
+import { useAlert } from '../../backoffice/layout/Alert'
 
 const ContactForm = () => {
 
@@ -23,16 +23,70 @@ const ContactForm = () => {
     const [phone, setPhone] = useState('')
     const [message, setMessage] = useState('')
 
+    const { setAlert } = useAlert()
+
+    const handleSuccess = () => {
+        setAlert({
+            title: "Mensaje enviado",
+            text: "Muchas gracias, te responderemos a la brevedad.",
+            show: true,
+            type: "success",
+            showCancelButton: false,
+            confirmButtonColor: '#5796D9',
+            confirmButtonText: 'Cerrar',
+            onConfirm: () => {
+                setName('')
+                setEmail('')
+                setPhone('')
+                setMessage('')
+            },
+            onCancel: () => {},
+        })
+    }
+
+    const handleError = () => {
+        setAlert({
+            title: "Algo salió mal",
+            text: "Hubo un error al enviar el mensaje, por favor intenta de vuelta",
+            show: true,
+            icon: "error",
+            type: "error",
+            showCancelButton: false,
+            confirmButtonColor: '#5796D9',
+            confirmButtonText: 'Cerrar',
+            onConfirm: () => {
+                setName('')
+                setEmail('')
+                setPhone('')
+                setMessage('')
+            },
+            onCancel: () => {},
+        })
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         const messageData = {
-            name,
-            email,
-            phone,
-            message
+            "name": name,
+            "email": email,
+            "phone": phone,
+            "message": message,
+            "created_at": new Date().toISOString()
         }
-        console.log(messageData)
+        fetch('http://ongapi.alkemy.org/api/contacts', {
+            method: 'POST',
+            body: JSON.stringify(messageData),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          })
+        .then(() => handleSuccess())
+        .catch(err => {
+            console.log(err)
+            handleError()
+        })
     }
+
     return (
         <Flex
       align={'center'}
@@ -45,7 +99,7 @@ const ContactForm = () => {
             </Stack>
             <form method="POST" onSubmit={handleSubmit}>
                 <FormControl id="nombre" mt={4}>
-                    <Input type="text" placeholder="Nombre y apellido" onChange={(e) => setName(e.target.value)} required/>
+                    <Input type="text" value={name} placeholder="Nombre y apellido" onChange={(e) => setName(e.target.value)} required/>
                 </FormControl>
                 <Stack spacing={4}
                     direction={{ base: 'column', sm: 'row' }}
@@ -57,17 +111,18 @@ const ContactForm = () => {
                         pointerEvents="none"
                         children={<FaAt color="brandBlue.200" />}
                         />
-                        <Input type="email" placeholder="Email" required onChange={(e) => setEmail(e.target.value)}/>
+                        <Input type="email" value={email} placeholder="Email" required onChange={(e) => setEmail(e.target.value)}/>
                     </InputGroup>
                     <InputGroup>
                         <InputLeftElement
                         pointerEvents="none"
                         children={<FaPhone color="brandBlue.200" />}
                         />
-                        <Input type="tel" placeholder="Teléfono" required onChange={(e) => setPhone(e.target.value)}/>
+                        <Input type="tel" value={phone} placeholder="Teléfono" required onChange={(e) => setPhone(e.target.value)}/>
                     </InputGroup>
                 </Stack>
                 <Textarea
+                    value={message}
                     placeholder="Mensaje"
                     mt={4}
                     required

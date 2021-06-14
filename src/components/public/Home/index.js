@@ -1,11 +1,14 @@
 import React from "react";
 import { Heading, Text, Box } from "@chakra-ui/react";
-import Footer from "../layout/Footer";
+import Slides from "./slides/HomeSlides";
 
 const Home = () => {
   return (
     <>
-      <Box m={{ base: "1rem", md: "2rem" }}>
+      <Box>
+        <Box>
+          <Slides/>
+        </Box>
         <Box>
           <Heading as="h1" size="2xl">
             Somos Más
@@ -18,9 +21,6 @@ const Home = () => {
           </Text>
         </Box>
         <Box h="400px">
-            Slides
-        </Box>
-        <Box h="400px">
             Novedades
         </Box>
         <Box h="400px">
@@ -28,7 +28,6 @@ const Home = () => {
         </Box>
         
       </Box>
-      <Footer />
     </>
   );
 };

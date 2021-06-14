@@ -21,6 +21,7 @@ const MappedMembers = ({ members, parentCallBack }) => {
     }).then(result => {
       if (result.value) {
         deleteMember(id);
+        parentCallBack(true);
       }
     })
   }
