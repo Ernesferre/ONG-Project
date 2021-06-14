@@ -8,7 +8,7 @@ import { CreateOrEditForm } from "./CreateOrEditForm";
 import { Spinner } from "@chakra-ui/spinner";
 import { createCategory, editCategory } from './CategoriesService'
 
-export const CreateOrEdit = ({ isCreate, id, lastId, categoryToEdit }) => {
+export const CreateOrEdit = ({ isCreate, id, categoryToEdit }) => {
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   const [description, setDescription] = useState('');
@@ -49,7 +49,7 @@ export const CreateOrEdit = ({ isCreate, id, lastId, categoryToEdit }) => {
   }, [isCreate, categoryToEdit])
 
   const handlePost = () => {
-    createCategory(category, lastId)
+    createCategory(category)
     .then(() => {
       handleSuccess();
       history.push("/backoffice/categories");
