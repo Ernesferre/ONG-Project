@@ -16,9 +16,11 @@ import { GrClose as CloseIcon } from "react-icons/gr";
 import { NavLink as LinkRouterDom } from "react-router-dom";
 
 const Routes = [
-  { route: "/us", name: "Nosotros" },
-  { route: "/activities", name: "Actividades" },
-  { route: "/news", name: "Novedades" },
+  { route: "/", name: "Inicio" },
+  { route: "/nosotros", name: "Nosotros" },
+  // { route: "/actividades", name: "Actividades" },
+  // { route: "/novedades", name: "Novedades" },
+  { route: "/contacto", name: "Contacto" },
   { route: "/login", name: "Iniciar Sesion" },
 ];
 
