@@ -11,12 +11,11 @@ export const getCategories = () => {
 // ordenar por id y obtener el mas alto para usarlo al crear
 
 //   CREATE CATEGORY
-export function createCategory(values, lastId) {
+export function createCategory(values) {
 
     let date = new Date().toISOString()
 
     const newCategory = {
-        "id": parseInt(lastId) + 1,
         "name": values.name,
         "description": values.description,
         "image": logo,
