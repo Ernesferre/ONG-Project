@@ -15,6 +15,7 @@ const Cards = ({image, title, description }) => {
             overflow='hidden'
             boxShadow='dark-lg'
             justifyContent='space-between'
+            mt='2rem'
             
             
         >
