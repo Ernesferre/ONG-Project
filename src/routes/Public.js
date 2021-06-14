@@ -7,6 +7,8 @@ import Us from "../pages/Us";
 import { Contact } from "../components/public/contact";
 import Layout from "../components/public/layout/Layout";
 import { PublicActivities } from "../components/public/activities/PublicActivities";
+import { PublicNews } from "../components/public/news/PublicNews";
+
 export const Public = () => {
   return (
       <Layout>
@@ -17,6 +19,7 @@ export const Public = () => {
           <Route exact path="/us" component={Us} />
           <Route exact path="/contacto" component={Contact} />
              <Route exact path="/activities" component={PublicActivities} />
+               <Route exact path="/news" component={PublicNews} />
           <Redirect to="/" />
         </Switch>
       </Layout>

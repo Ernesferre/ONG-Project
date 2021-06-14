@@ -2,7 +2,7 @@ import React from "react";
 import { Flex } from "@chakra-ui/react";
 import Title from "../../Title/Title";
 import pictureActivities from "../../../assets/Foto10.jpg";
-import CardActivity from "./CardActivity";
+import Card from "../../Cards/Card";
 
 export const PublicActivities = () => {
   const fakeDataActivities = [
@@ -39,9 +39,9 @@ export const PublicActivities = () => {
       <Title title="Actividades" image={pictureActivities} />
       <Flex wrap="wrap" gridGap="6%" justify="center" align="center" mt="3rem">
         {fakeDataActivities.map((data) => (
-          <CardActivity
-            image={data.image}
+          <Card
             title={data.title}
+            image={data.image}
             description={data.description}
           />
         ))}

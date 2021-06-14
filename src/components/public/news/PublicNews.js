@@ -2,7 +2,8 @@ import React from "react";
 import { Flex } from "@chakra-ui/react";
 import pictureNews from "../../../assets/Foto9.jpg";
 import Title from "../../Title/Title";
-import CardNews from "./CardNews";
+import Card from "../../Cards/Card";
+
 
 export const PublicNews = () => {
   const fakeDataNews = [
@@ -36,11 +37,11 @@ export const PublicNews = () => {
       <Title title="Novedades" image={pictureNews} />
       <Flex wrap="wrap" gridGap="6%" justify="center" align="center" mt="3rem">
         {fakeDataNews.map((data) => (
-          <CardNews
-            image={data.image}
-            title={data.title}
-            description={data.description}
-          />
+          <Card
+          title={data.title}
+          image={data.image}
+          description={data.description}
+        />
         ))}
       </Flex>
     </>
