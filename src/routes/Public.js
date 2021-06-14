@@ -9,16 +9,15 @@ import Layout from "../components/public/layout/Layout";
 
 export const Public = () => {
   return (
-    <>
-      <HeaderPublic />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/nosotros" component={Us} />
-        <Route exact path="/contacto" component={Contact} />
-        <Redirect to="/" />
-      </Switch>
-    </>
+      <Layout>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/us" component={Us} />
+          <Route exact path="/contacto" component={Contact} />
+          <Redirect to="/" />
+        </Switch>
+      </Layout>
   );
 };
