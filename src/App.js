@@ -1,3 +1,4 @@
+import React, {useEffect} from 'react'
 import "./App.css";
 //REACT-ROUTER
 import {
@@ -13,6 +14,10 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { Private } from "./routes/Private";
 import { Public } from "./routes/Public";
 import { PrivateRoute } from "./routes/PrivateRoute";
+
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { fetchOrganizationData } from "./features/organizationReducer";
 
 const theme = extendTheme({
   fonts: {
@@ -94,6 +99,17 @@ const theme = extendTheme({
 });
 
 function App() {
+
+  // GUARDAR INFO DE LA ORGANIZACIÓN EN REDUX
+  const dispatch = useDispatch();
+  const organizationData = useSelector((state) => state.organization.organizationData);
+
+  useEffect(() => {
+    if(!organizationData.name) {
+      dispatch(fetchOrganizationData());
+    }
+  }, []);
+
   return (
     <ChakraProvider theme={theme}>
       <Router>
