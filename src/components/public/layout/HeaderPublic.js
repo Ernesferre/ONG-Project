@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   Box,
   Flex,
@@ -9,15 +8,14 @@ import {
   useColorModeValue,
   Stack,
 } from "@chakra-ui/react";
-
 import { GiHamburgerMenu, GiHamburgerMenu as HamburgerIcon } from "react-icons/gi";
 import { GrClose as CloseIcon } from "react-icons/gr";
-
 import { NavLink as LinkRouterDom } from "react-router-dom";
+// import { useSelector } from "react-redux";
 
 const Routes = [
   { route: "/", name: "Inicio" },
-  { route: "/nosotros", name: "Nosotros" },
+  { route: "/us", name: "Nosotros" },
   // { route: "/actividades", name: "Actividades" },
   // { route: "/novedades", name: "Novedades" },
   { route: "/contacto", name: "Contacto" },
@@ -27,6 +25,10 @@ const Routes = [
 export default function HeaderPublic() {
 
   const [display, setDisplay] = useState('none');
+
+  // PARA USAR INFO DESDE REDUX
+  // const organizationData = useSelector((state) => state.organization.organizationData);
+  // console.log(organizationData)
 
   return (
     <>

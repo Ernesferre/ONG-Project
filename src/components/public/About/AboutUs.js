@@ -7,7 +7,7 @@ const AboutUs = ({ text }) => {
       direction="column"
       justify="center"
       alignItems="center"
-      h={{ base: "auto", md: "320px" }}
+      h={{ base: "auto", md: "auto" }}
       bg="#E5E5E5"
     >
       <Text

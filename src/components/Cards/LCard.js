@@ -24,7 +24,7 @@ export const LCard = ({ title, image, text, url, id, postedOn }) => {
 
   return (
     <Container
-      maxW="xs"
+      maxW="sm"
       borderRadius="3px"
       boxShadow="lg"
       bg="gray.200"
