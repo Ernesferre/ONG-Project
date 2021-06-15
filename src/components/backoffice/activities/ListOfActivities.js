@@ -3,11 +3,13 @@ import {Link} from 'react-router-dom'
 import {Container, Flex, Heading, Button} from '@chakra-ui/react'
 import MappedActivities from './MappedActivities'
 import  {getActivities} from './ActivitiesService'
+import  {getActivitiesById} from './ActivitiesService'
 
 const ListOfActivities = () => {
 
     const [loading, setLoading] = useState(true)
     const [activities, setActivities] = useState()
+    const [activitiesById, setActivitiesById] = useState()
     const [update, setUpdate] = useState(false)
     const [lastID, setLastID] = useState()
 
