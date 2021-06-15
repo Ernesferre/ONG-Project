@@ -21,14 +21,17 @@ export const LCard = ({ title, image, text, url, id }) => {
   return (
     <Container
       maxW="xs"
-      borderRadius="5px"
+      borderRadius="3px"
       boxShadow="lg"
       bg="gray.200"
       padding="0"
       position="relative"
+      margin="1em"
+      borderColor="brandBlue.50"
+      borderWidth="1px"
     >
       <Image
-        borderTopRadius="5px"
+        borderTopRadius="3px"
         width="100%"
         objectFit="cover"
         src={image}
