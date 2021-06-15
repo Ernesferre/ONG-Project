@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import AboutUs from "./AboutUs";
 import Title from "../../Title/Title";
 import imgSubtitle from "../../../assets/forBackTitle.jpg"
+import Members from "./Members";
 export const About = () => {
   return (
     <Box>
@@ -11,6 +12,8 @@ export const About = () => {
           capacidad intelectual, moral y afectiva de las personas de acuerdo con
           la cultura y las normas de convivencia de la sociedad a la que
           pertenecen." />
+
+          <Members />
     </Box>
   );
 };
