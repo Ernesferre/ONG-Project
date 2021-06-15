@@ -8,7 +8,7 @@ import News from "../components/public/News";
 import { Contact } from "../components/public/contact";
 import Layout from "../components/public/layout/Layout";
 import { PublicActivities } from "../components/public/activities/PublicActivities";
-import { PublicNews } from "../components/public/news/PublicNews";
+import { PublicNews } from "../components/public/News/PublicNews";
 
 export const Public = () => {
   return (
