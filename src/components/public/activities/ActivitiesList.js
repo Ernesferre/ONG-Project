@@ -13,7 +13,6 @@ export const ActivitiesList = () => {
         const response = await axios.get(
           "http://ongapi.alkemy.org/api/activities"
         );
-        console.log(response.data.data);
         setActivities(response.data.data);
       } catch (error) {
         throw error;
