@@ -20,7 +20,7 @@ code {
 }
 
 .page-enter {
-  transform: scaleX(1.2);
+  transform: scaleX(1.06);
 }
 
 .page-enter-active {
