@@ -1,8 +1,9 @@
+import { Container, Heading } from "@chakra-ui/react";
 const News = () => {
   return (
-    <>
-      <h2>Seccion novedades</h2>
-    </>
+    <Container maxW="container.xl">
+      <Heading>Novedades</Heading>
+    </Container>
   );
 };
 export default News;
