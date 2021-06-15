@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
-import { Container, Flex, Heading, Text } from "@chakra-ui/layout";
+import { Container, Flex, Heading, Text, VStack } from "@chakra-ui/layout";
 import { Collapse } from "@chakra-ui/transition";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -25,6 +25,7 @@ export const LCard = ({ title, image, text, url, id }) => {
       boxShadow="lg"
       bg="gray.200"
       padding="0"
+      position="relative"
     >
       <Image
         borderTopRadius="5px"
@@ -42,7 +43,7 @@ export const LCard = ({ title, image, text, url, id }) => {
       >
         {title}
       </Heading>
-      <Flex flexDir="column" justifyContent="flex-end">
+      <Flex flexDir="column" justifyContent="space-between">
         <Collapse startingHeight="4.2em" in={show}>
           <Text marginLeft="1em" marginRight="1em">
             {text}
@@ -61,13 +62,15 @@ export const LCard = ({ title, image, text, url, id }) => {
           </Text>
         )}
         <Link textDecoration="none" to={returnConditionalUrl(url, id)}>
-          <Flex justifyContent="center">
+          <Flex justifyContent="center" marginTop="2em">
             <Button
               textDecoration="none"
               margin="0.5em"
               variant="dangerOutline"
               textTransform="uppercase"
               size="sm"
+              position="absolute"
+              bottom="0em"
             >
               ver más
             </Button>
