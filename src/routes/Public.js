@@ -6,18 +6,20 @@ import Register from "../pages/Register";
 import Us from "../pages/Us";
 import { Contact } from "../components/public/contact";
 import Layout from "../components/public/layout/Layout";
+import { ActivitiesList } from "../components/public/activities/ActivitiesList";
 
 export const Public = () => {
   return (
-      <Layout>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/us" component={Us} />
-          <Route exact path="/contacto" component={Contact} />
-          <Redirect to="/" />
-        </Switch>
-      </Layout>
+    <Layout>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/us" component={Us} />
+        <Route exact path="/contacto" component={Contact} />
+        <Route exact path="/actividades" component={ActivitiesList} />
+        <Redirect to="/" />
+      </Switch>
+    </Layout>
   );
 };
