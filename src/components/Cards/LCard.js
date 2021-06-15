@@ -74,7 +74,7 @@ export const LCard = ({ title, image, text, url, id, postedOn }) => {
           </Text>
         )}
         <Link textDecoration="none" to={returnConditionalUrl(url, id)}>
-          <Flex justifyContent="center" marginTop="2em">
+          <Flex justifyContent="center" marginTop="3em">
             <Button
               textDecoration="none"
               margin="0.5em"
