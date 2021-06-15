@@ -9,14 +9,14 @@ const Cards = ({image, title, description }) => {
     return (
       
         <VStack
-            w='382px'
-            h='490px'
+            w={{base: "100%", sm: "382px" }}
+            h='auto'
+            minH="max-content"
             rounded='20px'
             overflow='hidden'
             boxShadow='dark-lg'
             justifyContent='space-between'
             mt='2rem'
-            
             
         >
             
