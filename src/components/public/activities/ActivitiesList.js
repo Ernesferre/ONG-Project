@@ -26,8 +26,8 @@ export const ActivitiesList = () => {
     <Container maxW="container.xl">
       {activities.length > 0 ? (
         <Flex flexWrap="wrap" justifyContent="center">
-          {activities.map((activity) => (
-            <Flex margin="0.5em">
+          {activities.map((activity, index) => (
+            <Flex margin="0.5em" key={index}>
               <LCard
                 image={activity.image}
                 title={activity.name}
