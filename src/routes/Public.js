@@ -9,7 +9,7 @@ import { Contact } from "../components/public/contact";
 import Layout from "../components/public/layout/Layout";
 import { ActivitiesList } from "../components/public/activities/ActivitiesList";
 import { PublicActivities } from "../components/public/activities/PublicActivities";
-import { PublicNews } from "../components/public/news/PublicNews";
+import { PublicNews } from "../components/public/News/PublicNews";
 
 export const Public = () => {
   return (
