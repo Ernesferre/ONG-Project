@@ -5,8 +5,11 @@ import { Collapse } from "@chakra-ui/transition";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export const LCard = ({ title, image, text, url, id }) => {
+export const LCard = ({ title, image, text, url, id, postedOn }) => {
   const [show, setShow] = useState(false);
+
+  const date = new Date(postedOn);
+  const formattedDate = new Intl.DateTimeFormat("es-AR").format(date);
 
   const returnConditionalUrl = (url, id) => {
     if (url && id) {
@@ -27,8 +30,6 @@ export const LCard = ({ title, image, text, url, id }) => {
       padding="0"
       position="relative"
       margin="1em"
-      borderColor="brandBlue.50"
-      borderWidth="1px"
     >
       <Image
         borderTopRadius="3px"
@@ -37,12 +38,20 @@ export const LCard = ({ title, image, text, url, id }) => {
         src={image}
         fallbackSrc="https://via.placeholder.com/382x300"
       />
+      <Text
+        textAlign="end"
+        fontSize="small"
+        color="gray.500"
+        marginRight="0.3em"
+      >
+        Posteado el: {formattedDate}
+      </Text>
       <Heading
         size="md"
         textAlign="center"
-        margin="0.5em"
         color="gray.700"
         fontWeight="semibold"
+        marginBottom="0.5em"
       >
         {title}
       </Heading>

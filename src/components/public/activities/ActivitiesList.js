@@ -13,6 +13,7 @@ export const ActivitiesList = () => {
         const response = await axios.get(
           "http://ongapi.alkemy.org/api/activities"
         );
+        console.log(response.data.data);
         setActivities(response.data.data);
       } catch (error) {
         throw error;
@@ -33,6 +34,7 @@ export const ActivitiesList = () => {
                 text={activity.description}
                 url="actividades"
                 id={activity.id}
+                postedOn={activity.created_at}
               />
             </Flex>
           ))}
