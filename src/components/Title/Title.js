@@ -16,7 +16,9 @@ import {
         backgroundImage={image}
         backgroundSize={'cover'}
         backgroundPosition={'center center'}
+        backgroundAttachment='fixed'
         fallbackSrc={forBackTitle} 
+        className='parallax'
        
         >
         <VStack
