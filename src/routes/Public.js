@@ -19,6 +19,7 @@ export const Public = () => {
         <Route exact path="/register" component={Register} />
         <Route exact path="/us" component={Us} />
         <Route exact path="/contacto" component={Contact} />
+        <Route exact path="/novedades" component={News} />
         <Route exact path="/activities" component={PublicActivities} />
         <Route exact path="/novedades" component={News} />
         <Route exact path="/news" component={PublicNews} />
