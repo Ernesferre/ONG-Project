@@ -3,7 +3,7 @@ import { Heading, Text, Box } from "@chakra-ui/react";
 import Slides from "./slides/HomeSlides";
 import Footer from "../layout/Footer";
 import { PublicActivities } from "../activities/PublicActivities";
-import { PublicNews } from "../news/PublicNews";
+import { PublicNews } from "../News/PublicNews";
 
 const Home = () => {
   return (
