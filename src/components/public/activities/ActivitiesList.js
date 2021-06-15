@@ -1,24 +1,16 @@
 import { Container, Flex } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/spinner";
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { LCard } from "../../Cards/LCard";
+import { getActivitiesList } from "./activitiesService";
 
 export const ActivitiesList = () => {
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
-    const getActivities = async () => {
-      try {
-        const response = await axios.get(
-          "http://ongapi.alkemy.org/api/activities"
-        );
-        setActivities(response.data.data);
-      } catch (error) {
-        throw error;
-      }
-    };
-    getActivities();
+    getActivitiesList()
+      .then((aList) => setActivities(aList))
+      .catch((error) => console.log(error));
   }, []);
 
   return (
@@ -39,7 +31,9 @@ export const ActivitiesList = () => {
           ))}
         </Flex>
       ) : (
-        <Spinner />
+        <Flex height="10em" justifyContent="center" alignItems="center">
+          <Spinner size="xl" color="#5796D9" />
+        </Flex>
       )}
     </Container>
   );

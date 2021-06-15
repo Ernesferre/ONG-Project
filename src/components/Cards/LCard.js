@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
-import { Container, Flex, Heading, Text } from "@chakra-ui/layout";
+import { Box, Container, Flex, Heading, Text } from "@chakra-ui/layout";
 import { Collapse } from "@chakra-ui/transition";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -58,9 +58,9 @@ export const LCard = ({ title, image, text, url, id, postedOn }) => {
       </Heading>
       <Flex flexDir="column" justifyContent="space-between">
         <Collapse startingHeight="4.2em" in={show}>
-          <Text marginLeft="1em" marginRight="1em">
+          <Box marginLeft="1em" marginRight="1em">
             {parse(text)}
-          </Text>
+          </Box>
         </Collapse>
         {text.length >= 150 && (
           <Text
