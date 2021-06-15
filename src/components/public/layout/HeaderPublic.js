@@ -26,6 +26,10 @@ export default function HeaderPublic() {
 
   const [display, setDisplay] = useState('none');
 
+  // PARA USAR INFO DESDE REDUX
+  // const organizationData = useSelector((state) => state.organization.organizationData);
+  // console.log(organizationData)
+
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={10}>
