@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
-import { Container, Flex, Heading, Text, VStack } from "@chakra-ui/layout";
+import { Container, Flex, Heading, Text } from "@chakra-ui/layout";
 import { Collapse } from "@chakra-ui/transition";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
