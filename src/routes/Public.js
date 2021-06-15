@@ -6,6 +6,8 @@ import Register from "../pages/Register";
 import Us from "../pages/Us";
 import { Contact } from "../components/public/contact";
 import Layout from "../components/public/layout/Layout";
+import { PublicActivities } from "../components/public/activities/PublicActivities";
+import { PublicNews } from "../components/public/news/PublicNews";
 
 export const Public = () => {
   return (
@@ -16,8 +18,11 @@ export const Public = () => {
           <Route exact path="/register" component={Register} />
           <Route exact path="/us" component={Us} />
           <Route exact path="/contacto" component={Contact} />
+             <Route exact path="/activities" component={PublicActivities} />
+               <Route exact path="/news" component={PublicNews} />
           <Redirect to="/" />
         </Switch>
       </Layout>
-  );
+  )
+
 };
