@@ -2,7 +2,6 @@ import { Container, Flex } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/spinner";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import Cards from "../../Cards/Card";
 import { LCard } from "../../Cards/LCard";
 
 export const ActivitiesList = () => {
@@ -28,15 +27,12 @@ export const ActivitiesList = () => {
         <Flex flexWrap="wrap" justifyContent="center">
           {activities.map((activity) => (
             <Flex margin="0.5em">
-              {/* <Cards
-                image={activity.image}
-                title={activity.name}
-                description={activity.description}
-              /> */}
               <LCard
                 image={activity.image}
                 title={activity.name}
                 text={activity.description}
+                url="actividades"
+                id={activity.id}
               />
             </Flex>
           ))}

@@ -8,6 +8,16 @@ import { Link } from "react-router-dom";
 export const LCard = ({ title, image, text, url, id }) => {
   const [show, setShow] = useState(false);
 
+  const returnConditionalUrl = (url, id) => {
+    if (url && id) {
+      return `/${url}/${id}`;
+    } else if (id === undefined) {
+      return `/${url}`;
+    } else if (url === undefined) {
+      return `/${id}`;
+    }
+  };
+
   return (
     <Container
       maxW="xs"
@@ -17,45 +27,53 @@ export const LCard = ({ title, image, text, url, id }) => {
       padding="0"
     >
       <Image
-        borderRadius="5px"
+        borderTopRadius="5px"
         width="100%"
         objectFit="cover"
         src={image}
         fallbackSrc="https://via.placeholder.com/382x300"
       />
-      <Heading size="md" textAlign="center" margin="0.5em">
+      <Heading
+        size="md"
+        textAlign="center"
+        margin="0.5em"
+        color="gray.700"
+        fontWeight="semibold"
+      >
         {title}
       </Heading>
-      <Collapse startingHeight="4.2em" in={show}>
-        <Text marginLeft="1em" marginRight="1em">
-          {text}
-        </Text>
-      </Collapse>
-      {text.length >= 200 && (
-        <Text
-          textAlign="end"
-          marginRight="0.5em"
-          color="brandBlue.300"
-          _hover={{ color: "brandBlue.400", cursor: "pointer" }}
-          onClick={(e) => setShow(!show)}
-        >
-          {!show ? "...Leer más" : "...Leer menos"}
-        </Text>
-      )}
-
-      <Link textDecoration="none" to={`/${url}/${id}`}>
-        <Flex justifyContent="center">
-          <Button
-            textDecoration="none"
-            margin="0.5em"
-            variant="dangerOutline"
-            textTransform="uppercase"
-            size="sm"
+      <Flex flexDir="column" justifyContent="flex-end">
+        <Collapse startingHeight="4.2em" in={show}>
+          <Text marginLeft="1em" marginRight="1em">
+            {text}
+          </Text>
+        </Collapse>
+        {text.length >= 150 && (
+          <Text
+            textAlign="end"
+            marginRight="0.5em"
+            color="brandBlue.300"
+            fontSize="sm"
+            _hover={{ color: "brandBlue.400", cursor: "pointer" }}
+            onClick={(e) => setShow(!show)}
           >
-            Ver más
-          </Button>
-        </Flex>
-      </Link>
+            {!show ? "...Leer más" : "...Leer menos"}
+          </Text>
+        )}
+        <Link textDecoration="none" to={returnConditionalUrl(url, id)}>
+          <Flex justifyContent="center">
+            <Button
+              textDecoration="none"
+              margin="0.5em"
+              variant="dangerOutline"
+              textTransform="uppercase"
+              size="sm"
+            >
+              ver más
+            </Button>
+          </Flex>
+        </Link>
+      </Flex>
     </Container>
   );
 };
