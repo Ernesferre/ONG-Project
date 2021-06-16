@@ -5,7 +5,7 @@ const Cards = ({ image, title, description }) => {
   return (
     <VStack
       w="382px"
-      h="490px"
+      h="auto"
       rounded="20px"
       overflow="hidden"
       boxShadow="dark-lg"
@@ -29,29 +29,15 @@ const Cards = ({ image, title, description }) => {
           >
             {title}
           </Text>
+          { description &&
           <Text fontWeight="normal" fontSize="sm" my={2} fontFamily="Open+Sans">
-            {description}
+            {`${description.slice(0, 150)}...`}
           </Text>
+          }
         </Box>
       </Box>
-
       <Box>
-        <Button
-          fontFamily="Source+Sans+Pro"
-          fontSize="xl"
-          fontWeight="extrabold"
-          color="red.400"
-          variant="outline"
-          size="lg"
-          boxShadow="dark-lg"
-          border="4px"
-          mb="6"
-          borderColor="red.450"
-          borderRadius="2xl"
-          _hover={{ background: "red.400", color: "white" }}
-        >
-          VER MÁS
-        </Button>
+        <Button variant="somosMas" mb={4}>VER MÁS</Button>
       </Box>
     </VStack>
   );
