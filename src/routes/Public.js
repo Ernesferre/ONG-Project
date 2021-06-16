@@ -8,7 +8,6 @@ import News from "../components/public/News";
 import { Contact } from "../components/public/contact";
 import Layout from "../components/public/layout/Layout";
 import { PublicActivities } from "../components/public/activities/PublicActivities";
-import { PublicNews } from "../components/public/news/PublicNews";
 import Detail from "../components/public/News/Detail";
 import { ActivitiesDetail } from "../components/public/activities/ActivitiesDetail";
 
@@ -24,7 +23,6 @@ export const Public = () => {
         <Route exact path="/actividades" component={PublicActivities} />
         <Route exact path="/actividades/:id" component={ActivitiesDetail} />
         <Route exact path="/novedades" component={News} />
-        <Route exact path="/news" component={PublicNews} />
         <Route exact path="/novedades/:id" component={Detail} />
         <Redirect to="/" />
       </Switch>
