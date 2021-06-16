@@ -13,7 +13,6 @@ export const PublicNews = () => {
 
   useEffect(() => {
     getNews().then((res) => {
-      console.log(res.data);
       setNews(res.data);
       setLoading(false);
       setUpdate(false);
@@ -23,7 +22,7 @@ export const PublicNews = () => {
   return (
     <>
       <Title title="Novedades" image={pictureNews} />
-      <Flex wrap="wrap" gridGap="6%" justify="center" align="center" mt="3rem">
+      <Flex wrap="wrap" gridGap="6%" justify="center" align="center" mt="4rem">
         {news?.map((data) => (
           <Card
             image={data.image}
