@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Text, Image, Button, Flex, VStack } from "@chakra-ui/react";
 
-const Cards = ({ image, title, description }) => {
+const Cards = ({ image, title, description, max }) => {
   return (
     <VStack
-      maxW="382px"
+      maxW={max ? max : "382px"}
       h="auto"
       rounded="20px"
       overflow="hidden"
@@ -15,7 +15,7 @@ const Cards = ({ image, title, description }) => {
       <Box>
         <Image
           src={image}
-          h="250"
+          h={max ? "150" : "250"}
           width="100%"
           layout={"fill"}
           fit={'cover'}
