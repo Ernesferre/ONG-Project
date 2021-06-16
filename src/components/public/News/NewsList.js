@@ -1,6 +1,6 @@
 import React , { useState, useEffect } from "react";
 import { Wrap, WrapItem } from "@chakra-ui/layout";
-import Cards from "../../Cards/Card";
+import Card from "../../Cards/Card";
 import { Link } from "react-router-dom";
 import {getNews} from "./newsService"
 
@@ -40,10 +40,9 @@ const NewsList = () => {
           key={item.id}
         >
 
-            <Cards
+            <Card
               image={item.image}
               title={item.name}
-              description={item.content}
               paddingBottom={6}
             />
 
