@@ -46,7 +46,7 @@ export const ActivitiesDetail = () => {
             src={activity.image}
             objectFit="cover"
             width="100%"
-            height="15em"
+            height="20em"
           />
           <Container maxW="container.xl" bg="gray.200" minH="50vh">
             <Text color="gray.500" fontSize="sm" textAlign="end">
