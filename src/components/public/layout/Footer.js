@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Flex, Link as LinkExter, IconButton } from '@chakra-ui/react';
+import { Flex, Link as LinkExter, IconButton, Spinner } from '@chakra-ui/react';
 import axios from 'axios';
 import {FaFacebook, FaTwitter, FaInstagram} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -24,7 +24,9 @@ const Footer = () => {
 
     return (
         loading ? (
-            <p>Espere...</p>
+            <Flex height="10em" justifyContent="center" alignItems="center">
+            <   Spinner size="xl" color="#5796D9" />
+            </Flex>
         ) : (
             <Flex backgroundColor="gray.100" p={16} justifyContent="space-between" w="full" >
                 <Flex flexDir="column">

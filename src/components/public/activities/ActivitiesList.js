@@ -2,6 +2,7 @@ import { Container, Flex } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/spinner";
 import React, { useState, useEffect } from "react";
 import { LCard } from "../../Cards/LCard";
+import SkeletonHome from "../layout/SkeletonHome";
 import { getActivitiesList } from "./activitiesService";
 
 export const ActivitiesList = () => {
@@ -31,9 +32,7 @@ export const ActivitiesList = () => {
           ))}
         </Flex>
       ) : (
-        <Flex height="10em" justifyContent="center" alignItems="center">
-          <Spinner size="xl" color="#5796D9" />
-        </Flex>
+        <SkeletonHome />
       )}
     </Container>
   );
