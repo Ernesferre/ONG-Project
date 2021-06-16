@@ -38,7 +38,7 @@ const Cards = ({ image, title, description, max }) => {
         </Box>
       </Box>
       <Box>
-        <Button variant="somosMas" mb={4}>VER MÁS</Button>
+        <Button variant="dangerOutline" mb={4}>VER MÁS</Button>
       </Box>
     </VStack>
   );
