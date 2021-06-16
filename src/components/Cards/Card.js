@@ -4,7 +4,7 @@ import { Box, Text, Image, Button, Flex, VStack } from "@chakra-ui/react";
 const Cards = ({ image, title, description }) => {
   return (
     <VStack
-      w="382px"
+      maxW="382px"
       h="auto"
       rounded="20px"
       overflow="hidden"
@@ -18,6 +18,7 @@ const Cards = ({ image, title, description }) => {
           h="250"
           width="100%"
           layout={"fill"}
+          fit={'cover'}
           fallbackSrc="https://via.placeholder.com/382x300"
         />
         <Box textAlign="left" p={4}>
