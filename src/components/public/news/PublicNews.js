@@ -10,6 +10,7 @@ export const PublicNews = () => {
   const [loading, setLoading] = useState(true);
   const [news, setNews] = useState();
   const [update, setUpdate] = useState(false);
+ 
 
   useEffect(() => {
     getNews().then((res) => {
@@ -26,7 +27,13 @@ export const PublicNews = () => {
       <Title title="Novedades" image={pictureNews} />
       <Flex wrap="wrap" gridGap="6%" justify="center" align="center" mt="4rem">
         {news?.map((data) => (
-          <Card image={data.image} title={data.name} />
+          <Link
+          to={`novedades/${data.id}`}
+          key={data.id}
+          >
+           <Card image={data.image} title={data.name}  />
+          </Link>
+         
         ))}
       </Flex>
       <Flex justify="flex-end" mt="2rem" mr="1rem">
