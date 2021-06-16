@@ -13,7 +13,9 @@ export const PublicNews = () => {
 
   useEffect(() => {
     getNews().then((res) => {
-      setNews(res.data);
+      const newsFilter = res.data.slice(res.data.length -3)
+      console.log(newsFilter);
+      setNews(newsFilter);
       setLoading(false);
       setUpdate(false);
     });
