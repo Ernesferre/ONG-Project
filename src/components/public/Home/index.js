@@ -3,14 +3,14 @@ import { Heading, Text, Box } from "@chakra-ui/react";
 import Slides from "./slides/HomeSlides";
 import Footer from "../layout/Footer";
 import { PublicActivities } from "../activities/PublicActivities";
-import { PublicNews } from "../News/PublicNews";
+import { PublicNews } from "../news/PublicNews";
 
 const Home = () => {
   return (
     <>
       <Box>
         <Box>
-          <Slides/>
+          <Slides />
         </Box>
         <Box>
           <Heading as="h1" size="2xl">
@@ -31,7 +31,7 @@ const Home = () => {
         <Box>
           <PublicActivities />
         </Box>
-        <Footer/>
+        <Footer />
       </Box>
     </>
   );
