@@ -11,7 +11,7 @@ import {
 import { GiHamburgerMenu, GiHamburgerMenu as HamburgerIcon } from "react-icons/gi";
 import { GrClose as CloseIcon } from "react-icons/gr";
 import { NavLink as LinkRouterDom } from "react-router-dom";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Routes = [
   { route: "/", name: "Inicio" },
@@ -27,8 +27,8 @@ export default function HeaderPublic() {
   const [display, setDisplay] = useState('none');
 
   // PARA USAR INFO DESDE REDUX
-  // const organizationData = useSelector((state) => state.organization.organizationData);
-  // console.log(organizationData)
+  const logo = useSelector((state) => state.organization.organizationData.logo);
+  console.log(logo)
 
   return (
     <>
@@ -36,7 +36,7 @@ export default function HeaderPublic() {
         <Flex h={16} alignItems={"center"} justifyContent={"left"} >
           <HStack>
             <LinkRouterDom to="/">
-              <img src="/brand-logo.svg" width="120px" alt="Somos más logo" />
+              <img src={logo} width="120px" alt="Somos más logo" />
             </LinkRouterDom>
           </HStack>
           <HStack
