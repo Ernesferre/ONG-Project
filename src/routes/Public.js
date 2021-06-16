@@ -10,6 +10,8 @@ import Layout from "../components/public/layout/Layout";
 import { ActivitiesList } from "../components/public/activities/ActivitiesList";
 import { PublicActivities } from "../components/public/activities/PublicActivities";
 import { PublicNews } from "../components/public/News/PublicNews";
+import Detail from "../components/public/News/Detail";
+
 
 export const Public = () => {
   return (
@@ -23,6 +25,7 @@ export const Public = () => {
         <Route exact path="/actividades" component={PublicActivities} />
         <Route exact path="/novedades" component={News} />
         <Route exact path="/news" component={PublicNews} />
+        <Route exact path="/novedades/:id" component={Detail} />
         <Redirect to="/" />
       </Switch>
     </Layout>
