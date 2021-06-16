@@ -8,21 +8,18 @@ const arrayOfNews = [
   image: photo },
   {name: 'otra noticia', 
   image: photo },
-  {name: 'Ultima noticia de la lista', 
+  {name: 'Ultima noticia ', 
   image: photo }
 ]
 
 const DetailNews = () => {
 
- 
- 
   return (
-  
-   <Container maxW="container.xl">
+    <Container maxW="container.xl">
+      <Heading>Novedad</Heading>
+      <RelatedNewsList arrayOfNews={arrayOfNews} />
+    </Container>
+  ) 
+}
 
-   <Heading>Novedad</Heading>
-    <RelatedNewsList arrayOfNews={arrayOfNews} />
- </Container>
-   
-  ) }
-  export default DetailNews;
+export default DetailNews;

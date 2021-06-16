@@ -1,6 +1,5 @@
 import React from 'react'
 import { Box, Flex, Heading, WrapItem, Link } from "@chakra-ui/react";
-import Title from "../../../Title/Title";
 import Card from "../../../Cards/Card";
 
 const RelatedNewsList = ({arrayOfNews}) => {
