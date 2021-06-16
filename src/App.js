@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from "react";
 import "./App.css";
 //REACT-ROUTER
 import {
@@ -6,6 +6,7 @@ import {
   Switch,
   Route,
   Redirect,
+  useLocation,
 } from "react-router-dom";
 //CHAKRA
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
@@ -18,6 +19,9 @@ import { PrivateRoute } from "./routes/PrivateRoute";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrganizationData } from "./features/organizationReducer";
+
+// ROUTE TRANSITIONS
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const theme = extendTheme({
   fonts: {
@@ -99,13 +103,14 @@ const theme = extendTheme({
 });
 
 function App() {
-
   // GUARDAR INFO DE LA ORGANIZACIÓN EN REDUX
   const dispatch = useDispatch();
-  const organizationData = useSelector((state) => state.organization.organizationData);
+  const organizationData = useSelector(
+    (state) => state.organization.organizationData
+  );
 
   useEffect(() => {
-    if(!organizationData.name) {
+    if (!organizationData.name) {
       dispatch(fetchOrganizationData());
     }
   }, []);
@@ -114,16 +119,27 @@ function App() {
     <ChakraProvider theme={theme}>
       <Router>
         <div className="App">
-          <Switch>
-            <PrivateRoute path="/backoffice" component={Private} />
-
-            <Route path="/" component={Public} />
-
-            <Redirect to="/" />
-          </Switch>
+          <Routes />
         </div>
       </Router>
     </ChakraProvider>
+  );
+}
+
+function Routes() {
+  const location = useLocation();
+  return (
+    <TransitionGroup>
+      <CSSTransition timeout={300} classNames="page" key={location.key}>
+        <Switch location={location}>
+          <PrivateRoute path="/backoffice" component={Private} />
+
+          <Route path="/" component={Public} />
+
+          <Redirect to="/" />
+        </Switch>
+      </CSSTransition>
+    </TransitionGroup>
   );
 }
 
