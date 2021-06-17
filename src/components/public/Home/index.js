@@ -10,7 +10,7 @@ const Home = () => {
     <>
       <Box>
         <Box>
-          <Slides/>
+          <Slides />
         </Box>
         <Box>
           <Heading as="h1" size="2xl">
