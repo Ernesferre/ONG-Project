@@ -8,7 +8,6 @@ import News from "../components/public/News";
 import { Contact } from "../components/public/contact";
 import Layout from "../components/public/layout/Layout";
 import { PublicActivities } from "../components/public/activities/PublicActivities";
-import { PublicNews } from "../components/public/News/PublicNews";
 import Detail from "../components/public/News/Detail";
 import { ActivitiesDetail } from "../components/public/activities/ActivitiesDetail";
 

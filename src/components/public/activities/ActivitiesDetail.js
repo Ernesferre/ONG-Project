@@ -67,7 +67,7 @@ export const ActivitiesDetail = () => {
         height="20em"
       />
       <Container maxW="container.xl" minH="50vh">
-        <Text color="gray.500" fontSize="sm" textAlign="end">
+        <Text color="brandBlue.300" fontWeight="700" fontSize="1rem" textAlign="end">
           Creado el: {formatDate(activity.created_at)}
         </Text>
         <Flex flexDir="column">
