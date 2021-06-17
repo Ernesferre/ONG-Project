@@ -5,7 +5,7 @@ const Cards = ({ image, title, description, max }) => {
   return (
     <VStack
       maxW={max ? max : "382px"}
-      h="auto"
+      h="400px"
       rounded="20px"
       overflow="hidden"
       boxShadow="dark-lg"
