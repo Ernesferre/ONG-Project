@@ -31,7 +31,6 @@ const Home = () => {
         <Box>
           <PublicActivities />
         </Box>
-        <Footer/>
       </Box>
     </>
   );
