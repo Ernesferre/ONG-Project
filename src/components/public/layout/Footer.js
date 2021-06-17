@@ -4,11 +4,15 @@ import axios from 'axios';
 import {FaFacebook, FaTwitter, FaInstagram} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useSelector } from 'react-redux';
 
 const Footer = () => {
     const [footer, setFooter] = useState(null);
     const [loading, setLoading] = useState(true);
     const [display, setDisplay] = useState('none');
+
+    const logo = useSelector((state) => state.organization.organizationData.logo);
+    console.log(logo);
 
     useEffect(async() => {
         getOrganization();
@@ -30,8 +34,8 @@ const Footer = () => {
         ) : (
             <Flex backgroundColor="gray.100" p={16} justifyContent="space-between" w="full" >
                 <Flex flexDir="column">
-                    <h2>{footer?.name}</h2>
-                    <img src={footer?.logo} />
+                    {/* <h2>{footer?.name}</h2> */}
+                    <img src={logo}  width="180px" alt="Somos más logo" />
                 </Flex>
                 <Flex flexDir="column" display={{ base: "none", md: "flex" }}>
                     <h2>Más Información</h2>
