@@ -21,7 +21,6 @@ const NewsList = () => {
     });
   }, []);
   
-  console.log(news);
  
   return (
     <Wrap
@@ -33,11 +32,10 @@ const NewsList = () => {
       
     >
       {news?.map((item) => (
-        <WrapItem>
+        <WrapItem key={item.id}>
         <Link
           style={{margin: "0"}}
           to={`novedades/${item.id}`}
-          key={item.id}
         >
 
             <Cards
