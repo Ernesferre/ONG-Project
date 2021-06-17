@@ -7,12 +7,10 @@ import Us from "../pages/Us";
 import News from "../components/public/News";
 import { Contact } from "../components/public/contact";
 import Layout from "../components/public/layout/Layout";
-import { ActivitiesList } from "../components/public/activities/ActivitiesList";
 import { PublicActivities } from "../components/public/activities/PublicActivities";
-import { Activity } from "../components/public/activities/Activity";
 import { PublicNews } from "../components/public/News/PublicNews";
 import Detail from "../components/public/News/Detail";
-
+import { ActivitiesDetail } from "../components/public/activities/ActivitiesDetail";
 
 export const Public = () => {
   return (
@@ -24,9 +22,8 @@ export const Public = () => {
         <Route exact path="/us" component={Us} />
         <Route exact path="/contacto" component={Contact} />
         <Route exact path="/actividades" component={PublicActivities} />
-        <Route exact path="/actividades/:id" component={Activity} />
+        <Route exact path="/actividades/:id" component={ActivitiesDetail} />
         <Route exact path="/novedades" component={News} />
-        <Route exact path="/news" component={PublicNews} />
         <Route exact path="/novedades/:id" component={Detail} />
         <Redirect to="/" />
       </Switch>

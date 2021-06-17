@@ -1,11 +1,11 @@
 import React from "react";
 import { Box, Text, Image, Button, Flex, VStack } from "@chakra-ui/react";
 
-const Cards = ({ image, title, description }) => {
+const Cards = ({ image, title, description, max }) => {
   return (
     <VStack
-      w="382px"
-      h="490px"
+      maxW={max ? max : "382px"}
+      h="400px"
       rounded="20px"
       overflow="hidden"
       boxShadow="dark-lg"
@@ -15,9 +15,10 @@ const Cards = ({ image, title, description }) => {
       <Box>
         <Image
           src={image}
-          h="250"
+          h={max ? "150" : "250"}
           width="100%"
           layout={"fill"}
+          fit={'cover'}
           fallbackSrc="https://via.placeholder.com/382x300"
         />
         <Box textAlign="left" p={4}>
@@ -29,29 +30,15 @@ const Cards = ({ image, title, description }) => {
           >
             {title}
           </Text>
+          { description &&
           <Text fontWeight="normal" fontSize="sm" my={2} fontFamily="Open+Sans">
-            {description}
+            {`${description.slice(0, 150)}...`}
           </Text>
+          }
         </Box>
       </Box>
-
       <Box>
-        <Button
-          fontFamily="Source+Sans+Pro"
-          fontSize="xl"
-          fontWeight="extrabold"
-          color="red.400"
-          variant="outline"
-          size="lg"
-          boxShadow="dark-lg"
-          border="4px"
-          mb="6"
-          borderColor="red.450"
-          borderRadius="2xl"
-          _hover={{ background: "red.400", color: "white" }}
-        >
-          VER MÁS
-        </Button>
+        <Button variant="dangerOutline" mb={4}>VER MÁS</Button>
       </Box>
     </VStack>
   );

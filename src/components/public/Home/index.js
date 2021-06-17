@@ -10,7 +10,7 @@ const Home = () => {
     <>
       <Box>
         <Box>
-          <Slides/>
+          <Slides />
         </Box>
         <Box>
           <Heading as="h1" size="2xl">
@@ -31,7 +31,6 @@ const Home = () => {
         <Box>
           <PublicActivities />
         </Box>
-        <Footer/>
       </Box>
     </>
   );
