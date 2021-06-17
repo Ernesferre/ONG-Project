@@ -11,7 +11,7 @@ export const ActivitiesList = () => {
   useEffect(() => {
     getActivitiesList()
       .then((aList) => setActivities(aList))
-      .catch((error) => console.log(error));
+      .catch(() => alert('Error al cargar actividades'));
   }, []);
 
   return (

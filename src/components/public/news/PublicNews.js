@@ -17,7 +17,8 @@ export const PublicNews = () => {
       setNews(res.data);
       setLoading(true);
       setUpdate(false);
-    });
+    })
+    .catch(() => alert('Error al cargar novedades'));
   }, [update]);
   
   return (
