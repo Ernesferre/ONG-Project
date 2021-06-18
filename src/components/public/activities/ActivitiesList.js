@@ -14,11 +14,11 @@ export const ActivitiesList = () => {
   }, []);
 
   return (
-    <Container maxW="container.xl">
+    <Container maxW="-moz-min-content">
       {activities.length > 0 ? (
         <Flex flexWrap="wrap" justifyContent="center">
           {activities.map((activity, index) => (
-            <Flex margin="0.5em" key={index}>
+            <Flex margin="0.5em" mt='3em' mb="3em" key={index}>
               <LCard
                 image={activity.image}
                 title={activity.name}
