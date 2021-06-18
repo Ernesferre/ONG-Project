@@ -28,13 +28,13 @@ const NewsList = () => {
       paddingY={{ base: "6", sm: "12" }}
     >
       {news?.map((item) => (
-        <WrapItem>
+        <WrapItem key={item.id}>
           <Link
             style={{ margin: "0" }}
             to={`novedades/${item.id}`}
             key={item.id}
           >
-            <Card image={item.image} title={item.name} paddingBottom={6} />
+            <Card image={item.image} title={item.name} description={item.content} paddingBottom={6} />
           </Link>
         </WrapItem>
       ))}

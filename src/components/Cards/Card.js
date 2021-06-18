@@ -1,11 +1,18 @@
 import React from "react";
 import { Box, Text, Image, Button, Flex, VStack } from "@chakra-ui/react";
+import parse from "html-react-parser";
 
 const Cards = ({ image, title, description, max }) => {
+
+  let descriptionLength
+  if (description) {
+    descriptionLength = `${description.slice(0, 150)}...`
+  }
+
   return (
     <VStack
       maxW={max ? max : "382px"}
-      h="400px"
+      h="auto"
       rounded="20px"
       overflow="hidden"
       boxShadow="dark-lg"
@@ -32,7 +39,7 @@ const Cards = ({ image, title, description, max }) => {
           </Text>
           { description &&
           <Text fontWeight="normal" fontSize="sm" my={2} fontFamily="Open+Sans">
-            {`${description.slice(0, 150)}...`}
+            {parse(descriptionLength)}
           </Text>
           }
         </Box>

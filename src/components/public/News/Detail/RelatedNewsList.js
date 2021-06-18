@@ -1,22 +1,27 @@
 import React from 'react'
-import { Box, Flex, Heading, WrapItem, Link } from "@chakra-ui/react";
+import { Box, Flex, Heading} from "@chakra-ui/react";
+import {Link} from 'react-router-dom';
 import Card from "../../../Cards/Card";
 
-const RelatedNewsList = ({arrayOfNews}) => {
+const RelatedNewsList = ({arrayOfNews, category ,id}) => {
+
+    let relatedNews = arrayOfNews.filter((news) => news.category_id === category).filter((related) => related.id != id)
+    if (relatedNews.length === 0) {
+        relatedNews = arrayOfNews.filter((related) => related.id != id)
+    }
+
     return (
         <Box mb={12}>
             <Heading>Noticias relacionadas</Heading>
             <Flex wrap="wrap" gridGap="6%" justify="center" align="center">
-                {arrayOfNews?.map((data) => (
-                <WrapItem>
-                    <Link style={{margin: "0", textDecoration: "none"}} to={`novedades/${data.id}`} key={data.id} >        
+                {relatedNews?.map((data) => (
+                    <Link to={`${data.id}`} key={data.id} style={{margin: "0", textDecoration: "none"}}>        
                         <Card
                             image={data.image}
                             title={data.name}
                             max={'250px'}
                         />
                     </Link>
-                </WrapItem>
                 ))}
             </Flex>
         </Box>
