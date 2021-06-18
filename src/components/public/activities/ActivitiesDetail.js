@@ -9,8 +9,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import parse from "html-react-parser";
+import { getActivity } from "./activitiesService";
 
 export const ActivitiesDetail = () => {
   const params = useParams();
@@ -20,17 +20,16 @@ export const ActivitiesDetail = () => {
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        const response = await axios.get(
-          `http://ongapi.alkemy.org/api/activities/${params.id}`
-        );
-        if (response.data.data) {
-          setActivity(response.data.data);
-        }
-      } catch (error) {
-        setIsNotFound(true);
-      }
-      setIsLoading(false);
+      getActivity(params.id)
+        .then((response) => {
+          setActivity(response);
+        })
+        .catch((err) => {
+          setIsNotFound(true);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     };
 
     getData();
@@ -67,7 +66,12 @@ export const ActivitiesDetail = () => {
         height="20em"
       />
       <Container maxW="container.xl" minH="50vh">
-        <Text color="brandBlue.300" fontWeight="700" fontSize="1rem" textAlign="end">
+        <Text
+          color="brandBlue.300"
+          fontWeight="700"
+          fontSize="1rem"
+          textAlign="end"
+        >
           Creado el: {formatDate(activity.created_at)}
         </Text>
         <Flex flexDir="column">
