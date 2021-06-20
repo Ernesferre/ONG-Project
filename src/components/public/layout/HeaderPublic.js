@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 const Routes = [
   { route: "/", name: "Inicio" },
   { route: "/us", name: "Nosotros" },
-  // { route: "/actividades", name: "Actividades" },
+  { route: "/actividades", name: "Actividades" },
   // { route: "/novedades", name: "Novedades" },
   { route: "/contacto", name: "Contacto" },
   { route: "/login", name: "Iniciar Sesion" },
