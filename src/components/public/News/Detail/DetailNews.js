@@ -6,6 +6,7 @@ import parse from "html-react-parser";
 import { useParams } from "react-router-dom";
 import { getDetailedNew, getNews } from "../newsService";
 import {Link} from 'react-router-dom';
+import SkeletonDetail from "../../layout/SkeletonDetail";
 
 function formatDate(newsDate) {
   const date = new Date(newsDate)
@@ -29,10 +30,10 @@ const DetailNews = () => {
         setLoading(false)
       })
     })
-    .catch(err => console.log(err))
+    .catch(() => alert('Error al cargar detalles.'));
   }, [id])
 
-  if (loading) return <p>Cargando...</p>
+  if (loading) return <SkeletonDetail />
   else return (
     <Container maxW="container.xl">
       <Box mb={20}>
