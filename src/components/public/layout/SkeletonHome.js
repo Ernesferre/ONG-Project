@@ -7,12 +7,12 @@ const SkeletonHome = () => {
             <Box padding="6" boxShadow="lg" bg="white" flex={1} borderWidth="1px" borderRadius="lg" >
                 <Skeleton height="60px" />
                 
-                <SkeletonText mt="4" noOfLines={2} spacing="4" />
+                <SkeletonText mt="4" noOfLines={3} spacing="4" />
             </Box>
             <Box padding="6" boxShadow="lg" bg="white" flex={1} borderWidth="1px" borderRadius="lg" >
                 <Skeleton height="60px" />
                 
-                <SkeletonText mt="4" noOfLines={2} spacing="4" />
+                <SkeletonText mt="4" noOfLines={3} spacing="4" />
             </Box>
         </HStack>
     )
