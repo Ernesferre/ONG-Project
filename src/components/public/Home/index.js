@@ -3,6 +3,7 @@ import { Heading, Text, Box } from "@chakra-ui/react";
 import Slides from "./slides/HomeSlides";
 import { PublicActivities } from "../activities/PublicActivities";
 import { PublicNews } from "../News/PublicNews";
+import PublicTestimonials from "../Testimonials/PublicTestimonials";
 
 const Home = () => {
   return (
@@ -27,6 +28,7 @@ const Home = () => {
           <PublicNews />
         </Box>
         <Box>
+          <PublicTestimonials />
         </Box>
         <Box>
           <PublicActivities />
