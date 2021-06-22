@@ -32,7 +32,7 @@ const GoogleMapComponent = () => {
         <GoogleMap
           center={position}
           zoom={15}
-          options={{ mapId: mapId, origin: "Perón 1525, CABA" }}
+          options={{ mapId: mapId, origin: address }}
           mapContainerStyle={{ height: "400px", width: "100vw" }}
         >
           <Marker position={position} label="Somos Más" />
