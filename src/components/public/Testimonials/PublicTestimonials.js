@@ -4,6 +4,7 @@ import photoTitle from "../../../assets/Foto5.jpg";
 import { Container, Flex, Box, Image, Stack, Heading, Text, Divider } from "@chakra-ui/react";
 import parse from "html-react-parser";
 import {Link} from 'react-router-dom';
+import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 
 const PublicTestimonials = () => {
 
@@ -55,9 +56,11 @@ const PublicTestimonials = () => {
                   pos={'relative'}
                   zIndex={1}>
                   <Stack align={'center'} pt={'80px'}>
-                      <Text color={'gray.500'} fontSize={'sm'} mb={2}>
+                    <Box as={FaQuoteLeft} size="12px" color="blue.500" m={'0 auto 0 0'} />
+                      <Text color={'gray.500'} fontSize={'sm'} mb={'1em !important'}>
                       {parse(testimonial.description)}
                       </Text>
+                      {/* <Box as={FaQuoteRight} size="12px" color="blue.500" m={'0px 0px 0px auto !important'} /> */}
                       <Divider w={'12%'} borderBottomColor='brandBlue.300' />
                       <Heading fontSize={'xl'} fontWeight={600}>
                       {testimonial.name}
