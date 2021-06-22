@@ -1,15 +1,16 @@
-import { Container, Flex, Heading } from "@chakra-ui/layout";
+import { Container, Flex, Box, Heading } from "@chakra-ui/layout";
 import React from "react";
 import { ContactData } from "./ContactData";
 import ContactForm from "./ContactForm";
 import { useSelector } from "react-redux";
-
+import GoogleMap from './GoogleMap'
 
 export const Contact = () => {
-
-// Se obtienen los datos de contacto a traves del estado almacenado en Redux
-const  data_contact = useSelector((state => state.organization.organizationData))
-console.log(data_contact)
+  // Se obtienen los datos de contacto a traves del estado almacenado en Redux
+  const data_contact = useSelector(
+    (state) => state.organization.organizationData
+  );
+  console.log(data_contact);
 
   return (
     <Container maxW="container.xl">
@@ -26,6 +27,8 @@ console.log(data_contact)
           instagram="SomosMás"
           name="Somos Más"
         />
+
+        <GoogleMap/>
       </Flex>
     </Container>
   );
