@@ -1,0 +1,92 @@
+import React, { useState, useEffect } from "react";
+import Title from "../../Title/Title";
+import photoTitle from "../../../assets/Foto5.jpg";
+import { Container, Flex, Box, Image, Stack, Heading, Text, Divider } from "@chakra-ui/react";
+import parse from "html-react-parser";
+import {Link} from 'react-router-dom';
+
+const PublicTestimonials = () => {
+
+    const [loading, setLoading] = useState(true)
+    const [testimonials, setTestimonials] = useState()
+
+    useEffect(() => {
+       fetch('http://ongapi.alkemy.org/api/testimonials')
+       .then(res => res.json())
+       .then(data => {
+         const slicedData = data.data.slice(0,4)
+         setTestimonials(slicedData)
+         setLoading(false)
+       })
+    }, [])
+
+  if (loading) return <h1>cargando</h1>
+  return (
+    <>
+      <Title title="Testimonios" image={photoTitle} />
+      <Container maxW="90%" mb={20}>
+        <Flex flexWrap="wrap" justifyContent="center">
+          {testimonials.map((testimonial) => (
+            <Flex margin="2em 1em 0" key={testimonial.id}>
+              <Box w={'260px'} align="stretch">
+                <Image
+                  pos={'relative'}
+                  top={'80px'}
+                  borderRadius="full"
+                  height={'150px'}
+                  width={'150px'}
+                  ml={'55px'}
+                  objectFit={'cover'}
+                  src={testimonial.image}
+                  boxShadow={'xl'}
+                  borderColor={'brandBlue.300'}
+                  borderWidth={'3px'}
+                  borderStyle={'solid'}
+                  zIndex={2}
+                  />
+                <Box
+                  role={'group'}
+                  p={6}
+                  maxW={'260px'}
+                  w={'full'}
+                  bg={'gray.200'}
+                  boxShadow={'xl'}
+                  rounded={'lg'}
+                  pos={'relative'}
+                  zIndex={1}>
+                  <Stack align={'center'} pt={'80px'}>
+                      <Text color={'gray.500'} fontSize={'sm'} mb={2}>
+                      {parse(testimonial.description)}
+                      </Text>
+                      <Divider w={'12%'} borderBottomColor='brandBlue.300' />
+                      <Heading fontSize={'xl'} fontWeight={600}>
+                      {testimonial.name}
+                      </Heading>
+                  </Stack>
+                </Box>
+              </Box>
+            </Flex>
+          ))}
+        </Flex>
+        <Link to='/testimonios' style={{margin: "0", textDecoration: "none"}}>
+          <Text m="4rem 0.2rem 2rem auto" 
+            width='max-content'
+            fontSize="1xl" 
+            alignSelf={'right'}
+            textAlign='right' 
+            color="brandBlue.200" 
+            fontWeight={700}
+            _hover={{
+              color: "brandRed.200",
+              marginRight:"0rem"
+              }}
+            >
+          Ver todos ➞
+          </Text>
+        </Link>
+    </Container>
+    </>
+  );
+};
+
+export default PublicTestimonials

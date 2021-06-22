@@ -26,7 +26,8 @@ const Home = () => {
         <Box>
           <PublicNews />
         </Box>
-        <Box h="400px">Testimonios</Box>
+        <Box>
+        </Box>
         <Box>
           <PublicActivities />
         </Box>
