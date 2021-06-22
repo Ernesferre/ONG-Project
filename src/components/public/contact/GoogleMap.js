@@ -1,9 +1,27 @@
-import React from "react";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
-
+import React, { useEffect, useState } from "react";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import axios from "axios";
 const GoogleMapComponent = () => {
+  const [address, setAdress] = useState("");
+
   const key = "AIzaSyAbtLpuihssQ11VNOGGul4bzO6j8tMx2hE",
-    mapId = "b23b721c336d70e0";
+    mapId = "b23b721c336d70e0",
+    position = { lat: -34.6063708, lng: -58.3903995 };
+
+  useEffect(() => {
+    (function () {
+      const url = "http://ongapi.alkemy.org/api/organization";
+      axios
+        .get(url)
+        .then((res) => {
+          console.log(res.data.data[0]);
+          setAdress(res.data.data[0].address);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })();
+  }, []);
 
   return (
     <div>
@@ -13,11 +31,13 @@ const GoogleMapComponent = () => {
         mapIds={[mapId]}
       >
         <GoogleMap
-          center={{ lat: 40.756795, lng: -73.954298 }}
+          center={position}
           zoom={15}
-          options={{ mapId: mapId }}
+          options={{ mapId: mapId, origin: "Perón 1525, CABA" }}
           mapContainerStyle={{ height: "400px", width: "100vw" }}
-        />
+        >
+          <Marker position={position} label="Somos Más" />
+        </GoogleMap>
       </LoadScript>
     </div>
   );
