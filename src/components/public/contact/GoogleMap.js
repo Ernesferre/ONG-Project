@@ -14,7 +14,6 @@ const GoogleMapComponent = () => {
       axios
         .get(url)
         .then((res) => {
-          console.log(res.data.data[0]);
           setAdress(res.data.data[0].address);
         })
         .catch((err) => {
