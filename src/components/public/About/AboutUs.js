@@ -1,28 +1,21 @@
-import {Flex, Text} from '@chakra-ui/react';
+import { Flex, Text, Heading, Container } from "@chakra-ui/react";
 
 const AboutUs = ({ text }) => {
   return (
-    <Flex
-      padding={4}
-      direction="column"
-      justify="center"
-      alignItems="center"
-      h={{ base: "auto", md: "auto" }}
-      bg="#E5E5E5"
-    >
-      <Text
-        fontSize="6xl"
-        paddingBottom={6}
-        lineHeight="70px"
-        fontWeight="bold"
+    <Container maxW="container.xl">
+      <Flex
+        padding={4}
+        direction="column"
+        justify="center"
+        alignItems="center"
+        h={{ base: "auto", md: "auto" }}
       >
-        SOMOS MÁS
-      </Text>
-      <Text fontSize="2xl" w={{ base: "100%", md: "55%" }}>
+        <Heading fontSize="3em">Somos Más</Heading>
+        <Text fontWeight="semibold" fontSize="lg" marginTop="1em">
           {text}
-      </Text>
-
-    </Flex>
+        </Text>
+      </Flex>
+    </Container>
   );
 };
 export default AboutUs;
