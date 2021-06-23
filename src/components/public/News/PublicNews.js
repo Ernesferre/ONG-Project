@@ -17,7 +17,6 @@ export const PublicNews = () => {
     getNews()
       .then((res) => {
         const newsFilter = res.data.slice(res.data.length / 2);
-        console.log(newsFilter);
         setNews(newsFilter);
         setLoading(true);
         setUpdate(false);

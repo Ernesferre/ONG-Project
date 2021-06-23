@@ -19,8 +19,6 @@ const NewsList = () => {
       .catch(() => alert("Error al cargar novedades"));
   }, []);
 
-  console.log(news);
-
   return loading ? (
     <Wrap
       direction="row"
