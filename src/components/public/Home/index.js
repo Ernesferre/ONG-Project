@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Text, Box } from "@chakra-ui/react";
+import { Heading, Text, Container, Flex } from "@chakra-ui/react";
 import Slides from "./slides/HomeSlides";
 import { PublicActivities } from "../activities/PublicActivities";
 import { PublicNews } from "../News/PublicNews";
@@ -7,30 +7,26 @@ import { PublicNews } from "../News/PublicNews";
 const Home = () => {
   return (
     <>
-      <Box>
-        <Box>
-          <Slides />
-        </Box>
-        <Box>
-          <Heading as="h1" size="2xl">
-            Somos Más
-          </Heading>
-          <Text fontSize={{ base: "1rem", md: "1.5rem" }}>
+      <Slides />
+      <Container maxW="container.xl" minH="40vh">
+        <Flex
+          marginTop="3em"
+          height="100%"
+          padding="2em"
+          borderRadius="3px"
+          flexDir="column"
+        >
+          <Heading fontSize="3em">Somos Más</Heading>
+          <Text fontWeight="semibold" fontSize="lg" marginTop="1em">
             Mediante nuestros programas educativos, buscamos incrementar la
             capacidad intelectual, moral y afectiva de las personas de acuerdo
             con la cultura y las normas de convivencia de la sociedad a la que
             pertenecen.
           </Text>
-        </Box>
-        <Box h="400px">Slides</Box>
-        <Box>
-          <PublicNews />
-        </Box>
-        <Box h="400px">Testimonios</Box>
-        <Box>
-          <PublicActivities />
-        </Box>
-      </Box>
+        </Flex>
+      </Container>
+      <PublicNews />
+      <PublicActivities />
     </>
   );
 };
