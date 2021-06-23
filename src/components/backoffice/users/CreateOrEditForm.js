@@ -202,8 +202,8 @@ export const CreateOrEditForm = ({ id }) => {
                           Rol
                         </FormLabel>
                         <Select variant="filled" {...field} id="role_id" bg={'white'}>
-                          <option value="1">Administrador</option>
-                          <option value="0">Usuario</option>
+                          <option value="0">Administrador</option>
+                          <option value="1">Usuario</option>
                         </Select>
                         <FormErrorMessage>{form.errors.role_id}</FormErrorMessage>
                       </FormControl>

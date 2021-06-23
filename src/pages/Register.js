@@ -37,6 +37,7 @@ const Register = () => {
       }}
       validationSchema={validate}
       onSubmit={async (values) => {
+        console.log({values});
         const response = await registerUser(values);
 
         if (response) {
