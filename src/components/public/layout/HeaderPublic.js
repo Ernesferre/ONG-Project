@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { GiHamburgerMenu, GiHamburgerMenu as HamburgerIcon } from "react-icons/gi";
 import { GrClose as CloseIcon } from "react-icons/gr";
-import { NavLink as LinkRouterDom } from "react-router-dom";
+import { NavLink as LinkRouterDom, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import '../../../scss/app.scss';
 import ItemCategories from "./ItemCategories";
@@ -25,7 +25,7 @@ const Routes = [
 ];
 
 export default function HeaderPublic() {
-
+  
   const [display, setDisplay] = useState('none');
 
   // PARA USAR INFO DESDE REDUX
@@ -54,6 +54,9 @@ export default function HeaderPublic() {
                 name={link.name}
               ></NavLink>
             ))}
+
+            {/* Donations */}
+            <DonateButton />
           </HStack>
 
           <Flex alignItems={"center"} ml={{ base: "auto", md: "2rem" }}>
@@ -105,6 +108,8 @@ export default function HeaderPublic() {
                     name={link.name}
                 ></NavLink>
                 ))}
+                {/* Donations */}
+                <DonateButton />
             </Flex>
         </Flex>
 
@@ -130,3 +135,20 @@ export const NavLink = ({ name, route }) => {
   );
 };
 
+export const DonateButton = () =>{
+  const router = useHistory();
+  function handleClick(){
+    router.push("/donar")
+  }
+  return <Button
+    mt="1rem"
+    bg="white"
+    _hover={{ backgroundColor: "#DB5752", color:"white" }}
+    border="solid 3px #DB5752"
+    color="#DB5752"
+    borderRadius="4px"
+    onClick={handleClick}
+  >
+    Donar
+  </Button>
+}
