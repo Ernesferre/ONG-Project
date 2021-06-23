@@ -9,7 +9,7 @@ import {
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GrClose as CloseIcon } from "react-icons/gr";
 import { NavLink as LinkRouterDom } from "react-router-dom";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import "../../../scss/app.scss";
 import ItemCategories from "./ItemCategories";
 import { SomosMasLogo } from "../../../assets/SomosMasLogo";
@@ -26,7 +26,7 @@ export default function HeaderPublic() {
   const [display, setDisplay] = useState("none");
 
   // PARA USAR INFO DESDE REDUX
-  const logo = useSelector((state) => state.organization.organizationData.logo);
+  // const logo = useSelector((state) => state.organization.organizationData.logo);
 
   return (
     <>
