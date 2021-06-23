@@ -13,12 +13,11 @@ import { useSelector } from "react-redux";
 import "../../../scss/app.scss";
 import ItemCategories from "./ItemCategories";
 import { SomosMasLogo } from "../../../assets/SomosMasLogo";
+import { ActivitiesMenu } from "./ActivitiesMenu";
 
 const Routes = [
-  { route: "/", name: "Inicio" },
   { route: "/us", name: "Nosotros" },
-  { route: "/actividades", name: "Actividades" },
-  // { route: "/novedades", name: "Novedades" },
+  { route: "/novedades", name: "Novedades" },
   { route: "/contacto", name: "Contacto" },
   { route: "/login", name: "Iniciar Sesion" },
 ];
@@ -28,7 +27,6 @@ export default function HeaderPublic() {
 
   // PARA USAR INFO DESDE REDUX
   const logo = useSelector((state) => state.organization.organizationData.logo);
-  console.log(logo);
 
   return (
     <>
@@ -43,12 +41,9 @@ export default function HeaderPublic() {
             spacing={10}
             display={{ base: "none", md: "flex" }}
           >
+            <ActivitiesMenu />
             {Routes.map((link) => (
-              <NavLink
-                key={link.name}
-                route={link.route}
-                name={link.name}
-              ></NavLink>
+              <NavLink key={link.name} route={link.route} name={link.name} />
             ))}
           </HStack>
 
