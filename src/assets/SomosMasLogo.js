@@ -6,7 +6,11 @@ export const SomosMasLogo = ({ maxW, fontSize }) => {
   return (
     <Flex flexDir="column" maxW={maxW}>
       <Image src={logo} />
-      <Heading fontSize={fontSize} fontWeight="semiBold">
+      <Heading
+        fontSize={fontSize}
+        textTransform="uppercase"
+        fontWeight="semiBold"
+      >
         Somos Más
       </Heading>
     </Flex>
