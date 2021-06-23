@@ -18,7 +18,7 @@ import { PrivateRoute } from "./routes/PrivateRoute";
 
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOrganizationData } from "./features/organizationReducer";
+import { fetchActivities, fetchOrganizationData } from "./features/organizationReducer";
 
 // ROUTE TRANSITIONS
 import { CSSTransition, TransitionGroup } from "react-transition-group";
@@ -112,6 +112,7 @@ function App() {
   useEffect(() => {
     if (!organizationData.name) {
       dispatch(fetchOrganizationData());
+      dispatch(fetchActivities());
     }
   }, []);
 

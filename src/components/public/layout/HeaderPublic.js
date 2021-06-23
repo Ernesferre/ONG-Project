@@ -12,6 +12,8 @@ import { GiHamburgerMenu, GiHamburgerMenu as HamburgerIcon } from "react-icons/g
 import { GrClose as CloseIcon } from "react-icons/gr";
 import { NavLink as LinkRouterDom, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import '../../../scss/app.scss';
+import ItemCategories from "./ItemCategories";
 
 const Routes = [
   { route: "/", name: "Inicio" },
@@ -29,7 +31,7 @@ export default function HeaderPublic() {
   // PARA USAR INFO DESDE REDUX
   const logo = useSelector((state) => state.organization.organizationData.logo);
   console.log(logo)
-
+  
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={10}>
@@ -128,6 +130,7 @@ export const NavLink = ({ name, route }) => {
       className="nav-link"
     >
       {name}
+      {name === 'Actividades' && <ItemCategories />}
     </LinkRouterDom>
   );
 };

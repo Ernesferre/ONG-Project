@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Us from "../pages/Us";
 import News from "../components/public/News";
+import Testimonials from "../components/public/Testimonials";
 import { Contact } from "../components/public/contact";
 import Layout from "../components/public/layout/Layout";
 import { PublicActivities } from "../components/public/activities/PublicActivities";
@@ -26,6 +27,7 @@ export const Public = () => {
         <Route exact path="/novedades" component={News} />
         <Route exact path="/novedades/:id" component={Detail} />
         <Route exact path="/donar" component={Donations} />
+        <Route exact path="/testimonios" component={Testimonials} />
         <Redirect to="/" />
       </Switch>
     </Layout>

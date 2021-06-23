@@ -11,6 +11,7 @@ import {
 import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
 import { getActivity } from "./activitiesService";
+import SkeletonDetail from "../layout/SkeletonDetail";
 
 export const ActivitiesDetail = () => {
   const params = useParams();
@@ -52,9 +53,7 @@ export const ActivitiesDetail = () => {
 
   if (isLoading)
     return (
-      <Flex height="10em" justifyContent="center" alignItems="center">
-        <Spinner size="xl" color="#5796D9" />
-      </Flex>
+      <SkeletonDetail />
     );
 
   return (
