@@ -39,6 +39,7 @@ export const PublicNews = () => {
           >
             {news?.map((data) => (
               <LCard
+                key={data.id}
                 image={data.image}
                 title={data.name}
                 postedOn={data.created_at}

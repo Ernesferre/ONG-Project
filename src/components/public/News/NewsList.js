@@ -38,6 +38,7 @@ const NewsList = () => {
             postedOn={item.created_at}
             url="novedades"
             id={`${item.id}`}
+            maxW="sm"
           />
         </WrapItem>
       ))}
