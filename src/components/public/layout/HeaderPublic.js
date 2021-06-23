@@ -4,16 +4,15 @@ import {
   Flex,
   HStack,
   IconButton,
-  Button,
   useColorModeValue,
-  Stack,
 } from "@chakra-ui/react";
-import { GiHamburgerMenu, GiHamburgerMenu as HamburgerIcon } from "react-icons/gi";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { GrClose as CloseIcon } from "react-icons/gr";
 import { NavLink as LinkRouterDom } from "react-router-dom";
 import { useSelector } from "react-redux";
-import '../../../scss/app.scss';
+import "../../../scss/app.scss";
 import ItemCategories from "./ItemCategories";
+import { SomosMasLogo } from "../../../assets/SomosMasLogo";
 
 const Routes = [
   { route: "/", name: "Inicio" },
@@ -25,21 +24,18 @@ const Routes = [
 ];
 
 export default function HeaderPublic() {
-
-  const [display, setDisplay] = useState('none');
+  const [display, setDisplay] = useState("none");
 
   // PARA USAR INFO DESDE REDUX
   const logo = useSelector((state) => state.organization.organizationData.logo);
-  console.log(logo)
-  
+  console.log(logo);
+
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={10}>
-        <Flex h={16} alignItems={"center"} justifyContent={"left"} >
+        <Flex h={16} alignItems={"center"} justifyContent={"left"}>
           <HStack>
-            <LinkRouterDom to="/">
-              <img src={logo} width="120px" alt="Somos más logo" />
-            </LinkRouterDom>
+            <SomosMasLogo />
           </HStack>
           <HStack
             as={"nav"}
@@ -58,56 +54,48 @@ export default function HeaderPublic() {
 
           <Flex alignItems={"center"} ml={{ base: "auto", md: "2rem" }}>
             <IconButton
-                    aria-label="Open Menu"
-                    size="lg"
-                    mr={2}
-                    icon={<GiHamburgerMenu />}
-                    display={['flex', 'flex', 'none', 'none']}
-                    onClick={() => setDisplay('flex')}
-                />
-            </Flex>
-
+              aria-label="Open Menu"
+              size="lg"
+              mr={2}
+              icon={<GiHamburgerMenu />}
+              display={["flex", "flex", "none", "none"]}
+              onClick={() => setDisplay("flex")}
+            />
+          </Flex>
         </Flex>
-
 
         <Flex
-            w="100vw"
-            bgColor="gray.100"
-            zIndex={20}
-            pb={10}
-            pos="fixed"
-            top="0"
-            left="0"
-            overflowY="auto"
-            flexDir="column"
-            display={display}
+          w="100vw"
+          bgColor="gray.100"
+          zIndex={20}
+          pb={10}
+          pos="fixed"
+          top="0"
+          left="0"
+          overflowY="auto"
+          flexDir="column"
+          display={display}
         >
-            <Flex justify="flex-end">
-                <IconButton
-                    mt={2}
-                    mr={5}
-                    aria-label="CloseMenu"
-                    size="lg"
-                    icon={
-                        <CloseIcon />
-                    }
-                    onClick={() => setDisplay('none')}
-                />
-            </Flex>
-            <Flex
-                flexDir="column"
-                align="center"
-            >
-                {Routes.map((link) => (
-                <NavLink
-                    key={link.name}
-                    route={link.route}
-                    name={link.name}
-                ></NavLink>
-                ))}
-            </Flex>
+          <Flex justify="flex-end">
+            <IconButton
+              mt={2}
+              mr={5}
+              aria-label="CloseMenu"
+              size="lg"
+              icon={<CloseIcon />}
+              onClick={() => setDisplay("none")}
+            />
+          </Flex>
+          <Flex flexDir="column" align="center">
+            {Routes.map((link) => (
+              <NavLink
+                key={link.name}
+                route={link.route}
+                name={link.name}
+              ></NavLink>
+            ))}
+          </Flex>
         </Flex>
-
       </Box>
     </>
   );
@@ -125,8 +113,7 @@ export const NavLink = ({ name, route }) => {
       className="nav-link"
     >
       {name}
-      {name === 'Actividades' && <ItemCategories />}
+      {name === "Actividades" && <ItemCategories />}
     </LinkRouterDom>
   );
 };
-
