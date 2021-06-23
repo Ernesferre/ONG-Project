@@ -140,13 +140,30 @@ function App() {
 
 function Routes() {
   const location = useLocation();
+
+  const token = localStorage.getItem("token");
+  const data = localStorage.getItem("data");
+  const parseData = JSON.parse(data);
+  const roleId = parseData.role_id;
+  console.log({ roleId });
+  console.log({ token });
+
   return (
     <TransitionGroup>
       <CSSTransition timeout={300} classNames="page" key={location.key}>
         <Switch location={location}>
-          <PrivateRoute path="/backoffice" component={Private} />
-
-          <Route path="/" component={Public} />
+          {roleId === 0
+           ? (
+            <>
+              <Route exact path="/" component={Public} />
+              <Route path="/backoffice" component={Private} />
+            </>
+          ) : (
+            <>
+              {" "}
+              <Route exact path="/" component={Public} />
+            </>
+          )}
 
           <Redirect to="/" />
         </Switch>
