@@ -20,12 +20,22 @@ export const fetchOrganizationData = createAsyncThunk("state/fetchOrganizationDa
     }
   });
 
+export const fetchActivities = createAsyncThunk("state/fetchActivities", async () => {
+  try {
+      const response = await axios.get(`http://ongapi.alkemy.org/api/activities`);
+      return response.data.data;
+  } catch (error) {
+      handleError();
+  }
+})
+
 export const organizationReducer = createSlice({
   name: "organization",
   initialState: {
     error: "",
     status: "idle",
     organizationData: {},
+    activitiesData: [],
   },
     // reducers: {
     //     deleteOrganizationData: (state) => {
@@ -44,6 +54,17 @@ export const organizationReducer = createSlice({
         .addCase(fetchOrganizationData.rejected, (state, action) => {
             state.error = action.error;
             state.status = "idle";
+        })
+        .addCase(fetchActivities.pending, (state) => {
+          state.status = "loading";
+        })
+        .addCase(fetchActivities.fulfilled, (state, action) => {
+          state.activitiesData = action.payload;
+          state.status = "idle";
+        })
+        .addCase(fetchActivities.rejected, (state, action) => {
+          state.error = action.error;
+          state.status = "idle";
         })
         }
 });
