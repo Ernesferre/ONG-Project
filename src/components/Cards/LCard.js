@@ -1,14 +1,11 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Box, Container, Flex, Heading, Text } from "@chakra-ui/layout";
-import { Collapse } from "@chakra-ui/transition";
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
 
 export const LCard = ({ title, image, text, url, id, postedOn, maxW }) => {
-  const [show, setShow] = useState(false);
-
   const formatDate = (dateToParse) => {
     const date = new Date(dateToParse);
     const formattedDate = new Intl.DateTimeFormat("es-AR").format(date);
@@ -62,44 +59,31 @@ export const LCard = ({ title, image, text, url, id, postedOn, maxW }) => {
       >
         {parse(title)}
       </Heading>
-      <Flex flexDir="column" justifyContent="space-between">
+      <Flex flexDir="column">
         {text && (
-          <>
-            <Collapse startingHeight="4.2em" in={show}>
-              <Box marginLeft="1em" marginRight="1em">
-                {parse(text)}
-              </Box>
-            </Collapse>
-            {text.length >= 150 && (
-              <Text
-                textAlign="end"
-                marginRight="0.5em"
-                color="brandBlue.300"
-                fontSize="sm"
-                _hover={{ color: "brandBlue.400", cursor: "pointer" }}
-                onClick={(e) => setShow(!show)}
-              >
-                {!show ? "...Leer más" : "...Leer menos"}
-              </Text>
-            )}
-          </>
+          <Box
+            marginLeft="1em"
+            marginRight="1em"
+            maxHeight="3em"
+            overflow="hidden"
+          >
+            {parse(text)}
+          </Box>
         )}
 
-        <Link textDecoration="none" to={returnConditionalUrl(url, id)}>
-          <Flex justifyContent="center" marginTop="3em">
+        <Flex justifyContent="center" margin="1em">
+          <Link to={returnConditionalUrl(url, id)}>
             <Button
               textDecoration="none"
               margin="0.5em"
               variant="dangerOutline"
               textTransform="uppercase"
               size="sm"
-              position="absolute"
-              bottom="0em"
             >
               ver más
             </Button>
-          </Flex>
-        </Link>
+          </Link>
+        </Flex>
       </Flex>
     </Container>
   );
