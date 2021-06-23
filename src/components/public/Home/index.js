@@ -1,8 +1,9 @@
 import React from "react";
-import { Heading, Text, Container, Flex } from "@chakra-ui/react";
+import { Heading, Text, Container, Flex, Button, Link } from "@chakra-ui/react";
 import Slides from "./slides/HomeSlides";
 import { PublicActivities } from "../activities/PublicActivities";
 import { PublicNews } from "../News/PublicNews";
+import { FaChevronRight } from "react-icons/fa";
 
 const Home = () => {
   return (
@@ -26,7 +27,14 @@ const Home = () => {
         </Flex>
       </Container>
       <PublicNews />
-      <PublicActivities />
+      <PublicActivities getOnlyLatest={true} />
+      <Flex justify="flex-end" margin="1em">
+        <Link to="/actividades">
+          <Button variant="somosMas" rightIcon={<FaChevronRight />}>
+            Ver más actividades
+          </Button>
+        </Link>
+      </Flex>
     </>
   );
 };
