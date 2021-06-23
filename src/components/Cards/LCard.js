@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
 
-export const LCard = ({ title, image, text, url, id, postedOn }) => {
+export const LCard = ({ title, image, text, url, id, postedOn, maxW }) => {
   const [show, setShow] = useState(false);
 
   const formatDate = (dateToParse) => {
@@ -27,7 +27,7 @@ export const LCard = ({ title, image, text, url, id, postedOn }) => {
 
   return (
     <Container
-      maxW="sm"
+      maxW={maxW}
       borderRadius="3px"
       boxShadow="lg"
       padding="0"

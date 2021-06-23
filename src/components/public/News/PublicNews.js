@@ -45,6 +45,7 @@ export const PublicNews = () => {
                 id={data.id}
                 url={`novedades`}
                 text={data.content}
+                maxW="sm"
               />
             ))}
           </Flex>

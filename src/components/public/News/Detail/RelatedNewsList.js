@@ -22,7 +22,7 @@ const RelatedNewsList = ({ arrayOfNews, category, id }) => {
             key={data.id}
             style={{ margin: "0", textDecoration: "none" }}
           >
-            <LCard image={data.image} title={data.name} />
+            <LCard image={data.image} title={data.name} maxW="15em" />
           </Link>
         ))}
       </Flex>

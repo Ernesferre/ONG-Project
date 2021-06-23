@@ -37,6 +37,7 @@ export const ActivitiesList = ({ getOnlyLatest }) => {
                 url="actividades"
                 id={activity.id}
                 postedOn={activity.created_at}
+                maxW="sm"
               />
             </Flex>
           ))}
