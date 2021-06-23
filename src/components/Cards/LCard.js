@@ -63,23 +63,28 @@ export const LCard = ({ title, image, text, url, id, postedOn }) => {
         {parse(title)}
       </Heading>
       <Flex flexDir="column" justifyContent="space-between">
-        <Collapse startingHeight="4.2em" in={show}>
-          <Box marginLeft="1em" marginRight="1em">
-            {parse(text)}
-          </Box>
-        </Collapse>
-        {text.length >= 150 && (
-          <Text
-            textAlign="end"
-            marginRight="0.5em"
-            color="brandBlue.300"
-            fontSize="sm"
-            _hover={{ color: "brandBlue.400", cursor: "pointer" }}
-            onClick={(e) => setShow(!show)}
-          >
-            {!show ? "...Leer más" : "...Leer menos"}
-          </Text>
+        {text && (
+          <>
+            <Collapse startingHeight="4.2em" in={show}>
+              <Box marginLeft="1em" marginRight="1em">
+                {parse(text)}
+              </Box>
+            </Collapse>
+            {text.length >= 150 && (
+              <Text
+                textAlign="end"
+                marginRight="0.5em"
+                color="brandBlue.300"
+                fontSize="sm"
+                _hover={{ color: "brandBlue.400", cursor: "pointer" }}
+                onClick={(e) => setShow(!show)}
+              >
+                {!show ? "...Leer más" : "...Leer menos"}
+              </Text>
+            )}
+          </>
         )}
+
         <Link textDecoration="none" to={returnConditionalUrl(url, id)}>
           <Flex justifyContent="center" marginTop="3em">
             <Button
