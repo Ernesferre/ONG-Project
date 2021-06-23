@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import Card from "../../../Cards/Card";
 import { LCard } from "../../../Cards/LCard";
 
 const RelatedNewsList = ({ arrayOfNews, category, id }) => {

@@ -1,9 +1,10 @@
 import React from "react";
-import { Heading, Text, Container, Flex, Button, Link } from "@chakra-ui/react";
+import { Heading, Text, Container, Flex, Button } from "@chakra-ui/react";
 import Slides from "./slides/HomeSlides";
 import { PublicActivities } from "../activities/PublicActivities";
 import { PublicNews } from "../News/PublicNews";
 import { FaChevronRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
