@@ -9,8 +9,11 @@ import parse from "html-react-parser";
 export const LCard = ({ title, image, text, url, id, postedOn }) => {
   const [show, setShow] = useState(false);
 
-  const date = new Date(postedOn);
-  const formattedDate = new Intl.DateTimeFormat("es-AR").format(date);
+  const formatDate = (dateToParse) => {
+    const date = new Date(dateToParse);
+    const formattedDate = new Intl.DateTimeFormat("es-AR").format(date);
+    return formattedDate;
+  };
 
   const returnConditionalUrl = (url, id) => {
     if (url && id) {
@@ -27,7 +30,6 @@ export const LCard = ({ title, image, text, url, id, postedOn }) => {
       maxW="sm"
       borderRadius="3px"
       boxShadow="lg"
-      bg="gray.200"
       padding="0"
       position="relative"
       margin="1em"
@@ -35,18 +37,22 @@ export const LCard = ({ title, image, text, url, id, postedOn }) => {
       <Image
         borderTopRadius="3px"
         width="100%"
+        maxH="13em"
         objectFit="cover"
         src={image}
         fallbackSrc="https://via.placeholder.com/382x300"
       />
-      <Text
-        textAlign="end"
-        fontSize="small"
-        color="gray.500"
-        marginRight="0.3em"
-      >
-        Posteado el: {formattedDate}
-      </Text>
+      {postedOn && (
+        <Text
+          textAlign="end"
+          fontSize="small"
+          color="brandBlue.200"
+          marginRight="0.3em"
+        >
+          {formatDate(postedOn)}
+        </Text>
+      )}
+
       <Heading
         size="md"
         textAlign="center"
