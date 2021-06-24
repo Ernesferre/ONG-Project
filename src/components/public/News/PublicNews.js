@@ -6,7 +6,6 @@ import { getNews } from "../homeService/homeService";
 import SkeletonHome from "../layout/SkeletonHome";
 import { Link } from "react-router-dom";
 import { LCard } from "../../Cards/LCard";
-import { FaChevronRight } from "react-icons/fa";
 
 export const PublicNews = () => {
   const [loading, setLoading] = useState(false);
