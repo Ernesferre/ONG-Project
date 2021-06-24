@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Flex, Button } from "@chakra-ui/react";
+import { Flex, Button, Text } from "@chakra-ui/react";
 import pictureNews from "../../../assets/Foto9.jpg";
 import Title from "../../Title/Title";
 import { getNews } from "../homeService/homeService";
@@ -49,13 +49,23 @@ export const PublicNews = () => {
               />
             ))}
           </Flex>
-          <Flex justify="flex-end" margin="1em">
-            <Link to="/novedades">
-              <Button variant="somosMas" rightIcon={<FaChevronRight />}>
-                Ver más novedades
-              </Button>
-            </Link>
-          </Flex>
+          <Link to="/novedades" style={{ textDecoration: "none" }}>
+            <Text
+              m="4rem 0.2rem 2rem auto"
+              width="max-content"
+              fontSize="1xl"
+              alignSelf={"right"}
+              textAlign="right"
+              color="brandBlue.200"
+              fontWeight={700}
+              _hover={{
+                color: "brandRed.200",
+                marginRight: "0rem",
+              }}
+            >
+              Ver novedades ➞
+            </Text>
+          </Link>
         </>
       ) : (
         <SkeletonHome />

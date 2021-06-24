@@ -31,13 +31,25 @@ const Home = () => {
       <PublicNews />
       <PublicTestimonials />
       <PublicActivities getOnlyLatest={true} />
-      <Flex justify="flex-end" margin="1em">
-        <Link to="/actividades">
-          <Button variant="somosMas" rightIcon={<FaChevronRight />}>
-            Ver más actividades
-          </Button>
+      <Container maxW="container.xl">
+        <Link to="/actividades" style={{ textDecoration: "none" }}>
+          <Text
+            m="4rem 0.2rem 2rem auto"
+            width="max-content"
+            fontSize="1xl"
+            alignSelf={"right"}
+            textAlign="right"
+            color="brandBlue.200"
+            fontWeight={700}
+            _hover={{
+              color: "brandRed.200",
+              marginRight: "0rem",
+            }}
+          >
+            Ver actividades ➞
+          </Text>
         </Link>
-      </Flex>
+      </Container>
     </>
   );
 };
