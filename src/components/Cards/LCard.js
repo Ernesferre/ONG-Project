@@ -67,6 +67,7 @@ export const LCard = ({ title, image, text, url, id, postedOn, maxW }) => {
             marginRight="1em"
             maxHeight="3em"
             overflow="hidden"
+            color="gray.600"
           >
             {parse(text)}
           </Box>
