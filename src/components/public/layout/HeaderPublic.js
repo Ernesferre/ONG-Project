@@ -19,6 +19,7 @@ const Routes = [
   { route: "/us", name: "Nosotros" },
   { route: "/novedades", name: "Novedades" },
   { route: "/contacto", name: "Contacto" },
+  { route: "/testimonios", name: "Testimonios" },
   { route: "/login", name: "Iniciar Sesion" },
 ];
 
@@ -39,7 +40,7 @@ export default function HeaderPublic() {
             as={"nav"}
             ml="auto"
             spacing={10}
-            display={{ base: "none", md: "flex" }}
+            display={{ base: "none", md: "none", lg: "flex" }}
           >
             <ActivitiesMenu />
             {Routes.map((link) => (
@@ -56,7 +57,7 @@ export default function HeaderPublic() {
               size="lg"
               mr={2}
               icon={<GiHamburgerMenu />}
-              display={["flex", "flex", "none", "none"]}
+              display={["flex", "flex", "flex", "none"]}
               onClick={() => setDisplay("flex")}
             />
           </Flex>
@@ -85,13 +86,11 @@ export default function HeaderPublic() {
             />
           </Flex>
           <Flex flexDir="column" align="center">
+            <ActivitiesMenu />
             {Routes.map((link) => (
-              <NavLink
-                key={link.name}
-                route={link.route}
-                name={link.name}
-              ></NavLink>
+              <NavLink key={link.name} route={link.route} name={link.name} />
             ))}
+
             {/* Donations */}
             <DonateButton />
           </Flex>
