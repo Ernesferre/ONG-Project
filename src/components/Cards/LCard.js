@@ -25,14 +25,15 @@ export const LCard = ({ title, image, text, url, id, postedOn, maxW }) => {
   return (
     <Container
       maxW={maxW}
-      borderRadius="3px"
-      boxShadow="lg"
+      borderRadius="8px"
+      boxShadow="xl"
       padding="0"
       position="relative"
       margin="1em"
+      bg="gray.200"
     >
       <Image
-        borderTopRadius="3px"
+        borderTopRadius="8px"
         width="100%"
         maxH="13em"
         objectFit="cover"
