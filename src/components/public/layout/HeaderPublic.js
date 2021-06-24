@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Box,
+  Button,
   Flex,
   HStack,
   IconButton,
@@ -8,8 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GrClose as CloseIcon } from "react-icons/gr";
-import { NavLink as LinkRouterDom } from "react-router-dom";
-// import { useSelector } from "react-redux";
+import { NavLink as LinkRouterDom, useHistory } from "react-router-dom";
 import "../../../scss/app.scss";
 import ItemCategories from "./ItemCategories";
 import { SomosMasLogo } from "../../../assets/SomosMasLogo";
@@ -45,6 +45,9 @@ export default function HeaderPublic() {
             {Routes.map((link) => (
               <NavLink key={link.name} route={link.route} name={link.name} />
             ))}
+
+            {/* Donations */}
+            <DonateButton />
           </HStack>
 
           <Flex alignItems={"center"} ml={{ base: "auto", md: "2rem" }}>
@@ -89,6 +92,8 @@ export default function HeaderPublic() {
                 name={link.name}
               ></NavLink>
             ))}
+            {/* Donations */}
+            <DonateButton />
           </Flex>
         </Flex>
       </Box>
@@ -110,5 +115,25 @@ export const NavLink = ({ name, route }) => {
       {name}
       {name === "Actividades" && <ItemCategories />}
     </LinkRouterDom>
+  );
+};
+
+export const DonateButton = () => {
+  const router = useHistory();
+  function handleClick() {
+    router.push("/donar");
+  }
+  return (
+    <Button
+      mt="1rem"
+      bg="white"
+      _hover={{ backgroundColor: "#DB5752", color: "white" }}
+      border="solid 3px #DB5752"
+      color="#DB5752"
+      borderRadius="4px"
+      onClick={handleClick}
+    >
+      Donar
+    </Button>
   );
 };

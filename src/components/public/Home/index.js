@@ -5,6 +5,7 @@ import { PublicActivities } from "../activities/PublicActivities";
 import { PublicNews } from "../News/PublicNews";
 import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import PublicTestimonials from "../Testimonials/PublicTestimonials";
 
 const Home = () => {
   return (
@@ -28,6 +29,7 @@ const Home = () => {
         </Flex>
       </Container>
       <PublicNews />
+      <PublicTestimonials />
       <PublicActivities getOnlyLatest={true} />
       <Flex justify="flex-end" margin="1em">
         <Link to="/actividades">
