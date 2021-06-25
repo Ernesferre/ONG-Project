@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 //REACT-ROUTER
 import {
@@ -7,7 +7,9 @@ import {
   Route,
   Redirect,
   useLocation,
+  useHistory,
 } from "react-router-dom";
+
 //CHAKRA
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
@@ -114,6 +116,14 @@ const theme = extendTheme({
 });
 
 function App() {
+  const token = localStorage.getItem("token");
+  const data = localStorage.getItem("data");
+  const parseData = JSON.parse(data);
+  const roleId = parseData?.role_id;
+  const history = useHistory();
+
+  
+
   // GUARDAR INFO DE LA ORGANIZACIÓN EN REDUX
   const dispatch = useDispatch();
   const organizationData = useSelector(
@@ -126,6 +136,20 @@ function App() {
       dispatch(fetchActivities());
     }
   }, []);
+
+  useEffect(() => {
+    const filterUser = () => {
+      if (!token || !parseData || roleId === 1) {
+        window.history.pushState("", "home", "/");
+        // window.location.replace("/");
+      } else {
+        window.history.replaceState("", "backoffice", "/backoffice");
+        // window.location.replace("/backoffice");
+      }
+    };
+
+    filterUser();
+  }, [token, parseData, history]);
 
   return (
     <ChakraProvider theme={theme}>
@@ -140,32 +164,24 @@ function App() {
 
 function Routes() {
   const location = useLocation();
-
   const token = localStorage.getItem("token");
   const data = localStorage.getItem("data");
   const parseData = JSON.parse(data);
-  const roleId = parseData.role_id;
-  console.log({ roleId });
-  console.log({ token });
+  const roleId = parseData?.role_id;
 
   return (
     <TransitionGroup>
       <CSSTransition timeout={300} classNames="page" key={location.key}>
         <Switch location={location}>
-          {roleId === 0
-           ? (
+          {!token || !parseData || roleId === 1 ? (
             <>
-              <Route exact path="/" component={Public} />
-              <Route path="/backoffice" component={Private} />
+              <Route path="/" component={Public} />
             </>
           ) : (
             <>
-              {" "}
-              <Route exact path="/" component={Public} />
+              <PrivateRoute path="/backoffice" component={Private} />
             </>
           )}
-
-          <Redirect to="/" />
         </Switch>
       </CSSTransition>
     </TransitionGroup>

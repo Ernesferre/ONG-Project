@@ -43,7 +43,7 @@ const Register = () => {
         if (response) {
           console.log(response.data);
           dispatch(SET_REGISTER(response.data));
-          localStorage.setItem(TOKEN, response.data.token);
+          // localStorage.setItem(TOKEN, response.data.token);
           history.push("/");
         } else {
           toast({
