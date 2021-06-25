@@ -12,10 +12,13 @@ export const ActivitiesMenu = () => {
         as={Button}
         fontWeight="regular"
         rightIcon={<ChevronDownIcon />}
+        height="1.3em"
         padding="0"
-        _hover={{ bg: "gray.100", color: "brandRed.200" }}
-        _active={{ bg: "gray.100", borderColor: "gray.100" }}
-        _focus={{ bg: "gray.100", borderColor: "gray.100" }}
+        margin="0"
+        bg="white"
+        _hover={{ color: "brandRed.200" }}
+        _active={{ borderColor: "gray.100" }}
+        _focus={{ borderColor: "gray.100" }}
       >
         Actividades
       </MenuButton>

@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import {
   Box,
   Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
   Flex,
   HStack,
   IconButton,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GrClose as CloseIcon } from "react-icons/gr";
@@ -25,7 +32,7 @@ const Routes = [
 
 export default function HeaderPublic() {
   const [display, setDisplay] = useState("none");
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   // PARA USAR INFO DESDE REDUX
   // const logo = useSelector((state) => state.organization.organizationData.logo);
 
@@ -61,11 +68,30 @@ export default function HeaderPublic() {
               mr={2}
               icon={<GiHamburgerMenu />}
               display={["flex", "flex", "flex", "none"]}
-              onClick={() => setDisplay("flex")}
+              onClick={onOpen}
             />
           </Flex>
         </Flex>
+        <Drawer placement="top" onClose={onClose} isOpen={isOpen}>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerCloseButton />
+            <DrawerBody>
+              <Flex flexDir="column" align="center">
+                <ActivitiesMenu />
+                {Routes.map((link) => (
+                  <NavLink
+                    key={link.name}
+                    route={link.route}
+                    name={link.name}
+                  />
+                ))}
 
+                <DonateButton />
+              </Flex>
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
         <Flex
           w="100vw"
           bgColor="gray.100"
