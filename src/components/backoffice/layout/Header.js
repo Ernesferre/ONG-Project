@@ -49,7 +49,7 @@ export default function Header() {
 
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={10}>
+      <Box bg={useColorModeValue("gray.100", "gray.900")} px={10} boxShadow={"lg"}>
         <Flex h={16} alignItems={"center"} justifyContent={"left"}>
           <HStack>
             <SomosMasLogo />

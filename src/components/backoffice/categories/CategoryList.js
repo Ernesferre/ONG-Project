@@ -16,7 +16,6 @@ export const CategoryList = () => {
   useEffect(()=>{
     getCategories()
     .then(res => {
-      console.log(res.data)
       setCategories(res.data)
       setLoading(false)
     })
