@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import parse from "html-react-parser";
 import { Link } from "react-router-dom";
-import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
+import { FaQuoteLeft } from "react-icons/fa";
 
 const PublicTestimonials = () => {
   const [loading, setLoading] = useState(true);
@@ -78,7 +78,6 @@ const PublicTestimonials = () => {
                     >
                       {parse(testimonial.description)}
                     </Box>
-                    {/* <Box as={FaQuoteRight} size="12px" color="blue.500" m={'0px 0px 0px auto !important'} /> */}
                     <Divider w={"12%"} borderBottomColor="brandBlue.300" />
                     <Heading fontSize={"xl"} fontWeight={600}>
                       {testimonial.name}

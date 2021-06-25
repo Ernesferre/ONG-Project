@@ -11,7 +11,7 @@ import axios from "axios";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { SomosMasLogo } from "../../../assets/SomosMasLogo";
 
 const Footer = () => {
@@ -19,8 +19,7 @@ const Footer = () => {
   const [loading, setLoading] = useState(true);
   const [display, setDisplay] = useState("none");
 
-  const logo = useSelector((state) => state.organization.organizationData.logo);
-  console.log(logo);
+  // const logo = useSelector((state) => state.organization.organizationData.logo);
 
   useEffect(async () => {
     getOrganization();
@@ -104,11 +103,7 @@ const Footer = () => {
         </Flex>
       </Flex>
 
-      <Flex
-        justify="flex-end"
-        display={{ base: "flex", md: "none" }}
-        justify="flex-end"
-      >
+      <Flex justify="flex-end" display={{ base: "flex", md: "none" }}>
         <IconButton
           aria-label="CloseMenu"
           size="lg"
