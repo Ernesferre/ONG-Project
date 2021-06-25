@@ -49,9 +49,18 @@ const toBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-const NewsForm = ({ newToEdit = {} }) => {
+const NewsForm = ({ newToEdit }) => {
   //estado para cargar categorias al formulario
   const [categorias, setCategorias] = useState([]);
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+
+  useEffect(() => {
+    if (newToEdit) {
+      setDescription(newToEdit.content);
+      setImage(newToEdit.image);
+    }
+  }, [newToEdit]);
 
   //alert: componente reutilizado
   const { setAlert } = useAlert();
@@ -67,7 +76,7 @@ const NewsForm = ({ newToEdit = {} }) => {
   };
   //data para enviar
   const [news, setNews] = useState(
-    "created_at" in newToEdit ? newToEdit : data
+    newToEdit ? newToEdit : data
   );
     //change imagen
   const handleChangeImage = (imageFile) => {
@@ -90,94 +99,99 @@ const NewsForm = ({ newToEdit = {} }) => {
   const handleSubmitForm = async (e) => {
     e.preventDefault();
 
-    //si existe la propiedad created_at es porque tengo que editar
-    if("created_at" in newToEdit){
-      
-      let imageEdit;
-      //si no se sube otra imagen me quedo la que ya estaba y la paso a base64
-      if(typeof news.image == "string"){
+    if (description === "" || image === "") {
+      alert("Por favor complete todos los campos");
+    } else {
 
-        imageEdit = await urlToBase64(news.image)
+      //si existe tengo que editar
+      if(newToEdit){
+        
+        let imageEdit;
+        //si no se sube otra imagen me quedo la que ya estaba y la paso a base64
+        if(typeof news.image == "string"){
+
+          imageEdit = await urlToBase64(news.image)
+
+        } else {
+          //si cargo nueva imagen la conviert a base64
+          imageEdit = await toBase64(news.image).then((res) => res);
+
+        }
+        //data que voy a enviar
+        const data = {
+          id: news.id,
+          name: news.title,
+          content: news.content,
+          image: imageEdit,
+          category_id: news.category_id,
+          updated_at: new Date().toISOString()
+        }
+
+        //peticion a la API
+        newsService.editNews(data, news.id).then(res => {
+
+          const text = res.data.name
+
+          setAlert({
+            title: "Novedad editada",
+            text: text,
+            show: true,
+            type: "success",
+            showCancelButton: false,
+          });
+
+        })
+        .then(() =>  history.push('/backoffice/news'))
+        .catch(err => {
+          setAlert({
+            title: "Error",
+            text: "Error al editar novedad",
+            show: true,
+            type: "error",
+            showCancelButton: true,
+          });
+        })
 
       } else {
-        //si cargo nueva imagen la conviert a base64
-        imageEdit = await toBase64(news.image).then((res) => res);
+        //si tengo que crear
+        let imageEdit;
+        //convertir imagen a base64
+        if(typeof news.image !== "string"){
 
+          imageEdit = await toBase64(news.image).then((res) => res);
+
+        }
+
+        //data a enviar
+        const data = {
+          name: news.title,
+          content: news.content,
+          image: imageEdit,
+          category_id: news.category_id,
+          created_at: new Date().toISOString()
+        }
+
+        //peticion a la API
+        newsService.createNews(data).then(res => {
+          setAlert({
+            title: "Novedad creada",
+            text: "Novedad creada",
+            show: true,
+            type: "success",
+            showCancelButton: false,
+          });
+        })
+        .then(() => history.push('/backoffice/news'))
+        .catch(err => {
+          setAlert({
+            title: "",
+            text: "Error al crear novedad",
+            show: true,
+            type: "error",
+            showCancelButton: true,
+          });
+        })
       }
-      //data que voy a enviar
-      const data = {
-        id: news.id,
-        name: news.title,
-        content: news.content,
-        image: imageEdit,
-        category_id: news.category_id,
-        updated_at: new Date().toISOString()
-      }
-
-      //peticion a la API
-      newsService.editNews(data, news.id).then(res => {
-
-        const text = res.data.name
-
-        setAlert({
-          title: "Novedad editada",
-          text: text,
-          show: true,
-          type: "success",
-          showCancelButton: false,
-        });
-
-      })
-      .then(() =>  history.push('/backoffice/news'))
-      .catch(err => {
-        setAlert({
-          title: "Error",
-          text: "Error al editar novedad",
-          show: true,
-          type: "error",
-          showCancelButton: true,
-        });
-      })
-
-    } else {
-      //si tengo que crear
-      let imageEdit;
-      //convertir imagen a base64
-      if(typeof news.image !== "string"){
-
-        imageEdit = await toBase64(news.image).then((res) => res);
-
-      }
-
-      //data a enviar
-      const data = {
-        name: news.title,
-        content: news.content,
-        image: imageEdit,
-        category_id: news.category_id,
-        created_at: new Date().toISOString()
-      }
-
-      //peticion a la API
-      newsService.createNews(data).then(res => {
-        setAlert({
-          title: "Novedad creada",
-          text: "Novedad creada",
-          show: true,
-          type: "success",
-          showCancelButton: false,
-        });
-      })
-      .then(() => history.push('/backoffice/news'))
-      .catch(err => {
-        setAlert({
-          title: "",
-          text: "Error al crear novedad",
-          show: true,
-          type: "error",
-          showCancelButton: true,
-        });
-      })
     }
 
   };
@@ -186,7 +200,7 @@ const NewsForm = ({ newToEdit = {} }) => {
   
   //si llega props con post para editar
   useEffect(() => {
-    if ("created_at" in newToEdit) {
+    if (newToEdit) {
       setNews({
         ...news,
         title: newToEdit.name,
@@ -215,7 +229,7 @@ const NewsForm = ({ newToEdit = {} }) => {
       padding={10}
     >
       <Heading margin={5}>
-        {"created_at" in newToEdit ? "Editar novedad" : "Crear novedad"}
+        {newToEdit ? "Editar novedad" : "Crear novedad"}
       </Heading>
       <Box
         bg="gray.100"
@@ -248,6 +262,7 @@ const NewsForm = ({ newToEdit = {} }) => {
                 onChange={handleChange}
                 bg="white"
                 placeholder="Seleccione una categoría"
+                isRequired
               >
                 {categorias.length > 0 ? (
                   categorias.map((item) => (
@@ -268,6 +283,7 @@ const NewsForm = ({ newToEdit = {} }) => {
                 data={news.content}
                 onChange={(event, editor) => {
                   const data = editor.getData();
+                  setDescription(data);
                   setNews({
                     ...news,
                     content: data,
@@ -287,7 +303,10 @@ const NewsForm = ({ newToEdit = {} }) => {
               <Input
                 type="file"
                 id="file"
-                onChange={(e) => handleChangeImage(e.target.files)}
+                onChange={(e) => {
+                  handleChangeImage(e.target.files)
+                  setImage(e.target.files[0])
+                  }}
                 style={{
                   height: "0",
                   width: "0",
@@ -299,15 +318,15 @@ const NewsForm = ({ newToEdit = {} }) => {
               <label htmlFor="file" style={{ cursor: "pointer" }}>
                 <Box as={FaFileImage} size="36px" color="brandBlue.300" />
               </label>
-              {news.image && (
+              {image && (
                 <Text style={{ textAlign: "left" }} marginTop={3}>
-                  {news.name}
+                  {newToEdit ? newToEdit.name : image.name}
                 </Text>
               )}
             </FormControl>
             <FormControl>
               <Button variant={'somosMas'} type="submit" size="sm" marginTop={5}>
-              {"created_at" in newToEdit ? "Editar" : "Crear"}
+              {newToEdit ? "Editar" : "Crear"}
               </Button>
             </FormControl>
           </Stack>
