@@ -16,19 +16,20 @@ export const ActivitiesMenu = () => {
         padding="0"
         margin="0"
         bg="white"
-        _hover={{ color: "brandRed.200" }}
+        color="brandBlue.400"
+        _hover={{ color: "brandBlue.300" }}
         _active={{ borderColor: "gray.100" }}
         _focus={{ borderColor: "gray.100" }}
       >
         Actividades
       </MenuButton>
       <MenuList>
-        <MenuItem _hover={{ color: "brandRed.200" }}>
+        <MenuItem _hover={{ color: "brandBlue.300" }}>
           <Link to="/actividades">Todas las actividades</Link>
         </MenuItem>
         {organization.activitiesData
           ? organization.activitiesData.map((activity) => (
-              <MenuItem key={activity.id} _hover={{ color: "brandRed.200" }}>
+              <MenuItem key={activity.id} _hover={{ color: "brandBlue.300" }}>
                 <Link to={`/actividades/${activity.id}`}>{activity.name}</Link>
               </MenuItem>
             ))
