@@ -18,7 +18,10 @@ import { PrivateRoute } from "./routes/PrivateRoute";
 
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { fetchActivities, fetchOrganizationData } from "./features/organizationReducer";
+import {
+  fetchActivities,
+  fetchOrganizationData,
+} from "./features/organizationReducer";
 
 // ROUTE TRANSITIONS
 import { CSSTransition, TransitionGroup } from "react-transition-group";
@@ -29,6 +32,14 @@ const theme = extendTheme({
     heading: "Source Sans Pro, sans-serif",
   },
 
+  styles: {
+    global: {
+      body: {
+        minH: "100vh",
+        bg: "gray.100",
+      },
+    },
+  },
   colors: {
     brandYellow: {
       50: "#FFFFBF",

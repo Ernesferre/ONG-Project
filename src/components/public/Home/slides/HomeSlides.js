@@ -82,7 +82,6 @@ const HomeSlides = () => {
       {/* Dot buttons */}
       <Box
         position="absolute"
-        bottom="5px"
         right="50%"
         transform="translateX(50%)"
         display="flex"
@@ -91,7 +90,7 @@ const HomeSlides = () => {
         {images.map((image, i) => (
           <DotButton
             key={image.id}
-            bg={i * 100 === position ? "brandBlue.300" : "brandRed.100"}
+            bg={i * 100 === position ? "brandBlue.100" : "brandRed.100"}
             onClick={() => {
               moveTo(i);
             }}
@@ -116,7 +115,6 @@ function DotButton(props) {
       {...props}
       w="1.25rem"
       h="1.25rem"
-      border="solid 2px "
       borderColor="brandRed.300"
       transition="transform .25s"
       _hover={{ cursor: "pointer", transform: "scale(1.15)" }}
@@ -131,7 +129,7 @@ function ArrowButton(props) {
       {...props}
       position="absolute"
       borderRadius="0"
-      _focus={{border:"none"}}
+      _focus={{ border: "none" }}
       _hover={{ backgroundColor: "#9AC9FB80" }}
       _active={{ backgroundColor: "#9AC9FBA0" }}
       bg="transparent"
