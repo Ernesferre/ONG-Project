@@ -173,7 +173,7 @@ function Routes() {
     <TransitionGroup>
       <CSSTransition timeout={300} classNames="page" key={location.key}>
         <Switch location={location}>
-          {!token || !parseData || roleId === 1 ? (
+          {!token || !parseData || roleId === 1 || roleId == null ? (
             <>
               <Route path="/" component={Public} />
             </>
