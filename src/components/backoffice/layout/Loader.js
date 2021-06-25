@@ -5,7 +5,7 @@ import {Flex} from '@chakra-ui/react';
 const Loader = () => {
   //Documentation: https://www.npmjs.com/package/react-loader-spinner
   return (
-    <Flex w={'100%'} h={'calc(100vh - 64px)'} position={"absolute"} top={'64px'} zIndex={100} backgroundColor={'white'} justifyContent={'center'} alignItems={'center'}>
+    <Flex w={'100%'} h={'calc(100vh - 64px)'} position={"absolute"} top={'64px'} zIndex={100} backgroundColor={'gray.100'} justifyContent={'center'} alignItems={'center'}>
       <LoaderSpinner visible={true} type="Puff" color="#88BBF2" height={80} width={80} />
     </Flex>
   )
