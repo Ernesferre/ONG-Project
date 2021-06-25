@@ -15,7 +15,7 @@ const Thanks = () => {
                 paddingBottom={6}
                 fontWeight="bold"
                 >
-                ¡Muchas gracias por querer apoyar a la causa! 
+                ¡ Muchas gracias por apoyar a la causa ! 
                 </Text>
                 
                 </Box>
