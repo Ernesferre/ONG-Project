@@ -13,9 +13,12 @@ import {
   FormLabel,
   Input,
   Select,
+  Box,
   Stack,
+  Text,
   Button,
 } from "@chakra-ui/react";
+import { FaFileImage } from "react-icons/fa";
 
 //services
 import { getCategories } from "../categories/CategoriesService";
@@ -128,7 +131,7 @@ const NewsForm = ({ newToEdit = {} }) => {
       .then(() =>  history.push('/backoffice/news'))
       .catch(err => {
         setAlert({
-          title: "",
+          title: "Error",
           text: "Error al editar novedad",
           show: true,
           type: "error",
@@ -159,7 +162,7 @@ const NewsForm = ({ newToEdit = {} }) => {
       newsService.createNews(data).then(res => {
         setAlert({
           title: "Novedad creada",
-          text: "titulo",
+          text: "Novedad creada",
           show: true,
           type: "success",
           showCancelButton: false,
@@ -209,87 +212,107 @@ const NewsForm = ({ newToEdit = {} }) => {
       minHeight="100vh"
       align="center"
       justify="center"
-      padding={6}
+      padding={10}
     >
-      <Heading>
+      <Heading margin={5}>
         {"created_at" in newToEdit ? "Editar novedad" : "Crear novedad"}
       </Heading>
-      <Stack w="80%" p={6} m={10} bg="gray.200">
+      <Box
+        bg="gray.100"
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+        w={[250, 400, 700]}
+        maxWidth={700}
+        boxShadow={"xl"}
+      >
         <form onSubmit={handleSubmitForm}>
-          <FormControl mb={6}>
-            <FormLabel>Titulo</FormLabel>
-            <Input
-              name="title"
-              value={news.title}
-              onChange={handleChange}
-              bg="white"
-              type="text"
-              required
-            />
-          </FormControl>
+          <Stack w={"90%"} margin={[3, 6, 8]} spacing={5}>
+            <FormControl>
+              <FormLabel>Titulo</FormLabel>
+              <Input
+                name="title"
+                value={news.title}
+                onChange={handleChange}
+                bg="white"
+                type="text"
+                isRequired
+              />
+            </FormControl>
 
-          <FormControl mb={6}>
-            <FormLabel>Categoría</FormLabel>
-            <Select
-              name="category_id"
-              value={news.category_id}
-              onChange={handleChange}
-              bg="white"
-              placeholder="Seleccione una categoría"
-            >
-              {categorias.length > 0 ? (
-                categorias.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
-                ))
-              ) : (
-                <option>Agrege categoria</option>
+            <FormControl>
+              <FormLabel  mb={3}>Categoría</FormLabel>
+              <Select
+                name="category_id"
+                value={news.category_id}
+                onChange={handleChange}
+                bg="white"
+                placeholder="Seleccione una categoría"
+              >
+                {categorias.length > 0 ? (
+                  categorias.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))
+                ) : (
+                  <option>Agregar categoría</option>
+                )}
+              </Select>
+            </FormControl>
+
+            <FormControl>
+              <FormLabel marginBottom={3}>Descripción</FormLabel>
+              <CKEditor
+                editor={ClassicEditor}
+                data={news.content}
+                onChange={(event, editor) => {
+                  const data = editor.getData();
+                  setNews({
+                    ...news,
+                    content: data,
+                  });
+                }}
+                config={{
+                  ckfinder: {
+                    // Upload the images to the server using the CKFinder QuickUpload command.
+                    uploadUrl:
+                      "https://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json",
+                  },
+                }}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Foto</FormLabel>
+              <Input
+                type="file"
+                id="file"
+                onChange={(e) => handleChangeImage(e.target.files)}
+                style={{
+                  height: "0",
+                  width: "0",
+                  overflow: "hidden",
+                  padding: "0",
+                  border: "none",
+                }}
+              />
+              <label htmlFor="file" style={{ cursor: "pointer" }}>
+                <Box as={FaFileImage} size="36px" color="brandBlue.300" />
+              </label>
+              {news.image && (
+                <Text style={{ textAlign: "left" }} marginTop={3}>
+                  {news.name}
+                </Text>
               )}
-            </Select>
-          </FormControl>
-
-          <FormControl mb={6}>
-            <FormLabel>Descripcion</FormLabel>
-            <CKEditor
-              editor={ClassicEditor}
-              data={news.content}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                setNews({
-                  ...news,
-                  content: data,
-                });
-              }}
-              config={{
-                ckfinder: {
-                  // Upload the images to the server using the CKFinder QuickUpload command.
-                  uploadUrl:
-                    "https://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json",
-                },
-              }}
-            />
-          </FormControl>
-          <FormControl mb={6}>
-            <FormLabel>Imagen</FormLabel>
-            <Input
-              name="image"
-              onChange={(e) => handleChangeImage(e.target.files)}
-              type="file"
-              h="auto"
-              style={{
-                overflow: "hidden",
-                padding: "0",
-                border: "none",
-              }}
-            />
-          </FormControl>
-
-          <Button mt={4} colorScheme="blue" type="submit">
-            {"created_at" in newToEdit ? "Editar" : "Crear"}
-          </Button>
+            </FormControl>
+            <FormControl>
+              <Button variant={'somosMas'} type="submit" size="sm" marginTop={5}>
+              {"created_at" in newToEdit ? "Editar" : "Crear"}
+              </Button>
+            </FormControl>
+          </Stack>
         </form>
-      </Stack>
+      </Box>
     </Flex>
   );
 };
