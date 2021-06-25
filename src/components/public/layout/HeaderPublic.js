@@ -51,7 +51,10 @@ export default function HeaderPublic() {
             <DonateButton />
           </HStack>
 
-          <Flex alignItems={"center"} ml={{ base: "auto", md: "2rem" }}>
+          <Flex
+            alignItems={"center"}
+            ml={{ base: "auto", md: "auto", lg: "2em" }}
+          >
             <IconButton
               aria-label="Open Menu"
               size="lg"
