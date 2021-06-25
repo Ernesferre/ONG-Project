@@ -50,7 +50,7 @@ export const PublicNews = () => {
                 fontSize="1xl"
                 alignSelf={"right"}
                 textAlign="right"
-                color="brandBlue.200"
+                color="brandBlue.300"
                 fontWeight={700}
                 transition="500ms"
                 _hover={{

@@ -38,7 +38,7 @@ const Home = () => {
             fontSize="1xl"
             alignSelf={"right"}
             textAlign="right"
-            color="brandBlue.200"
+            color="brandBlue.300"
             transition="500ms"
             fontWeight={700}
             _hover={{
