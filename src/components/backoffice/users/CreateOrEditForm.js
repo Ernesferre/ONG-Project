@@ -26,11 +26,11 @@ export const CreateOrEditForm = ({ id }) => {
       .required("Nombre es requerido"),
     password: Yup.string()
       .min(8, "La contraseña debe tener al menos 6 caracteres")
-      .max(200, "Contraseña demasiado larga"),
+      .max(200, "Contraseña demasiado larga")
+      .required("La contraseña es requerida"),
     email: Yup.string()
       .email("Email debe ser válido")
       .required("El Email es requerido"),
-    profilePhoto: Yup.mixed().required("La imagen es requerida"),
   });
 
   const { singleUser, status } = useSelector((state) => state.users);
@@ -68,14 +68,6 @@ export const CreateOrEditForm = ({ id }) => {
 
   const history = useHistory();
 
-  const toBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-
   return (
     <Container maxWidth="container.xl" minHeight="100vh" bg="gray.200">
       <Heading>{id ? "Editar Usuario" : "Crear Usuario"}</Heading>
@@ -95,13 +87,11 @@ export const CreateOrEditForm = ({ id }) => {
             initialValues={initialValues}
             validationSchema={editSchema}
             onSubmit={async (values, actions) => {
-              let base64Img = await toBase64(values.profilePhoto);
               let data = {
                 name: values.name,
                 email: values.email,
                 role_id: parseInt(values.role_id),
                 password: values.password,
-                profilePhoto: base64Img,
               };
               setTimeout(() => {
                 if (id !== undefined) {
@@ -197,48 +187,7 @@ export const CreateOrEditForm = ({ id }) => {
                     </FormControl>
                   )}
                 </Field>
-                <Field name="profilePhoto">
-                  {({ field, form, values }) => (
-                    <FormControl
-                      isInvalid={
-                        form.errors.profilePhoto && form.touched.profilePhoto
-                      }
-                    >
-                      <FormLabel marginTop="1em" htmlFor="profilePhoto">
-                        Foto de Perfil
-                      </FormLabel>
-                      <Input
-                        id="profilePhoto"
-                        type="file"
-                        display="none"
-                        onChange={(e) => {
-                          form.setFieldValue(
-                            "profilePhoto",
-                            e.currentTarget.files[0]
-                          );
-                        }}
-                      />
-                      <FormLabel
-                        htmlFor="profilePhoto"
-                        color="white"
-                        fontWeight="bold"
-                        marginTop="1em"
-                        bg="#5796D9"
-                        width="10em"
-                        padding="0.5em"
-                        textAlign="center"
-                        borderRadius="0.3em"
-                        cursor="pointer"
-                        _hover={{ bg: "#3672B3" }}
-                      >
-                        Elegir Foto
-                      </FormLabel>
-                      <FormErrorMessage>
-                        {form.errors.profilePhoto}
-                      </FormErrorMessage>
-                    </FormControl>
-                  )}
-                </Field>
+
                 <Button
                   mt={4}
                   colorScheme="blue"
