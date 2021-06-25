@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Container, Flex, Heading, Text } from "@chakra-ui/layout";
+import { Flex, Heading, Text } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
-import axios from "axios";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router";
 import { CreateOrEditForm } from "./CreateOrEditForm";
-import { Spinner } from "@chakra-ui/spinner";
+import Loader from '../layout/Loader'
 import { createCategory, editCategory } from './CategoriesService'
 
 export const CreateOrEdit = ({ isCreate, id, categoryToEdit }) => {
@@ -24,6 +23,7 @@ export const CreateOrEdit = ({ isCreate, id, categoryToEdit }) => {
       title: "Error",
       text: "Hubo un error",
       icon: "error",
+      confirmButtonColor: 'brandRed.200',
       confirmButtonText: "Ok",
     });
   };
@@ -33,6 +33,7 @@ export const CreateOrEdit = ({ isCreate, id, categoryToEdit }) => {
       title: "Success",
       text: "Tarea completada",
       icon: "success",
+      confirmButtonColor: '#5796D9',
       confirmButtonText: "Ok",
     });
   };
@@ -54,7 +55,7 @@ export const CreateOrEdit = ({ isCreate, id, categoryToEdit }) => {
       handleSuccess();
       history.push("/backoffice/categories");
     })
-    .catch(err => handleError())
+    .catch(() => handleError())
   }
 
   const handlePut = (id) => {
@@ -63,28 +64,19 @@ export const CreateOrEdit = ({ isCreate, id, categoryToEdit }) => {
       handleSuccess();
       history.push("/backoffice/categories");
     })
-    .catch(err => handleError())
+    .catch(() => handleError())
   }
 
-
+  if (loading) return <Loader/>
   return (
-    <Container
-      maxW="container.xl"
-      bg="gray.200"
-      borderRadius="3px"
-      padding="1em"
-    >
-      {loading ? (
-        <Flex height="10em" justifyContent="center" alignItems="center">
-          <Spinner size="xl" color="#5796D9" />
-        </Flex>
-      ) : (
-        <>
-          {isCreate === false ? (
-            <Heading>Editar Categoría</Heading>
-          ) : (
-            <Heading>Crear Categoría</Heading>
-          )}
+      <Flex
+        w="100%"
+        flexDirection="column"
+        minHeight="calc(100vh - 64px)"
+        align="center"
+        justify="center"
+        >
+        <Heading margin={5}>{!isCreate ? 'Editar categoría' : 'Crear categoría'}</Heading>
           <CreateOrEditForm
             name={name}
             description={description}
@@ -92,18 +84,16 @@ export const CreateOrEdit = ({ isCreate, id, categoryToEdit }) => {
             setDescription={setDescription}
           />
           <Button
-            mt={4}
-            colorScheme="blue"
-            bg="#5796D9"
+            mt={5}
+            variant={'somosMas'}
+            size="sm"
             type="submit"
             onClick={() => {
               isCreate ? handlePost() : handlePut(categoryToEdit.id);
             }}
           >
-            {isCreate === false ? <Text>Editar</Text> : <Text>Crear</Text>}
+            {!isCreate ? 'Editar' : 'Crear'}
           </Button>
-        </>
-      )}
-    </Container>
+        </Flex>
   );
 };

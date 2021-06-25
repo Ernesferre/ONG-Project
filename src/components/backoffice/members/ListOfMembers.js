@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {Container, Flex, Heading, Button} from '@chakra-ui/react'
+import { useBreakpointValue } from "@chakra-ui/media-query";
 import MappedMembers from './MappedMembers'
 import { getMembers } from '../../../functions/membersService'
 import Loader from '../layout/Loader'
@@ -21,13 +22,17 @@ const ListOfMembers = () => {
          .catch(() => setLoading(false))
       }, [update])
 
-    if (loading) return <Loader visible={true} type="Puff" color="#88BBF2" height={80} width={80}/>
+    const alignButton = useBreakpointValue({ base: "center", md: "flex-end" })
+    const marginB = useBreakpointValue({ base: "1em", md: "0" })
+    const marginR = useBreakpointValue({ base: "0", md: "1em" })
+
+    if (loading) return <Loader/>
     return(
         <div>
             <Container maxW="container.xl">
                 <Flex flexDir="column" mb={10}>
-                    <Heading textAlign="center" mt={10}>Miembros</Heading>
-                    <Flex alignSelf='flex-end' marginRight='1em'>
+                    <Heading textAlign="center" mt={10} mb={marginB}>Miembros</Heading>
+                    <Flex alignSelf={alignButton} marginRight={marginR}>
                     <Link to="/backoffice/members/create">
                         <Button variant={'somosMas'}>+ Crear Miembro</Button>
                     </Link>
