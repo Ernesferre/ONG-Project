@@ -33,7 +33,7 @@ const PublicTestimonials = () => {
   return (
     <>
       <Title title="Testimonios" image={photoTitle} />
-      <Container maxW="90%" mb={20}>
+      <Container maxW="container.xl" mb={20}>
         <Flex flexWrap="wrap" justifyContent="center">
           {testimonials.map((testimonial) => (
             <Flex margin="2em 1em 0" key={testimonial.id}>
@@ -96,10 +96,12 @@ const PublicTestimonials = () => {
             alignSelf={"right"}
             textAlign="right"
             color="brandBlue.200"
+            transition="500ms"
             fontWeight={700}
             _hover={{
               color: "brandRed.200",
               marginRight: "0rem",
+              transition: "500ms",
             }}
           >
             Ver todos ➞

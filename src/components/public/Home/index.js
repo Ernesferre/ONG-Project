@@ -30,26 +30,27 @@ const Home = () => {
       <PublicNews />
       <PublicTestimonials />
       <PublicActivities getOnlyLatest={true} />
-      <Container maxW="container.xl"></Container>
-      <Link to="/actividades" style={{ textDecoration: "none" }}>
-        <Text
-          m="4rem 0.2rem 2rem auto"
-          width="max-content"
-          fontSize="1xl"
-          alignSelf={"right"}
-          textAlign="right"
-          color="brandBlue.200"
-          transition="500ms"
-          fontWeight={700}
-          _hover={{
-            color: "brandRed.200",
-            marginRight: "0rem",
-            transition: "500ms",
-          }}
-        >
-          Ver actividades ➞
-        </Text>
-      </Link>
+      <Container maxW="container.xl">
+        <Link to="/actividades" style={{ textDecoration: "none" }}>
+          <Text
+            m="4rem 0.2rem 2rem auto"
+            width="max-content"
+            fontSize="1xl"
+            alignSelf={"right"}
+            textAlign="right"
+            color="brandBlue.200"
+            transition="500ms"
+            fontWeight={700}
+            _hover={{
+              color: "brandRed.200",
+              marginRight: "0rem",
+              transition: "500ms",
+            }}
+          >
+            Ver actividades ➞
+          </Text>
+        </Link>
+      </Container>
     </>
   );
 };
