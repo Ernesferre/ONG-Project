@@ -15,6 +15,7 @@ export const HeaderMain = () => {
     { url: "/testimonios", name: "Testimonios" },
   ];
 
+  let username = "test";
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -30,10 +31,15 @@ export const HeaderMain = () => {
       >
         <ActivitiesMenu />
         <HeaderRoutes routes={routes} />
-        <AuthLinks />
+        <AuthLinks username={username} />
       </Flex>
       <HeaderMenuBtn onOpen={onOpen} />
-      <HeaderDrawer onClose={onClose} isOpen={isOpen} routes={routes} />
+      <HeaderDrawer
+        onClose={onClose}
+        isOpen={isOpen}
+        routes={routes}
+        username={username}
+      />
     </Flex>
   );
 };

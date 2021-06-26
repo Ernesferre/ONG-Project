@@ -11,7 +11,7 @@ import { ActivitiesMenu } from "../layout/ActivitiesMenu";
 import { AuthLinks } from "./AuthLinks";
 import { HeaderRoutes } from "./HeaderRoutes";
 
-export const HeaderDrawer = ({ routes, onClose, isOpen }) => {
+export const HeaderDrawer = ({ routes, onClose, isOpen, username }) => {
   return (
     <Drawer placement="top" onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay />
@@ -21,7 +21,7 @@ export const HeaderDrawer = ({ routes, onClose, isOpen }) => {
           <Flex flexDir="column" align="center">
             <ActivitiesMenu />
             <HeaderRoutes routes={routes} />
-            <AuthLinks />
+            <AuthLinks username={username} />
           </Flex>
         </DrawerBody>
       </DrawerContent>
