@@ -15,7 +15,7 @@ export const ActivitiesMenu = () => {
         height="1.3em"
         padding="0"
         margin="0"
-        bg="white"
+        bg="transparent"
         _hover={{ color: "brandRed.200" }}
         _active={{ borderColor: "gray.100" }}
         _focus={{ borderColor: "gray.100" }}
