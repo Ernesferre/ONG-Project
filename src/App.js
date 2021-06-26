@@ -122,8 +122,6 @@ function App() {
   const roleId = parseData?.role_id;
   const history = useHistory();
 
-  
-
   // GUARDAR INFO DE LA ORGANIZACIÓN EN REDUX
   const dispatch = useDispatch();
   const organizationData = useSelector(
@@ -139,12 +137,10 @@ function App() {
 
   useEffect(() => {
     const filterUser = () => {
-      if (!token || !parseData || roleId === 1) {
-        window.history.pushState("", "home", "/");
-        // window.location.replace("/");
+      if (!token || !parseData) {
+        <Redirect to="/" />;
       } else {
-        window.history.replaceState("", "backoffice", "/backoffice");
-        // window.location.replace("/backoffice");
+        <Redirect to="/" />;
       }
     };
 
@@ -173,15 +169,15 @@ function Routes() {
     <TransitionGroup>
       <CSSTransition timeout={300} classNames="page" key={location.key}>
         <Switch location={location}>
-          {!token || !parseData || roleId === 1 || roleId == null ? (
-            <>
-              <Route path="/" component={Public} />
-            </>
+
+          { roleId === 0 ? (
+            <PrivateRoute path="/backoffice" component={Private} />
           ) : (
-            <>
-              <PrivateRoute path="/backoffice" component={Private} />
-            </>
+              <Route path="/" component={Public} />
           )}
+
+
+          <Route path="/" component={Public} />
         </Switch>
       </CSSTransition>
     </TransitionGroup>
