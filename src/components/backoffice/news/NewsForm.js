@@ -100,7 +100,12 @@ const NewsForm = ({ newToEdit }) => {
     e.preventDefault();
 
     if (description === "" || image === "") {
-      alert("Por favor complete todos los campos");
+      setAlert({
+        title: "Campo vacío",
+        text: "Por favor complete todos los campos.",
+        show: true,
+        type: "error",
+      });
     } else {
 
       //si existe tengo que editar

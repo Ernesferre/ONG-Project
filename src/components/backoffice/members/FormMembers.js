@@ -18,6 +18,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaFileImage, FaFacebook, FaLinkedin } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { createMember, editMember } from "../../../functions/membersService";
+import { useAlert } from "../layout/Alert";
 
 // convert image to base64
 const toBase64 = (file) =>
@@ -93,10 +94,17 @@ const FormMembers = ({ member }) => {
     });
   };
 
+  const { setAlert } = useAlert();
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (name === "" || description === "" || image === "" || facebook === "" || linkedin === "") {
-      alert("Por favor complete todos los campos");
+      setAlert({
+        title: "Campo vacío",
+        text: "Por favor complete todos los campos.",
+        show: true,
+        type: "error",
+      });
     } else {
       let data;
       if (typeof image !== "string") {

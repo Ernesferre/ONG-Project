@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Flex, Heading, Text } from "@chakra-ui/layout";
+import { Flex, Heading } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router";
 import { CreateOrEditForm } from "./CreateOrEditForm";
 import Loader from '../layout/Loader'
 import { createCategory, editCategory } from './CategoriesService'
+import { useAlert } from "../layout/Alert";
 
 export const CreateOrEdit = ({ isCreate, id, categoryToEdit }) => {
   const [name, setName] = useState('');
@@ -17,6 +18,7 @@ export const CreateOrEdit = ({ isCreate, id, categoryToEdit }) => {
   };
 
   const history = useHistory();
+  const { setAlert } = useAlert();
 
   const handleError = () => {
     Swal.fire({
@@ -50,21 +52,39 @@ export const CreateOrEdit = ({ isCreate, id, categoryToEdit }) => {
   }, [isCreate, categoryToEdit])
 
   const handlePost = () => {
-    createCategory(category)
-    .then(() => {
-      handleSuccess();
-      history.push("/backoffice/categories");
-    })
-    .catch(() => handleError())
+    if (name === "" || description === "") {
+      setAlert({
+        title: "Campo vacío",
+        text: "Por favor complete todos los campos.",
+        show: true,
+        type: "error",
+      });
+    } else {
+      createCategory(category)
+      .then(() => {
+        handleSuccess();
+        history.push("/backoffice/categories");
+      })
+      .catch(() => handleError())
+    }
   }
 
   const handlePut = (id) => {
-    editCategory(id, category)
-    .then(() => {
-      handleSuccess();
-      history.push("/backoffice/categories");
-    })
-    .catch(() => handleError())
+    if (name === "" || description === "") {
+      setAlert({
+        title: "Campo vacío",
+        text: "Por favor complete todos los campos.",
+        show: true,
+        type: "error",
+      });
+    } else {
+      editCategory(id, category)
+      .then(() => {
+        handleSuccess();
+        history.push("/backoffice/categories");
+      })
+      .catch(() => handleError())
+    }
   }
 
   if (loading) return <Loader/>
