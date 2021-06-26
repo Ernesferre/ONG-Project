@@ -4,18 +4,16 @@ import { SomosMasLogo } from "../../../assets/SomosMasLogo";
 import { ActivitiesMenu } from "../layout/ActivitiesMenu";
 import { AuthLinks } from "./AuthLinks";
 import { HeaderRoutes } from "./HeaderRoutes";
-import { IconButton } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
 import { HeaderMenuBtn } from "./HeaderMenuBtn";
+import { HeaderDrawer } from "./HeaderDrawer";
 
-export const HeaderMain = ({}) => {
-  const publicRoutes = [
+export const HeaderMain = () => {
+  const routes = [
     { url: "/us", name: "Nosotros" },
     { url: "/novedades", name: "Novedades" },
     { url: "/contacto", name: "Contacto" },
     { url: "/testimonios", name: "Testimonios" },
   ];
-  const privateRoutes = [];
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -31,10 +29,11 @@ export const HeaderMain = ({}) => {
         display={{ base: "none", md: "none", lg: "flex" }}
       >
         <ActivitiesMenu />
-        <HeaderRoutes routes={publicRoutes} />
+        <HeaderRoutes routes={routes} />
         <AuthLinks />
       </Flex>
       <HeaderMenuBtn onOpen={onOpen} />
+      <HeaderDrawer onClose={onClose} isOpen={isOpen} routes={routes} />
     </Flex>
   );
 };
