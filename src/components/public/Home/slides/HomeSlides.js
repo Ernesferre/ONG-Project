@@ -4,34 +4,23 @@ import {
   IoIosArrowForward as RightIcon,
   IoIosArrowBack as LeftIcon,
 } from "react-icons/io";
-
+import axios from "axios";
 import Slide from "./Slide";
 
 const HomeSlides = () => {
   const [position, setPosition] = useState(0);
-  const images = [
-    {
-      id: 1,
-      name: "This is a slide title 1",
-      description: "Description 1",
-      image:
-        "https://content.gallup.com/origin/gallupinc/GallupSpaces/Production/Cms/WORKPLACEV9CMS/30_bc1p3meybi5ttq2iy_w.jpg",
-    },
-    {
-      id: 2,
-      name: "This is a slide title 2",
-      description: "Description 2",
-      image:
-        "https://www.benq.com/content/dam/b2c/en-us/knowledge-center/what-is-the-best-wireless-hdmi-technology-for-collaboration--html/2020-03-27%20What-is-the-best-wireless-hdmi-technology-for-collaboration.jpg",
-    },
-    {
-      id: 3,
-      name: "This is a slide title 3",
-      description: "Description 3",
-      image:
-        "https://www.vive-energia.com/wp-content/uploads/2020/03/business-meeting-and-teamwork-by-business-people-SZ5YLEZ-scaled.jpg",
-    },
-  ];
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    (async function () {
+      try {
+        const response = await axios.get("http://ongapi.alkemy.org/api/slides");
+        setImages(response.data.data);
+      } catch (error) {
+        throw error;
+      }
+    })();
+  }, []);
 
   //Auto slide
   useEffect(() => {
@@ -83,6 +72,7 @@ const HomeSlides = () => {
       <Box
         position="absolute"
         right="50%"
+        bottom="-30px"
         transform="translateX(50%)"
         display="flex"
         gridGap="10px"
