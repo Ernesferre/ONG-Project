@@ -12,6 +12,7 @@ export const UserList = () => {
   
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.userList);
+  console.log({users});
   const status = useSelector((state) => state.users.status);
 
   useEffect(() => {
