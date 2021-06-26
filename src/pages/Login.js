@@ -3,12 +3,13 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 //CHAKRA UI
-import {Flex, Heading, Stack, Button} from "@chakra-ui/react";
+import {Flex, Heading, Stack, Button, background} from "@chakra-ui/react";
 //COMPONENTS
 import TextField from '../components/TextField';
 
+
 import {loginUser} from "../app/authService"
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useToast } from "@chakra-ui/react"
 import { apiService } from "../app/apiService";
 
@@ -71,15 +72,21 @@ const Login = () => {
       {({handleSubmit, handleChange, isSubmitting}) => (
         <Flex
           direction="column"
-          height="90vh"
+          mt={10}
+          mb={10}
           alignItems="center"
           justifyContent="center"
         >
           
-          <Stack bg="#E5E5E5" p={12} rounded={6} width={{ base: "90%", md: "50%", lg: "30%"}}>
+          <Stack 
+            
+            p={12} 
+            bg="#E5E5E5" 
+            rounded={6} 
+            width={{ base: "90%", md: "50%", lg: "30%"}}>
 
             <Stack mb={6}>
-              <Heading>Formulario de registro</Heading>
+              <Heading>Formulario de Login</Heading>
             </Stack>
 
             <Form onSubmit={handleSubmit} spacing={6} w="100%" >
@@ -101,6 +108,25 @@ const Login = () => {
 
             </Form>
 
+            
+
+          </Stack>
+
+          <Stack 
+            mt={4}
+            mb={12}  
+            fontSize="20px" 
+            color="brandBlue.300"
+              
+          >
+
+          <Link
+            mt={4}
+            to="/register"
+            color= "brandBlue.500"
+            > 
+            No estas Logueado ? Registrate aqui
+          </Link>
           </Stack>
 
         </Flex>

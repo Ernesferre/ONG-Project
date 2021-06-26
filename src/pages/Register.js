@@ -4,7 +4,7 @@ import TextField from "../components/TextField";
 import * as Yup from "yup";
 import { registerUser } from "../app/authService";
 import { useHistory } from "react-router-dom";
-import { useToast } from "@chakra-ui/react";
+import { Stack, useToast } from "@chakra-ui/react";
 
 import { useDispatch } from "react-redux";
 import { SET_REGISTER } from "../features/authReducer";
@@ -38,9 +38,10 @@ const Register = () => {
       validationSchema={validate}
       onSubmit={async (values) => {
         const response = await registerUser(values);
+        
 
         if (response) {
-          console.log(response.data);
+          console.log(response);
           dispatch(SET_REGISTER(response.data));
           localStorage.setItem(TOKEN, response.data.token);
           history.push("/");
@@ -55,37 +56,56 @@ const Register = () => {
       }}
     >
       {(formik) => (
-        <Flex height="90vh" alignItems="center" justifyContent="center">
-          <Flex
-            direction="column"
+        <Flex 
+          direction="column"
+          mt={10}
+          mb={10}
+          alignItems="center" 
+          justifyContent="center">
+          
+          <Stack
+            
             p={12}
-            background="gray.100"
+            bg="#E5E5E5"
             rounded={6}
-            alignItems="center"
-            justifyContent="center"
+            width={{ base: "90%", md: "80%", lg: "30%"}}
           >
-            <Heading mb={6} mt={1}>
-              {" "}
-              Formulario de Registro{" "}
-            </Heading>
+            <Stack mb={6}>
+              <Heading  > Formulario de Registro </Heading>
+            </Stack>
 
-            <Form>
-              <TextField label="Nombre" name="name" type="text" />
-              <TextField label="Apellido" name="apellido" type="text" />
-              <TextField label="Email" name="email" type="email" />
-              <TextField label="Password" name="password" type="password" />
+            <Form w="100%" spacing={6} >
 
-              <Flex mt={6}>
-                <Button colorScheme="teal" variant="solid" type="submit">
-                  Registrarme
-                </Button>
-                <Spacer />
-                <Button colorScheme="red" type="reset">
-                  Reset
-                </Button>
+              <TextField bg="whrite" label="Nombre" name="name" type="text" />
+              <TextField bg="whrite" label="Apellido" name="apellido" type="text" />
+              <TextField bg="whrite" label="Email" name="email" type="email" />
+              <TextField bg="whrite" label="Password" name="password" type="password" />
+
+              <Flex mt={6} mb={6}>
+                
+                  <Button 
+                    type="submit"
+                    colorScheme="blue" 
+                    variant="solid" 
+                    fontSize="15px"
+                    
+                    >
+                    Registrarme
+                  </Button>
+
+                  <Spacer />
+
+                  <Button colorScheme="red" type="reset">
+                    Reset
+                  </Button>
+
               </Flex>
+
             </Form>
-          </Flex>
+
+
+
+          </Stack>
         </Flex>
       )}
     </Formik>
