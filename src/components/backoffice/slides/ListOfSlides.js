@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Container, Flex, Heading, Button } from "@chakra-ui/react";
 import { getSlides } from "./slidesService";
 import SlidesShow from "./SlidesShow";
+import Loader from '../layout/Loader'
 
 const ListOfSlides = () => {
   const [loading, setLoading] = useState(true);
@@ -18,10 +17,9 @@ const ListOfSlides = () => {
     });
   }, [update]);
 
+  if (loading) return <Loader />
   return (
-    <>
       <SlidesShow slides={slides} parentCallBack={setUpdate} />
-    </>
   );
 };
 

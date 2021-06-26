@@ -1,6 +1,7 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Container, Flex, Heading, Text, Box } from "@chakra-ui/layout";
+import { useBreakpointValue } from "@chakra-ui/media-query";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -30,6 +31,8 @@ export const Organization = () => {
     .catch(() => handleError())
   }, []);
 
+  const maxWText = useBreakpointValue({ base: "250px", md: "600px" })
+
   return (
     <Container maxW="container.xl">
       {loading ? (
@@ -43,19 +46,24 @@ export const Organization = () => {
             </Text>
             <Heading size="lg">{data.name}</Heading>
           </Flex>
-          <Image
+          <Flex flexDir="column " mt="2em">
+            <Text color="gray.500" fontWeight="bold">
+              Logo
+            </Text>
+            <Image
             src={data.logo}
             w={'220px'}
             alignSelf="center"
             objectFit="cover"
-          />
-          <Flex flexDir="column" >
+            />
+          </Flex>
+          <Flex flexDir="column" mt="2em">
             <Text color="gray.500" fontWeight="bold">
               Descripción
             </Text>
-            <Box alignSelf='center' maxWidth={'250px'}> {parse(data.short_description)}</Box>
+            <Box alignSelf='center' maxWidth={maxWText}> {parse(data.short_description)}</Box>
           </Flex>
-          <Flex justifyContent="center" mt="3em">
+          <Flex justifyContent="center" mt="2em">
             <Link to="/backoffice/organization/edit">
               <Button variant={'somosMas'}>
                 Editar
