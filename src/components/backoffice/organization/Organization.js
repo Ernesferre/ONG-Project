@@ -1,16 +1,17 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
-import { Container, Flex, Heading, Text } from "@chakra-ui/layout";
-import { Spinner } from "@chakra-ui/spinner";
-import axios from "axios";
+import { Container, Flex, Heading, Text, Box } from "@chakra-ui/layout";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { getOrganization } from "./organizationService";
+import Loader from '../layout/Loader'
+import parse from "html-react-parser";
 
 export const Organization = () => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
+
   const handleError = () => {
     Swal.fire({
       title: "Error",
@@ -32,33 +33,31 @@ export const Organization = () => {
   return (
     <Container maxW="container.xl">
       {loading ? (
-        <Flex height="10em" justifyContent="center" alignItems="center">
-          <Spinner size="xl" color="#5796D9" />
-        </Flex>
+        <Loader />
       ) : (
-        <Flex flexDir="column" bg="gray.200" padding="1em" borderRadius="0.2em">
-          <Heading>Organización</Heading>
-          <Flex flexDir="column " margin="1em">
+        <Flex flexDir="column" mb={10} >
+          <Heading textAlign="center" mt={10} >Organización</Heading>
+          <Flex flexDir="column " mt="3em">
             <Text color="gray.500" fontWeight="bold">
               Nombre
             </Text>
-            <Heading size="md">{data.name}</Heading>
+            <Heading size="lg">{data.name}</Heading>
           </Flex>
           <Image
             src={data.logo}
-            boxSize="sm"
+            w={'220px'}
             alignSelf="center"
             objectFit="cover"
           />
-          <Flex flexDir="column" margin="1em">
+          <Flex flexDir="column" >
             <Text color="gray.500" fontWeight="bold">
               Descripción
             </Text>
-            <Text> {data.short_description}</Text>
+            <Box alignSelf='center' maxWidth={'250px'}> {parse(data.short_description)}</Box>
           </Flex>
-          <Flex justifyContent="center">
+          <Flex justifyContent="center" mt="3em">
             <Link to="/backoffice/organization/edit">
-              <Button bg="#FAFA88" _hover={{ bg: "gray.300" }}>
+              <Button variant={'somosMas'}>
                 Editar
               </Button>
             </Link>
