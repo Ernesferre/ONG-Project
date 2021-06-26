@@ -10,7 +10,6 @@ import {
   Input,
 } from "@chakra-ui/react";
 
-
 import { FaFileImage } from "react-icons/fa";
 
 import Swal from "sweetalert2";
@@ -24,28 +23,27 @@ const toBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-
 const HomeEdition = () => {
     
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
-
 
   const handleSuccess = () => {
     Swal.fire({
       title: "Success",
       text: "Home Editada Correctamente",
       icon: "success",
+      confirmButtonColor: '#5796D9',
       confirmButtonText: "Ok",
     });
   };
-
 
   const handleError = () => {
     Swal.fire({
       title: "Error",
       text: "Favor de completar los 2 campos",
       icon: "error",
+      confirmButtonColor: 'brandRed.200',
       confirmButtonText: "Ok",
     });
   };
@@ -55,8 +53,6 @@ const HomeEdition = () => {
     e.preventDefault();
     if (name === "" || image === "") {
       handleError();
-      // alert("Por favor complete todos los campos");
-      
     } else {
       handleSuccess();
       let data;
@@ -66,22 +62,16 @@ const HomeEdition = () => {
           name: name,
           image: base64Img,
         };
-        console.log("data ingresada")
-        console.log(data);
       } else {
         data = {
           name: name,
           image: image,
         };
-        console.log("data ingresadaa")
       }
-      
     }
   }
-
     
     return (
-      
       <Flex
       w="100%"
       flexDirection="column"
@@ -98,10 +88,8 @@ const HomeEdition = () => {
         overflow="hidden"
         w={[250, 400, 700]}
         maxWidth={700}
+        boxShadow={"xl"}
       >
-
-        
-
         <form method="POST" onSubmit={handleSubmit}>
           <Stack w={"90%"} margin={[3, 6, 8]} spacing={5}>
             <FormControl>
@@ -112,17 +100,14 @@ const HomeEdition = () => {
                 onChange={(e) => setName(e.target.value)}
                 bg="white"
                 minLength = "20"
-                // isRequired
               />
             </FormControl>
-            
-            
             <FormControl>
               <FormLabel>Seleccione Slide</FormLabel>
               <Input
                 type="file"
                 id="file"
-                // Los Slides deben probenir de la API // Reemplazar cuando esten disponibles //
+                // Los Slides deben provenir de la API // Reemplazar cuando esten disponibles //
                 onChange={(e) => setImage(e.target.files[0])}
                 style={{
                   height: "0",
@@ -133,17 +118,14 @@ const HomeEdition = () => {
                 }}
               />
               <label htmlFor="file" style={{ cursor: "pointer" }}>
-                <Box as={FaFileImage} size="36px" color="blue.500" />
+                <Box as={FaFileImage} size="36px" color="brandBlue.300" />
               </label>
-              
             </FormControl>
-
             <FormControl>
-              <Button colorScheme="blue" type="submit" size="sm" marginTop={5}>
+              <Button variant={'somosMas'} type="submit" size="sm" marginTop={5}>
                 Editar
               </Button>
             </FormControl>
-
           </Stack>
         </form>
       </Box>
