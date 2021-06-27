@@ -34,7 +34,7 @@ export async function loginUser(data) {
         }
         const response = await fetch(url, params)
         const result = await response.json()
-        console.log(result);
+        console.log(result.data.user.name);
         return result
         
     } catch (error) {

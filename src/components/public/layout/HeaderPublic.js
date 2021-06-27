@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import {
   Box,
+  Text,
   Flex,
   HStack,
   IconButton,
   Button,
   useColorModeValue,
   Stack,
+  background,
 } from "@chakra-ui/react";
 import { GiHamburgerMenu, GiHamburgerMenu as HamburgerIcon } from "react-icons/gi";
 import { GrClose as CloseIcon } from "react-icons/gr";
 import { NavLink as LinkRouterDom, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 import '../../../scss/app.scss';
 import ItemCategories from "./ItemCategories";
+import { selectUser, SET_LOGOUT } from "../../../features/authReducer";
 
 const Routes = [
   { route: "/", name: "Inicio" },
@@ -21,16 +25,44 @@ const Routes = [
   { route: "/actividades", name: "Actividades" },
   // { route: "/novedades", name: "Novedades" },
   { route: "/contacto", name: "Contacto" },
-  { route: "/login", name: "Iniciar Sesion" },
+  // { route: "/login", name: "Iniciar Sesion" },
 ];
 
 export default function HeaderPublic() {
   
   const [display, setDisplay] = useState('none');
+  const dispatch = useDispatch();
+  let history = useHistory();
+  
 
   // PARA USAR INFO DESDE REDUX
   const logo = useSelector((state) => state.organization.organizationData.logo);
-  console.log(logo)
+  // const userName = useSelector((state) => state.register.user.name);
+  // const Logged = useSelector(selectUser.loggedIn);
+  const Logged = useSelector((state) => state.user.user.loggedIn);
+  const Name = useSelector((state) => state.user.user.name)
+  console.log(Logged);
+
+  // console.log(Logged.loggedIn);
+  
+
+  const hadleLogout = () => {
+    dispatch(
+      SET_LOGOUT({
+        name: null,
+        email: null,
+        role_id: null,
+        loggedIn: false
+      })
+    );
+    localStorage.removeItem('token')
+    history.push("/login");
+  }
+
+  const handleLogin = () => {
+    history.push("/login");
+  }
+
   
   return (
     <>
@@ -40,6 +72,7 @@ export default function HeaderPublic() {
             <LinkRouterDom to="/">
               <img src={logo} width="120px" alt="Somos más logo" />
             </LinkRouterDom>
+            {/* <span> {userName} </span> */}
           </HStack>
           <HStack
             as={"nav"}
@@ -47,6 +80,18 @@ export default function HeaderPublic() {
             spacing={10}
             display={{ base: "none", md: "flex" }}
           >
+          
+          {Logged ? 
+            <Text 
+              mr="1rem" 
+              fontSize="xl"
+              color="gray.500"
+              
+               
+            > Bienvenido {Name} 
+            </Text>     : 
+            null }
+             
             {Routes.map((link) => (
               <NavLink
                 key={link.name}
@@ -55,8 +100,34 @@ export default function HeaderPublic() {
               ></NavLink>
             ))}
 
+            
+
+
             {/* Donations */}
             <DonateButton />
+
+            <Flex>
+            { Logged ? 
+              
+              <Button
+                onClick={hadleLogout}
+                bg="red.300"
+                color="white"
+                textColor="white"
+              > Cerrar Sesion </Button>  :
+              
+              <Button
+                onClick={handleLogin}
+                bg="blue.300"
+                textColor="white"
+                _hover={{ textColor: "blue.300", background:"white" }}
+              > 
+                Iniciar Sesion 
+              </Button> 
+            }
+            </Flex>
+
+
           </HStack>
 
           <Flex alignItems={"center"} ml={{ base: "auto", md: "2rem" }}>
@@ -108,7 +179,9 @@ export default function HeaderPublic() {
                     name={link.name}
                 ></NavLink>
                 ))}
-                {/* Donations */}
+                
+                
+                
                 <DonateButton />
             </Flex>
         </Flex>
