@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { SET_REGISTER } from "../features/authReducer";
 
 import { Button, Heading, Flex, Spacer } from "@chakra-ui/react";
+import swal from 'sweetalert';
+
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -43,8 +45,9 @@ const Register = () => {
         if (response) {
           console.log(response);
           dispatch(SET_REGISTER(response.data));
-          localStorage.setItem(TOKEN, response.data.token);
-          history.push("/");
+          // localStorage.setItem(TOKEN, response.data.token);
+          swal("Registro Exitoso!", "Logueate para ingresar");
+          history.push("/login");
         } else {
           toast({
             title: "Error al registrar el usuario.",

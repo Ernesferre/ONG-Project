@@ -23,6 +23,7 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const TOKEN = "token";
+  const NAME = "name";
 
   let history = useHistory();
   const toast = useToast()
@@ -41,20 +42,32 @@ const Login = () => {
       }}
       validationSchema={validate}
       
+      
       onSubmit={ async (values, actions) => {
 
        
         const response = await loginUser(values)
     
         if(response.data?.token) {
-            console.log(response.data);
-            dispatch(SET_LOGIN(response.data))
-            localStorage.setItem(TOKEN, response.data.token)
+            console.log(response.data.user.name);
+            console.log(response.data.token);
+            dispatch(
+              SET_LOGIN({
+                name: response.data.user.name,
+                email: response.data.user.email,
+                role_id: response.data.user.role_id,
+                loggedIn: true,
+                })
+            );
+            localStorage.setItem(
+                TOKEN, response.data.token
+                
+            )
             apiService (response.data?.token);
             history.push("/");
        
         }  else {
-        
+            console.log("No se registran datos")
             toast({
                 title: "Error al registrar el usuario.",  
                 status: "error",
