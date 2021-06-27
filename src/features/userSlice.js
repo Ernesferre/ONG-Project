@@ -54,12 +54,24 @@ export const createUser = createAsyncThunk(
   "users/createUser",
   async (userData) => {
     try {
-      const response = await axios.post(
-        "http://ongapi.alkemy.org/api/users",
-        userData
-      );
+      // const response = await axios.post(
+      //   "http://ongapi.alkemy.org/api/users",
+      //   userData
+      // );
+      const url = `http://ongapi.alkemy.org/api/register`;
+      const params = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      };
+      const response = await fetch(url, params);
+      const result = await response.json();
       handleSuccess("Usuario creado");
-      return response.data;
+      return result;
+
+      // return response.data;
     } catch (error) {
       handleError("Hubo un error");
     }

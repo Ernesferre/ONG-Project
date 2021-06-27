@@ -14,19 +14,6 @@ import { NavLink } from "./Header";
 
 const Sections = [
   {
-    name: "Categoríass",
-    routes: [
-      {
-        route: "/backoffice/categories",
-        name: "Listar categorías",
-      },
-      {
-        route: "/backoffice/categories/create",
-        name: "Crear categorías",
-      },
-    ],
-  },
-  {
     name: "Novedades",
     routes: [
       {
@@ -62,6 +49,84 @@ const Sections = [
       {
         route: "/backoffice/testimonials/create",
         name: "Crear testimonio",
+      },
+    ],
+  },
+  {
+    name: "Miembros",
+    routes: [
+      {
+        route: "/backoffice/members",
+        name: "Listar miembros",
+      },
+      {
+        route: "/backoffice/members/create",
+        name: "Crear miembro",
+      },
+    ],
+  },
+  {
+    name: "Categorías",
+    routes: [
+      {
+        route: "/backoffice/categories",
+        name: "Listar categorías",
+      },
+      {
+        route: "/backoffice/categories/create",
+        name: "Crear categorías",
+      },
+    ],
+  },
+  {
+    name: "Slides",
+    routes: [
+      {
+        route: "/backoffice/slides",
+        name: "Listar slides",
+      },
+      {
+        route: "/backoffice/slides/create",
+        name: "Crear slide",
+      },
+    ],
+  },
+  {
+    name: "Users",
+    routes: [
+      {
+        route: "/backoffice/users",
+        name: "Listar Users",
+      },
+      {
+        route: "/backoffice/users/create",
+        name: "Crear user",
+      },
+    ],
+  },
+  {
+    name: "Organización",
+    routes: [
+      {
+        route: "/backoffice/organization",
+        name: "Ver organización",
+      },
+      {
+        route: "/backoffice/organization/edit",
+        name: "Editar organización",
+      },
+    ],
+  },
+  {
+    name: "Backoffice",
+    routes: [
+      {
+        route: "/backoffice",
+        name: "Ver backoffice",
+      },
+      {
+        route: "/backoffice/homeEdition",
+        name: "Editar backoffice",
       },
     ],
   },

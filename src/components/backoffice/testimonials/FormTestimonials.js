@@ -127,6 +127,7 @@ const TestimonialsForm = ({ testimonialToEdit }) => {
         overflow="hidden"
         w={[250, 400, 700]}
         maxWidth={700}
+        boxShadow={"xl"}
       >
         <form method="POST" onSubmit={handleSubmit}>
           <Stack w={"90%"} margin={[3, 6, 8]} spacing={5}>
@@ -169,7 +170,7 @@ const TestimonialsForm = ({ testimonialToEdit }) => {
                 }}
               />
               <label htmlFor="file" style={{ cursor: "pointer" }}>
-                <Box as={FaFileImage} size="36px" color="blue.500" />
+                <Box as={FaFileImage} size="36px" color="brandBlue.300" />
               </label>
               {image && (
                 <Text style={{ textAlign: "left" }} marginTop={3}>
@@ -178,8 +179,8 @@ const TestimonialsForm = ({ testimonialToEdit }) => {
               )}
             </FormControl>
             <FormControl>
-              <Button colorScheme="blue" type="submit" size="sm" marginTop={5}>
-                {testimonialToEdit ? "Guardar" : "Crear"}
+              <Button variant={'somosMas'} type="submit" size="sm" marginTop={5}>
+                {testimonialToEdit ? "Editar" : "Crear"}
               </Button>
             </FormControl>
           </Stack>

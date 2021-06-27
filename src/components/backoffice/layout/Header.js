@@ -26,10 +26,10 @@ import { SET_LOGOUT } from "./../../../features/authReducer";
 import { SomosMasLogo } from "../../../assets/SomosMasLogo";
 
 const Routes = [
-  { route: "/backoffice/categories", name: "Categorías" },
   { route: "/backoffice/news", name: "Novedades" },
   { route: "/backoffice/activities", name: "Actividades" },
   { route: "/backoffice/testimonials", name: "Testimonios" },
+  { route: "/backoffice/members", name: "Miembros" },
 ];
 
 export default function Header() {
@@ -49,7 +49,7 @@ export default function Header() {
 
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={10}>
+      <Box bg={useColorModeValue("gray.100", "gray.900")} px={10} boxShadow={"lg"}>
         <Flex h={16} alignItems={"center"} justifyContent={"left"}>
           <HStack>
             <SomosMasLogo />

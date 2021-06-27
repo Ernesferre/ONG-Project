@@ -18,6 +18,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaFileImage, FaFacebook, FaLinkedin } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { createMember, editMember } from "../../../functions/membersService";
+import { useAlert } from "../layout/Alert";
 
 // convert image to base64
 const toBase64 = (file) =>
@@ -68,6 +69,7 @@ const FormMembers = ({ member }) => {
       title: "Hecho",
       text: `Miembro ${name} creado`,
       icon: "success",
+      confirmButtonColor: '#5796D9',
       confirmButtonText: "Ok",
     });
   };
@@ -77,6 +79,7 @@ const FormMembers = ({ member }) => {
       title: "Hecho",
       text: `Miembro ${name} editado`,
       icon: "success",
+      confirmButtonColor: '#5796D9',
       confirmButtonText: "Ok",
     });
   };
@@ -86,14 +89,22 @@ const FormMembers = ({ member }) => {
       title: "Error",
       text: "Hubo un error",
       icon: "error",
+      confirmButtonColor: 'brandRed.200',
       confirmButtonText: "Ok",
     });
   };
 
+  const { setAlert } = useAlert();
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (name === "" || description === "" || image === "" || facebook === "" || linkedin === "") {
-      alert("Por favor complete todos los campos");
+      setAlert({
+        title: "Campo vacío",
+        text: "Por favor complete todos los campos.",
+        show: true,
+        type: "error",
+      });
     } else {
       let data;
       if (typeof image !== "string") {
@@ -154,6 +165,7 @@ const FormMembers = ({ member }) => {
         overflow="hidden"
         w={[250, 400, 700]}
         maxWidth={700}
+        boxShadow={"xl"}
       >
         <form method="POST" onSubmit={handleSubmit}>
           <Stack w={"90%"} margin={[3, 6, 8]} spacing={5}>
@@ -186,7 +198,7 @@ const FormMembers = ({ member }) => {
                 <InputGroup>
                     <InputLeftElement
                     pointerEvents="none"
-                    children={<FaLinkedin color="gray.300" />}
+                    children={<FaLinkedin color="brandBlue.300" />}
                     />
                     <Input type='url' 
                     placeholder="Linkedin URL" 
@@ -202,7 +214,7 @@ const FormMembers = ({ member }) => {
                 <InputGroup>
                     <InputLeftElement
                     pointerEvents="none"
-                    children={<FaFacebook color="gray.300" />}
+                    children={<FaFacebook color="brandBlue.300" />}
                     />
                     <Input type='url' 
                     placeholder="Facebook URL" 
@@ -228,7 +240,7 @@ const FormMembers = ({ member }) => {
                 }}
               />
               <label htmlFor="file" style={{ cursor: "pointer" }}>
-                <Box as={FaFileImage} size="36px" color="blue.500" />
+                <Box as={FaFileImage} size="36px" color="brandBlue.300" />
               </label>
               {image && (
                 <Text style={{ textAlign: "left" }} marginTop={3}>
@@ -237,8 +249,8 @@ const FormMembers = ({ member }) => {
               )}
             </FormControl>
             <FormControl>
-              <Button colorScheme="blue" type="submit" size="sm" marginTop={5}>
-                Crear
+              <Button variant={'somosMas'} type="submit" size="sm" marginTop={5}>
+                {member ? "Editar" : "Crear"}
               </Button>
             </FormControl>
           </Stack>
