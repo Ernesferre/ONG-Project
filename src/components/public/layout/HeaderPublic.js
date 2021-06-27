@@ -1,48 +1,39 @@
 import React, { useState } from "react";
 import {
   Box,
-<<<<<<< HEAD
-  Text,
-=======
   Button,
+  Text,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
   DrawerOverlay,
->>>>>>> master
   Flex,
   HStack,
   IconButton,
   useColorModeValue,
-<<<<<<< HEAD
   Stack,
   background,
-=======
   useDisclosure,
->>>>>>> master
 } from "@chakra-ui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GrClose as CloseIcon } from "react-icons/gr";
 import { NavLink as LinkRouterDom, useHistory } from "react-router-dom";
-<<<<<<< HEAD
 import { useSelector, useDispatch } from "react-redux";
 
 import '../../../scss/app.scss';
 import ItemCategories from "./ItemCategories";
 import { selectUser, SET_LOGOUT } from "../../../features/authReducer";
-=======
 import "../../../scss/app.scss";
-import ItemCategories from "./ItemCategories";
+// import ItemCategories from "./ItemCategories";
 import { SomosMasLogo } from "../../../assets/SomosMasLogo";
 import { ActivitiesMenu } from "./ActivitiesMenu";
->>>>>>> master
 
 const Routes = [
   { route: "/us", name: "Nosotros" },
   { route: "/novedades", name: "Novedades" },
   { route: "/contacto", name: "Contacto" },
-<<<<<<< HEAD
+  { route: "/testimonios", name: "Testimonios" }
   // { route: "/login", name: "Iniciar Sesion" },
 ];
 
@@ -51,6 +42,8 @@ export default function HeaderPublic() {
   const [display, setDisplay] = useState('none');
   const dispatch = useDispatch();
   let history = useHistory();
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
   
 
   // PARA USAR INFO DESDE REDUX
@@ -81,32 +74,18 @@ export default function HeaderPublic() {
     history.push("/login");
   }
 
-  
-=======
-  { route: "/testimonios", name: "Testimonios" },
-  { route: "/login", name: "Iniciar Sesion" },
-];
 
-export default function HeaderPublic() {
-  const [display, setDisplay] = useState("none");
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  // PARA USAR INFO DESDE REDUX
-  // const logo = useSelector((state) => state.organization.organizationData.logo);
 
->>>>>>> master
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={10}>
         <Flex h={16} alignItems={"center"} justifyContent={"left"}>
           <HStack>
-<<<<<<< HEAD
-            <LinkRouterDom to="/">
+            {/* <LinkRouterDom to="/">
               <img src={logo} width="120px" alt="Somos más logo" />
-            </LinkRouterDom>
+            </LinkRouterDom> */}
             {/* <span> {userName} </span> */}
-=======
             <SomosMasLogo />
->>>>>>> master
           </HStack>
           <HStack
             as={"nav"}
@@ -114,22 +93,18 @@ export default function HeaderPublic() {
             spacing={10}
             display={{ base: "none", md: "none", lg: "flex" }}
           >
-<<<<<<< HEAD
           
           {Logged ? 
             <Text 
               mr="1rem" 
               fontSize="xl"
               color="gray.500"
-              
                
             > Bienvenido {Name} 
             </Text>     : 
             null }
              
-=======
             <ActivitiesMenu />
->>>>>>> master
             {Routes.map((link) => (
               <NavLink key={link.name} route={link.route} name={link.name} />
             ))}
@@ -140,7 +115,7 @@ export default function HeaderPublic() {
             {/* Donations */}
             <DonateButton />
 
-            <Flex>
+            {/* <Flex> */}
             { Logged ? 
               
               <Button
@@ -159,7 +134,7 @@ export default function HeaderPublic() {
                 Iniciar Sesion 
               </Button> 
             }
-            </Flex>
+            {/* </Flex> */}
 
 
           </HStack>
@@ -192,14 +167,35 @@ export default function HeaderPublic() {
                     name={link.name}
                   />
                 ))}
-<<<<<<< HEAD
                 
                 
                 
-=======
+                
 
->>>>>>> master
                 <DonateButton />
+
+              { Logged ? 
+              
+                <Button
+                  onClick={hadleLogout}
+                  bg="red.300"
+                  color="white"
+                  textColor="white"
+                  mt={2}
+                  
+                > Cerrar Sesion </Button>  :
+                
+                <Button
+                  onClick={handleLogin}
+                  bg="blue.300"
+                  textColor="white"
+                  mt={2}
+                  _hover={{ textColor: "blue.300", background:"white" }}
+                > 
+                  Iniciar Sesion 
+                </Button> 
+              }
+
               </Flex>
             </DrawerBody>
           </DrawerContent>

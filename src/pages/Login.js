@@ -49,7 +49,7 @@ const Login = () => {
         const response = await loginUser(values)
     
         if(response.data?.token) {
-<<<<<<< HEAD
+
             console.log(response.data.user.name);
             console.log(response.data.token);
             dispatch(
