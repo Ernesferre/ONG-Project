@@ -47,12 +47,8 @@ const Register = () => {
           console.log(response);
           dispatch(SET_REGISTER(response.data));
           // localStorage.setItem(TOKEN, response.data.token);
-<<<<<<< HEAD
           swal("Registro Exitoso!", "Logueate para ingresar");
           history.push("/login");
-=======
-          history.push("/");
->>>>>>> master
         } else {
           toast({
             title: "Error al registrar el usuario.",
