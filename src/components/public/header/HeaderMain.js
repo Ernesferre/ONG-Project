@@ -8,6 +8,7 @@ import { HeaderMenuBtn } from "./HeaderMenuBtn";
 import { HeaderDrawer } from "./HeaderDrawer";
 import { DonateBtn } from "./DonateBtn";
 import { BackofficeRoutes } from "./backoffice/BackofficeRoutes";
+import { BackofficeDrawer } from "./backoffice/BackofficeDrawer";
 
 export const HeaderMain = () => {
   const routes = [
@@ -28,9 +29,21 @@ export const HeaderMain = () => {
       </Flex>
       {isBackoffice ? (
         <>
-          <Flex marginLeft="auto" marginRight="1em">
+          <Flex
+            marginLeft="auto"
+            marginRight="1em"
+            display={{ base: "none", md: "none", lg: "flex" }}
+          >
             <BackofficeRoutes />
+            <AuthLinks username={username} />
           </Flex>
+          <HeaderMenuBtn onOpen={onOpen} />
+          <BackofficeDrawer
+            onClose={onClose}
+            isOpen={isOpen}
+            routes={routes}
+            username={username}
+          />
         </>
       ) : (
         <>
