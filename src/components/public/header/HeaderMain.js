@@ -20,7 +20,7 @@ export const HeaderMain = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Flex height="5em">
+    <Flex height="5em" boxShadow="sm">
       <Flex alignItems="center" margin="1em">
         <SomosMasLogo />
       </Flex>
