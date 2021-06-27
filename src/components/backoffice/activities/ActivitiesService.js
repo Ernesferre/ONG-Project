@@ -2,12 +2,7 @@ const url = "http://ongapi.alkemy.org/api/activities";
 
 export const getActivities = async () => {
   return await fetch(url, { method: "GET" })
-
-
     .then((response) => response.json())
-
-    // .then((res) =>console.log(res.data))
-
     .catch((err) => console.log(err));
 };
 
@@ -34,8 +29,7 @@ export function createActivity(values, lastId) {
         },
       })
     .then((response) => response.json())
-    .then((json) => {
-        console.log(json)
+    .then(() => {
         return 'Posted! Great job!'
     })
     .catch(err => {
@@ -67,8 +61,7 @@ export function editActivity(id, values) {
         },
       })
     .then((response) => response.json())
-    .then((json) => {
-        console.log(json)
+    .then(() => {
         return 'Posted! Great job!'
     })
     .catch(err => {
@@ -77,10 +70,8 @@ export function editActivity(id, values) {
     })
 }
 
-
 export const deleteActivities = (id) => {
   return fetch(`${url}/${id}`, {method: 'DELETE'})
-  // .then(res => res.data)
   .then(() => 'Category deleted')
   .catch(err => console.log(err))
 }

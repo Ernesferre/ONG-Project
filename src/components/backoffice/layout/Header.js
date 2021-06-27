@@ -12,24 +12,27 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
-import { GiHamburgerMenu, GiHamburgerMenu as HamburgerIcon } from "react-icons/gi";
+import {
+  GiHamburgerMenu,
+  GiHamburgerMenu as HamburgerIcon,
+} from "react-icons/gi";
 import { GrClose as CloseIcon } from "react-icons/gr";
 
 import { NavLink as LinkRouterDom } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
-import {useDispatch} from "react-redux";
-import {SET_LOGOUT} from './../../../features/authReducer'
+import { useDispatch } from "react-redux";
+import { SET_LOGOUT } from "./../../../features/authReducer";
+import { SomosMasLogo } from "../../../assets/SomosMasLogo";
 
 const Routes = [
-  { route: "/backoffice/categories", name: "Categorías" },
   { route: "/backoffice/news", name: "Novedades" },
   { route: "/backoffice/activities", name: "Actividades" },
   { route: "/backoffice/testimonials", name: "Testimonios" },
+  { route: "/backoffice/members", name: "Miembros" },
 ];
 
 export default function Header() {
-  
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const dispatch = useDispatch();
@@ -39,19 +42,17 @@ export default function Header() {
   const history = useHistory();
 
   const handleLogout = () => {
-    dispatch(SET_LOGOUT())
-    localStorage.removeItem('token')
-    history.push("/login")
-  }
+    dispatch(SET_LOGOUT());
+    localStorage.removeItem("token");
+    history.push("/login");
+  };
 
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={10}>
+      <Box bg={useColorModeValue("gray.100", "gray.900")} px={10} boxShadow={"lg"}>
         <Flex h={16} alignItems={"center"} justifyContent={"left"}>
           <HStack>
-            <LinkRouterDom to="/backoffice">
-              <img src="/brand-logo.svg" width="120px" alt="Somos más logo" />
-            </LinkRouterDom>
+            <SomosMasLogo />
           </HStack>
           <HStack
             as={"nav"}
@@ -69,38 +70,36 @@ export default function Header() {
           </HStack>
 
           <Flex alignItems={"center"} ml={{ base: "auto", md: "2rem" }}>
-            <Button bg="#FAFA88" mx="10px" cursor={"pointer"} onClick={handleLogout}>
+            <Button
+              bg="#FAFA88"
+              mx="10px"
+              cursor={"pointer"}
+              onClick={handleLogout}
+            >
               Cerrar sesión
             </Button>
 
             <IconButton
               onClick={() => {
-              setopen(!open);
+                setopen(!open);
               }}
               style={{ padding: ".5rem" }}
-              icon= {<GiHamburgerMenu />}
-            >
-            </IconButton>
+              icon={<GiHamburgerMenu />}
+            ></IconButton>
 
-            {
-              open ? 
-              ( <Sidebar /> ) : null
-            }  
-             
+            {open ? <Sidebar /> : null}
           </Flex>
         </Flex>
 
-        {isOpen ? 
-          (
-            <Box pb={4} display={{ md: "none" }}>
-              <Stack as={"nav"} spacing={4}>
-                {Routes.map((link) => (
+        {isOpen ? (
+          <Box pb={4} display={{ md: "none" }}>
+            <Stack as={"nav"} spacing={4}>
+              {Routes.map((link) => (
                 <NavLink key={link.name} route={link.route} name={link.name} />
-                ))}
-              </Stack>
-            </Box>
-          ) :
-           null}
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
       </Box>
     </>
   );

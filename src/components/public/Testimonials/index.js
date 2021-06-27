@@ -1,11 +1,18 @@
-import { Container } from "@chakra-ui/layout";
+import imgSubtitle from "../../../assets/forBackTitle.jpg"
+import { Box } from "@chakra-ui/react";
+import Title from "../../Title/Title";
+import TestimonialsComp from "./TestimonialsComp"
 
 export default function Testimonials (){
 
     return(
-        <Container centerContent h="auto" minHeight="50vh" w="100%">
-                deposite aquí sus componentes
-        </Container>
+      
+          <Box>
+          <Title image={imgSubtitle} title="Testimonios"/>
+    
+        <TestimonialsComp />
+            
+        </Box>
     )
     
 }

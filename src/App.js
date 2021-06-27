@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 //REACT-ROUTER
 import {
@@ -7,7 +7,9 @@ import {
   Route,
   Redirect,
   useLocation,
+  useHistory,
 } from "react-router-dom";
+
 //CHAKRA
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
@@ -18,7 +20,10 @@ import { PrivateRoute } from "./routes/PrivateRoute";
 
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { fetchActivities, fetchOrganizationData } from "./features/organizationReducer";
+import {
+  fetchActivities,
+  fetchOrganizationData,
+} from "./features/organizationReducer";
 
 // ROUTE TRANSITIONS
 import { CSSTransition, TransitionGroup } from "react-transition-group";
@@ -29,6 +34,14 @@ const theme = extendTheme({
     heading: "Source Sans Pro, sans-serif",
   },
 
+  styles: {
+    global: {
+      body: {
+        minH: "100vh",
+        bg: "gray.100",
+      },
+    },
+  },
   colors: {
     brandYellow: {
       50: "#FFFFBF",
@@ -103,6 +116,12 @@ const theme = extendTheme({
 });
 
 function App() {
+  const token = localStorage.getItem("token");
+  const data = localStorage.getItem("data");
+  const parseData = JSON.parse(data);
+  const roleId = parseData?.role_id;
+  const history = useHistory();
+
   // GUARDAR INFO DE LA ORGANIZACIÓN EN REDUX
   const dispatch = useDispatch();
   const organizationData = useSelector(
@@ -115,6 +134,18 @@ function App() {
       dispatch(fetchActivities());
     }
   }, []);
+
+  useEffect(() => {
+    const filterUser = () => {
+      if (!token || !parseData) {
+        <Redirect to="/" />;
+      } else {
+        <Redirect to="/" />;
+      }
+    };
+
+    filterUser();
+  }, [token, parseData, history]);
 
   return (
     <ChakraProvider theme={theme}>
@@ -129,15 +160,24 @@ function App() {
 
 function Routes() {
   const location = useLocation();
+  const token = localStorage.getItem("token");
+  const data = localStorage.getItem("data");
+  const parseData = JSON.parse(data);
+  const roleId = parseData?.role_id;
+
   return (
     <TransitionGroup>
       <CSSTransition timeout={300} classNames="page" key={location.key}>
         <Switch location={location}>
-          <PrivateRoute path="/backoffice" component={Private} />
+
+          { roleId === 0 ? (
+            <PrivateRoute path="/backoffice" component={Private} />
+          ) : (
+              <Route path="/" component={Public} />
+          )}
+
 
           <Route path="/" component={Public} />
-
-          <Redirect to="/" />
         </Switch>
       </CSSTransition>
     </TransitionGroup>

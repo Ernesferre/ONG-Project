@@ -1,6 +1,8 @@
-import React, { useRef, useCallback, useState, useEffect } from "react";
+import React, { useRef, useCallback } from "react";
+import {Link} from 'react-router-dom'
 import { MappedSlides } from "../slides/MappedSlides";
-
+import {Container, Flex, Heading, Button} from '@chakra-ui/react'
+import { useBreakpointValue } from "@chakra-ui/media-query";
 
 const SlidesShow = ({ speed = "500", slides, parentCallBack }) => {
   const slideshow = useRef(null);
@@ -42,17 +44,31 @@ const SlidesShow = ({ speed = "500", slides, parentCallBack }) => {
 
   const order = slides?.map((data) => data.id);
 
+  const alignButton = useBreakpointValue({ base: "center", md: "flex-end" })
+  const marginB = useBreakpointValue({ base: "1em", md: "0" })
+  const marginR = useBreakpointValue({ base: "0", md: "5%" })
+
   return (
-    <>
-      <MappedSlides
-        next={next}
-        prev={prev}
-        slideshow={slideshow}
-        slides={slides}
-        parentCallBack={parentCallBack}
-        order={order}
-      />
-    </>
+    <div>
+      <Container maxW="container.xl">
+          <Flex flexDir="column" mb={10}>
+              <Heading textAlign="center" mt={10} mb={marginB}>Slides</Heading>
+              <Flex alignSelf={alignButton} marginRight={marginR}>
+              <Link to="/backoffice/slides/create">
+                  <Button variant={'somosMas'}>+ Crear Slide</Button>
+              </Link>
+              </Flex>
+              <MappedSlides
+                next={next}
+                prev={prev}
+                slideshow={slideshow}
+                slides={slides}
+                parentCallBack={parentCallBack}
+                order={order}
+              />
+          </Flex>
+      </Container>
+    </div>
   );
 };
 

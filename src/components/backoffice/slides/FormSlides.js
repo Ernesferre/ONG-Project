@@ -17,6 +17,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaFileImage } from "react-icons/fa";
 import { createSlide, editSlide } from "./slidesService";
 import Swal from "sweetalert2";
+import { useAlert } from "../layout/Alert";
 
 // convert image to base64
 const toBase64 = (file) =>
@@ -26,6 +27,24 @@ const toBase64 = (file) =>
     reader.onload = () => resolve(reader.result);
     reader.onerror = (error) => reject(error);
   });
+
+  
+// convert url to base64
+const urlToBase64 = (img) => {
+  var blob = new Blob([img])
+  var url = URL.createObjectURL(blob)
+  
+  return fetch(url)
+  .then(res => res.blob())
+  .then(blob => {
+    var fr = new FileReader()
+    fr.onload = () => {
+      var b64 = fr.result
+      return b64
+    }
+    fr.readAsDataURL(blob)
+  })
+}
 
 const FormSlides = ({ slideToEdit }) => {
   const [name, setName] = useState("");
@@ -46,6 +65,7 @@ const FormSlides = ({ slideToEdit }) => {
       title: "Success",
       text: "Slide creada",
       icon: "success",
+      confirmButtonColor: '#5796D9',
       confirmButtonText: "Ok",
     });
   };
@@ -55,6 +75,7 @@ const FormSlides = ({ slideToEdit }) => {
       title: "Success",
       text: "Slide editada",
       icon: "success",
+      confirmButtonColor: '#5796D9',
       confirmButtonText: "Ok",
     });
   };
@@ -64,14 +85,22 @@ const FormSlides = ({ slideToEdit }) => {
       title: "Error",
       text: "Hubo un error",
       icon: "error",
+      confirmButtonColor: 'brandRed.200',
       confirmButtonText: "Ok",
     });
   };
 
+  const { setAlert } = useAlert();
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (name === "" || description === "" || image === "") {
-      alert("Por favor complete todos los campos");
+      setAlert({
+        title: "Campo vacío",
+        text: "Por favor complete todos los campos.",
+        show: true,
+        type: "error",
+      });
     } else {
       let data;
       if (typeof image !== "string") {
@@ -82,10 +111,11 @@ const FormSlides = ({ slideToEdit }) => {
           image: base64Img,
         };
       } else {
+        let urlToBase64Img = await urlToBase64(image);
         data = {
           name: name,
           description: description,
-          image: image,
+          image: urlToBase64Img,
         };
       }
       if (slideToEdit) {
@@ -126,6 +156,7 @@ const FormSlides = ({ slideToEdit }) => {
         overflow="hidden"
         w={[250, 400, 700]}
         maxWidth={700}
+        boxShadow={"xl"}
       >
         <form method="POST" onSubmit={handleSubmit}>
           <Stack w={"90%"} margin={[3, 6, 8]} spacing={5}>
@@ -165,7 +196,7 @@ const FormSlides = ({ slideToEdit }) => {
                 }}
               />
               <label htmlFor="file" style={{ cursor: "pointer" }}>
-                <Box as={FaFileImage} size="36px" color="blue.500" />
+                <Box as={FaFileImage} size="36px" color="brandBlue.300" />
               </label>
               {image && (
                 <Text style={{ textAlign: "left" }} marginTop={3}>
@@ -174,8 +205,8 @@ const FormSlides = ({ slideToEdit }) => {
               )}
             </FormControl>
             <FormControl>
-              <Button colorScheme="blue" type="submit" size="sm" marginTop={5}>
-                Crear
+              <Button variant={'somosMas'} type="submit" size="sm" marginTop={5}>
+                {slideToEdit ? "Editar" : "Crear"}
               </Button>
             </FormControl>
           </Stack>

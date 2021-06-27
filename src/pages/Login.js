@@ -49,6 +49,7 @@ const Login = () => {
         const response = await loginUser(values)
     
         if(response.data?.token) {
+<<<<<<< HEAD
             console.log(response.data.user.name);
             console.log(response.data.token);
             dispatch(
@@ -63,13 +64,19 @@ const Login = () => {
                 TOKEN, response.data.token
                 
             )
+=======
+            console.log(response.data);
+            dispatch(SET_LOGIN(response.data))
+            localStorage.setItem(TOKEN, response.data.token)
+            localStorage.setItem('data', JSON.stringify(response.data?.user))
+>>>>>>> master
             apiService (response.data?.token);
             history.push("/");
        
         }  else {
             console.log("No se registran datos")
             toast({
-                title: "Error al registrar el usuario.",  
+                title: "Error al loguear el usuario.",  
                 status: "error",
                 duration: 3000,
                 isClosable: true,

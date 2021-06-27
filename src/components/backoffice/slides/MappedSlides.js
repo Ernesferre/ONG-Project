@@ -1,4 +1,4 @@
-import React0 from "react";
+import React from "react";
 import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
 import {
   Flex,
@@ -8,6 +8,7 @@ import {
   Box,
   Text,
 } from "@chakra-ui/react";
+import { useBreakpointValue } from "@chakra-ui/media-query";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { deleteSlide } from "./slidesService";
@@ -35,9 +36,12 @@ export const MappedSlides = ({
       parentCallBack(true);
     }
   };
-let split = <p></p>
+
+  const marginArrow = useBreakpointValue({ base: "0", md: "0 18px" })
+
+// let split = <p></p>
   return (
-    <Flex color="black" wrap="nowrap" ref={slideshow}>
+    <Flex color="black" wrap="nowrap" ref={slideshow} overflow="hidden">
       {slides?.map((slide, idx) => (
         <Flex
           key={idx}
@@ -48,19 +52,10 @@ let split = <p></p>
           pos="relative"
           zIndex="10"
         >
-          <Button mt={4} colorScheme="blue" bg="#5796D9" type="submit">
-            <Link cursor="pointer" to="/backoffice/slides/create">
-              {" "}
-              <button> + Crear nueva slide</button>
-            </Link>
-          </Button>
-          <Heading as="h3" mt="3rem">
-            {slide.name}
-          </Heading>
           {slide.image === "" ? (
             <Box h="22rem" w="90%" border="1px solid lightgray">
               <Text w="60%" display="block" mx="auto" mt="5rem">
-                Por favor ingresa una imagen en el home, haz click en editar
+                No hay slides para mostrar, haz click en editar para agregar una
               </Text>
             </Box>
           ) : (
@@ -74,6 +69,9 @@ let split = <p></p>
               mt="1rem"
             />
           )}
+          <Heading as="h3" mt="3rem">
+            {slide.name}
+          </Heading>
           <Text color="black" mt="1rem">
             {slide.description}
           </Text>
@@ -84,7 +82,7 @@ let split = <p></p>
                 state: slide,
               }}
             >
-              <Button colorScheme="blue" size="sm" variant="outline">
+              <Button variant={'somosMasOutline'} size="sm">
                 Editar
               </Button>
             </Link>
@@ -92,8 +90,7 @@ let split = <p></p>
               // DELETE FUNCTION  HERE
               onClick={()=> handleDelete(slide.id)}
               cursor="pointer"
-              border="none"
-              bg="red"
+              variant={'danger'}
               size="sm"
               ml="1rem"
             >
@@ -103,8 +100,8 @@ let split = <p></p>
           <Flex
             justify="space-between"
             pos="relative"
-            bottom="18rem"
-            margin="18px"
+            bottom="24rem"
+            margin={marginArrow}
             w="100%"
             color="blue"
           >
