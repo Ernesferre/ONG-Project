@@ -9,6 +9,7 @@ import {
 import React from "react";
 import { ActivitiesMenu } from "../layout/ActivitiesMenu";
 import { AuthLinks } from "./AuthLinks";
+import { DonateBtn } from "./DonateBtn";
 import { HeaderRoutes } from "./HeaderRoutes";
 
 export const HeaderDrawer = ({ routes, onClose, isOpen, username }) => {
@@ -22,6 +23,7 @@ export const HeaderDrawer = ({ routes, onClose, isOpen, username }) => {
             <ActivitiesMenu />
             <HeaderRoutes routes={routes} />
             <AuthLinks username={username} />
+            <DonateBtn />
           </Flex>
         </DrawerBody>
       </DrawerContent>

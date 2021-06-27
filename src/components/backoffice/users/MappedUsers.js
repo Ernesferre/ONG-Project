@@ -24,16 +24,18 @@ export const MappedUsers = ({ users, handleUpdate }) => {
     if (confirmation.isConfirmed === true) {
       dispatch(deleteUser(id));
       dispatch(removeUserFromState(id));
-      console.log("delete");
     }
   };
 
-  const flexDir = useBreakpointValue({ base: "column", md: "row" })
-  const marginTop = useBreakpointValue({ base: "1rem", md: "0" })
-  const widthSection = useBreakpointValue({ base: "100%", md: "33%" })
-  const alignActivity = useBreakpointValue({ base: "center", md: "space-between" })
-  const alignUser = useBreakpointValue({ base: "center", md: "left" })
-  const alignButtons = useBreakpointValue({ base: "center", md: "flex-end" })
+  const flexDir = useBreakpointValue({ base: "column", md: "row" });
+  const marginTop = useBreakpointValue({ base: "1rem", md: "0" });
+  const widthSection = useBreakpointValue({ base: "100%", md: "33%" });
+  const alignActivity = useBreakpointValue({
+    base: "center",
+    md: "space-between",
+  });
+  const alignUser = useBreakpointValue({ base: "center", md: "left" });
+  const alignButtons = useBreakpointValue({ base: "center", md: "flex-end" });
 
   return (
     <Flex flexDir="column">
@@ -48,27 +50,45 @@ export const MappedUsers = ({ users, handleUpdate }) => {
           boxShadow={"xl"}
         >
           <Flex justifyContent="space-between" flexDir={flexDir}>
-            <Flex alignItems={"center"} justifyContent={alignActivity} width={widthSection} marginTop={marginTop}>
+            <Flex
+              alignItems={"center"}
+              justifyContent={alignActivity}
+              width={widthSection}
+              marginTop={marginTop}
+            >
               <Box as="h2" fontWeight="bold" textAlign={alignUser}>
-                <Text fontSize="small" color="gray.400">Usuario: </Text>
+                <Text fontSize="small" color="gray.400">
+                  Usuario:
+                </Text>
                 {user.name}
               </Box>
             </Flex>
-            <Flex alignItems="center" justifyContent="center" width={widthSection} marginTop={marginTop}>
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              width={widthSection}
+              marginTop={marginTop}
+            >
               <Box as="h2" fontWeight="bold">
-                <Text fontSize="small" color="gray.400">Email: </Text>
-                  {user.email}
+                <Text fontSize="small" color="gray.400">
+                  Email:{" "}
+                </Text>
+                {user.email}
               </Box>
             </Flex>
-            <Flex justifyContent={alignButtons} width={widthSection} marginTop={marginTop}>
+            <Flex
+              justifyContent={alignButtons}
+              width={widthSection}
+              marginTop={marginTop}
+            >
               <Link to={`/backoffice/users/${user.id}`}>
-                <Button variant={'somosMasOutline'} size="sm">
+                <Button variant={"somosMasOutline"} size="sm">
                   Editar
                 </Button>
               </Link>
               <Button
                 size="sm"
-                variant={'danger'}
+                variant={"danger"}
                 marginLeft="1em"
                 onClick={() => handleDelete(user.id)}
               >

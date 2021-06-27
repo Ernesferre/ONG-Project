@@ -45,7 +45,7 @@ export const CreateOrEditForm = ({ id }) => {
     name: "",
     email: "",
     password: "",
-    role_id: "0",
+    role_id: "1",
     profilePhoto: "",
   };
 
@@ -201,49 +201,7 @@ export const CreateOrEditForm = ({ id }) => {
                     </FormControl>
                   )}
                 </Field>
-                <Field name="profilePhoto">
-                  {({ field, form, values }) => (
-                    <FormControl
-                      isInvalid={
-                        form.errors.profilePhoto && form.touched.profilePhoto
-                      }
-                    >
-                      <FormLabel marginTop="1em" htmlFor="profilePhoto">
-                        Foto de Perfil
-                      </FormLabel>
-                      <Input
-                        id="profilePhoto"
-                        type="file"
-                        display="none"
-                        bg="white"
-                        onChange={(e) => {
-                          form.setFieldValue(
-                            "profilePhoto",
-                            e.currentTarget.files[0]
-                          );
-                        }}
-                      />
-                      <FormLabel
-                        htmlFor="profilePhoto"
-                        color="white"
-                        fontWeight="bold"
-                        marginTop="1em"
-                        bg="#88BBF2"
-                        width="10em"
-                        padding="0.5em"
-                        textAlign="center"
-                        borderRadius="0.3em"
-                        cursor="pointer"
-                        _hover={{ bg: "#3672B3" }}
-                      >
-                        Elegir Foto
-                      </FormLabel>
-                      <FormErrorMessage>
-                        {form.errors.profilePhoto}
-                      </FormErrorMessage>
-                    </FormControl>
-                  )}
-                </Field>
+
                 <FormControl>
                   <Button
                     mt={4}
@@ -252,7 +210,7 @@ export const CreateOrEditForm = ({ id }) => {
                     isLoading={props.isSubmitting}
                     type="submit"
                   >
-                    Crear
+                    {id === undefined ? "Crear" : "Editar"}
                   </Button>
                 </FormControl>
               </Stack>

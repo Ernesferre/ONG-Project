@@ -6,6 +6,7 @@ import { AuthLinks } from "./AuthLinks";
 import { HeaderRoutes } from "./HeaderRoutes";
 import { HeaderMenuBtn } from "./HeaderMenuBtn";
 import { HeaderDrawer } from "./HeaderDrawer";
+import { DonateBtn } from "./DonateBtn";
 
 export const HeaderMain = () => {
   const routes = [
@@ -32,6 +33,7 @@ export const HeaderMain = () => {
         <ActivitiesMenu />
         <HeaderRoutes routes={routes} />
         <AuthLinks username={username} />
+        <DonateBtn />
       </Flex>
       <HeaderMenuBtn onOpen={onOpen} />
       <HeaderDrawer
