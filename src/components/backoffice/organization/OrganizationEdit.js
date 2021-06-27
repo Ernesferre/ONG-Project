@@ -1,19 +1,19 @@
-import { Container, Heading } from "@chakra-ui/layout";
+import { Flex, Heading } from "@chakra-ui/layout";
 import React from "react";
 import { OrganizationForm } from "./OrganizationForm";
 
 export const OrganizationEdit = () => {
   return (
-    <Container
-      maxW="container.xl"
-      bg="gray.200"
-      borderRadius="0.2em"
-      borderWidth="1px"
-      borderColor="gray.300"
-      padding="1em"
+    <Flex
+      w="100%"
+      flexDirection="column"
+      minHeight="100vh"
+      align="center"
+      justify="center"
+      padding={10}
     >
-      <Heading>Editar Organización</Heading>
+      <Heading margin={5}>Editar Organización</Heading>
       <OrganizationForm />
-    </Container>
+    </Flex>
   );
 };

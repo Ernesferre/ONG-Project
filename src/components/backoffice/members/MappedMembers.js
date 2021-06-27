@@ -1,22 +1,23 @@
 import React from 'react'
-import { Button, Flex, Image, Text, useBreakpointValue } from '@chakra-ui/react'
+import { Button, Flex, Image, Text, useBreakpointValue, Box } from '@chakra-ui/react'
 import {Link} from 'react-router-dom'
-import Swal from "sweetalert2";
-import { deleteMember } from '../../../functions/membersService';
+import Swal from "sweetalert2"
+import { deleteMember } from '../../../functions/membersService'
 
 const MappedMembers = ({ members, parentCallBack }) => {
 
   const flexDir = useBreakpointValue({ base: "column", md: "row" })
   const marginTop = useBreakpointValue({ base: "1rem", md: "0" })
 
-  const handleDelete = (id) => {
+  const handleDelete = (id, name) => {
     Swal.fire({
       title: '¿Estás Seguro?',
-      text: 'Se eliminará de la base de datos.',
+      text: `Se eliminará a ${name} de la base de datos.`,
       icon: "warning",
       showCancelButton: true,
+      confirmButtonColor: "#CC423D",
       confirmButtonText: "Borrar",
-      confirmButtonColor: "#DB5752",
+      cancelButtonColor: "#88BBF2",
       cancelButtonText: "Cancelar",
     }).then(result => {
       if (result.value) {
@@ -25,7 +26,6 @@ const MappedMembers = ({ members, parentCallBack }) => {
       }
     })
   }
-  
 
   return (
     <Flex flexDir="column">
@@ -37,6 +37,7 @@ const MappedMembers = ({ members, parentCallBack }) => {
           bg="gray.200"
           padding="1em"
           borderRadius="0.1em"
+          boxShadow={"xl"}
         >
           <Flex alignItems='center' justifyContent='space-between' flexDir={flexDir}>
             <Flex alignItems="center" justifyContent="space-between">
@@ -47,13 +48,14 @@ const MappedMembers = ({ members, parentCallBack }) => {
                     src={member.image}
                     fallbackSrc="/brand-logo.svg"
                     alt={member.name}
+                    boxShadow={"xl"}
                 />
             </Flex>
             <Flex alignItems="center" justifyContent="space-between" marginTop={marginTop}>
-              <Text fontWeight="bold">
+              <Box as="h2" fontWeight="bold">
                 <Text fontSize="small" color="gray.400">Nombre: </Text>
                 {member.name}
-              </Text>
+              </Box>
             </Flex>
             <Flex justifyContent="space-between" marginTop={marginTop}>
                 <Link 
@@ -61,14 +63,14 @@ const MappedMembers = ({ members, parentCallBack }) => {
                         pathname: "/backoffice/members/edit",
                         state: member,
                     }}>
-                    <Button colorScheme="blue" size="sm" variant="outline">
+                    <Button variant={'somosMasOutline'} size="sm" >
                         Editar
                     </Button>
                 </Link>
               <Button size="sm" 
-                colorScheme="red" 
+                variant={'danger'} 
                 marginLeft="1em"  
-                onClick={() => handleDelete(member.id)}
+                onClick={() => handleDelete(member.id, member.name)}
               >
                 Borrar
               </Button>

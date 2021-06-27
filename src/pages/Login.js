@@ -49,13 +49,14 @@ const Login = () => {
             console.log(response.data);
             dispatch(SET_LOGIN(response.data))
             localStorage.setItem(TOKEN, response.data.token)
+            localStorage.setItem('data', JSON.stringify(response.data?.user))
             apiService (response.data?.token);
             history.push("/");
        
         }  else {
         
             toast({
-                title: "Error al registrar el usuario.",  
+                title: "Error al loguear el usuario.",  
                 status: "error",
                 duration: 3000,
                 isClosable: true,

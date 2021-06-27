@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/button";
-import { Flex, Text } from "@chakra-ui/layout";
+import { Flex, Text, Box } from "@chakra-ui/layout";
 import { useBreakpointValue } from "@chakra-ui/media-query";
 import { Link } from "react-router-dom";
 import React from "react";
@@ -7,7 +7,12 @@ import Swal from "sweetalert2";
 import { deleteCategory } from './CategoriesService';
 
 export const MappedCategories = ({ categories, handleUpdate }) => {
-  const flexDir = useBreakpointValue({ base: "column", sm: "" });
+
+  const flexDir = useBreakpointValue({ base: "column", md: "row" })
+  const marginTop = useBreakpointValue({ base: "1rem", md: "0" })
+  const widthSection = useBreakpointValue({ base: "100%", md: "33%" })
+  const alignActivity = useBreakpointValue({ base: "center", md: "space-between" })
+  const alignButtons = useBreakpointValue({ base: "center", md: "flex-end" })
 
   const handleDelete = async (id) => {
     const confirmation = await Swal.fire({
@@ -15,8 +20,9 @@ export const MappedCategories = ({ categories, handleUpdate }) => {
       text: "¿Quieres borrar esta categoría?",
       icon: "warning",
       showCancelButton: true,
+      confirmButtonColor: "#CC423D",
       confirmButtonText: "Borrar",
-      confirmButtonColor: "#DB5752",
+      cancelButtonColor: "#88BBF2",
       cancelButtonText: "Cancelar",
     });
     if (confirmation.isConfirmed === true) {
@@ -38,33 +44,34 @@ export const MappedCategories = ({ categories, handleUpdate }) => {
           bg="gray.200"
           padding="1em"
           borderRadius="0.1em"
+          boxShadow={"xl"}
         >
-          <Flex justifyContent="space-between" flexDir={flexDir}>
-            <Flex alignItems="center" justifyContent="space-between">
-              <Text fontSize="small" color="gray.400">
-                Categoría:
-              </Text>
-              <Text fontWeight="bold">{`\u00A0\u00A0${category.name.charAt(0).toUpperCase() + category.name.slice(1)}`}</Text>
+          <Flex justifyContent='space-between' flexDir={flexDir}>
+            <Flex alignItems={"center"} justifyContent={alignActivity} width={widthSection} marginTop={marginTop}>
+              <Box as="h2" fontWeight="bold">
+                <Text fontSize="small" color="gray.400">Categoría: </Text>
+                {`\u00A0\u00A0${category.name.charAt(0).toUpperCase() + category.name.slice(1)}`}
+              </Box>
             </Flex>
-            <Flex alignItems="center" justifyContent="space-between">
-              <Text fontSize="small" color="gray.400">
-                Creada el:
-              </Text>
-              <Text fontWeight="bold">{`\u00A0\u00A0${category.created_at.slice(0, 10)}`}</Text>
+            <Flex alignItems="center" justifyContent="center" width={widthSection} marginTop={marginTop}>
+              <Box as="h2" fontWeight="bold">
+                <Text fontSize="small" color="gray.400">Creada el: </Text>
+                  {`\u00A0\u00A0${category.created_at.slice(0, 10)}`}
+              </Box>
             </Flex>
-            <Flex justifyContent="space-between">
+            <Flex justifyContent={alignButtons} width={widthSection} marginTop={marginTop}>
               <Link 
                   to={{
                       pathname: "/backoffice/categories/edit",
                       state: {category: category},
                   }}>
-                <Button colorScheme="blue" size="sm" variant="outline">
+                <Button  variant={'somosMasOutline'} size="sm">
                 Editar
                 </Button>
               </Link>
               <Button
                 size="sm"
-                colorScheme="red"
+                variant={'danger'}
                 marginLeft="1em"
                 onClick={() => handleDelete(category.id)}
               >

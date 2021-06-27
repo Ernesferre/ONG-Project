@@ -16,6 +16,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaFileImage } from "react-icons/fa";
 import { createActivity, editActivity } from "./ActivitiesService";
 import Swal from "sweetalert2";
+import { useAlert } from "../layout/Alert";
 
 // convert image to base64
 const toBase64 = (file) =>
@@ -59,18 +60,20 @@ const ActivitiesForm = ({ activityToEdit }) => {
 
   const handleSuccess = () => {
     Swal.fire({
-      title: "Success",
+      title: "Hecho",
       text: "Actividad creada",
       icon: "success",
+      confirmButtonColor: '#5796D9',
       confirmButtonText: "Ok",
     });
   };
 
   const handleSuccessEdit = () => {
     Swal.fire({
-      title: "Success",
+      title: "Hecho",
       text: "Actividad editada",
       icon: "success",
+      confirmButtonColor: '#5796D9',
       confirmButtonText: "Ok",
     });
   };
@@ -80,14 +83,22 @@ const ActivitiesForm = ({ activityToEdit }) => {
       title: "Error",
       text: "Hubo un error",
       icon: "error",
+      confirmButtonColor: 'brandRed.200',
       confirmButtonText: "Ok",
     });
   };
 
+  const { setAlert } = useAlert();
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (name === "" || description === "" || image === "") {
-      alert("Por favor complete todos los campos");
+      setAlert({
+        title: "Campo vacío",
+        text: "Por favor complete todos los campos.",
+        show: true,
+        type: "error",
+      });
     } else {
       let data;
       if (typeof image !== "string") {
@@ -111,14 +122,14 @@ const ActivitiesForm = ({ activityToEdit }) => {
           handleSuccessEdit();
             history.push("/backoffice/activities");
           })
-          .catch(err => handleError())
+          .catch(() => handleError())
       } else {
         createActivity(data)
         .then(() => {
             handleSuccess();
             history.push("/backoffice/activities");
           })
-          .catch(err => handleError())
+          .catch(() => handleError())
       }
     }
   }
@@ -142,6 +153,7 @@ const ActivitiesForm = ({ activityToEdit }) => {
         overflow="hidden"
         w={[250, 400, 700]}
         maxWidth={700}
+        boxShadow={"xl"}
       >
         <form method="POST" onSubmit={handleSubmit}>
           <Stack w={"90%"} margin={[3, 6, 8]} spacing={5}>
@@ -184,7 +196,7 @@ const ActivitiesForm = ({ activityToEdit }) => {
                 }}
               />
               <label htmlFor="file" style={{ cursor: "pointer" }}>
-                <Box as={FaFileImage} size="36px" color="blue.500" />
+                <Box as={FaFileImage} size="36px" color="brandBlue.300" />
               </label>
               {image && (
                 <Text style={{ textAlign: "left" }} marginTop={3}>
@@ -193,8 +205,8 @@ const ActivitiesForm = ({ activityToEdit }) => {
               )}
             </FormControl>
             <FormControl>
-              <Button colorScheme="blue" type="submit" size="sm" marginTop={5}>
-                Crear
+              <Button variant={'somosMas'} type="submit" size="sm" marginTop={5}>
+                {activityToEdit ? "Editar" : "Crear"}
               </Button>
             </FormControl>
           </Stack>

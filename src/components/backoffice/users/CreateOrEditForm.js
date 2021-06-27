@@ -7,9 +7,9 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Spinner,
-  FormErrorMessage,
-  Container,
+  Stack,
+  Box,
+  FormErrorMessage
 } from "@chakra-ui/react";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -77,20 +77,28 @@ export const CreateOrEditForm = ({ id }) => {
     });
 
   return (
-    <Container maxWidth="container.xl" minHeight="100vh" bg="gray.200">
-      <Heading>{id ? "Editar Usuario" : "Crear Usuario"}</Heading>
-      {status === "loading" ? (
-        <Flex height="10em" justifyContent="center" alignItems="center">
-          <Spinner size="xl" color="#5796D9" />
-        </Flex>
-      ) : (
-        <Flex
-          flexDir="column"
-          borderWidth="10px"
-          borderRadius="0.3em"
-          justifyContent="center"
-        >
-          <Formik
+    <Flex
+      w="100%"
+      flexDirection="column"
+      minHeight="100vh"
+      align="center"
+      justify="center"
+      padding={10}
+    >
+      <Heading margin={5}>
+        {id ? "Editar Usuario" : "Crear Usuario"}
+      </Heading>
+      <Box
+        bg="gray.100"
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+        w={[250, 400, 700]}
+        maxWidth={700}
+        boxShadow={"xl"}
+      >
+
+        <Formik
             enableReinitialize={true}
             initialValues={initialValues}
             validationSchema={editSchema}
@@ -124,134 +132,142 @@ export const CreateOrEditForm = ({ id }) => {
           >
             {(props) => (
               <Form>
-                <Field name="name">
-                  {({ field, form }) => (
-                    <FormControl
-                      isInvalid={form.errors.name && form.touched.name}
-                    >
-                      <FormLabel marginTop="1em" htmlFor="name">
-                        Nombre
-                      </FormLabel>
-                      <Input
-                        variant="filled"
-                        {...field}
-                        id="name"
-                        placeholder="Nombre"
-                      />
-                      <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="email">
-                  {({ field, form }) => (
-                    <FormControl
-                      isInvalid={form.errors.email && form.touched.email}
-                    >
-                      <FormLabel marginTop="1em" htmlFor="email">
-                        Email
-                      </FormLabel>
-                      <Input
-                        variant="filled"
-                        {...field}
-                        id="email"
-                        placeholder="Email"
-                      />
-                      <FormErrorMessage>{form.errors.email}</FormErrorMessage>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="password">
-                  {({ field, form }) => (
-                    <FormControl
-                      isInvalid={form.errors.password && form.touched.password}
-                    >
-                      <FormLabel marginTop="1em" htmlFor="password">
-                        Contraseña
-                      </FormLabel>
-                      <Input
-                        type="password"
-                        variant="filled"
-                        {...field}
-                        id="password"
-                        placeholder="Contraseña"
-                      />
-                      <FormErrorMessage>
-                        {form.errors.password}
-                      </FormErrorMessage>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="role_id">
-                  {({ field, form }) => (
-                    <FormControl
-                      isInvalid={form.errors.role_id && form.touched.role_id}
-                    >
-                      <FormLabel marginTop="1em" htmlFor="role_id">
-                        Rol
-                      </FormLabel>
-                      <Select variant="filled" {...field} id="role_id">
-                        <option value="1">Administrador</option>
-                        <option value="0">Usuario</option>
-                      </Select>
-                      <FormErrorMessage>{form.errors.role_id}</FormErrorMessage>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="profilePhoto">
-                  {({ field, form, values }) => (
-                    <FormControl
-                      isInvalid={
-                        form.errors.profilePhoto && form.touched.profilePhoto
-                      }
-                    >
-                      <FormLabel marginTop="1em" htmlFor="profilePhoto">
-                        Foto de Perfil
-                      </FormLabel>
-                      <Input
-                        id="profilePhoto"
-                        type="file"
-                        display="none"
-                        onChange={(e) => {
-                          form.setFieldValue(
-                            "profilePhoto",
-                            e.currentTarget.files[0]
-                          );
-                        }}
-                      />
-                      <FormLabel
-                        htmlFor="profilePhoto"
-                        color="white"
-                        fontWeight="bold"
-                        marginTop="1em"
-                        bg="#5796D9"
-                        width="10em"
-                        padding="0.5em"
-                        textAlign="center"
-                        borderRadius="0.3em"
-                        cursor="pointer"
-                        _hover={{ bg: "#3672B3" }}
+                <Stack w={"90%"} margin={[3, 6, 8]} spacing={5}>
+                  <Field name="name">
+                    {({ field, form }) => (
+                      <FormControl
+                        isInvalid={form.errors.name && form.touched.name}
                       >
-                        Elegir Foto
-                      </FormLabel>
-                      <FormErrorMessage>
-                        {form.errors.profilePhoto}
-                      </FormErrorMessage>
-                    </FormControl>
-                  )}
-                </Field>
-                <Button
-                  mt={4}
-                  colorScheme="blue"
-                  isLoading={props.isSubmitting}
-                  type="submit"
-                >
-                  Submit
-                </Button>
+                        <FormLabel marginTop="1em" htmlFor="name">
+                          Nombre
+                        </FormLabel>
+                        <Input
+                          variant="filled"
+                          {...field}
+                          id="name"
+                          placeholder="Nombre"
+                          bg="white"
+                        />
+                        <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+                  <Field name="email">
+                    {({ field, form }) => (
+                      <FormControl
+                        isInvalid={form.errors.email && form.touched.email}
+                      >
+                        <FormLabel marginTop="1em" htmlFor="email">
+                          Email
+                        </FormLabel>
+                        <Input
+                          variant="filled"
+                          {...field}
+                          id="email"
+                          placeholder="Email"
+                          bg="white"
+                        />
+                        <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+                  <Field name="password">
+                    {({ field, form }) => (
+                      <FormControl
+                        isInvalid={form.errors.password && form.touched.password}
+                      >
+                        <FormLabel marginTop="1em" htmlFor="password">
+                          Contraseña
+                        </FormLabel>
+                        <Input
+                          type="password"
+                          variant="filled"
+                          {...field}
+                          id="password"
+                          placeholder="Contraseña"
+                          bg="white"
+                        />
+                        <FormErrorMessage>
+                          {form.errors.password}
+                        </FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+                  <Field name="role_id">
+                    {({ field, form }) => (
+                      <FormControl
+                        isInvalid={form.errors.role_id && form.touched.role_id}
+                      >
+                        <FormLabel marginTop="1em" htmlFor="role_id">
+                          Rol
+                        </FormLabel>
+                        <Select variant="filled" {...field} id="role_id" bg={'white'}>
+                          <option value="0">Administrador</option>
+                          <option value="1">Usuario</option>
+                        </Select>
+                        <FormErrorMessage>{form.errors.role_id}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+                  <Field name="profilePhoto">
+                    {({ field, form, values }) => (
+                      <FormControl
+                        isInvalid={
+                          form.errors.profilePhoto && form.touched.profilePhoto
+                        }
+                      >
+                        <FormLabel marginTop="1em" htmlFor="profilePhoto">
+                          Foto de Perfil
+                        </FormLabel>
+                        <Input
+                          id="profilePhoto"
+                          type="file"
+                          display="none"
+                          bg="white"
+                          onChange={(e) => {
+                            form.setFieldValue(
+                              "profilePhoto",
+                              e.currentTarget.files[0]
+                            );
+                          }}
+                        />
+                        <FormLabel
+                          htmlFor="profilePhoto"
+                          color="white"
+                          fontWeight="bold"
+                          marginTop="1em"
+                          bg="#88BBF2"
+                          width="10em"
+                          padding="0.5em"
+                          textAlign="center"
+                          borderRadius="0.3em"
+                          cursor="pointer"
+                          _hover={{ bg: "#3672B3" }}
+                        >
+                          Elegir Foto
+                        </FormLabel>
+                        <FormErrorMessage>
+                          {form.errors.profilePhoto}
+                        </FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+                  <FormControl>
+                    <Button
+                      mt={4}
+                      variant={'somosMas'}
+                      size="sm"
+                      isLoading={props.isSubmitting}
+                      type="submit"
+                    >
+                      Crear
+                    </Button>
+                  </FormControl>
+                </Stack>
               </Form>
             )}
           </Formik>
-        </Flex>
-      )}
-    </Container>
+      </Box>
+    </Flex>
   );
 };

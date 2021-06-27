@@ -15,6 +15,8 @@ import Donations from "../components/public/donations";
 import Thanks from "../components/public/donations/Thanks";
 
 export const Public = () => {
+
+ 
   return (
     <Layout>
       <Switch>

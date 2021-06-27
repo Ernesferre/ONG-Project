@@ -19,13 +19,13 @@ const MappedTestimonials = ({ testimonials, handleUpdate }) => {
         text: "¿Quieres borrar este testimonio?",
         type: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#DB5752",
+        confirmButtonColor: "#CC423D",
         cancelButtonText: "Cancelar",
+        cancelButtonColor: "#88BBF2",
         confirmButtonText: "Borrar",
         onConfirm: () => {
           deleteTestimonial(id)
           handleUpdate(true);
-          console.log(`Deleting testimonial ${id} `)
         },
         onCancel: () => {},
       });    
@@ -44,6 +44,7 @@ const MappedTestimonials = ({ testimonials, handleUpdate }) => {
           bg="gray.200"
           padding="1em"
           borderRadius="0.1em"
+          boxShadow={"xl"}
         >
           <Flex
             alignItems="center"
@@ -53,10 +54,12 @@ const MappedTestimonials = ({ testimonials, handleUpdate }) => {
             <Flex alignItems="center" justifyContent="space-between">
               <Image
                 boxSize="100px"
+                borderRadius="full"
                 objectFit="cover"
                 src={testimonial.image}
                 fallbackSrc="/brand-logo.svg"
                 alt={testimonial.name}
+                boxShadow={"xl"}
               />
             </Flex>
             <Flex direction="column" marginTop={marginTop}>
@@ -84,13 +87,13 @@ const MappedTestimonials = ({ testimonials, handleUpdate }) => {
                   state: testimonial,
                 }}
               >
-                <Button colorScheme="blue" size="sm" variant="outline">
+                <Button variant={'somosMasOutline'} size="sm">
                   Editar
                 </Button>
               </Link>
               <Button
                 size="sm"
-                colorScheme="red"
+                variant={'danger'}
                 marginLeft="1em"
                 onClick={() => handleDelete(testimonial.id)}
               >

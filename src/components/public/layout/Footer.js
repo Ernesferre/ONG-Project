@@ -38,47 +38,48 @@ const Footer = () => {
     </Flex>
   ) : (
     <Flex
+      flexDir={{ base: "column", md: "row" }}
       backgroundColor="gray.100"
-      p={16}
+      p={'20px 30px'}
       justifyContent="space-between"
+      alignItems='center'
       w="full"
       boxShadow="0px -2px 10px rgba(0, 0, 0, 0.1)"
     >
-      <Flex flexDir="column" width="12em" justifyContent="center">
+      <Flex flexDir="column" width="8em" justifyContent="center">
         <SomosMasLogo fontSize="xl" />
       </Flex>
       <Flex flexDir="column" display={{ base: "none", md: "flex" }}>
         <Heading fontSize="md" fontWeight="regular" color="gray.600">
           Más Información
         </Heading>
-        <br />
-        <Link to="/us">
-          <Text color="brandBlue.200" _hover={{ color: "brandBlue.300" }}>
-            Nosotros
-          </Text>
-        </Link>
-        <br />
-        <Link to="/activities">
-          <Text color="brandBlue.200" _hover={{ color: "brandBlue.300" }}>
-            Actividades
-          </Text>
-        </Link>
-        <br />
-        <Link to="/news">
-          <Text color="brandBlue.200" _hover={{ color: "brandBlue.300" }}>
-            Novedades
-          </Text>
-        </Link>
+        {/* <br /> */}
+        <Flex flexDir="row" w={'300px'} mt={1} justifyContent='space-between'>
+          <Link to="/us">
+            <Text color="brandBlue.200" _hover={{ color: "brandBlue.300" }}>
+              Nosotros
+            </Text>
+          </Link>
+          {/* <br /> */}
+          <Link to="/actividades">
+            <Text color="brandBlue.200" _hover={{ color: "brandBlue.300" }}>
+              Actividades
+            </Text>
+          </Link>
+          {/* <br /> */}
+          <Link to="/novedades">
+            <Text color="brandBlue.200" _hover={{ color: "brandBlue.300" }}>
+              Novedades
+            </Text>
+          </Link>
+        </Flex>
       </Flex>
-      <Flex
+      {/* <Flex
         flexDir="column"
         justifyContent="center"
         display={{ base: "none", md: "flex" }}
-      >
-        <Heading fontSize="md" fontWeight="regular" color="gray.600">
-          Redes Sociales
-        </Heading>
-        <Flex justifyContent="space-between" pt={5}>
+      > */}
+        <Flex justifyContent="space-between" width='150px' mt={{base: "1.5em", md: "0"}}>
           <LinkExter
             href="https://facebook.com/Somos_Más"
             isExternal
@@ -101,9 +102,9 @@ const Footer = () => {
             <FaInstagram size="30px" />
           </LinkExter>
         </Flex>
-      </Flex>
+      {/* </Flex> */}
 
-      <Flex justify="flex-end" display={{ base: "flex", md: "none" }}>
+      {/* <Flex justify="flex-end" display={{ base: "flex", md: "none" }}>
         <IconButton
           aria-label="CloseMenu"
           size="lg"
@@ -162,7 +163,7 @@ const Footer = () => {
             <FaInstagram size="30px" />
           </LinkExter>
         </Flex>
-      </Flex>
+      </Flex> */}
     </Flex>
   );
 };
