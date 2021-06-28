@@ -1,8 +1,9 @@
 import React from 'react'
-import {  Flex, Image, Text, useBreakpointValue } from '@chakra-ui/react'
+import {  Flex, Box, Image, Text, useBreakpointValue } from '@chakra-ui/react'
 import { FaFacebookF, FaLinkedinIn} from "react-icons/fa";
 import { Link } from "@chakra-ui/layout";
 import Icon from "@chakra-ui/icon";
+import parse from "html-react-parser";
 
 
 export default function Memmber({members}) {
@@ -12,7 +13,7 @@ export default function Memmber({members}) {
   const marginTop = useBreakpointValue({ base: "1rem", md: "0" })
 
     return (
-        <Flex flexDir="column">
+        <Flex flexDir="column" mt={8} mb={14}>
       {members?.map((member) => (
         <Flex
           flexDir="column"
@@ -34,16 +35,16 @@ export default function Memmber({members}) {
                 />
             </Flex>
             <Flex alignItems="center" justifyContent="space-between" marginTop={marginTop}>
-              <Text fontWeight="bold">
+              <Box as="h2" fontWeight="bold">
                 <Text fontSize="small" color="gray.400">Nombre: </Text>
                 {member.name}
-              </Text>
+              </Box>
             </Flex>
             <Flex alignItems="center" justifyContent="space-between" marginTop={marginTop}>
-              <Text fontWeight="bold">
+              <Box as="h2" fontWeight="bold">
                 <Text fontSize="small" color="gray.400">Descripción: </Text>
-                {member.description}
-              </Text>
+                {parse(member.description)}
+              </Box>
             </Flex>
 
             <Flex justifyContent="space-between" marginTop={marginTop}>

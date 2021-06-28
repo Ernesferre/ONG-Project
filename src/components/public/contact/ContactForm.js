@@ -91,8 +91,9 @@ const ContactForm = () => {
       <Stack spacing={8} mx={"auto"} my="1rem" maxW={"xl"} px={6}>
         <Box
           rounded={"lg"}
-          bg={useColorModeValue("white", "gray.700")}
-          boxShadow={"lg"}
+          bg="gray.200"
+          borderRadius="lg"
+          boxShadow={"xl"}
           p={8}
         >
           <Stack align={"left"}>
@@ -104,6 +105,7 @@ const ContactForm = () => {
             <FormControl id="nombre" mt={4}>
               <Input
                 type="text"
+                bg="white"
                 value={name}
                 placeholder="Nombre y apellido"
                 onChange={(e) => setName(e.target.value)}
@@ -124,6 +126,7 @@ const ContactForm = () => {
                 />
                 <Input
                   type="email"
+                  bg="white"
                   value={email}
                   placeholder="Email"
                   required
@@ -137,6 +140,7 @@ const ContactForm = () => {
                 />
                 <Input
                   type="tel"
+                  bg="white"
                   value={phone}
                   placeholder="Teléfono"
                   required
@@ -146,6 +150,7 @@ const ContactForm = () => {
             </Stack>
             <Textarea
               value={message}
+              bg="white"
               placeholder="Mensaje"
               mt={4}
               required

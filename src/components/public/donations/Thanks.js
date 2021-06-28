@@ -6,7 +6,7 @@ import Title from "../../Title/Title";
 const Thanks = () => {
     
     return (
-        <Box mb="2rem">
+        <Box minH={'calc(100vh - 167px)'}>
                 <Title image={forBackTitle} title="Gracias" />
                 <Box maxW="900px" m={{base:"1rem",md:"auto"}} my="2rem">
                 <Text
