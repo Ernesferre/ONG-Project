@@ -1,7 +1,7 @@
-import { Button, Link } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import React from "react";
 
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export const LoggedOutLinks = () => {
   let history = useHistory();
