@@ -3,34 +3,32 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 //CHAKRA UI
-import {Flex, Heading, Stack, Button, background} from "@chakra-ui/react";
+import { Flex, Heading, Stack, Button } from "@chakra-ui/react";
 //COMPONENTS
-import TextField from '../components/TextField';
+import TextField from "../components/TextField";
 
-
-import {loginUser} from "../app/authService"
+import { loginUser } from "../app/authService";
 import { useHistory, Link } from "react-router-dom";
-import { useToast } from "@chakra-ui/react"
+import { useToast } from "@chakra-ui/react";
 import { apiService } from "../app/apiService";
 
 //REDUX
-import {useDispatch} from "react-redux";
-import {SET_LOGIN} from "../features/authReducer";
+import { useDispatch } from "react-redux";
+import { SET_LOGIN } from "../features/authReducer";
 
 const Login = () => {
-
-  
-
   const dispatch = useDispatch();
   const TOKEN = "token";
   const NAME = "name";
 
   let history = useHistory();
-  const toast = useToast()
+  const toast = useToast();
 
   const validate = Yup.object({
     email: Yup.string().email("El email es invalido").required("Requerido"),
-    password: Yup.string().min(6, "Inserte mas de 6 carácteres").required("Requerido"),
+    password: Yup.string()
+      .min(6, "Inserte mas de 6 carácteres")
+      .required("Requerido"),
   });
 
   return (
@@ -38,50 +36,42 @@ const Login = () => {
       initialValues={{
         email: "",
         password: "",
-        
       }}
       validationSchema={validate}
-      
-      
-      onSubmit={ async (values, actions) => {
+      onSubmit={async (values, actions) => {
+        const response = await loginUser(values);
 
-       
-        const response = await loginUser(values)
-    
-        if(response.data?.token) {
-
-            console.log(response.data.user.name);
-            console.log(response.data.token);
-            dispatch(
-              SET_LOGIN({
-                name: response.data.user.name,
-                email: response.data.user.email,
-                role_id: response.data.user.role_id,
-                loggedIn: true,
-                })
-            );
-            localStorage.setItem(TOKEN, response.data.token)
-            localStorage.setItem('data', JSON.stringify(response.data?.user))
-            apiService (response.data?.token);
-            history.push("/");
-       
-        }  else {
-            console.log("No se registran datos")
-            toast({
-                title: "Corroborar datos ingresados",  
-                status: "error",
-                duration: 3000,
-                isClosable: true,
-              })
+        if (response.data?.token) {
+          console.log(response.data.user.name);
+          console.log(response.data.token);
+          dispatch(
+            SET_LOGIN({
+              name: response.data.user.name,
+              email: response.data.user.email,
+              role_id: response.data.user.role_id,
+              loggedIn: true,
+            })
+          );
+          localStorage.setItem(TOKEN, response.data.token);
+          localStorage.setItem("data", JSON.stringify(response.data?.user));
+          apiService(response.data?.token);
+          history.push("/");
+        } else {
+          console.log("No se registran datos");
+          toast({
+            title: "Corroborar datos ingresados",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
         }
 
+        actions.setSubmitting(false);
 
-        actions.setSubmitting(false)
-
-        actions.resetForm()
+        actions.resetForm();
       }}
     >
-      {({handleSubmit, handleChange, isSubmitting}) => (
+      {({ handleSubmit, handleChange, isSubmitting }) => (
         <Flex
           direction="column"
           mt={10}
@@ -89,58 +79,51 @@ const Login = () => {
           alignItems="center"
           justifyContent="center"
         >
-          
-          <Stack 
-            
-            p={12} 
-            bg="#E5E5E5" 
-            rounded={6} 
-            width={{ base: "90%", md: "50%", lg: "30%"}}>
-
+          <Stack
+            p={12}
+            rounded={6}
+            width={{ base: "90%", md: "50%", lg: "30%" }}
+            boxShadow="lg"
+            bg="gray.200"
+          >
             <Stack mb={6}>
-              <Heading>Formulario de Login</Heading>
+              <Heading color="brandBlue.400">Login</Heading>
             </Stack>
 
-            <Form onSubmit={handleSubmit} spacing={6} w="100%" >
+            <Form onSubmit={handleSubmit} spacing={6} w="100%">
               {/* TextField: componentes para validar campos */}
-              <TextField bg="whrite" onChange={handleChange} label="Email" name="email" type="email" />
+              <TextField
+                bg="whrite"
+                onChange={handleChange}
+                label="Email"
+                name="email"
+                type="email"
+              />
 
-              <TextField bg="whrite" onChange={handleChange} label="Contraseña" name="password" type="password" />
-             
-              <Button 
+              <TextField
+                bg="whrite"
+                onChange={handleChange}
+                label="Contraseña"
+                name="password"
+                type="password"
+              />
+
+              <Button
                 type="submit"
                 isLoading={isSubmitting}
-                colorScheme="blue" 
-                variant="solid" 
-                fontSize="15px" 
-                mt={6} 
-
-              >Ingresar
+                variant="somosMas"
+                mt={6}
+              >
+                Ingresar
               </Button>
-
             </Form>
-
-            
-
           </Stack>
 
-          <Stack 
-            mt={4}
-            mb={12}  
-            fontSize="20px" 
-            color="brandBlue.300"
-              
-          >
-
-          <Link
-            mt={4}
-            to="/register"
-            color= "brandBlue.500"
-            > 
-            No estas Logueado ? Registrate aqui
-          </Link>
+          <Stack mt={4} mb={12} fontSize="20px" color="brandBlue.300">
+            <Link mt={4} to="/register" color="brandBlue.500">
+              ¿No tienes cuenta? ¡Registrate aqui!
+            </Link>
           </Stack>
-
         </Flex>
       )}
     </Formik>

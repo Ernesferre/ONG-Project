@@ -26,22 +26,25 @@ import EditSlice from "../components/backoffice/slides/EditSlice";
 import { OrganizationEditPage } from "../pages/backoffice/organization/OrganizationEditPage";
 import SlidesShow from "../components/backoffice/slides/SlidesShow";
 import { CreateOrEditUser } from "../components/backoffice/users/CreateOrEditUser";
-import CreateMember from "../components/backoffice/members/CreateMember"
-import EditMember from "../components/backoffice/members/EditMember"
-import ListOfMembers from "../components/backoffice/members/ListOfMembers"
-
+import CreateMember from "../components/backoffice/members/CreateMember";
+import EditMember from "../components/backoffice/members/EditMember";
+import ListOfMembers from "../components/backoffice/members/ListOfMembers";
+import { HeaderMain } from "../components/public/header/HeaderMain";
 
 export const Private = () => {
   return (
     <>
-      <Header />
+      <HeaderMain isBackoffice={true} />
       <Switch>
         <Route exact path="/backoffice" component={Backoffice} />
         <Route exact path="/backoffice/news" component={NewsList} />
         <Route exact path="/backoffice/news/edit" component={NewsEdit} />
         <Route exact path="/backoffice/news/create" component={NewsForm} />
         <Route exact path="/backoffice/categories" component={CategoryList} />
-        <Route exact path="/backoffice/categories/create" component={CategoryCreate}
+        <Route
+          exact
+          path="/backoffice/categories/create"
+          component={CategoryCreate}
         />
         <Route
           exact
@@ -101,21 +104,13 @@ export const Private = () => {
           path="/backoffice/users/edit"
           component={CreateOrEditUser}
         />
-        <Route
-          exact
-          path="/backoffice/members"
-          component={ListOfMembers}
-        />
+        <Route exact path="/backoffice/members" component={ListOfMembers} />
         <Route
           exact
           path="/backoffice/members/create"
           component={CreateMember}
         />
-        <Route
-          exact
-          path="/backoffice/members/edit"
-          component={EditMember}
-        />
+        <Route exact path="/backoffice/members/edit" component={EditMember} />
 
         <Redirect to="/backoffice" />
       </Switch>

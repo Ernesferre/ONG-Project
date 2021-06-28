@@ -37,7 +37,6 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        minH: "100vh",
         bg: "gray.100",
       },
     },
@@ -70,15 +69,15 @@ const theme = extendTheme({
     Button: {
       variants: {
         somosMas: {
-          color: "brandBlue.500",
+          color: "brandBlue.400",
           bg: "brandBlue.200",
-          _hover: { bg: "brandBlue.300" },
+          _hover: { bg: "brandBlue.300", color: "white" },
         },
         somosMasOutline: {
-          color: "brandBlue.500",
+          color: "brandBlue.300",
           borderColor: "brandBlue.300",
           borderWidth: "0.12em",
-          _hover: { bg: "brandBlue.200" },
+          _hover: { bg: "brandBlue.200", color: "brandBlue.400" },
         },
         danger: {
           bg: "brandRed.100",
@@ -89,10 +88,12 @@ const theme = extendTheme({
         },
         dangerOutline: {
           borderWidth: "0.12em",
+          textTransform: "uppercase",
           borderColor: "brandRed.200",
-          color: "brandRed.500",
+          color: "brandRed.300",
           _hover: {
             bg: "brandRed.200",
+            color: "white",
           },
         },
         warning: {
@@ -169,13 +170,11 @@ function Routes() {
     <TransitionGroup>
       <CSSTransition timeout={300} classNames="page" key={location.key}>
         <Switch location={location}>
-
-          { roleId === 0 ? (
+          {roleId === 0 ? (
             <PrivateRoute path="/backoffice" component={Private} />
           ) : (
-              <Route path="/" component={Public} />
+            <Route path="/" component={Public} />
           )}
-
 
           <Route path="/" component={Public} />
         </Switch>
