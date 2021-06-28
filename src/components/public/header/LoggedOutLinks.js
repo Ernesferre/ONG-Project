@@ -19,7 +19,7 @@ export const LoggedOutLinks = () => {
           size="sm"
           onClick={handleLogin}
         >
-          Login
+          Iniciar Sesión
         </Button>
       </Link>
       <Link to="/register">

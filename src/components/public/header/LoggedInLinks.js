@@ -19,6 +19,7 @@ export const LoggedInLinks = ({ username }) => {
       })
     );
     localStorage.removeItem("token");
+    localStorage.removeItem("data");
     history.push("/login");
   };
 
@@ -26,14 +27,16 @@ export const LoggedInLinks = ({ username }) => {
     <>
       <Button
         variant="somosMasOutline"
+        borderWidth="0"
         color="brandBlue.400"
-        _hover={{ color: "brandBlue.300" }}
+        _hover={{ color: "brandBlue.300", cursor: "default" }}
         leftIcon={<FaUser />}
+        textTransform="capitalize"
       >
         {username}
       </Button>
       <Button variant="dangerOutline" marginLeft="1em" onClick={handleLogout}>
-        Logout
+        Cerrar Sesión
       </Button>
     </>
   );

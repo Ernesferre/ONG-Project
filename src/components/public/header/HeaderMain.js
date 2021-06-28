@@ -9,6 +9,7 @@ import { HeaderDrawer } from "./HeaderDrawer";
 import { DonateBtn } from "./DonateBtn";
 import { BackofficeRoutes } from "./backoffice/BackofficeRoutes";
 import { BackofficeDrawer } from "./backoffice/BackofficeDrawer";
+import { BackofficeBtn } from "./backoffice/BackofficeBtn";
 
 export const HeaderMain = ({ isBackoffice }) => {
   const publicRoutes = [
@@ -18,8 +19,28 @@ export const HeaderMain = ({ isBackoffice }) => {
     { url: "/testimonios", name: "Testimonios" },
   ];
 
-  let username = "test";
+  const parseUserData = () => {
+    if (localStorage.getItem("data")) {
+      const user = JSON.parse(localStorage.getItem("data"));
+
+      return user;
+    }
+  };
+
+  const getUsername = () => {
+    const userData = parseUserData();
+    return userData.name;
+  };
+
+  const checkIfAdmin = () => {
+    const userData = parseUserData();
+    if (userData.role_id === 0) return true;
+    return false;
+  };
+
+  const username = getUsername();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const isAdmin = checkIfAdmin();
 
   return (
     <Flex height="5em" boxShadow="sm">
@@ -51,6 +72,7 @@ export const HeaderMain = ({ isBackoffice }) => {
             alignItems="center"
             display={{ base: "none", md: "none", lg: "flex" }}
           >
+            <BackofficeBtn isAdmin={isAdmin} />
             <ActivitiesMenu />
             <HeaderRoutes routes={publicRoutes} />
             <AuthLinks username={username} />
@@ -62,6 +84,7 @@ export const HeaderMain = ({ isBackoffice }) => {
             isOpen={isOpen}
             routes={publicRoutes}
             username={username}
+            isAdmin={isAdmin}
           />
         </>
       )}
