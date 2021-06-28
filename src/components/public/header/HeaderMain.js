@@ -19,28 +19,37 @@ export const HeaderMain = ({ isBackoffice }) => {
     { url: "/testimonios", name: "Testimonios" },
   ];
 
-  const parseUserData = () => {
+  const checkDataInLocalStorage = () => {
     if (localStorage.getItem("data")) {
-      const user = JSON.parse(localStorage.getItem("data"));
-
-      return user;
-    }
+      return true;
+    } else return false;
   };
 
-  const getUsername = () => {
-    const userData = parseUserData();
-    return userData.name;
+  const parseUserData = () => {
+    const userData = JSON.parse(localStorage.getItem("data"));
+    return userData;
   };
 
-  const checkIfAdmin = () => {
-    const userData = parseUserData();
+  const checkIfAdmin = (userData) => {
     if (userData.role_id === 0) return true;
     return false;
   };
 
-  const username = getUsername();
+  const returnNeededData = () => {
+    const isUserData = checkDataInLocalStorage();
+    if (isUserData) {
+      const userData = parseUserData();
+      const isAdmin = checkIfAdmin(userData);
+      const username = userData.name;
+      return { username, isAdmin };
+    }
+    const username = undefined;
+    const isAdmin = false;
+    return { username, isAdmin };
+  };
+
+  const { username, isAdmin } = returnNeededData();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const isAdmin = checkIfAdmin();
 
   return (
     <Flex height="5em" boxShadow="sm">
