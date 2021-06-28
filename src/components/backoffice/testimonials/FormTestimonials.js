@@ -18,6 +18,7 @@ import { FaFileImage } from "react-icons/fa";
 import { useAlert } from "../layout/Alert";
 import { createTestimonial } from "./testimonials";
 import { editTestimonial } from "./testimonials";
+import Swal from "sweetalert2";
 
 // convert image to base64
 const toBase64 = (file) =>
@@ -61,6 +62,36 @@ const TestimonialsForm = ({ testimonialToEdit }) => {
     }
   }, [testimonialToEdit]);
 
+  const handleSuccess = () => {
+    Swal.fire({
+      title: "Hecho",
+      text: "Testimonio creado",
+      icon: "success",
+      confirmButtonColor: '#5796D9',
+      confirmButtonText: "Ok",
+    });
+  };
+
+  const handleSuccessEdit = () => {
+    Swal.fire({
+      title: "Hecho",
+      text: "Testimonio editado",
+      icon: "success",
+      confirmButtonColor: '#5796D9',
+      confirmButtonText: "Ok",
+    });
+  };
+
+  const handleError = () => {
+    Swal.fire({
+      title: "Error",
+      text: "Hubo un error",
+      icon: "error",
+      confirmButtonColor: 'brandRed.200',
+      confirmButtonText: "Ok",
+    });
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (name === "" || description === "" || image === "") {
@@ -90,19 +121,20 @@ const TestimonialsForm = ({ testimonialToEdit }) => {
       if (testimonialToEdit) {
         editTestimonial(testimonialToEdit.id, data)
         .then(() => {
+          handleSuccessEdit()
           history.push("/backoffice/testimonials");
         })
-        
+        .catch(err => handleError())
       } else {
         // AGREGAR FUNCIÓN CREAR - pasar data
         createTestimonial(data)
         .then(() => {
           //HBAILITAR Linea inferior CUANDO SE INTRODUZAC SWEET ALERT
-          // handleSuccess();
+          handleSuccess();
           history.push("/backoffice/testimonials");
         })
         //HBAILITAR Linea inferior CUANDO SE INTRODUZAC SWEET ALERT
-        // .catch(err => handleError())
+        .catch(err => handleError())
 
       }
     }

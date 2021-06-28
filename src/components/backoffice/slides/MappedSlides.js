@@ -94,7 +94,7 @@ export const MappedSlides = ({
               size="sm"
               ml="1rem"
             >
-              Eliminar
+              Borrar
             </Button>
           </Flex>
           <Flex
