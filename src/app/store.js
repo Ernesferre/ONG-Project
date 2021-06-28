@@ -5,7 +5,7 @@ import organizationReducer from "../features/organizationReducer";
 
 export default configureStore({
   reducer: {
-    register: authReducer,
+    user: authReducer,
     users: userReducer,
     organization: organizationReducer,
   },
