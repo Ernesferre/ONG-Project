@@ -71,6 +71,7 @@ export const HeaderMain = ({ isBackoffice }) => {
             onClose={onClose}
             isOpen={isOpen}
             username={username}
+            isMobile={true}
           />
         </>
       ) : (

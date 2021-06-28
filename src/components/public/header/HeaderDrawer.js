@@ -30,7 +30,7 @@ export const HeaderDrawer = ({
             <BackofficeBtn isAdmin={isAdmin} />
             <ActivitiesMenu />
             <HeaderRoutes routes={routes} />
-            <AuthLinks username={username} />
+            <AuthLinks username={username} isMobile={true} />
             <DonateBtn />
           </Flex>
         </DrawerBody>

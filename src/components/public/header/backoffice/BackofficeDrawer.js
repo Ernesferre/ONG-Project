@@ -10,7 +10,7 @@ import React from "react";
 import { AuthLinks } from "../AuthLinks";
 import { BackofficeRoutes } from "./BackofficeRoutes";
 
-export const BackofficeDrawer = ({ onClose, isOpen, username }) => {
+export const BackofficeDrawer = ({ onClose, isOpen, username, isMobile }) => {
   return (
     <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay />
@@ -19,7 +19,7 @@ export const BackofficeDrawer = ({ onClose, isOpen, username }) => {
         <DrawerBody>
           <Flex flexDir="column" align="center">
             <BackofficeRoutes />
-            <AuthLinks username={username} />
+            <AuthLinks username={username} isMobile={true} />
           </Flex>
         </DrawerBody>
       </DrawerContent>

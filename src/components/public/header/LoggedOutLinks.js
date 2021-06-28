@@ -1,9 +1,9 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import React from "react";
 
 import { Link, useHistory } from "react-router-dom";
 
-export const LoggedOutLinks = () => {
+export const LoggedOutLinks = ({ isMobile }) => {
   let history = useHistory();
 
   const handleLogin = () => {
@@ -11,7 +11,7 @@ export const LoggedOutLinks = () => {
   };
   const handleRegister = () => [history.push("/register")];
   return (
-    <>
+    <Flex flexDir={isMobile ? "column" : "row"}>
       <Link to="/login">
         <Button variant="somosMasOutline" size="sm" onClick={handleLogin}>
           Iniciar Sesión
@@ -28,6 +28,6 @@ export const LoggedOutLinks = () => {
           Registrarse
         </Button>
       </Link>
-    </>
+    </Flex>
   );
 };
