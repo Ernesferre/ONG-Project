@@ -10,7 +10,7 @@ import React from "react";
 import { AuthLinks } from "../AuthLinks";
 import { BackofficeRoutes } from "./BackofficeRoutes";
 
-export const BackofficeDrawer = ({ routes, onClose, isOpen, username }) => {
+export const BackofficeDrawer = ({ onClose, isOpen, username }) => {
   return (
     <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay />

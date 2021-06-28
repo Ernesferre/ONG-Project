@@ -10,15 +10,14 @@ import { DonateBtn } from "./DonateBtn";
 import { BackofficeRoutes } from "./backoffice/BackofficeRoutes";
 import { BackofficeDrawer } from "./backoffice/BackofficeDrawer";
 
-export const HeaderMain = () => {
-  const routes = [
+export const HeaderMain = ({ isBackoffice }) => {
+  const publicRoutes = [
     { url: "/us", name: "Nosotros" },
     { url: "/novedades", name: "Novedades" },
     { url: "/contacto", name: "Contacto" },
     { url: "/testimonios", name: "Testimonios" },
   ];
 
-  let isBackoffice = true;
   let username = "test";
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -41,7 +40,6 @@ export const HeaderMain = () => {
           <BackofficeDrawer
             onClose={onClose}
             isOpen={isOpen}
-            routes={routes}
             username={username}
           />
         </>
@@ -54,7 +52,7 @@ export const HeaderMain = () => {
             display={{ base: "none", md: "none", lg: "flex" }}
           >
             <ActivitiesMenu />
-            <HeaderRoutes routes={routes} />
+            <HeaderRoutes routes={publicRoutes} />
             <AuthLinks username={username} />
             <DonateBtn />
           </Flex>
@@ -62,7 +60,7 @@ export const HeaderMain = () => {
           <HeaderDrawer
             onClose={onClose}
             isOpen={isOpen}
-            routes={routes}
+            routes={publicRoutes}
             username={username}
           />
         </>
