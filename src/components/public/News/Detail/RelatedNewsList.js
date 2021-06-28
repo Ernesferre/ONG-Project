@@ -6,9 +6,9 @@ import { LCard } from "../../../Cards/LCard";
 const RelatedNewsList = ({ arrayOfNews, category, id }) => {
   let relatedNews = arrayOfNews
     .filter((news) => news.category_id === category)
-    .filter((related) => related.id !== id);
+    .filter((related) => related.id !== parseInt(id));
   if (relatedNews.length === 0) {
-    relatedNews = arrayOfNews.filter((related) => related.id !== id);
+    relatedNews = arrayOfNews.filter((related) => related.id !== parseInt(id));
   }
   console.log(relatedNews);
 
@@ -22,7 +22,7 @@ const RelatedNewsList = ({ arrayOfNews, category, id }) => {
             key={data.id}
             style={{ margin: "0", textDecoration: "none" }}
           >
-            <LCard image={data.image} title={data.name} maxW="15em" />
+            <LCard image={data.image} title={data.name} id={data.id} url={'novedades'} maxW="15em" />
           </Link>
         ))}
       </Flex>
