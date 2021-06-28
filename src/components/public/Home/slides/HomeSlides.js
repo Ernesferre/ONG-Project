@@ -1,37 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { Box, IconButton } from "@chakra-ui/react";
+import { Box, IconButton, Spinner } from "@chakra-ui/react";
 import {
   IoIosArrowForward as RightIcon,
   IoIosArrowBack as LeftIcon,
 } from "react-icons/io";
-
+import axios from "axios";
 import Slide from "./Slide";
 
 const HomeSlides = () => {
-  const [position, setPosition] = useState(0);
-  const images = [
-    {
-      id: 1,
-      name: "This is a slide title 1",
-      description: "Description 1",
-      image:
-        "https://content.gallup.com/origin/gallupinc/GallupSpaces/Production/Cms/WORKPLACEV9CMS/30_bc1p3meybi5ttq2iy_w.jpg",
-    },
-    {
-      id: 2,
-      name: "This is a slide title 2",
-      description: "Description 2",
-      image:
-        "https://www.benq.com/content/dam/b2c/en-us/knowledge-center/what-is-the-best-wireless-hdmi-technology-for-collaboration--html/2020-03-27%20What-is-the-best-wireless-hdmi-technology-for-collaboration.jpg",
-    },
-    {
-      id: 3,
-      name: "This is a slide title 3",
-      description: "Description 3",
-      image:
-        "https://www.vive-energia.com/wp-content/uploads/2020/03/business-meeting-and-teamwork-by-business-people-SZ5YLEZ-scaled.jpg",
-    },
-  ];
+  const [slidesData, setSlidesData] = useState({
+    images: [],
+    position: 0,
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    (async function () {
+      try {
+        const response = await axios.get("http://ongapi.alkemy.org/api/slides");
+        setSlidesData((data) => {
+          return { ...data, images: response.data.data };
+        });
+      } catch (error) {
+        throw error;
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
 
   //Auto slide
   useEffect(() => {
@@ -46,23 +42,27 @@ const HomeSlides = () => {
 
   //Show next slide
   function right() {
-    setPosition((p) => {
-      if (p < 100 * (images.length - 1)) return p + 100;
-      else return 0;
+    setSlidesData((data) => {
+      if (data.position < 100 * (data.images.length - 1))
+        return { ...data, position: data.position + 100 };
+      else return { ...data, position: 0 };
     });
   }
 
   //Show previous slide
   function left() {
-    setPosition((p) => {
-      if (p !== 0) return p - 100;
-      else return 100 * (images.length - 1);
+    setSlidesData((data) => {
+      if (data.position !== 0)
+        return { ...data, position: data.position - 100 };
+      else return { ...data, position: 100 * (data.images.length - 1) };
     });
   }
 
   //Move from one image to other (DotButton)
   function moveTo(index) {
-    setPosition(index * 100);
+    setSlidesData((data) => {
+      return { ...data, position: index * 100 };
+    });
   }
 
   return (
@@ -74,8 +74,9 @@ const HomeSlides = () => {
         alignItems="center"
         overflow="hidden"
       >
-        {images.map((image) => (
-          <Slide key={image.id} image={image} position={position} />
+        {loading && <Spinner m="auto" size="xl" color="brandRed.100" thickness="5px" />}
+        {slidesData.images.map((image) => (
+          <Slide key={image.id} image={image} position={slidesData.position} />
         ))}
       </Box>
 
@@ -83,14 +84,17 @@ const HomeSlides = () => {
       <Box
         position="absolute"
         right="50%"
+        bottom="-30px"
         transform="translateX(50%)"
         display="flex"
         gridGap="10px"
       >
-        {images.map((image, i) => (
+        {slidesData.images.map((image, i) => (
           <DotButton
             key={image.id}
-            bg={i * 100 === position ? "brandBlue.100" : "brandRed.100"}
+            bg={
+              i * 100 === slidesData.position ? "brandBlue.100" : "brandRed.100"
+            }
             onClick={() => {
               moveTo(i);
             }}
