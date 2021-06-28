@@ -22,6 +22,7 @@ export const LoggedOutLinks = ({ isMobile }) => {
           variant="somosMas"
           size="sm"
           color="brandBlue.400"
+          margin={isMobile ? "1em" : 0}
           marginLeft="1em"
           onClick={handleRegister}
         >

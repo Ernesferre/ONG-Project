@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { AuthLinks } from "../AuthLinks";
+import { PublicBtn } from "../PublicBtn";
 import { BackofficeRoutes } from "./BackofficeRoutes";
 
 export const BackofficeDrawer = ({ onClose, isOpen, username, isMobile }) => {
@@ -18,6 +19,7 @@ export const BackofficeDrawer = ({ onClose, isOpen, username, isMobile }) => {
         <DrawerCloseButton />
         <DrawerBody>
           <Flex flexDir="column" align="center">
+            <PublicBtn />
             <BackofficeRoutes />
             <AuthLinks username={username} isMobile={true} />
           </Flex>

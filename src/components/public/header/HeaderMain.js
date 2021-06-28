@@ -10,6 +10,7 @@ import { DonateBtn } from "./DonateBtn";
 import { BackofficeRoutes } from "./backoffice/BackofficeRoutes";
 import { BackofficeDrawer } from "./backoffice/BackofficeDrawer";
 import { BackofficeBtn } from "./backoffice/BackofficeBtn";
+import { PublicBtn } from "./PublicBtn";
 
 export const HeaderMain = ({ isBackoffice }) => {
   const publicRoutes = [
@@ -63,6 +64,7 @@ export const HeaderMain = ({ isBackoffice }) => {
             marginRight="1em"
             display={{ base: "none", md: "none", lg: "flex" }}
           >
+            <PublicBtn />
             <BackofficeRoutes />
             <AuthLinks username={username} />
           </Flex>
