@@ -29,7 +29,9 @@ export const LoggedInLinks = ({ username }) => {
         variant="somosMasOutline"
         borderWidth="0"
         color="brandBlue.400"
-        _hover={{ color: "brandBlue.300", cursor: "default" }}
+        cursor="default"
+        _hover={{ color: "brandBlue.300" }}
+        _focus={{ borderRadius: "0" }}
         leftIcon={<FaUser />}
         textTransform="capitalize"
       >
