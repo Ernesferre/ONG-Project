@@ -13,12 +13,7 @@ export const LoggedOutLinks = () => {
   return (
     <>
       <Link to="/login">
-        <Button
-          variant="somosMasOutline"
-          color="brandBlue.400"
-          size="sm"
-          onClick={handleLogin}
-        >
+        <Button variant="somosMasOutline" size="sm" onClick={handleLogin}>
           Iniciar Sesión
         </Button>
       </Link>

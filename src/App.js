@@ -72,7 +72,7 @@ const theme = extendTheme({
         somosMas: {
           color: "brandBlue.500",
           bg: "brandBlue.200",
-          _hover: { bg: "brandBlue.300" },
+          _hover: { bg: "brandBlue.300", color: "white" },
         },
         somosMasOutline: {
           color: "brandBlue.300",
