@@ -37,7 +37,6 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        minH: "100vh",
         bg: "gray.100",
       },
     },
@@ -70,7 +69,7 @@ const theme = extendTheme({
     Button: {
       variants: {
         somosMas: {
-          color: "brandBlue.500",
+          color: "brandBlue.400",
           bg: "brandBlue.200",
           _hover: { bg: "brandBlue.300", color: "white" },
         },
