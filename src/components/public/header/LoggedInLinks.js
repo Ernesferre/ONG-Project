@@ -13,7 +13,7 @@ export const LoggedInLinks = ({ username }) => {
       >
         {username}
       </Button>
-      <Button variant="dangerOutline" color="brandRed.400" marginLeft="1em">
+      <Button variant="dangerOutline" marginLeft="1em">
         Logout
       </Button>
     </>

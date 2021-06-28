@@ -89,10 +89,12 @@ const theme = extendTheme({
         },
         dangerOutline: {
           borderWidth: "0.12em",
+          textTransform: "uppercase",
           borderColor: "brandRed.200",
-          color: "brandRed.500",
+          color: "brandRed.300",
           _hover: {
             bg: "brandRed.200",
+            color: "white",
           },
         },
         warning: {
@@ -169,13 +171,11 @@ function Routes() {
     <TransitionGroup>
       <CSSTransition timeout={300} classNames="page" key={location.key}>
         <Switch location={location}>
-
-          { roleId === 0 ? (
+          {roleId === 0 ? (
             <PrivateRoute path="/backoffice" component={Private} />
           ) : (
-              <Route path="/" component={Public} />
+            <Route path="/" component={Public} />
           )}
-
 
           <Route path="/" component={Public} />
         </Switch>
