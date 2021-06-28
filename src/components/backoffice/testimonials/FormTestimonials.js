@@ -135,7 +135,6 @@ const TestimonialsForm = ({ testimonialToEdit }) => {
         })
         //HBAILITAR Linea inferior CUANDO SE INTRODUZAC SWEET ALERT
         .catch(err => handleError())
-
       }
     }
   }

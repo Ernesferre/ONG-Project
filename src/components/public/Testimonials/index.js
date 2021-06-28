@@ -7,7 +7,7 @@ export default function Testimonials (){
 
     return(
       
-          <Box>
+          <Box mb={14}>
           <Title image={imgSubtitle} title="Testimonios"/>
     
         <TestimonialsComp />

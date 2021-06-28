@@ -21,6 +21,7 @@ export default function Testimony({testimonials}) {
           bg="gray.200"
           padding="1em"
           borderRadius="0.1em"
+          boxShadow={"xl"}
         >
           <Flex alignItems='center' justifyContent='space-between'  flexDir={flexDir}>
             <Flex alignItems="center" justifyContent="center" >
@@ -38,7 +39,7 @@ export default function Testimony({testimonials}) {
                 {testimony.name}
               </Text>
             </Flex>
-            <Flex alignItems="center"  marginRight="1em" marginTop={marginTop}>
+            <Flex alignItems="center"  marginRight="1em" marginTop={marginTop} maxW={'70%'}>
               <Text >
                 {testimony.description}
               </Text>
