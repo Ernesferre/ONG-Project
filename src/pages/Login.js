@@ -19,7 +19,6 @@ import { SET_LOGIN } from "../features/authReducer";
 const Login = () => {
   const dispatch = useDispatch();
   const TOKEN = "token";
-  const NAME = "name";
 
   let history = useHistory();
   const toast = useToast();

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Flex, Button, Text, Container } from "@chakra-ui/react";
+import { Flex, Text, Container } from "@chakra-ui/react";
 import pictureNews from "../../../assets/Foto9.jpg";
 import Title from "../../Title/Title";
 import { getNews } from "../homeService/homeService";

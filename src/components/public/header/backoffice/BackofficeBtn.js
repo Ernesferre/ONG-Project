@@ -9,11 +9,12 @@ export const BackofficeBtn = ({ isAdmin }) => {
   return (
     <>
       {isAdmin && (
-        <Flex margin="1em">
+        <Flex margin="1em" alignItems="center">
           <Link to="/backoffice">
             <Button
               variant="somosMasOutline"
               rightIcon={<MdComputer />}
+              size="sm"
               onClick={() => history.push("/backoffice")}
             >
               Ir a Backoffice

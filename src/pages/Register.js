@@ -10,12 +10,10 @@ import { useDispatch } from "react-redux";
 import { SET_REGISTER } from "../features/authReducer";
 
 import { Button, Heading, Flex, Spacer } from "@chakra-ui/react";
-import swal from 'sweetalert';
-
+import swal from "sweetalert";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const TOKEN = "token";
 
   let history = useHistory();
   const toast = useToast();
@@ -39,9 +37,8 @@ const Register = () => {
       }}
       validationSchema={validate}
       onSubmit={async (values) => {
-        console.log({values});
+        console.log({ values });
         const response = await registerUser(values);
-        
 
         if (response) {
           console.log(response);
@@ -60,55 +57,56 @@ const Register = () => {
       }}
     >
       {(formik) => (
-        <Flex 
+        <Flex
           direction="column"
           mt={10}
           mb={10}
-          alignItems="center" 
-          justifyContent="center">
-          
+          alignItems="center"
+          justifyContent="center"
+        >
           <Stack
-            
             p={12}
             bg="#E5E5E5"
             rounded={6}
-            width={{ base: "90%", md: "80%", lg: "30%"}}
+            width={{ base: "90%", md: "80%", lg: "30%" }}
           >
             <Stack mb={6}>
-              <Heading  > Formulario de Registro </Heading>
+              <Heading> Formulario de Registro </Heading>
             </Stack>
 
-            <Form w="100%" spacing={6} >
-
+            <Form w="100%" spacing={6}>
               <TextField bg="whrite" label="Nombre" name="name" type="text" />
-              <TextField bg="whrite" label="Apellido" name="apellido" type="text" />
+              <TextField
+                bg="whrite"
+                label="Apellido"
+                name="apellido"
+                type="text"
+              />
               <TextField bg="whrite" label="Email" name="email" type="email" />
-              <TextField bg="whrite" label="Password" name="password" type="password" />
+              <TextField
+                bg="whrite"
+                label="Password"
+                name="password"
+                type="password"
+              />
 
               <Flex mt={6} mb={6}>
-                
-                  <Button 
-                    type="submit"
-                    colorScheme="blue" 
-                    variant="solid" 
-                    fontSize="15px"
-                    
-                    >
-                    Registrarme
-                  </Button>
+                <Button
+                  type="submit"
+                  colorScheme="blue"
+                  variant="solid"
+                  fontSize="15px"
+                >
+                  Registrarme
+                </Button>
 
-                  <Spacer />
+                <Spacer />
 
-                  <Button colorScheme="red" type="reset">
-                    Reset
-                  </Button>
-
+                <Button colorScheme="red" type="reset">
+                  Reset
+                </Button>
               </Flex>
-
             </Form>
-
-
-
           </Stack>
         </Flex>
       )}

@@ -10,9 +10,10 @@ const Home = () => {
   return (
     <>
       <Slides />
-      <Container maxW="container.xl" minH="40vh">
+      <Container maxW="container.xl">
         <Flex
           marginTop="3em"
+          marginBottom="2em"
           height="100%"
           padding="2em"
           borderRadius="3px"

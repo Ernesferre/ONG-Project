@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Flex,
   Link as LinkExter,
-  IconButton,
   Spinner,
   Text,
   Heading,
@@ -10,27 +9,23 @@ import {
 import axios from "axios";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
-// import { useSelector } from "react-redux";
 import { SomosMasLogo } from "../../../assets/SomosMasLogo";
 
 const Footer = () => {
   const [footer, setFooter] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [display, setDisplay] = useState("none");
 
-  // const logo = useSelector((state) => state.organization.organizationData.logo);
-
-  useEffect(async () => {
+  useEffect(() => {
+    const getOrganization = async () => {
+      await axios
+        .get("http://ongapi.alkemy.org/api/organization")
+        .then((res) => {
+          setFooter(res.data.data[0]);
+          setLoading(false);
+        });
+    };
     getOrganization();
   }, []);
-
-  const getOrganization = async () => {
-    await axios.get("http://ongapi.alkemy.org/api/organization").then((res) => {
-      setFooter(res.data.data[0]);
-      setLoading(false);
-    });
-  };
 
   return loading ? (
     <Flex height="10em" justifyContent="center" alignItems="center">
@@ -40,9 +35,9 @@ const Footer = () => {
     <Flex
       flexDir={{ base: "column", md: "row" }}
       backgroundColor="gray.100"
-      p={'20px 30px'}
+      p={"20px 30px"}
       justifyContent="space-between"
-      alignItems='center'
+      alignItems="center"
       w="full"
       boxShadow="0px -2px 10px rgba(0, 0, 0, 0.1)"
     >
@@ -54,7 +49,7 @@ const Footer = () => {
           Más Información
         </Heading>
         {/* <br /> */}
-        <Flex flexDir="row" w={'300px'} mt={1} justifyContent='space-between'>
+        <Flex flexDir="row" w={"300px"} mt={1} justifyContent="space-between">
           <Link to="/us">
             <Text color="brandBlue.200" _hover={{ color: "brandBlue.300" }}>
               Nosotros
@@ -79,29 +74,33 @@ const Footer = () => {
         justifyContent="center"
         display={{ base: "none", md: "flex" }}
       > */}
-        <Flex justifyContent="space-between" width='150px' mt={{base: "1.5em", md: "0"}}>
-          <LinkExter
-            href="https://facebook.com/Somos_Más"
-            isExternal
-            color="blue.500"
-          >
-            <FaFacebook size="30px" />
-          </LinkExter>
-          <LinkExter
-            href="https://instagram.com/SomosMás"
-            isExternal
-            color="blue.300"
-          >
-            <FaTwitter size="30px" />
-          </LinkExter>
-          <LinkExter
-            href="https://twitter.com/SomosMás"
-            isExternal
-            color="red.400"
-          >
-            <FaInstagram size="30px" />
-          </LinkExter>
-        </Flex>
+      <Flex
+        justifyContent="space-between"
+        width="150px"
+        mt={{ base: "1.5em", md: "0" }}
+      >
+        <LinkExter
+          href="https://facebook.com/Somos_Más"
+          isExternal
+          color="blue.500"
+        >
+          <FaFacebook size="30px" />
+        </LinkExter>
+        <LinkExter
+          href="https://instagram.com/SomosMás"
+          isExternal
+          color="blue.300"
+        >
+          <FaTwitter size="30px" />
+        </LinkExter>
+        <LinkExter
+          href="https://twitter.com/SomosMás"
+          isExternal
+          color="red.400"
+        >
+          <FaInstagram size="30px" />
+        </LinkExter>
+      </Flex>
       {/* </Flex> */}
 
       {/* <Flex justify="flex-end" display={{ base: "flex", md: "none" }}>

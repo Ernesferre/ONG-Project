@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  Image,
-  Spinner,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
 import { getActivity } from "./activitiesService";
@@ -51,10 +43,7 @@ export const ActivitiesDetail = () => {
       </Flex>
     );
 
-  if (isLoading)
-    return (
-      <SkeletonDetail />
-    );
+  if (isLoading) return <SkeletonDetail />;
 
   return (
     <>
