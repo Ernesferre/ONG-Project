@@ -62,13 +62,13 @@ export const HeaderMain = ({ isBackoffice }) => {
           <Flex
             marginLeft="auto"
             marginRight="1em"
-            display={{ base: "none", md: "none", lg: "flex" }}
+            display={{ base: "none", md: "none", lg: "none", xl: "flex" }}
           >
             <PublicBtn />
             <BackofficeRoutes />
             <AuthLinks username={username} />
           </Flex>
-          <HeaderMenuBtn onOpen={onOpen} />
+          <HeaderMenuBtn onOpen={onOpen} isBackoffice={true} />
           <BackofficeDrawer
             onClose={onClose}
             isOpen={isOpen}

@@ -108,19 +108,6 @@ export const BackofficeRoutes = () => {
         },
       ],
     },
-    {
-      section: "Backoffice",
-      routes: [
-        {
-          listRoute: "/backoffice",
-          listName: "Ver backoffice",
-        },
-        {
-          createRoute: "/backoffice/homeEdition",
-          createName: "Editar backoffice",
-        },
-      ],
-    },
   ];
   return adminRoutes.map((route, index) => (
     <Flex key={index} margin="1em" alignItems="center">
