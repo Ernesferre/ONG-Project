@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
 import {
@@ -12,11 +12,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
-import {
-  GiHamburgerMenu,
-  GiHamburgerMenu as HamburgerIcon,
-} from "react-icons/gi";
-import { GrClose as CloseIcon } from "react-icons/gr";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 import { NavLink as LinkRouterDom } from "react-router-dom";
 import Sidebar from "./Sidebar";
@@ -33,7 +29,7 @@ const Routes = [
 ];
 
 export default function Header() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen } = useDisclosure();
 
   const dispatch = useDispatch();
 
@@ -49,7 +45,11 @@ export default function Header() {
 
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={10} boxShadow={"lg"}>
+      <Box
+        bg={useColorModeValue("gray.100", "gray.900")}
+        px={10}
+        boxShadow={"lg"}
+      >
         <Flex h={16} alignItems={"center"} justifyContent={"left"}>
           <HStack>
             <SomosMasLogo />

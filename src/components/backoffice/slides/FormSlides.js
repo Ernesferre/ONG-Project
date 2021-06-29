@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import {
   Flex,
   Heading,
@@ -12,8 +12,6 @@ import {
   Input,
   Textarea,
 } from "@chakra-ui/react";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaFileImage } from "react-icons/fa";
 import { createSlide, editSlide } from "./slidesService";
 import Swal from "sweetalert2";
@@ -28,29 +26,28 @@ const toBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-  
 // convert url to base64
 const urlToBase64 = (img) => {
-  var blob = new Blob([img])
-  var url = URL.createObjectURL(blob)
-  
+  var blob = new Blob([img]);
+  var url = URL.createObjectURL(blob);
+
   return fetch(url)
-  .then(res => res.blob())
-  .then(blob => {
-    var fr = new FileReader()
-    fr.onload = () => {
-      var b64 = fr.result
-      return b64
-    }
-    fr.readAsDataURL(blob)
-  })
-}
+    .then((res) => res.blob())
+    .then((blob) => {
+      var fr = new FileReader();
+      fr.onload = () => {
+        var b64 = fr.result;
+        return b64;
+      };
+      fr.readAsDataURL(blob);
+    });
+};
 
 const FormSlides = ({ slideToEdit }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-  const history = useHistory()
+  const history = useHistory();
 
   useEffect(() => {
     if (slideToEdit) {
@@ -65,7 +62,7 @@ const FormSlides = ({ slideToEdit }) => {
       title: "Success",
       text: "Slide creada",
       icon: "success",
-      confirmButtonColor: '#5796D9',
+      confirmButtonColor: "#5796D9",
       confirmButtonText: "Ok",
     });
   };
@@ -75,7 +72,7 @@ const FormSlides = ({ slideToEdit }) => {
       title: "Success",
       text: "Slide editada",
       icon: "success",
-      confirmButtonColor: '#5796D9',
+      confirmButtonColor: "#5796D9",
       confirmButtonText: "Ok",
     });
   };
@@ -85,7 +82,7 @@ const FormSlides = ({ slideToEdit }) => {
       title: "Error",
       text: "Hubo un error",
       icon: "error",
-      confirmButtonColor: 'brandRed.200',
+      confirmButtonColor: "brandRed.200",
       confirmButtonText: "Ok",
     });
   };
@@ -119,20 +116,20 @@ const FormSlides = ({ slideToEdit }) => {
         };
       }
       if (slideToEdit) {
-       editSlide(slideToEdit.id, data)
-        .then(() => {
-          handleSuccessEdit();
-          console.log({slideToEdit, data});
+        editSlide(slideToEdit.id, data)
+          .then(() => {
+            handleSuccessEdit();
+            console.log({ slideToEdit, data });
             history.push("/backoffice/slides");
           })
-          .catch(err => handleError())
+          .catch((err) => handleError());
       } else {
         createSlide(data)
-        .then(() => {
+          .then(() => {
             handleSuccess();
             history.push("/backoffice/slides");
           })
-          .catch(err => handleError())
+          .catch((err) => handleError());
       }
     }
   }
@@ -173,14 +170,14 @@ const FormSlides = ({ slideToEdit }) => {
             <FormControl>
               <FormLabel marginBottom={3}>Descripción</FormLabel>
             </FormControl>
-            <Textarea 
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                bg="white"
-                isRequired
-                color="black"
-              />
+            <Textarea
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              bg="white"
+              isRequired
+              color="black"
+            />
             <FormControl>
               <FormLabel>Foto</FormLabel>
               <Input
@@ -205,7 +202,12 @@ const FormSlides = ({ slideToEdit }) => {
               )}
             </FormControl>
             <FormControl>
-              <Button variant={'somosMas'} type="submit" size="sm" marginTop={5}>
+              <Button
+                variant={"somosMas"}
+                type="submit"
+                size="sm"
+                marginTop={5}
+              >
                 {slideToEdit ? "Editar" : "Crear"}
               </Button>
             </FormControl>

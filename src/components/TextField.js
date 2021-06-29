@@ -1,11 +1,6 @@
 import React from "react";
 import { ErrorMessage, useField } from "formik";
-import {
-  Input,
-  FormLabel,
-  FormControl,
-  FormErrorMessage,
-} from "@chakra-ui/react";
+import { Input, FormLabel, FormControl } from "@chakra-ui/react";
 
 const TextField = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -16,7 +11,7 @@ const TextField = ({ label, ...props }) => {
 
       <Input {...field} {...props} variant="outline" mb={1} />
 
-      <FormErrorMessage name={field.name} />
+      <ErrorMessage name={field.name} />
     </FormControl>
   );
 };

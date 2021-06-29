@@ -12,8 +12,6 @@ import {
   HStack,
   IconButton,
   useColorModeValue,
-  Stack,
-  background,
   useDisclosure,
 } from "@chakra-ui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -21,9 +19,9 @@ import { GrClose as CloseIcon } from "react-icons/gr";
 import { NavLink as LinkRouterDom, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import '../../../scss/app.scss';
+import "../../../scss/app.scss";
 import ItemCategories from "./ItemCategories";
-import { selectUser, SET_LOGOUT } from "../../../features/authReducer";
+import { SET_LOGOUT } from "../../../features/authReducer";
 import "../../../scss/app.scss";
 // import ItemCategories from "./ItemCategories";
 import { SomosMasLogo } from "../../../assets/SomosMasLogo";
@@ -33,29 +31,26 @@ const Routes = [
   { route: "/us", name: "Nosotros" },
   { route: "/novedades", name: "Novedades" },
   { route: "/contacto", name: "Contacto" },
-  { route: "/testimonios", name: "Testimonios" }
+  { route: "/testimonios", name: "Testimonios" },
   // { route: "/login", name: "Iniciar Sesion" },
 ];
 
 export default function HeaderPublic() {
-  
-  const [display, setDisplay] = useState('none');
+  const [display, setDisplay] = useState("none");
   const dispatch = useDispatch();
   let history = useHistory();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
 
   // PARA USAR INFO DESDE REDUX
-  const logo = useSelector((state) => state.organization.organizationData.logo);
+  // const logo = useSelector((state) => state.organization.organizationData.logo);
   // const userName = useSelector((state) => state.register.user.name);
   // const Logged = useSelector(selectUser.loggedIn);
   const Logged = useSelector((state) => state.user.user.loggedIn);
-  const Name = useSelector((state) => state.user.user.name)
+  const Name = useSelector((state) => state.user.user.name);
   console.log(Logged);
 
   // console.log(Logged.loggedIn);
-  
 
   const hadleLogout = () => {
     dispatch(
@@ -63,18 +58,16 @@ export default function HeaderPublic() {
         name: null,
         email: null,
         role_id: null,
-        loggedIn: false
+        loggedIn: false,
       })
     );
-    localStorage.removeItem('token')
+    localStorage.removeItem("token");
     history.push("/login");
-  }
+  };
 
   const handleLogin = () => {
     history.push("/login");
-  }
-
-
+  };
 
   return (
     <>
@@ -93,50 +86,43 @@ export default function HeaderPublic() {
             spacing={10}
             display={{ base: "none", md: "none", lg: "flex" }}
           >
-          
-          {Logged ? 
-            <Text 
-              mr="1rem" 
-              fontSize="xl"
-              color="gray.500"
-               
-            > Bienvenido {Name} 
-            </Text>     : 
-            null }
-             
+            {Logged ? (
+              <Text mr="1rem" fontSize="xl" color="gray.500">
+                {" "}
+                Bienvenido {Name}
+              </Text>
+            ) : null}
+
             <ActivitiesMenu />
             {Routes.map((link) => (
               <NavLink key={link.name} route={link.route} name={link.name} />
             ))}
 
-            
-
-
             {/* Donations */}
             <DonateButton />
 
             {/* <Flex> */}
-            { Logged ? 
-              
+            {Logged ? (
               <Button
                 onClick={hadleLogout}
                 bg="red.300"
                 color="white"
                 textColor="white"
-              > Cerrar Sesion </Button>  :
-              
+              >
+                {" "}
+                Cerrar Sesion{" "}
+              </Button>
+            ) : (
               <Button
                 onClick={handleLogin}
                 bg="blue.300"
                 textColor="white"
-                _hover={{ textColor: "blue.300", background:"white" }}
-              > 
-                Iniciar Sesion 
-              </Button> 
-            }
+                _hover={{ textColor: "blue.300", background: "white" }}
+              >
+                Iniciar Sesion
+              </Button>
+            )}
             {/* </Flex> */}
-
-
           </HStack>
 
           <Flex
@@ -167,35 +153,31 @@ export default function HeaderPublic() {
                     name={link.name}
                   />
                 ))}
-                
-                
-                
-                
 
                 <DonateButton />
 
-              { Logged ? 
-              
-                <Button
-                  onClick={hadleLogout}
-                  bg="red.300"
-                  color="white"
-                  textColor="white"
-                  mt={2}
-                  
-                > Cerrar Sesion </Button>  :
-                
-                <Button
-                  onClick={handleLogin}
-                  bg="blue.300"
-                  textColor="white"
-                  mt={2}
-                  _hover={{ textColor: "blue.300", background:"white" }}
-                > 
-                  Iniciar Sesion 
-                </Button> 
-              }
-
+                {Logged ? (
+                  <Button
+                    onClick={hadleLogout}
+                    bg="red.300"
+                    color="white"
+                    textColor="white"
+                    mt={2}
+                  >
+                    {" "}
+                    Cerrar Sesion{" "}
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleLogin}
+                    bg="blue.300"
+                    textColor="white"
+                    mt={2}
+                    _hover={{ textColor: "blue.300", background: "white" }}
+                  >
+                    Iniciar Sesion
+                  </Button>
+                )}
               </Flex>
             </DrawerBody>
           </DrawerContent>

@@ -8,7 +8,6 @@ import {
   Button,
   Heading,
   Textarea,
-  useColorModeValue,
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";

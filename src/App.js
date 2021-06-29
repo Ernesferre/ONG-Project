@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 //REACT-ROUTER
 import {
@@ -120,7 +120,6 @@ function App() {
   const token = localStorage.getItem("token");
   const data = localStorage.getItem("data");
   const parseData = JSON.parse(data);
-  const roleId = parseData?.role_id;
   const history = useHistory();
 
   // GUARDAR INFO DE LA ORGANIZACIÓN EN REDUX
@@ -161,7 +160,6 @@ function App() {
 
 function Routes() {
   const location = useLocation();
-  const token = localStorage.getItem("token");
   const data = localStorage.getItem("data");
   const parseData = JSON.parse(data);
   const roleId = parseData?.role_id;
